@@ -1,0 +1,2724 @@
+---
+title: "Effiziente Nutzung knapper Ressourcen"
+author: "Prof. Dr. Jan S. Voßwinkel"
+date: "HfWU Zukunftsökonomie | WiSe 2023/24"
+
+output:
+  bookdown::gitbook:
+    config:
+      sharing: no
+    number_sections: yes
+
+bibliography: Effizienz.bib
+lang: de
+---
+
+---
+nocite: '@*'
+csl: technische-universitat-dresden-betriebswirtschaftslehre-rechnungswesen-controlling.csl
+
+```{r include=F}
+knitr::opts_chunk$set(dev = 'svg') # set output device to svg
+```
+---
+
+#  {-}
+
+[Wirtschaftsgeschichte macht Ulrike!]::
+
+[Unten Link anpassen!]::
+```{r qr,  echo=FALSE, warning=FALSE}
+library(qrcode)
+
+qr <- qr_code('https://janvoss.github.io/Effizienz/')
+#plot(qr)
+
+generate_svg(qr, filename = "qr.svg")
+
+```
+
+
+ ${}$             |  Unterlagen: [https://janvoss.github.io/Effizienz/](https://janvoss.github.io/Effizienz/)
+:-------------------------:|:-------------------------:
+![logo](logo.png)  |  ![](qr.svg){width=60% }
+
+
+# Organisatorisches {-}
+
+- Unterlagen in neo und auf github (s.o.)
+
+- Prüfungsleistung: K 60
+
+
+# Einleitung
+
+## Fragestellungen
+
+-   Was ist Effizienz und warum ist sie wichtig?
+
+- Wovon hängt es ab, ob Ressourcen effizienz alloziiert werden?
+
+-   Wie wird die effiziente Nutzung von Ressourcen ökonomisch analysiert?
+
+- Wessen Handlungen wollen wir analysieren?
+
+## Begriff Effizienz
+
+### Abgrenzung
+
+- **Effektivität**:  
+  - Fähigkeit, ein Ziel zu erreichen/Zielerreichungsgrad  
+  - $\frac{\textrm{Ergebnis}}{\textrm{Ziel}}$
+  - Mögliche Übersetzung: Wirksamkeit
+  
+- **Effizienz:**  
+  - Verhältnis von Ergebnis und Einsatz  
+  - $\frac{\textrm{Ergebnis}}{\textrm{Einsatz}}$
+  
+- Eine Strategie kann effektiv aber ineffizient sein (Mit Kanonen auf Spatzen schießen)  
+- Eine Strategie kann grundsätzlich effizient aber ineffektiv sein (z.B. mangelnde Skalierung)
+
+- Für **langfristige Lösungen** ist Effizienz von großer Bedeutung.
+
+
+### Teilbereiche des Effizienzbegriffs
+
+- Technische Effzienz  
+- Kosteneffizienz  
+- Allokative Effizienz
+
+ Erklärung auf Twitter:
+ 
+ <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+ 
+  
+```{r eval=F, include =F}
+
+Abgrenzung Effektivität
+
+Einbettung Schnellenbach
+
+```
+
+
+## Der Blick in die Welt
+
+Daten von [Our World in Data](https://ourworldindata.org/) zu (realem) BIP pro Kopf, Lebenserwartung, Gini-Index, Bevölkerungsgröße
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(tidyverse)
+# library(owidR)
+library(RColorBrewer)
+
+# Daten von OWID laden
+
+gdppc <- read.csv("gdp-per-capita-worldbank.csv")
+lifeex <- read.csv("life-expectancy.csv")
+gini <- read.csv("economic-inequality-gini-index.csv")
+pop <- read.csv("population-long-run-with-projections.csv")
+
+# Daten zusammenfügen
+
+df <- gdppc %>% 
+  left_join(lifeex) %>%
+  left_join(gini) %>%
+  left_join(pop) %>%
+
+   #Dummy for EU Member States
+  mutate(dummy_EU = as.numeric(Entity %in% c("Austria", "Belgium", "Denmark",
+                                             "Finland", "France", "Germany", 
+                                             "Greece", "Ireland", "Italy",
+                                             "Luxembourg", "Netherlands", "Portugal",
+                                             "Spain", "Sweden", "United Kingdom"))) %>%
+  #Dummy for USA
+  mutate(dummy_USA = as.numeric(Entity %in% c("United States")))
+
+## Lücken füllen
+
+df %<>%  group_by(Entity) %>% 
+  fill(Gini.coefficient, .direction = "downup") %>% 
+   ungroup()
+
+# Daten ansehen
+
+#library(psych)
+#  headTail(df, top = 2, bottom = 2, ellipsis = T)
+
+#library(knitr)
+#kable(headTail(df, top = 2, bottom = 2, ellipsis = T), digits=2)
+```
+
+
+### BIP pro Kopf vs. Lebenserwartung
+  
+```{r echo=F, warning=F, message=F, cache=F}
+
+options(scipen = 999)
+
+p <- df %>% 
+  filter(Year == 2019)%>%
+  #Gruppen herauswerfen
+  filter(is.na(Code)==F,
+         Entity !="World")%>%
+  ggplot(aes(x= GDP.per.capita..PPP..constant.2017.international...,
+             y=  Life.expectancy.at.birth..historical.,
+             group=Entity)
+  )+
+  # scale_x_log10()+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) #,
+                  #   trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(aes(color=Gini.coefficient, size=Population..historical.estimates. #, frame=year
+                 )
+    )+
+  geom_smooth(aes(group=NULL, weight=Population..historical.estimates.))+
+#  coord_cartesian(xlim = c(100, 150000))+
+  # shadow_wake(.5)+
+  labs(title="BIP pro Kopf vs. Lebenserwartung",
+       #subtitle= expression('2020=100'),
+       x="BIP pro Kopf",
+       y='Lebenserwartung',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+# p
+
+p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                 #    trans = "log10"
+  )
+
+library(plotly)
+
+p1 <- ggplotly(p) %>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+
+p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )
+
+
+p1 <- ggplotly(p) %>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+```
+
+
+### BIP pro Kopf im Zeitverlauf
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(quantreg)
+
+p <- df %>% 
+  #Gruppen herauswerfen
+  filter(is.na(Code)==F,
+         Entity !="World")%>%
+  ggplot(aes(Year, GDP.per.capita..PPP..constant.2017.international..., label=Entity))+
+  geom_point(aes(color = Gini.coefficient),alpha=.7)+
+  scale_color_distiller(palette='Spectral')+
+  geom_quantile(size=1)+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) , 
+                         trans = "log10"
+  )+
+  labs(title="BIP pro Kopf im Zeitverlauf",
+       subtitle= "Kaufkraft- und inflationsbereinigt",
+       x="Jahr",
+       y='BIP pro Kopf',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+  
+
+# p
+  
+
+p1 <- ggplotly(p) %>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+
+```
+
+
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+
+### BIP pro Kopf 1990 vs. 2019
+
+#GDPPC einst und jetzt
+
+
+# neue Tabelle
+
+
+
+
+df1 <- df %>% 
+  filter(Year==1990) %>% 
+  select(Entity, Code, `GDP per capita`) %>% 
+  rename(GDPPC1990 = `GDP per capita`)
+
+df2 <- df %>% 
+  filter(year==2019) %>% 
+  select(entity, code, `GDP per capita`, Population, `Gini coefficient`) %>% 
+  rename(GDPPC2019 = `GDP per capita`)
+
+df3 <- df1 %>% 
+  left_join(df2)
+
+p <- df3 %>% 
+   filter(is.na(code)==F,
+         entity !="World")%>%
+  ggplot(aes(x=GDPPC1990,
+             y=GDPPC2019,
+             group=entity))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) ,
+                        trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(
+    aes(color=`Gini coefficient`, 
+      size=Population #, frame=year
+      )
+  )+
+  geom_smooth(aes(group=NULL, weight=Population))+
+  geom_abline(slope = 1,
+              intercept = 0,
+              color="red")+
+  labs(title="BIP pro Kopf 1990 vs. 2019",
+       #subtitle= expression('2020=100'),
+       x="BIP pro Kopf 1990",
+       y='BIP pro Kopf 2019',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+# p
+
+p1 <- ggplotly(p)%>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+``` 
+
+
+### Gini-Index 1990 vs. Gini-Index 2019
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+#Gini einst und jetzt
+
+
+# neue Tabelle
+
+df1 <- df %>% 
+  filter(year==1990) %>% 
+  select(entity, code, `Gini coefficient`) %>% 
+  rename(Gini1990 = `Gini coefficient`)
+
+df2 <- df %>% 
+  filter(year==2019) %>% 
+  select(entity, code, `Gini coefficient`, Population, `GDP per capita`) %>% 
+  rename(Gini2019 = `Gini coefficient`)
+
+df3 <- df1 %>% 
+  left_join(df2)
+
+p <- df3 %>% 
+  filter(is.na(code)==F,
+         entity !="World")%>%
+  ggplot(aes(x=Gini1990,
+             y=Gini2019,
+             group=entity))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) #, 
+                    # trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) #,
+                    # trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(
+    aes(color=`GDP per capita`, size=Population #, frame=year
+        )
+  )+
+  geom_smooth(aes(group=NULL, weight=Population))+
+  geom_abline(slope = 1,
+              intercept = 0,
+              color="red")+
+  labs(title="Gini-Index 1990 vs. 2019",
+       #subtitle= expression('2020=100'),
+       x="Gini-Index 1990",
+       y='Gini-Index 2019 ',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+# p
+
+p1 <- ggplotly(p)%>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+```
+
+
+
+# Beobachten, beschreiben, erklären, bewerten, verändern
+
+![Abbildung: Jan S. Voßwinkel](./Tikz/Beobachten.svg)
+
+
+# Ein bisschen Wissenschaftstheorie
+
+## Was macht Wissenschaft
+
+[s. Veranstaltung Science Lab](https://janvoss.github.io/sciencelab/wissenschaftstheorie.html)
+
+## Rolle der Wissenschaft in der Gesellschaft
+
+[s. Veranstaltung Science Lab](https://janvoss.github.io/sciencelab/wissenschaftstheorie.html)
+
+# Soziale Phänomene und „Gleichgewichte"
+
+[Feedback, aber schöner? ]::
+
+## Soziale Phänomene
+
+- Soziale Phänomene entstehen durch Entscheidungen und Interaktion von Individuen. 
+
+- Sie sind regelmäßig  	&bdquo;Ergebnis menschlichen Handelns aber nicht menschlichen Entwurfs&ldquo; (Hayek) (**spontane Ordnung**)
+
+## Gleichgewichte
+
+- Ein Gleichgewicht liegt vor, wenn ein System ohne &bdquo;Störungen&ldquo;  durch äußere Einflüsse in Ruhe verbleibt. 
+
+- Muster: Individuelle Entscheidungen \(\rightarrow\) Interaktion/Anpassung/Aggregation \(\rightarrow\) Gleichgewicht. Exogener Schock \(\rightarrow\) neue individuelle Entscheidungen \(\rightarrow\) Interaktion/Anpassung/Aggregation \(\rightarrow\) \(\dots\)
+
+## Exkurs: Empirische Regelmäßigkeiten, das Bruttoinlandsprodukt {-}
+
+```{r echo=F, message=F, warning=F, cache=T}
+library(tidyverse) 
+#library(udunits2) #vor eurostat laden, um Probleme zu vermeiden. 
+#Prüfen: Redundant mit mosaic?
+library(eurostat)
+mydata <- get_eurostat("nama_10_gdp",
+                       type = "label",
+                       time_format = "num",
+                       select_time="Y",
+                       cache = T
+) %>%
+  filter(na_item =="Gross domestic product at market prices",
+         unit =="Chain linked volumes (2015), million euro",
+       #  geo==c("Germany (until 1990 former territory of the FRG)")
+         )
+# Name für Germany kürzen
+#mydata$geo[mydata$geo=="Germany (until 1990 former territory of the FRG)"] <- "Germany"
+```
+
+```{r echo=F, warning=F, message=F, cache=F}
+#library(psych)
+library(knitr)
+#kable(headTail(mydata, top = 3, bottom = 3, ellipsis = T), digits=2)
+```
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+# kable(headTail(mydata %>% 
+#  filter(geo==c("Germany")),top = 3, bottom = 3, ellipsis = T), digits=2)
+
+```
+
+Entwicklung des BIPs
+```{r echo=F, warning=F, message=F, cache=F}
+mydata %>%
+    filter(geo=="Germany") %>%
+    ggplot(aes(time, values))+
+    geom_point()+
+    geom_line() +
+    #geom_smooth(method = 'lm', formula = y ~ x + I(x^2))+
+    geom_smooth(method = 'lm'
+    )+
+  labs(title="Entwicklung des BIPs in Deutschland",
+       x="Jahr",
+       y="BIP")
+
+
+```
+
+Wachstumsraten
+```{r echo=F, warning=F, message=F, cache=F}
+
+mydata <- mydata %>% 
+    filter(geo=="Germany") %>%
+    group_by(geo) %>% mutate(growth = (log(values) - lead(log(values)))*100)
+g <-   mean(mydata$growth[mydata$geo=="Germany"], na.rm=T)
+
+#options(OutDec= ",")
+
+```  
+Die durchschnittliche Wachstumsrate des Bruttoinlandsprodukts für Deutschland im Beobachtungszeitrum (blaue Linie) beträgt `r round(g,2)`%.
+
+```{r echo=F, warning=F, message=F, cache=F, eval=T}  
+mydata %>%
+  filter(geo=="Germany") %>%
+  ggplot(aes(time, growth))+
+  geom_line(#color="red"
+    )+
+  geom_point()+
+  #geom_smooth(method = 'lm'#, formula = y ~ x + I(x^2))
+  geom_hline(yintercept = mean(mydata$growth[mydata$geo=="Germany"], na.rm=T), color="blue")+
+  geom_hline(yintercept = 0, color="red")
+
+```
+
+
+```{r echo=F, warning=F, message=F, cache=F, results = "asis"}
+model <- lm(log(values) ~ time, data= mydata %>%                             filter(geo=="Germany"))
+
+library(stargazer)#
+
+stargazer(model, type= "html", digits=4,
+          notes = "<em>&#42;p&lt;0.1;&#42;&#42;p&lt;0.05;&#42;&#42;&#42;p&lt;0.01</em>", notes.append = F)
+```
+
+## Erklärungen durch Modelle
+
+(wissenschaftliche) **Erklärung**: Antwort auf eine Warum-Frage unter Rückgriff auf systematische Zusammenhänge
+
+
+Unerschiedliche Suchrichtungen für Erklärungen (in sehr enger Anlehnung an @blum2016grundlagen)
+
+![Suchrichtungen für Erklärungen](./TiKz/Deduktion.svg)
+
+**Theorie**: Systematische Vorstellung über Aspekte der Welt
+
+**Modell**: Theoriegeleitetes Abbild einer Situation
+
+
+**Modellgestützte Erklärung**: 
+
+- **Systematischer Zusammenhang** zwischen unabhängigen und abhängigen Variablen.
+
+- Erlaubt die Formulierung einer **Erwartung** über Entwicklung der abhängigen Variable in Abhängigkeit von der Entwicklung der unabhängigen Variable. 
+
+- Erlaubt **keine** Prognose von Einzelereignissen
+
+- In jedem **Einzelfall** wirkt eine **Vielzahl von unsystematischen Einzelfaktoren**, die sich nicht systematisch erklären lassen. 
+
+
+
+```{r Modell-Stoerung, echo=F, warning=F, message=F, cache=F}
+library(tidyverse)
+
+# df erzeugen
+set.seed(123)
+
+index <- 1:100
+
+df <- as.data.frame(index) %>% 
+  mutate(trend = .2*index^2+30,
+         beobachtung = trend+rnorm(100, 0, 150))
+
+#(Zusätzlicher df, um vertikale Linien in Grafik zu erzeugen, s. https://stackoverflow.com/questions/12253239/vertical-lines-between-points-with-ggplot2)
+
+trend1 <- df$trend
+beobachtung1 <- df$beobachtung
+index1 <- rep(1:100,2)
+
+df1 <- data.frame(index1=index1,
+                 y=c(trend1, beobachtung1))
+
+# Bild erzeugen
+
+p <- df %>% 
+  ggplot(aes(index, beobachtung))+
+  geom_point(aes(color="Beobachtungen"))+
+#  geom_line()+
+  geom_line(aes(x=index1, y=y, group=df1$index1, color="zufällige Störungen"), data=df1)+
+  geom_line(aes(y=trend, color= "Erklärung"))+
+  scale_color_manual(values=c("blue", "red", "gray"))+
+  scale_x_continuous(breaks= NULL) +
+  scale_y_continuous(breaks= NULL) +
+  theme_classic()+
+  theme(panel.grid = element_blank()) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(title="Erklärung und Zufall",
+       caption="Darstellung: Jan S. Voßwinkel",
+    x = "unabhängige Variable", y = "abhängige Variable", 
+       color="",
+       fill="")
+
+p
+
+```
+
+
+- Modelle erlauben es, den Grad an Komplexität zu steuern. 
+  - Beschränkung (zunächst) auf Zusammenhänge, von denen man annimmt, dass sie stark sind  
+  - dann ggf sukzessive Aufnahme weiterer Zusammenhänge
+  
+
+Prozess der Modellvereinfachung in enger Anlehnung an @blum2016grundlagen 
+
+ Brainstorming: Kompliziertes Geflecht aus Zusammenhängen            |  Modell: Vereinfachender (erster) Ansatz
+:-------------------------:|:-------------------------:
+![Kompliziert](./TikZ/Modell-Vereinfachung2.svg) |  ![Einfach](./TikZ/Modell-Vereinfachung.svg)
+
+
+## Twitter-Universität: Modelle {-}
+
+<blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Aus gegebenem Anlass: ein Thread ueber Modelle in der Oekonomik. <br><br>Zunaechst einmal muss Folgendes gesagt werden. Unter dem Oberbegriff Modelle werden sehr verschiedene Dinge zusammengefasst, die sehr unterschiedlichen Zwecken dienen.</p>&mdash; Rudi Bachmann (@BachmannRudi) <a href="https://twitter.com/BachmannRudi/status/1624083694582366209?ref_src=twsrc%5Etfw">February 10, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+## Typische Grundannahmen in ökonomischen Modellen
+
+
+
+- **Methodologischer Individualismus**   	&bdquo;[A]lle sozialen Phänomene, insbesondere das Funktionieren der sozialen Institutionen [sollten] immer als das Resultat der Entscheidungen, Handlungen, Einstellungen menschlicher Individuen verstanden werden und (...) wir [dürfen] nie mit einer Erklärung aufgrund sogenannter 'Kollektive' (Staaten, Nationen, Rassen usw.) zufrieden sein.&ldquo; (Karl Popper 1992, S. 116)
+
+- **Normativer Individualismus **Die Ziele keines einzigen Menschen sind a priori wichtiger als die irgendeines anderen Menschen. Ausschließlich Individuen und alle Individuen sind Quelle von Werten.
+
+- **Rationalität** der handelnden Subjekte wird unterstellt (Verknüpfung
+von Situation und Handlung möglich)
+
+- **Präferenzen** werden als **gegeben** angenommen 
+
+- **Veränderliche Restriktionen** bestimmen folglich Ergebnisse
+
+
+## Twitter-Universität: Methodologischer Individualismus und sonstigen Annahmen in der Ökonomik {-}
+
+<blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Wie kann das sein? Die „Mainstream“-Ökonomie beschäftigt sich seit Jahren mit Fragen von Marktmacht und Einflussnahme. Vorschläge zu wirksamem Klimaschutz, die auf einer Analyse der Anreize und Machtverhältnisse basieren, werden seit Jahren nicht oder nur halbherzig umgesetzt. <a href="https://t.co/xxRjN3FgUy">https://t.co/xxRjN3FgUy</a></p>&mdash; Veronika Grimm (@GrimmVeronika) <a href="https://twitter.com/GrimmVeronika/status/1641749578754957313?ref_src=twsrc%5Etfw">March 31, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>    
+
+
+## Der Rationalitätsbegriff
+
+Das Folgende ist fast wörtlich aus Detel Grundkurs V, S. 20 übernommen.
+
+**Basisschema der Handlungserklärung**
+
+1. Person $S$ wünscht, Ziel $Z$ zu realisieren.
+
+2. $S$ glaubt, die Handlung $H$ sei ein Mittel, um $Z$ zu realisieren.
+
+3. **$S$ vollzieht Handlung $H$**.
+
+
+Das Basisschema ist noch unvollständig:
+
+- Was ist, wenn es für $S$ bessere Handlungen als $H$ gibt, $Z$ zu
+realisieren? Dann wäre es nicht vernünftig, $H$ zu vollziehen.
+-  Was ist, wenn es $S$ $H$ gar nicht vollziehen kann?
+-  Was ist, wenn $H$ mit negativen Folgen einhergeht, die schlimmer
+sind, als $Z$ nicht zu realisieren?
+-  Was ist, wenn $S$ noch weitere Ziele realisieren will, die mit $Z$
+nicht vereinbar sind?
+
+$\Rightarrow$ **erweitertes Schema der Handlungserklärung**
+
+
+1. $S$ hat die Absicht, Ziel $Z$ zu realisieren.
+
+2. $S$ glaubt, dass, wenn sie Handlung $H$ vollzieht, sie somit $Z$
+realisieren kann.
+
+3. $S$ glaubt in der Lage zu sein, $Z$ zu realisieren und $H$ zu vollziehen.
+
+4. $S$ weiß, wie man $Z$ realisiert und $H$ vollzieht.
+
+4. $S$ glaubt nicht, dass es etwas Besseres gibt als $H$, um $Z$ zu
+realisieren.
+
+5. $S$ glaubt nicht, dass der Vollzug von $H$ Folgen hat, die schlimmer
+sind als nicht $Z$ realisieren zu können.
+
+6. $S$ hat nicht die Absicht, ein Ziel zu realisieren, von dem $S$
+weiß, dass es unvereinbar damit ist, $Z$ zu realisieren, und das
+sie $Z$ gegenüber vorzieht.
+
+7. **$S$ vollzieht Handlung $H$.**
+
+- Erklärungen rationaler Handlungen unterstellen nicht zwangsläufig,
+dass die handelnde Person "alles richtig"  macht. 
+-  Insbesondere lässt es beschränkte Handlungsmöglichkeiten zu und unvollständige
+oder fehlerhafte Informationslagen.
+- Das Rationalprinzip ist weniger eine Behauptung über die handelnde
+Person, sondern ein Schema, eine "Grammatik" der Erklärung.
+
+# Akteursgruppen und allokative (Teil-)mechanismen
+
+- **Haushalt/Familie**
+
+  - Zielfunktion?  
+    
+      - Langfristige Optimierung/ Sparen für die Zukunft
+      
+      - Materieller Wohlstand
+      
+      - Aktuelle Bedürfnisbefriedigung
+      
+      - Sicherheit
+      
+      - $\dots$
+
+  - Restriktionen? 
+    
+    - Einkommen, Preise
+    
+    - Unsicherheit
+    
+    - Zeit
+    
+    - Ánzahl der Familienmitglieder
+    
+    - Fähigkeiten
+    
+    - Gesetzliche/gesellschaftliche Rahmenbedingungen
+    
+    - $\dots$
+
+
+- **Unternehmen**
+
+  - Zielfunktion?
+  
+    - **Gewinn maximieren** 
+    
+    - Kostenreduktion
+    
+    - Expansion/ langfristiger Erfolg
+    
+    - Image
+    
+    - Kundenbindung
+    
+    - Gewinnung von Fachkräften
+    
+    - $\dots$
+  
+  - Restriktionen?
+  
+    - Gesetzliche Rahmenbedingungen
+    
+    - Fähigkeiten
+    
+    - Finanzielle Mittel
+    
+    - Ressourcen (Platz, Rohstoffe, Informationen, Personal $\dots$)
+    
+    - Wettbewerber
+    
+    - Gesellschaftliche Erwartungen/ Image
+    
+    - $\dots$
+  
+  
+- **NPOs (Stiftungen, Vereine, $\dots$)**
+
+  - Zielfunktion?
+  
+  - Restriktionen?
+  
+- **Der Staat**
+
+  - Zielfunktion?
+  
+    - Gesellschaftliche Wohlfahrt
+    
+    - Machtsicherung
+    
+    - Zustimmung der Gesellschaft
+    
+    - Sprache und Kultur
+    
+    - Ordnung der Gesellschaft
+    
+    - Internationaler Einfluss
+    
+    - Innere/ Äußere Sicherheit
+    
+    - $\dots$
+  
+  - Restriktionen?
+  
+    - Relevanz auf internationaler Bühne
+    
+    - Ressourcen
+    
+    - Rechtliche Rahmenbedingunge
+    
+    - Öffentliche Meinung (Opposition, Presse)
+    
+    - Bevölkerung (Wahlen, Abstimmungen)
+    
+    - Zielkonflikte
+    
+    - "Weltgeschehen"
+    
+    - Geografische Lage
+    
+    - $\dots$
+  
+- **Supranationale Organisationen**
+
+  - Zielfunktion?
+  
+  - Restriktionen?
+
+# Wo sind wir?
+
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+library(tidyverse)
+library(owidR)
+
+df <- owid("population")
+options(scipen = 999)
+
+p <- df %>% 
+  filter(entity== "World") %>% 
+  ggplot(aes(x=year, y=Population))+
+  geom_point(color="red")+
+#  geom_smooth(method = 'glm')+
+  geom_line()+
+#  scale_x_continuous(#expand = c(0, 0), 
+    #                 breaks = c(0,q_M,q), labels = expression(0,"x"^M,"x*") +
+  scale_y_continuous(labels= function(x) format(x/1000000,scientific = F) , 
+                     trans = "log10"
+  )+
+#  coord_cartesian(xlim=(c(1800,2100)))+
+  labs(title= "Bevölkerungsentwicklung",
+       x="Jahr",
+       y= "Weltbevölkerung in Mio.")
+
+# p
+
+library(plotly)
+
+ggplotly(p,dynamicTicks = "x") 
+
+```
+
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+lifeex <- owid("life-expectancy")
+
+options(scipen = 999)
+
+p <- lifeex %>% 
+  filter(entity== "World") %>% 
+  ggplot(aes(x=year, y= `Life expectancy at birth (historical)`))+
+  geom_point(color="red")+
+#  geom_smooth(method = 'glm')+
+  geom_line()+
+#  scale_x_continuous(#expand = c(0, 0), 
+    #                 breaks = c(0,q_M,q), labels = expression(0,"x"^M,"x*") +
+ # scale_y_continuous(labels= function(x) format(x/1000000,scientific = F) , 
+#                     trans = "log10"
+#  )+
+#  coord_cartesian(xlim=(c(1800,2100)))+
+  labs(title= "Lebenserwartung",
+       x="Jahr",
+       y= "Lebenserwartung")
+
+# p
+
+library(plotly)
+
+ggplotly(p,dynamicTicks = "x") 
+
+```
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+df <- owid("maddison-data-gdp-per-capita-in-2011us-single-benchmark")
+
+options(scipen = 999)
+
+p <- df %>% 
+  filter(entity== "World") %>% 
+  ggplot(aes(x=year, y= `GDP per capita`))+
+  geom_point(color="red")+
+#  geom_smooth(method = 'glm')+
+  geom_line()+
+#  scale_x_continuous(#expand = c(0, 0), 
+    #                 breaks = c(0,q_M,q), labels = expression(0,"x"^M,"x*") +
+ # scale_y_continuous(labels= function(x) format(x/1000000,scientific = F) , 
+#                     trans = "log10"
+#  )+
+#  coord_cartesian(xlim=(c(1800,2100)))+
+  labs(title= "BIP pro Kopf",
+       x="Jahr",
+       y= "BIP pro Kopf")
+
+# p
+
+library(plotly)
+
+ggplotly(p,dynamicTicks = T) 
+
+```
+
+```{r Patente, echo=F, warning=F, message=F, cache=T}
+
+# Patente
+
+library(tidyverse)
+library(wbstats)
+
+df <- wb_data(c("IP.PAT.RESD", "NY.GDP.MKTP.KD"))
+
+p <- df %>% 
+  filter(date==2020) %>% 
+  ggplot(aes(x=NY.GDP.MKTP.KD, y=IP.PAT.RESD, group=country #für labels in ggplotly
+             ))+
+  geom_point(color="red")+
+  geom_smooth(aes(group=NULL #, weight=NY.GDP.MKTP.KD
+                  ))+
+  scale_x_continuous(labels= function(x) format(x/1000000,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  labs(title= "Patentanmeldungen durch Einwohner, 2020",
+       x="Bruttoinlandsprodukt",
+       y= "Patentanmeldungen durch Inländer")
+                     
+# p
+
+library(plotly)
+
+ggplotly(p)%>%
+  config(displaylogo = F) %>% 
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: World Bank; Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+```
+
+
+```{r Patente2, echo=F, warning=F, message=F, cache=T}
+
+# Patente
+
+library(tidyverse)
+library(wbstats)
+
+df <- wb_data(c("IP.PAT.RESD", 
+                "NY.GDP.MKTP.KD",
+                "SP.POP.TOTL"))
+
+p <- df %>% 
+  filter(date==2020) %>% 
+  ggplot(aes(x=NY.GDP.MKTP.KD/SP.POP.TOTL, y=IP.PAT.RESD/SP.POP.TOTL, group=country #für labels in ggplotly
+             ))+
+  geom_point(color="red")+
+  geom_smooth(aes(group=NULL, # weight=SP.POP.TOTL
+                  ))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x*1000000,scientific = F) , 
+                     trans = "log10"
+  )+
+  labs(title= "Patentanmeldungen durch Einwohner pro 1 Mio Einwohner, 2020",
+       x="Bruttoinlandsprodukt pro Kopf",
+       y= "Patentanmeldungen durch Inländer pro 1 Mio Einwohner")
+                     
+# p
+
+library(plotly)
+
+ggplotly(p)%>%
+  config(displaylogo = F) %>% 
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: World Bank; Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+```
+
+
+```{r migration, echo=F, message=F, warning=F, cache=T}
+
+library(tidyverse)
+library(wbstats)
+
+df <- wb_data(c("NY.GDP.PCAP.PP.KD",
+                "SM.POP.NETM",
+                "SP.POP.TOTL"))
+
+options(scipen = 999)
+p <- df %>% 
+  filter(date==2017) %>% #keine neueren Migrationsdaten
+  ggplot(aes(x=NY.GDP.PCAP.PP.KD, y=SM.POP.NETM/SP.POP.TOTL, group=country
+             ))+
+  geom_point(aes(size=SP.POP.TOTL))+
+  geom_smooth(aes(group=NULL, weight=SP.POP.TOTL))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                                                  trans = "log10"
+  )+
+  labs(title= "Relative Nettomigration, 2017",
+       x="Bruttoinlandsprodukt pro Kopf",
+       y= "Relative Nettomigraion")
+
+#p
+
+library(plotly)
+
+ggplotly(p) %>% 
+  config(displaylogo = F) %>% 
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: World Bank; Datenabruf:', format(Sys.Date(), format="%d.%m.%Y"), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+```
+
+
+# Rationalität und Effizienz
+
+## Nutzenfunktionen
+
+- Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
+
+- Der Nutzen hängt ab von den konsumierten Gütern $x_i$
+
+- Zur Vereinfachung: Beschränkung auf wenige Güter
+
+### Perfekte Substitute
+
+Beispiel: $U(x_1, x_2)=x_1+x_2$
+
+#### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+
+
+library(tidyverse)
+library(plotly)
+
+f <- function(x1, x2){x1+x2}
+
+x1a <- 0
+x1b <- 100
+
+x2a <- 0
+x2b <- 100
+
+x1 <- seq(x1a, x1b)
+x2 <- seq(x2a, x2b)  
+
+u <- outer(x1, x2, f)
+
+
+
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+#### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+$x_2=\bar{U}-x_1$
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+### Imperfekte Substitute
+
+$U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
+
+#### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(mosaic)
+library(plotly)
+
+f <- function(x1, x2){.5*(x1*x2)^.5}
+
+
+u <- outer(x1, x2, f)
+
+
+# Werte für x1 usw. werden aus dem anderen chunk übernommen
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+#### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+
+
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+### Komplementärgüter
+
+$U(x_1, x_2)=\min(x_1, x_2)$
+
+#### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(mosaic)
+library(plotly)
+
+f <- function(x1, x2){
+  ifelse(x1< x2, x1, x2)}
+
+#f <- function(x1, x2){
+#  ifelse(x1< .25*x2, x1, floor(x2/4))}
+
+
+u <- outer(x1, x2, f)
+
+
+# Werte für x1 usw. werden aus dem anderen chunk übernommen
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+#### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+## Indifferenzkurven und Budgetrestriktionen
+
+Nutzenfunktion: $U(x_1, x_2)=x_1\times x_2$
+
+Indifferenzkurve: $x_2=\frac{\bar{U}}{x_1}$
+
+Budgetrestriktion: $I=p_1 x_1+p_2 x_2$
+
+Budgetlinie: $x_2=\frac{I}{p_2}- \frac{p_1}{p_2}x_1$
+
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(mosaic)
+library(latex2exp)
+
+# Funktionen definieren
+
+x <- 0:10
+
+I_1 <- function(x) 10/x
+I_2 <- function(x) 25/x
+I_3 <- function(x) (5*7.5)/x
+
+b1 <- function(x) 10-x
+b2 <- function(x) 10-(2/3)*x
+
+
+#Gleichgewichtsmenge x1^0
+x10 <- uniroot(function(x) -25/x^2 + 1, range(x))$root
+
+#Gleichgewichtsmenge x20
+
+x20 <- b1(x10)
+
+#Gleichgewichtsmenge x1^1
+x11 <- uniroot(function(x) -(5*7.5)/x^2 + 2/3, range(x))$root
+
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "I_1"), fun = I_1, xlim = c(uniroot(function(x) I_1(x) - 18, range(x))$root,18))+
+   annotate(geom = "text", x=18, y=I_1(18), hjust=-0.4, label=expression(I[1]),color = "grey30")+
+  #
+  stat_function(aes(color = "I_2"), fun = I_2, xlim = c(uniroot(function(x) I_2(x) - 18, range(x))$root,18)) +
+   annotate(geom = "text", x=18, y=I_2(18), hjust=-0.4, label=expression(I[2]),color = "grey30")+
+  #
+  stat_function(aes(color = "I_3"), fun = I_3, xlim = c(uniroot(function(x) I_3(x) - 18, range(x))$root,18)) +
+  annotate(geom = "text", x=18, y=I_3(18), hjust=-0.4, label=expression(I[3]),color = "grey30")+
+  #
+  stat_function(aes(color = "budget"), fun = b1, xlim=c(0,10))+
+  stat_function(aes(color = "budget"), fun = b2, linetype="dashed", xlim=c(0,15))+
+  #
+  annotate("segment", x = x10, xend = x10, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+  annotate("segment", x = 0, xend = x11, y = x20, yend = x20,
+           linetype = "dashed") +
+  #
+  annotate("segment", x = x10, xend = x10, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+    annotate("segment", x = x11, xend = x11, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+  scale_color_manual(values=c("red", "green", "green", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                    breaks = c(0, x10, x11, 10, 15), labels = expression("0",x[1]^0, x[1]^1, frac(I^0, p[1]^0), frac(I^0, p[1]^1) ),
+                     limits = c(0, 20)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(0,x20, 10), labels = c("0", latex2exp::TeX(r"($x_2^0=x_2^1$)"), latex2exp::TeX(r"($\frac{I^0}{p_1^0}$)") ),
+                     limits = c(0,20)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = latex2exp::TeX(r'($x_1$)'), y = latex2exp::TeX(r'($x_2$)'), 
+       color = NULL, fill = NULL)
+    chart
+
+```
+
+# Nachfrage, Angebot Märkte
+
+[Mikro Grundlagen in Mikro-VL]::
+
+## Nachfragefunktion 
+
+s. Tafelaufschrieb
+
+Aggregation
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand2 <- function(x) 4-x
+demand1 <- function(x) 3-.8*x
+
+# x=4-p
+#(4/5)*x=3-p
+#x=(15/4)-(5/4)p
+
+#x=(31/4)-(9/4)p
+
+#(9/4)p=(31/4)-x
+
+#p=(31/9)-(4/9)x 
+
+demandg <- function(x) (31/9)-(4/9)*x 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) demand2(x) - demandg(x), range(x))$root
+
+p0 <- function(x) 2.5
+
+q1 <- uniroot(function(x) demand1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) demand2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) demandg(x) - p0(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand1, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand1(3.3), hjust=-0.1, label=expression('D'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand2(3.3), hjust=-0.1, label=expression('D'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demandg, xlim = c(q0,3.3), size=1)+
+   annotate(geom = "text", x=3.3, y=demandg(3.3), hjust=-0.1, label=expression('D'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,q0), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), linetype= "dashed")+
+  #
+  annotate("point", x = q1, y = demand1(q1), color = "grey30")+
+  annotate("point", x = q2, y = demand2(q2), color = "grey30")+
+  annotate("point", x = qg, y = demandg(qg), color = "grey30")+
+  annotate("point", x=0, y=demand1(0))+
+  annotate("point", x=q0, y=demandg(q0))+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = demand1(q1),
+                    linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = demand2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = demandg(qg),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x=0, xend=q0, y=demandg(q0), yend=demandg(q0), linetype = "dashed")+
+    #
+  scale_color_manual(values=c("green"))+
+#  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "x"[1], "x"[2], "x"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("p"[0]),
+                     limits = c(0,5)
+                    ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+
+## Angebotsfunktion
+
+[Angebotsfunktion herleiten?]::
+
+$$\max \pi=\bar{p}\times x-TC(x)$$
+
+$$\frac{d\pi}{dx}=\bar{p}-MC\overset{!}{=}0  \iff \bar{p}=MC$$
+
+[TR-TC]::
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+TC <- function(x) x^2.2+2
+TR <- function(x) 4.5*x
+
+
+# Gewinnmaximum
+
+## Steigungen gleich
+
+
+q <- uniroot(function(x) x^1.2*2.2 - 4.5 , range(x))$root
+
+help <- TR(q)-TC(q)
+
+help2 <- function(x) 4.5*x-help
+
+#Gleichgewichtspreis
+#p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+#z <- seq(0, q, 0.01)
+
+# Abbildung
+
+p <- ggplot() +
+  stat_function(aes(color = "TC"), fun = TC, xlim = c(0,3.5))+
+ #  annotate(geom = "text", x=3.5, y=TC(3.5), hjust=-0.1, label="TC",color = "grey30")+
+  stat_function(aes(color = "TR"), fun = TR, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=TR(3.5), hjust=-0.1, label="TR",color = "grey30")+ 
+  annotate("point", x = q, y = TC(q), color = "grey30")+
+  annotate("point", x = q, y = TR(q), color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = TC(q),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2, xlim=c(q-1, q+1))+
+  annotate("segment", x=q, xend=q, y=TC(q), yend=TR(q),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+   #geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+    #              fill = "Produzentenrente"), alpha = 0.25) +
+  #geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+   #               fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("red", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q), labels = c(0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = NULL, labels = NULL,
+                     limits = c(0,19)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "TC, TR", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+Höherer Preis $\rightarrow$ Menge ausdehnen, bis wieder Preis=Grenzkosten
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+TC <- function(x) x^2.2+2
+TR <- function(x) 4.5*x
+
+TRN <- function(x) 5.5*x
+
+
+# Gewinnmaximum
+
+## Steigungen gleich
+
+
+q <- uniroot(function(x) x^1.2*2.2 - 4.5 , range(x))$root
+
+help <- TR(q)-TC(q)
+
+help2 <- function(x) 4.5*x-help
+
+qn <- uniroot(function(x) x^1.2*2.2 - 5.5 , range(x))$root
+
+helpn <- TRN(qn)-TC(qn)
+
+help2n <- function(x) 5.5*x-helpn
+
+#Gleichgewichtspreis
+#p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+#z <- seq(0, q, 0.01)
+
+# Abbildung
+
+p <- ggplot() +
+  stat_function(aes(color = "TC"), fun = TC, xlim = c(0,3.5))+
+ #  annotate(geom = "text", x=3.5, y=TC(3.5), hjust=-0.1, label="TC",color = "grey30")+
+  stat_function(aes(color = "TR"), fun = TR, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=TR(3.5), hjust=-0.1, label="TR",color = "grey30")+ 
+  stat_function(aes(color = "TR"), fun = TRN, xlim = c(0,3.5),  linetype= "dashed")+
+  annotate("point", x = q, y = TC(q), color = "grey30")+
+  annotate("point", x = q, y = TR(q), color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = TC(q),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2, xlim=c(q-1, q+1))+
+  annotate("segment", x=q, xend=q, y=TC(q), yend=TR(q),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+  annotate("point", x = qn, y = TC(qn), color = "grey30")+
+  annotate("point", x = qn, y = TRN(qn), color = "grey30")+
+  annotate("segment", x = qn, xend = qn, y = 0, yend = TC(qn),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2n, xlim=c(qn-1, qn+1))+
+  annotate("segment", x=qn, xend=qn, y=TC(qn), yend=TRN(qn),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+  #Pfeil
+  geom_curve(
+    aes(x = 2.5, y = TR(2.5), xend = 2.8, yend = TRN(2.8)),
+    arrow = arrow(length = unit(0.03, "npc")),
+    angle=90
+  )+
+  
+   #geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+    #              fill = "Produzentenrente"), alpha = 0.25) +
+  #geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+   #               fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("red", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q, qn), labels = c(0,"x*", "x*'"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = NULL, labels = NULL,
+                     limits = c(0,19)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "TC, TR", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+$\rightarrow$ Die  Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. **Damit ist die Grenzkostenfunktion die Angebotsfunktion**.
+
+[Aggregation der Funktionen]::
+  
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:6
+
+supply2 <- function(x) 1+x
+supply1 <- function(x) 2+.8*x
+
+# x=p-1
+#(4/5)*x=p-2
+#x=(5/4)p-(10/4)
+
+#x=(9/4)p-(14/4)
+
+#(9/4)p=(14/4)+x |*(4/9)
+
+#p=(14/9)+(4/9)x 
+
+supplyg <- function(x) (14/9)+(4/9)*x 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) supply2(x) - supplyg(x), range(x))$root
+
+p0 <- function(x) 3
+
+q1 <- uniroot(function(x) supply1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) supply2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) supplyg(x) - p0(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Angebot"), fun = supply1, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=supply1(3.3), hjust=-0.1, label=expression('S'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supply2, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=supply2(3.3), hjust=-0.1, label=expression('S'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supplyg, xlim = c(q0,3.3), size=1)+
+   annotate(geom = "text", x=3.3, y=supplyg(3.3), hjust=-0.1, label=expression('S'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supply2, xlim = c(0,q0), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), linetype= "dashed")+
+  #
+  annotate("point", x = q1, y = supply1(q1), color = "grey30")+
+  annotate("point", x = q2, y = supply2(q2), color = "grey30")+
+  annotate("point", x = qg, y = supplyg(qg), color = "grey30")+
+  annotate("point", x=0, y=supply1(0))+
+  annotate("point", x=q0, y=supplyg(q0))+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = supply1(q1),
+                    linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = supply2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = supplyg(qg),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x=0, xend=q0, y=supplyg(q0), yend=supplyg(q0), linetype = "dashed")+
+    #
+  scale_color_manual(values=c("orange"))+
+#  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "x"[1], "x"[2], "x"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("p"[0]),
+                     limits = c(0,5)
+                    ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+## Marktgleichgewicht, Konsumenten- und Produzentenrente
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis
+p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.1, label="Nachfrage",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.1, label="Angebot",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  annotate("text", x=1, y=16, label="PR", color="grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", "green"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q), labels = c(0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p, labels = "p*",
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Der Wohlfahrtsverlust von Mindest- und Höchstpreisen
+
+### Mindestpreis
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart (Erzeugt aus Abb. mit Steuer)
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_t, ymin = supply(z_t), ymax = p_t,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+  # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+   #        linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z_t, ymin = p_t, ymax = demand(z_t),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", #"blue",
+                              "green"))+
+  scale_fill_manual(values=c("green", "orange", #"blue",
+                             "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p*", "p"^min),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+### Höchstpreis
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart (Erzeugt aus Abb. mit Steuer)
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_t, ymin = supply(z_t), ymax = p_t-t,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+#  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+ #          linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+   annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+           linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = demand(z_t),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", #"blue",
+                              "green"))+
+  scale_fill_manual(values=c("green", "orange", #"blue",
+                             "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^1,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t-t), labels = expression("p*", "p"^max),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+## Der Wohlfahrtsverlust einer Mengensteuer
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S=MC",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+   annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+           linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+                  fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", "blue", "green"))+
+  scale_fill_manual(values=c("green", "orange", "blue", "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^t,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p*", "p"^t),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+## Wettbewerbsfunktionen
+[@conradWirtschaftsethik2016]
+
+**Statische Wettbewerbsfunktionen**
+
+- Steuerungsfunktion
+
+- Allokationsfunktion
+
+- Anreizfunktion
+
+- Sanktionsfunktion
+
+- Verteilungsfunktion
+
+- Freiheitsfunktion
+
+- Kontrollfunktion
+
+
+**Dynamische Wettbewerbsfunktionen**
+
+- Innovationsfunktion
+
+- Imitationsfunktion
+
+- Anpassungsfunktion
+
+[Irgendwo auch: Entlassung von Mitarbeitenden: Funktion und ethische Bewertung]::
+
+## Pfadabhängigkeit
+
+Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in frühen Perioden können dann zu verfestigten Wettbewerbsstrukturen führen.
+
+Veranschaulichung anhand der sog. Pólya-Urne
+
+- Es gibt Kugeln verschiedener Farben in einer Urne.
+
+- Es wird zufällig eine Kugel gezogen
+
+- Die gezogene Kugel wird zurückgelegt
+
+- Es wird eine zusätzliche Kugel (oder mehrere zusätzliche Kugeln) der Urne hinzugefügt, die die gleiche Farbe hat (haben), wie die zuvor gehogene Kugel. 
+
+- Die Prozedur wird wiederholt
+
+
+Ergebnis: 
+
+- Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne 
+
+
+- Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
+
+
+Anwendung auf ökonomischen Wettbewerb
+
+- Netzwerkeffekte (Vorteile großer Nutzerzahlen)
+
+- Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
+
+```{r echo=T, warning=F, message=F}
+
+#Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]
+
+# Nun mit ggplot
+library(tidyverse)
+
+# Matrix aufbauen
+cols = c("black", "blue", "green", "red", "yellow")
+
+n=1000
+
+urn <- cols |> table() |> as.matrix() |> t()
+urn <- rbind(urn, matrix(NA, nrow = n-1, ncol = ncol(urn)))
+cols_unique <- colnames(urn)
+
+# n-1 draws from Dirichelet distribution
+
+set.seed(1)
+for (i in seq_len(n-1)) {
+  urn[i+1, ] <- urn[i, ]
+  col_sample <- sample(cols_unique, size = 1, prob = (urn[i, ] / sum(urn[i, ]))                       ) # sample ball
+  urn[i+1, col_sample] <- urn[i+1, col_sample] + 1 # add ball with same colour
+}
+# Data frame erzeugen
+  
+df <- as.data.frame(urn) %>% 
+  mutate(Züge=seq(1:n))
+
+# Rundenanzahl
+
+# long format
+
+df1 <- df %>%   
+  pivot_longer( !starts_with("Z") ,
+               names_to = "Farbe", values_to = "Anzahl") %>% 
+  group_by(Züge) %>% 
+  mutate(Anteil=Anzahl/sum(Anzahl))
+
+p1 <- df1 %>% 
+  ggplot(aes(x=Züge, y=Anzahl, group=Farbe, color=Farbe))+
+  geom_line(size=1)+
+  scale_color_manual(values=c(unique(df1$Farbe)),
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))
+
+p2 <- df1 %>% 
+  ggplot(aes(x=Züge, y=Anteil, group=Farbe, color=Farbe))+
+  geom_line(size=1)+
+  scale_color_manual(values=c(unique(df1$Farbe)),
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))
+
+
+p1
+
+p2
+
+```
+
+
+# Gutseigenschaften: Private und öffentliche Güter   
+
+```{tikz,  fig.ext = 'png', cache=F, echo=F,  out.width="75%"}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}
+
+\sffamily % Keine Serifen
+
+\renewcommand{\familydefault}{\sfdefault} 
+
+\matrix[matrix of nodes, every node/.style={text width=3.5cm, minimum height=1.2cm, text centered, rectangle}] (m) {
+	{Private Güter} & {Allmendegüter}\\ 
+	{Clubgüter}   & {Öffentliche Güter}\\
+};
+\draw (m.north east) rectangle (m.south west);
+\draw (m.north) -- (m.south);
+\draw (m.east) -- (m.west);
+
+\coordinate (a) at ($(m.north west)!0.25!(m.north east)$);
+\coordinate (b) at ($(m.north west)!0.75!(m.north east)$);
+\node[above=5pt of a,anchor=base] {Ja};
+\node[above=5pt of b,anchor=base] {Nein};
+
+\coordinate (c) at ($(m.north west)!0.25!(m.south west)$);
+\coordinate (d) at ($(m.north west)!0.75!(m.south west)$);
+%\node[left=0pt of c, red]{c};
+\node[left=12pt of c,text width=1.5cm,rotate=90,align=center,anchor=center]  {Ja};
+\node[left=12pt of d,text width=1.5cm,rotate=90,align=center,anchor=center]  {Nein};
+
+
+\node[above=18pt of m.north] (Spaltenspieler) {Ausschließbarkeit};
+\node[left=30pt of m.west,rotate=90,align=center,anchor=center] {Rivalität};
+
+\node[above=20pt of Spaltenspieler]  {\textbf{Gutseigenschaften}};
+
+\end{tikzpicture}
+
+```
+
+# Marktversagenstatbestände
+
+## Öffentliche Güter
+
+- Nichtausschließbarkeit
+
+- Nichtrivalität im Konsum
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand2 <- function(x) 3-x
+demand1 <- function(x) 2-.8*x
+
+#Vertikale Aggregation
+demandg <- function(x) demand1(x)+demand2(x) 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) demand2(x) - demandg(x), range(x))$root
+
+p0 <- function(x) 1.3 #Horizontale Grenzkosten
+
+q1 <- uniroot(function(x) demand1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) demand2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) demandg(x) - p0(x), range(x))$root
+
+q_knick <- uniroot(function(x) demand1(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand1, xlim = c(0,3.3))+
+  annotate(geom = "text", x=.5, y=demand1(.5), hjust=-0.1, label=expression('MB'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,3.3))+
+  annotate(geom = "text", x=.5, y=demand2(0.5), hjust=-0.1, label=expression('MB'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demandg, xlim = c(0,q_knick), size=1)+
+  annotate(geom = "text", x=.5, y=demandg(.5), hjust=-0.1, label=expression('MB'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(q_knick,3.3), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), color="orange")+
+  #
+  annotate("point", x = q1, y = demand1(q1), color = "grey30")+
+  annotate("point", x = q2, y = demand2(q2), color = "grey30")+
+  annotate("point", x = qg, y = demandg(qg), color = "grey30")+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = demand1(q1),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = demand2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = demandg(qg),
+           linetype = "dashed", color = "grey30") +  
+  scale_color_manual(values=c("green"))+
+  #  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "G"[1], "G"[2], "G"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("MC"[G]),
+                     limits = c(0,5)
+  ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+  ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge des öffentlichen Guts", y = "Steuerpreis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+
+## Externe Effekte
+
+- Nicht alle Kosten- u/o Nutzenwirkungen werden im Preis berücksichtigt. 
+
+- Beispielsweise negative Umweltwirkungen
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+#t <-10
+supply_ext <- function(x) x^2.5 + 7.5*x + 8
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_ext(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_ext(q_t)
+
+p_ext <- supply_ext(q)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(0, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Private Grenzkosten"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label=expression("S=MC"[pr]), color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+  annotate("point", x = q, y = p_ext, color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  stat_function(aes(color = "Soziale Grenzkosten"), fun = supply_ext, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply_ext(3.5), hjust=-0.4, label=expression("MC"[soc]),color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+  # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+   #        linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+ # geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+  #                fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  #Soziale Kosten
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = supply_ext(z_wfl),
+                                 fill = "Externe Kosten"), alpha = 0.55)+
+ # annotate("text", x=q+1, y=p_t, label="Wohlfahrtsverlust",color = "grey30")+
+  scale_color_manual(values=c("green", "orange", "red"))+
+  scale_fill_manual(values=c("red", "green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x*","x"^0),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p"^0, "p*"),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+
+## Natürliche Monopole
+
+- Wettbewerb ist gar nicht gewünscht, da unnötig hohe Kosten
+
+- Wettbewerb aufgrund von Größenvorteilen nur eingeschränkt möglich
+
+## Informationsasymmetrien
+
+[Hier auch PA]::
+
+- Nicht alle relevanten Informationen liegen allen Vertragspartnern vor  
+  - Vor Vertragsabschluss: Adverse Selection
+  - Nach Vertragsabschluss: Moral Hazrard
+
+- Potenziell wohlfahrtssteigernde Verträge kommen ggf. nicht zustande
+
+# Institutionen- und Konstituonenökonomik
+
+s. VL Wirtschaftspolitik
+
+# Das Bruttoinlandsprodukt
+
+**Definition**: Das **Bruttoinlandsprodukt (BIP)** ist der **Marktwert** aller für den **Endverbrauch** bestimmten **Waren und Dienstleistunge**n, die **in einem Land** **in einem bestimmten Zeitabschnitt** hergestellt werden.
+
+- Marktwert (staatliche Leistungen ohne Preis: Kosten)
+
+- Nur Endverbrauch. ZWischenprodukte werden nicht mitgezählt, um Doppelzählung zu vermeiden
+
+
+- Keine gebrauchten Güter
+
+- Lagerbestandsänderungen $\rightarrow$ Investitionen
+
+- Geografische Abgrenzung (Inland, nicht Inländer)
+
+- zeitliche Abgrenzung. Saison- und Feiertagsbereinigung
+
+
+Verwendungsgleichung: $Y=C+I+G+(Ex-Im)$
+
+oder: $Y+Im=C+I+Ex$
+
+Gespart wird, was nicht konsumiert wird. 
+
+- Geschlossene Volkswirtschaft $S=Y-C-G \Leftrightarrow I=S$
+
+- Offene Volkswirtschaft: $Y=C+I+G+NX\Leftrightarrow Y-C-G=I+NX\Leftrightarrow I=Y-C-G-NX$
+
+- Nominales vs. reales BIP
+
+
+
+[Unterlagen an Gerhard]::
+# Geld
+
+[Unterlagen an Gerhard]::
+
+# Internationaler Handel
+
+## Weltmarktpreis \< Autarkiepreis
+
+```{r echo=F, message=F, warning=F, cache=F}
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)-8
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+# Menge inländischer Produktion
+q_wmp_i <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+#                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  #Gleichgewichtsmenge wmp
+  #
+   annotate("point", x = q_wmp, y = wmp(q_wmp), color = "grey30")+
+  annotate("segment", x = q_wmp, xend = q_wmp, y = 0, yend = wmp(q_wmp),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Produktion
+  annotate("point", x = q_wmp_i, y = wmp(q_wmp_i), color = "grey30")+
+  annotate("segment", x = q_wmp_i, xend = q_wmp_i, y = 0, yend = wmp(q_wmp_i),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Konsumentenrente neu
+  #
+    geom_ribbon(aes(x = z_wmp, ymin = wmp(q_wmp), ymax = demand(z_wmp),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("green", "orange", "purple"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_i,q, q_wmp), labels = expression(0, "x"^inl, "x"^0, "x"^wmp),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), p), labels = expression("WMP", "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Weltmarktpreis \> Autarkiepreis
+
+```{r echo=F, message=F, warning=F, cache=F}
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)+8
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+# Menge inländische Nachfrage
+q_wmp_i <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+ #  geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+#                  fill = "Produzentenrente"), alpha = 0.25) +
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  #Gleichgewichtsmenge wmp
+  #
+   annotate("point", x = q_wmp, y = wmp(q_wmp), color = "grey30")+
+  annotate("segment", x = q_wmp, xend = q_wmp, y = 0, yend = wmp(q_wmp),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Nachfrage
+  annotate("point", x = q_wmp_i, y = wmp(q_wmp_i), color = "grey30")+
+  annotate("segment", x = q_wmp_i, xend = q_wmp_i, y = 0, yend = wmp(q_wmp_i),
+           linetype = "dashed", color = "grey30") +
+ #
+ #
+ # Produzentenrente neu
+ #
+    geom_ribbon(aes(x = z_wmp, ymin = supply(z_wmp), ymax = wmp(q_wmp),
+                  fill = "Produzentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("green", "orange", "purple"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_i,q, q_wmp), labels = expression(0, "x"^inl, "x"^0, "x"^wmp),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), p), labels = expression("WMP", "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Der Effekt eines Einfuhrzolls
+
+```{r echo=F, message=F, warning=F, cache=F}
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)-8
+
+t <- 4
+wmp_t <- function(x) wmp(q)+t
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+q_wmp_t <- uniroot(function(x) demand(x) - wmp_t(x), range(x))$root
+
+# Menge inländischer Produktion
+q_wmp_i <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+q_wmp_it <- uniroot(function(x) supply(x) - wmp_t(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+z_wmp_it <- seq(0, q_wmp_it, 0.01)
+
+# Steuereinnahmen
+ z_t <- seq(q_wmp_it, q_wmp_t, 0.01)
+ 
+# Wohlfahrtsverlust
+ z_wfl1 <- seq(q_wmp_i, q_wmp_it, 0.01)
+ z_wfl2 <- seq(q_wmp_t, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_wmp_it , ymin = supply(z_wmp_it), ymax = wmp_t(q_wmp_it),
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+#                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  # Weltmarktpreis mit Zoll
+    stat_function(aes(color = "Importpreis"), fun = wmp_t, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp_t(3.5), hjust=-0, label="WMP+t",color = "grey30")+ 
+  #Gleichgewichtsmenge wmp_t
+  #
+   annotate("point", x = q_wmp_t, y = wmp_t(q_wmp_t), color = "grey30")+
+  annotate("segment", x = q_wmp_t, xend = q_wmp_t, y = 0, yend = wmp_t(q_wmp_t),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Produktion
+  annotate("point", x = q_wmp_it, y = wmp_t(q_wmp_it), color = "grey30")+
+  annotate("segment", x = q_wmp_it, xend = q_wmp_it, y = 0, yend = wmp_t(q_wmp_it),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Konsumentenrente neu
+  #
+    geom_ribbon(aes(x = z_wmp, ymin = wmp(q_wmp), ymax = demand(z_wmp),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #Steuereinnahmen
+      geom_ribbon(aes(x = z_t, ymin = wmp(z_t), ymax = wmp_t(z_t),
+                  fill = "Steuereinnahmen"), alpha = 0.25)+
+  #
+  #Wohlfahrtsverlust
+  ## erster Teil
+  geom_ribbon(aes(x = z_wfl1, ymin = wmp(z_wfl1), ymax = supply(z_wfl1),
+                  fill = "Wohlfahrsverlust"), alpha = 1)+
+  #
+  ## zweiter Teil
+  geom_ribbon(aes(x = z_wfl2, ymin = wmp(z_wfl2), ymax = demand(z_wfl2),
+                  fill = "Wohlfahrsverlust"), alpha = 1)+
+  scale_color_manual(values=c("green", "orange", "blue", "purple"))+
+  scale_fill_manual(values=c("green", "orange", "blue", "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_it,q, q_wmp_t), labels = expression(0, "x"^inl, "x"^0, "x"^t),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), wmp_t(q_wmp_t), p), labels = expression("WMP", "p"^t, "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+
+# Am Ende: Was haben wir gelernt?
+
+# Literatur {-}
+
+<div style="text-indent: -40px; padding-left: 40px;">
+
+<div id="refs"></div>
+
+</div>
+
+[Hier LVZ ausgeben]::
+
+[https://dailydevsblog.com/troubleshoot/resolved-how-to-generate-a-hanging-citation-for-an-html-document-in-rmarkdown-151396/]::
