@@ -888,7 +888,7 @@ ggplotly(p,dynamicTicks = T)
 
 ```
 
-```{r Patente, echo=F, warning=F, message=F, cache=T}
+```{r Patente, echo=F, warning=F, message=F, cache=T, eval=F}
 
 # Patente
 
@@ -929,7 +929,7 @@ ggplotly(p)%>%
 ```
 
 
-```{r Patente2, echo=F, warning=F, message=F, cache=T}
+```{r Patente2, echo=F, warning=F, message=F, cache=T, eval=F}
 
 # Patente
 
@@ -972,7 +972,7 @@ ggplotly(p)%>%
 ```
 
 
-```{r migration, echo=F, message=F, warning=F, cache=T}
+```{r migration, echo=F, message=F, warning=F, cache=T, eval=F}
 
 library(tidyverse)
 library(wbstats)
