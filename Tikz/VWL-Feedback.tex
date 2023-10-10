@@ -1,0 +1,45 @@
+\documentclass[border=10pt, 
+preview
+]{standalone}
+\usepackage{smartdiagram}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc} %UTF-Code für Umlaute
+\usepackage[T1]{fontenc} %Trennung von Wörtern mit Umlauten
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %Serifenlose Schrift als Standard
+%\usepackage{microtype}
+\usesmartdiagramlibrary{additions}
+
+	
+\begin{document}
+
+%\begin{minipage}[c][10cm]{\textwidth}
+
+%\centering
+
+\smartdiagramset{
+%	module minimum width=4cm,
+	text width=3cm,
+	%		circular final arrow disabled=true,
+	additions={
+		additional item offset=0.5cm,
+    	additional item text width=3cm,
+        additional item bottom color=yellow!50,
+		additional item border color=gray
+}
+}
+
+\smartdiagramadd
+[circular diagram]{
+	Individuelle Entscheidungen\\ (Optimierung unter Restriktionen)
+	,Aggregation
+	,soziale Phänomene\\ Gleichgewicht
+	,geänderte Restriktionen
+}
+{
+above right of module4/exogener Schock
+}
+\smartdiagramconnect{->}{additional-module1/module4}
+
+%\end{minipage}
+\end{document}

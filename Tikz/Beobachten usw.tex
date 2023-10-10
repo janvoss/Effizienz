@@ -1,0 +1,127 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{smartdiagram} %für tikz
+\usepackage[ngerman]{babel} %Sprache deutsch (für Silbentrennung)
+\usepackage[utf8]{inputenc} %UTF-Code für Umlaute
+\usepackage[T1]{fontenc} %Trennung von Wörtern mit Umlauten
+\usepackage{lmodern} %Schriftart
+%\usepackage{libertine}
+\renewcommand*\familydefault{\sfdefault} %Serifenlose Schrift als Standard
+\usepackage{microtype}
+\usesmartdiagramlibrary{additions}
+\usetikzlibrary{fit}
+\usetikzlibrary{decorations.pathreplacing}
+
+\tikzstyle{container} = [draw, rectangle, semithick, inner sep=0.3cm
+]
+
+%Aufzählungsstriche
+\AtBeginDocument{
+	\def\labelitemi{\normalfont\bfseries{--}}
+}
+
+
+\begin{document}
+
+		\begin{tikzpicture}[
+		every node/.style = {shape=rectangle, % is not necessary, default node's shape is rectangle
+			rounded corners,
+		%	draw, semithick,
+			text width=5cm,
+			align=center,
+			node distance=0.1cm
+		}
+		]
+		
+%Überschriften
+	\node (Beobachten)[text depth=.25ex  % Schrift immer auf der gleichen Höhe
+   		]{\textbf{Beobachten}
+     };
+    
+    \node (Beschreiben)[text depth=.25ex, right = of Beobachten
+    ]{\textbf{Beschreiben}
+    };
+
+	\node (Erklären)[text depth=.25ex, right = of Beschreiben
+	]{\textbf{Erklären}
+	};
+
+	\node (Bewerten)[text depth=.25ex, right = of Erklären
+	]{\textbf{Bewerten}
+	};
+    
+    \node (Verändern)[text depth=.25ex, right = of Bewerten
+    ]{\textbf{Verändern}
+    };
+
+%Spalten
+	\node[below= of Beobachten, align=left](){
+	\begin{itemize}
+		\item Auswahl der Sachverhalte
+		\item Messung
+		\item Dokumentation
+	\end{itemize}
+	};
+
+\node[below= of Beschreiben, align=left](){
+	\begin{itemize}
+		\item Zusammenstellen der Beobachtungen
+		\item Übersicht
+		\item Zusammenfassung/""Systematisierung
+	\end{itemize}
+};
+
+	\node[below= of Erklären, align=left](){
+		\begin{itemize}
+			\item Systematische Zusammenhänge
+			\item \glqq Ursache\grqq, \glqq Wirkung\grqq
+			\item Theorien und Modelle
+			\item \dots
+		\end{itemize}
+	};
+
+	\node[below= of Bewerten, align=left](){
+		\begin{itemize}
+			\item Normative Aussagen
+			\item Vergleich von \glqq Ist\grqq\ mit \glqq Soll\grqq
+			\item Bewertung abhängig von gewählten Erklärungen
+		\item \dots
+		\end{itemize}
+	};
+
+	\node[below= of Verändern](){
+		\begin{itemize}
+			\item Umsetzen in Gesetze, Vorschriften usw.
+			\item Berücksichtgung des rechtlichen Rahmens
+			\item \glqq Machbarkeit\grqq
+			\item \dots
+		\end{itemize}
+	};
+		
+     
+%Horizontale Linie unter Überschriften	
+	\draw [
+	transform canvas={yshift=-0.1cm}
+	] (Beobachten.south west) -- (Verändern.south east);
+	
+%gestrichelte Linie zwischen Bewerten und Verändern
+	\path [draw = none] (Bewerten) -- (Verändern) node [midway, yshift = .5cm](Mitte_Praxis){};
+	\node[below= 5.5cm of Mitte_Praxis](Mitte_Praxis2){};
+	\draw [dashed] (Mitte_Praxis) -- (Mitte_Praxis2);
+	
+% Zusammenfassung Analyse und Praxis
+
+	\node[below= 4cm of Beobachten, text width=0cm](Analyse-l){};
+	\node[below= 4cm of Bewerten,   text width=0cm](Analyse-r){};	
+	\draw [decorate,decoration={brace,amplitude=7pt, mirror}] (Analyse-l) -- (Analyse-r) node[midway, yshift= -.7cm]{\textbf{Analyse}};
+	
+	\node[below= 4cm of Verändern.south west, text width=0cm, xshift= .7cm](Verändern-l){};
+	\node[below= 4cm of Verändern.south east, text width=0cm, xshift = -.7cm](Verändern-r){};
+	\draw [decorate,decoration={brace,amplitude=7pt, mirror}] (Verändern-l) -- (Verändern-r) node[midway, yshift= -.7cm]{\textbf{Praxis}};
+	
+%Überschrift
+	\path [draw=none] (Beobachten) -- (Verändern) node [midway] (Mittelpunkt) {};	
+	\node[above= 1cm of Mittelpunkt, text width=15cm]{\huge Schritte der ökonomischen Analyse und Praxis};
+	
+	\end{tikzpicture}
+
+\end{document}
