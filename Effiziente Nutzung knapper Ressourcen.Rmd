@@ -675,6 +675,12 @@ Person, sondern ein Schema, eine "Grammatik" der Erklärung.
 
 # Akteursgruppen und allokative (Teil-)mechanismen
 
+Sie sind dran!
+
+```{r echo=F, eval=F, include=F}
+
+# Sammlung WiSe 2023/24
+
 - **Haushalt/Familie**
 
   - Zielfunktion?  
@@ -792,6 +798,10 @@ Person, sondern ein Schema, eine "Grammatik" der Erklärung.
   - Zielfunktion?
   
   - Restriktionen?
+
+```
+
+
 
 # Wo sind wir?
 
