@@ -1,0 +1,90 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{smartdiagram}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc} %UTF-Code für Umlaute
+\usepackage[T1]{fontenc} %Trennung von Wörtern mit Umlauten
+\usepackage{lmodern}
+%\usepackage{libertine}
+\renewcommand*\familydefault{\sfdefault} %Serifenlose Schrift als Standard
+\usepackage{microtype}
+\usesmartdiagramlibrary{additions}
+
+\usetikzlibrary{fit}
+
+\tikzstyle{container} = [draw, rectangle, semithick, %inner sep=0cm
+]
+
+%Aufzählungsstriche
+\AtBeginDocument{
+	\def\labelitemi{\normalfont\bfseries{--}}
+}
+
+
+\begin{document}
+	
+	\begin{tikzpicture}[
+	every node/.style = {shape=rectangle, % is not necessary, default node's shape is rectangle
+		rounded corners,
+		draw= none	, semithick,
+	%	text width=5cm,
+		align=center,
+		node distance=1.6cm
+	}
+	]
+	\node (gegeben-D1)[]{{gegeben}};
+	\node[right = of gegeben-D1](gesucht-I1){\textcolor{red}{gesucht}};
+	\node[right = 0.3cm of gesucht-I1, draw = none](Mittelpunkt){};
+	\node[right = 0.3cm of Mittelpunkt](gegeben-I1){{gegeben}};
+	\node[right = of gegeben-I1](gesucht-A1){\textcolor{red}{gesucht}};
+	
+%Überschriften
+	
+	\node[above = of gegeben-D1](Deduktion){\textbf{logische Deduktion}};
+	\node[above = 1.75cm of Mittelpunkt](Induktion){\textbf{unvollständige Induktion}};
+	\node[above = of gesucht-A1](Abduktion){\textbf{Abduktion}};
+	
+	\node[below = of gegeben-D1](gegeben-D2){{gegeben}};
+	\node[below = of gesucht-I1](gegeben-I2){{gegeben}};
+	\node[below = of gegeben-I1](gesucht-I2){\textcolor{red}{gesucht}};
+	\node[below = of gesucht-A1](gesucht-A2){\textcolor{red}{gesucht}};
+	
+	\node[below = of gegeben-D2](gesucht-D3){\textcolor{red}{gesucht}};
+	\node[below = of gegeben-I2](gegeben-I3a){{gegeben}};
+	\node[below = of gesucht-I2](gegeben-I3b){{gegeben}};
+	\node[below = of gesucht-A2](gegeben-A3){{gegeben}};
+	
+%Linke Spalte
+	
+	\node[left = of gegeben-D1](Antezedenz){Antezedenzbedingungen};
+	\node[left = of gegeben-D2](Gesetze){gesetzesartige Aussagen};
+	\node[below = of Gesetze, draw, text width=4cm](Explanandum){\textbf{Explanandum}};
+	
+	\node (Explanans) [container,fit=(Gesetze)(Antezedenz), text width=4cm]{\textbf{Explanans}};
+	\node () [container,fit=(gegeben-D1)(gegeben-D2)(gesucht-A1)]{};
+	\node () [container,fit=(gesucht-D3)(gegeben-A3)]{};
+%	\node () [container,fit=(gegeben-D1)(gesucht-D3)]{};
+
+%Pfade
+	
+	\path [->, thick] (gegeben-D1) edge (gegeben-D2);
+	\path [->, thick] (gegeben-D2) edge (gesucht-D3);	
+	
+	\path [->, thick] (gegeben-I3a) edge (gegeben-I2);
+	\path [->, thick] (gegeben-I2) edge (gesucht-I1);	
+	
+	\path [->, thick] (gegeben-I3b) edge (gesucht-I2);
+	\path [->, thick] (gegeben-I1) edge (gesucht-I2);
+		
+	\path [->, thick] (gegeben-A3) edge (gesucht-A2);
+	\path [->, thick] (gesucht-A2) edge (gesucht-A1);
+	
+
+	
+%Überschrift
+	\path [draw=none] (Antezedenz) -- (gesucht-A1) node [midway](Mittelpunkt2){};
+	
+	\node[above= 3cm of Mittelpunkt2]{\huge Suchrichtungen von Erklärungen};	
+	
+\end{tikzpicture}
+	
+\end{document}

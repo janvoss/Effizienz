@@ -1,0 +1,108 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{smartdiagram}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc} %UTF-Code für Umlaute
+\usepackage[T1]{fontenc} %Trennung von Wörtern mit Umlauten
+%\usepackage{lmodern}
+%\usepackage{libertine}
+\renewcommand*\familydefault{\sfdefault} %Serifenlose Schrift als Standard
+%\usepackage{microtype}
+\usepackage{verbatim}
+\usesmartdiagramlibrary{additions}
+\usetikzlibrary{fit}
+
+\tikzstyle{container} = [draw, rectangle, semithick, %inner sep=0cm
+]
+
+%Aufzählungsstriche
+\AtBeginDocument{
+	\def\labelitemi{\normalfont\bfseries{--}}
+}
+
+
+\begin{document}
+	
+	\begin{tikzpicture}[
+	every node/.style = {shape=circle, % is not necessary, default node's shape is rectangle
+	%	rounded corners,
+	%	draw= none	
+		, semithick,
+	%	text width=5cm,
+		align=center,
+		node distance=1.6cm
+	}
+	]
+	\node (1)[draw
+	,color=black!60!green
+	]{1};
+	\node (2)[right = of 1, draw]{2};
+	\node (3)[right = of 2, draw
+	,color=black!60!green
+	]{3};
+	
+	\node (4)[below = of 1, draw]{4};
+	\node (5)[right = of 4, draw
+	, thick,color=blue
+	]{5};
+	\node (6)[right = of 5, draw]{6};
+	
+	\node (7)[below = of 4, draw]{7};
+	\node (8)[right = of 7, draw
+	,color=black!60!green
+	]{8};
+	\node (9)[right = of 8, draw]{9};
+	
+
+%Pfade
+
+%Starke, direkte Beziehungen
+	
+	\path [->, thick
+	, color=red
+	] (1) edge (5);	
+	\path [->, thick
+	, color=red
+	] (3) edge (5);
+	\path [->, thick
+	, color=red
+	] (8) edge (5);
+	
+%\begin{comment}
+% Die schwachen direkten Beziehungen
+		\path [->, dashed, thick
+	,color=red
+	] (4) edge (5);
+	\path [->, dashed, thick
+	,color=red
+	] (9) edge (5);
+	
+
+%\end{comment}	
+	
+%\begin{comment}
+% Die starken indirekten Beziehungen	
+	\path [->, thick] (1) edge (2);
+	\path [->, thick] (2) edge (7);
+	\path [->, thick] (7) edge (8);
+	
+	\path [->, thick] (8) edge (6);
+	\path [->, thick] (6) edge (3);
+	\path [->, thick, bend left=30] (6) edge (4);
+	\path [->, thick] (9) edge (4);
+
+
+%end{comment}
+	
+%\begin{comment}
+% Die schwachen indirekten Beziehungen 	
+	\path [->, dashed, thick] (4) edge (1);
+	\path [->, dashed, thick] (1) edge (8);
+	\path [->, dashed, thick,  bend left=30] (1) edge (3);
+	\path [->, dashed, thick] (3) edge (4);
+	\path [->, dashed, thick,  bend left=30] (7) edge (1);
+
+
+%ä\end{comment}	
+\end{tikzpicture}
+	
+\end{document}
