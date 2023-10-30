@@ -677,6 +677,117 @@ Person, sondern ein Schema, eine "Grammatik" der Erklärung.
 
 Sie sind dran!
 
+**Konsumenten**
+
+Ziele: 
+  _ Möglichst gut und viel konsumieren (Bedürfnisse stillen, Nutzen maximieren)  
+  - Wenig zahlen  
+  
+Restriktionen: 
+  - Einkommen  
+  - Zeit
+  - Preise  
+  - Mangelndes Wissen/Unsichere Zukunft  
+  - $\dots$
+
+**Unternehmen und Banken**
+
+Ziele: 
+  - Gewinn maximieren  
+  - Kundenbindung/ Gutes Image  
+  - Überschaubare Risiken/ Sicherheit  
+  - ggf. Kostenreduktion  
+  - Hohe Marktanteile 
+  - (Arbeitskräfte)  
+  - Innovation 
+  - $\dots$
+  
+Restriktionen:  
+  - Fachkräftemangel  
+  - Begrenzte Produktionsmittel  
+  - ggf. schlechtes Image  
+  - Standort/ Region  
+  - Rechtliche Restriktionen  
+  - Finanzmittel  
+  - Begrenzte Absatzkanäle  
+  - mangelnde Bekanntheit  
+  - Konkurrenz  
+  - Steuern  
+  - Technische Restriktionen  
+  - $\dots$
+
+**Politiker/Staat**
+
+Ziele:
+  - Zustimmung/Wiederwahlinteresse 
+  - Macht
+  - Geld/Steuereinnahmen  
+  - Wohlstand, Zufriedenheit, Lebensqualität der Bürger
+  - Innere und äußere Sicherheit 
+  - $\dots$
+  
+Restriktionen:  
+  - Finanzielle Mittel
+  - Verfassung/Grundgesetz
+  - Interessenskonflikte
+  - Bevölkerung  
+  - Parteienkonkurrenz  
+  - Globale Politik/internationale Abkommen
+  - Information/Image
+  - $\dots$
+
+**Zentralbanken**
+
+Ziele:  
+  - Geldwertstabilität
+  - Wirtschaftswachstum
+  
+Restriktionen:  
+  - Kreditvergabe der Banken
+  - Konsumverhalten der Konsumenten
+
+**Supranationale Organisationen**
+
+**NGOs/Aktivisten/Stiftungen**
+
+Ziele: 
+  - Handeln der Politik beeinflussen/erzwingen  
+  - Möglichst viele Anhänger, Macht, Ruhm, Reichweite 
+  - Gemeinwohlziele erreichen  
+  - $\dots$
+
+Restriktionen:
+  - Finanzielle Mittel  
+  - Rechtslage  
+  - Bevölkerung  
+  - Mangelnde Handlungs- und Umsetzungsfähigkeit  
+  - $\dots$
+
+**Arbeitnehmer**
+
+Ziele: 
+  - Hohes Einkommen  
+  - Nicht zu viel Arbeit  
+  - Work-Life-Balance  
+  - Einkommenssicherheit  
+  - Angenehmes Arbeitsumfeld/Vorgesetzte/Wertschätzung, Unterstützung im Konflikt (Gewerkschaften, Betriebsrat)  
+  - Selbstverwirklichung/Karriere  
+
+Restriktionen:
+  - Zeit 
+  - Standort  
+  - Märktewandel  
+  - Lebensumstände/familiäre Verantwortung 
+  - Mangelnde Qualifikation  
+  - Sozialer Status  
+  - $\dots$
+
+**Haushalte/Familie**
+
+**$\dots$**
+
+
+
 ```{r echo=F, eval=F, include=F}
 
 # Sammlung WiSe 2023/24
