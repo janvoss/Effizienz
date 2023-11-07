@@ -680,10 +680,12 @@ Sie sind dran!
 **Konsumenten**
 
 Ziele: 
-  _ Möglichst gut und viel konsumieren (Bedürfnisse stillen, Nutzen maximieren)  
+
+  - Möglichst gut und viel konsumieren (Bedürfnisse stillen, Nutzen maximieren)  
   - Wenig zahlen  
   
-Restriktionen: 
+Restriktionen:  
+
   - Einkommen  
   - Zeit
   - Preise  
@@ -693,6 +695,7 @@ Restriktionen:
 **Unternehmen und Banken**
 
 Ziele: 
+
   - Gewinn maximieren  
   - Kundenbindung/ Gutes Image  
   - Überschaubare Risiken/ Sicherheit  
@@ -703,6 +706,7 @@ Ziele:
   - $\dots$
   
 Restriktionen:  
+
   - Fachkräftemangel  
   - Begrenzte Produktionsmittel  
   - ggf. schlechtes Image  
@@ -719,44 +723,49 @@ Restriktionen:
 **Politiker/Staat**
 
 Ziele:
+
   - Zustimmung/Wiederwahlinteresse 
   - Macht
   - Geld/Steuereinnahmen  
   - Wohlstand, Zufriedenheit, Lebensqualität der Bürger
-  - Innere und äußere Sicherheit 
+  - Innere und äußere Sicherheit   
   - $\dots$
   
-Restriktionen:  
+Restriktionen:
+
   - Finanzielle Mittel
   - Verfassung/Grundgesetz
   - Interessenskonflikte
   - Bevölkerung  
   - Parteienkonkurrenz  
-  - Globale Politik/internationale Abkommen
+  - Globale Politik/internationale Abkommen  
   - Information/Image
   - $\dots$
 
 **Zentralbanken**
 
 Ziele:  
+ 
   - Geldwertstabilität
   - Wirtschaftswachstum
   
 Restriktionen:  
-  - Kreditvergabe der Banken
+  - Kreditvergabe der Banken  
   - Konsumverhalten der Konsumenten
 
 **Supranationale Organisationen**
 
 **NGOs/Aktivisten/Stiftungen**
 
-Ziele: 
+Ziele:  
+
   - Handeln der Politik beeinflussen/erzwingen  
   - Möglichst viele Anhänger, Macht, Ruhm, Reichweite 
   - Gemeinwohlziele erreichen  
   - $\dots$
 
 Restriktionen:
+
   - Finanzielle Mittel  
   - Rechtslage  
   - Bevölkerung  
@@ -766,6 +775,7 @@ Restriktionen:
 **Arbeitnehmer**
 
 Ziele: 
+
   - Hohes Einkommen  
   - Nicht zu viel Arbeit  
   - Work-Life-Balance  
@@ -774,6 +784,7 @@ Ziele:
   - Selbstverwirklichung/Karriere  
 
 Restriktionen:
+
   - Zeit 
   - Standort  
   - Märktewandel  

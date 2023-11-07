@@ -39,11 +39,9 @@ p <- df %>%
         # Entity=="United States"
          )%>%
   ggplot(aes(Year, GDP.per.capita..PPP..constant.2017.international..., label=Entity))+
- # geom_boxplot()+
-#  geom_smooth()+
- # geom_quantile(size=1)+
   geom_point(aes(color = Gini.coefficient),alpha=.7)+
-#  geom_point()+
+#  geom_smooth()+
+  geom_quantile(size=1)+
   scale_color_distiller(palette='Spectral')+
   scale_y_continuous(labels= function(x) format(x,scientific = F) , 
                      trans = "log10"
@@ -80,18 +78,22 @@ df1 <- df %>%
 
 df2 <- df %>% 
   filter(Year==2019) %>% 
-  select(Entity, Code, Gini.coefficient , GDP.per.capita..PPP..constant.2017.international...) %>% 
+  select(Entity, Code, Gini.coefficient , GDP.per.capita..PPP..constant.2017.international..., Population..historical.estimates.) %>% 
   rename(Gini2019 = Gini.coefficient)
 
 df3 <- df1 %>% 
   left_join(df2)
+
+options(scipen = 999)
 
 p <- df3 %>% 
   filter(is.na(Code)==F,
          Entity !="World")%>%
   ggplot(aes(x=Gini1990,
              y=Gini2019,
-             group=Entity))+
+             group=Entity, 
+            weight = Population..historical.estimates.
+             ))+
   scale_x_continuous(labels= function(x) format(x,scientific = F) #, 
                      # trans = "log10"
   )+
@@ -100,8 +102,7 @@ p <- df3 %>%
   )+
   scale_color_distiller(palette='Spectral')+
   geom_point(
-#    aes(color=`GDP per capita`, size=Population #, frame=year
-    #)
+    aes(color= GDP.per.capita..PPP..constant.2017.international..., size=Population..historical.estimates.)
   )+
   geom_smooth(aes(group=NULL #, weight=Population
                   ))+
@@ -115,7 +116,7 @@ p <- df3 %>%
        caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
   )
 
-# p
+ p
 
 p1 <- ggplotly(p)%>%
   layout(margin = list(l = 50, r = 50, b = 100, t = 50),
