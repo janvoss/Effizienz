@@ -750,6 +750,7 @@ Ziele:
   - Wirtschaftswachstum
   
 Restriktionen:  
+
   - Kreditvergabe der Banken  
   - Konsumverhalten der Konsumenten
 
@@ -1423,6 +1424,45 @@ chart <- ggplot() +
     chart
 
 ```
+
+
+# Anwendung: Das aktuelle Jahresgutachten des Sachverständigenrates zur Begutachtgung der gesamtwirtschaftlichen Entwicklung {-}
+
+## Der Sachverständigenrat
+
+[Zum Sachverständigenrat](https://www.sachverstaendigenrat-wirtschaft.de/)
+
+## Das aktuelle Jahresgutachten
+
+[Kapitel 4 des aktuellen Jahresgutachtens](https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Kapitel_4.pdf)
+
+
+```{r,  echo=FALSE, warning=FALSE, out.width="30%"}
+library(qrcode)
+
+qr <- qr_code('https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Kapitel_4.pdf')
+plot(qr)
+
+```
+
+1. Bitte lesen Sie zunächst insb. den Abschnitt II.
+
+  a) Welche Fragen haben Sie?
+  
+  a) Welche Kernaussagen entnehmen Sie der Darstellung?
+  
+  a) Welche Anknüpfungspunkte sehen Sie an die Gerechtigkeitsdiskussion, die wir bislang geführt haben?
+  
+  a) Welche Effizienzprobleme werden angesprochen?
+  
+2. Lesen Sie nun bitte insbesondere Abschnitt IV.
+
+  a) Welche Fragen haben Sie?
+  
+  a) Welche Kernaussagen entnehmen Sie der Darstellung?
+  
+  a) Sehen Sie in den Maßnahmen einen relevanten Beitrag zur Entschärfung etwaiger Gerechtigkeitsprobleme?
+
 
 # Nachfrage, Angebot Märkte
 
