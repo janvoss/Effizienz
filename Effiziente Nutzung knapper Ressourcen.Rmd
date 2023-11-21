@@ -2208,7 +2208,7 @@ Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in f
 
 ### Grafik
 
-```{r echo=T, warning=F, message=F, fig.width=12}
+```{r echo=F, warning=F, message=F, fig.width=12}
 
 #Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]
 
