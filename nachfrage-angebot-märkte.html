@@ -227,7 +227,13 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#der-wohlfahrtsverlust-einer-mengensteuer"><i class="fa fa-check"></i><b>8.5</b> Der Wohlfahrtsverlust einer Mengensteuer</a></li>
 <li class="chapter" data-level="8.6" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#wettbewerbsfunktionen"><i class="fa fa-check"></i><b>8.6</b> Wettbewerbsfunktionen</a></li>
-<li class="chapter" data-level="8.7" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#pfadabhängigkeit"><i class="fa fa-check"></i><b>8.7</b> Pfadabhängigkeit</a></li>
+<li class="chapter" data-level="8.7" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#pfadabhängigkeit"><i class="fa fa-check"></i><b>8.7</b> Pfadabhängigkeit</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#veranschaulichung-anhand-der-pólya-urne"><i class="fa fa-check"></i><b>8.7.1</b> Veranschaulichung anhand der Pólya-Urne</a></li>
+<li class="chapter" data-level="8.7.2" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#grafik"><i class="fa fa-check"></i><b>8.7.2</b> Grafik</a></li>
+<li class="chapter" data-level="8.7.3" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#ergebnis"><i class="fa fa-check"></i><b>8.7.3</b> Ergebnis</a></li>
+<li class="chapter" data-level="8.7.4" data-path="nachfrage-angebot-märkte.html"><a href="nachfrage-angebot-märkte.html#anwendung-auf-ökonomischen-wettbewerb"><i class="fa fa-check"></i><b>8.7.4</b> Anwendung auf ökonomischen Wettbewerb</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="gutseigenschaften-private-und-öffentliche-güter.html"><a href="gutseigenschaften-private-und-öffentliche-güter.html"><i class="fa fa-check"></i><b>9</b> Gutseigenschaften: Private und öffentliche Güter</a></li>
 <li class="chapter" data-level="10" data-path="marktversagenstatbestände.html"><a href="marktversagenstatbestände.html"><i class="fa fa-check"></i><b>10</b> Marktversagenstatbestände</a>
@@ -327,7 +333,8 @@ div.csl-indent {
 <div id="pfadabhängigkeit" class="section level2 hasAnchor" number="8.7">
 <h2><span class="header-section-number">8.7</span> Pfadabhängigkeit<a href="nachfrage-angebot-märkte.html#pfadabhängigkeit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in frühen Perioden können dann zu verfestigten Wettbewerbsstrukturen führen.</p>
-<p>Veranschaulichung anhand der sog. Pólya-Urne</p>
+<div id="veranschaulichung-anhand-der-pólya-urne" class="section level3 hasAnchor" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> Veranschaulichung anhand der Pólya-Urne<a href="nachfrage-angebot-märkte.html#veranschaulichung-anhand-der-pólya-urne" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Es gibt Kugeln verschiedener Farben in einer Urne.</p></li>
 <li><p>Es wird zufällig eine Kugel gezogen</p></li>
@@ -335,16 +342,9 @@ div.csl-indent {
 <li><p>Es wird eine zusätzliche Kugel (oder mehrere zusätzliche Kugeln) der Urne hinzugefügt, die die gleiche Farbe hat (haben), wie die zuvor gehogene Kugel.</p></li>
 <li><p>Die Prozedur wird wiederholt</p></li>
 </ul>
-<p>Ergebnis:</p>
-<ul>
-<li><p>Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne</p></li>
-<li><p>Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position</p></li>
-</ul>
-<p>Anwendung auf ökonomischen Wettbewerb</p>
-<ul>
-<li><p>Netzwerkeffekte (Vorteile großer Nutzerzahlen)</p></li>
-<li><p>Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)</p></li>
-</ul>
+</div>
+<div id="grafik" class="section level3 hasAnchor" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> Grafik<a href="nachfrage-angebot-märkte.html#grafik" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="nachfrage-angebot-märkte.html#cb1-1" tabindex="-1"></a><span class="co">#Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]</span></span>
 <span id="cb1-2"><a href="nachfrage-angebot-märkte.html#cb1-2" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="nachfrage-angebot-märkte.html#cb1-3" tabindex="-1"></a><span class="co"># Nun mit ggplot</span></span>
@@ -361,44 +361,68 @@ div.csl-indent {
 <span id="cb1-14"><a href="nachfrage-angebot-märkte.html#cb1-14" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="nachfrage-angebot-märkte.html#cb1-15" tabindex="-1"></a><span class="co"># n-1 draws from Dirichelet distribution</span></span>
 <span id="cb1-16"><a href="nachfrage-angebot-märkte.html#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="nachfrage-angebot-märkte.html#cb1-17" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-18"><a href="nachfrage-angebot-märkte.html#cb1-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n<span class="dv">-1</span>)) {</span>
-<span id="cb1-19"><a href="nachfrage-angebot-märkte.html#cb1-19" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> urn[i, ]</span>
-<span id="cb1-20"><a href="nachfrage-angebot-märkte.html#cb1-20" tabindex="-1"></a>  col_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(cols_unique, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> (urn[i, ] <span class="sc">/</span> <span class="fu">sum</span>(urn[i, ]))                       ) <span class="co"># sample ball</span></span>
-<span id="cb1-21"><a href="nachfrage-angebot-märkte.html#cb1-21" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="ot">&lt;-</span> urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="sc">+</span> <span class="dv">1</span> <span class="co"># add ball with same colour</span></span>
-<span id="cb1-22"><a href="nachfrage-angebot-märkte.html#cb1-22" tabindex="-1"></a>}</span>
-<span id="cb1-23"><a href="nachfrage-angebot-märkte.html#cb1-23" tabindex="-1"></a><span class="co"># Data frame erzeugen</span></span>
-<span id="cb1-24"><a href="nachfrage-angebot-märkte.html#cb1-24" tabindex="-1"></a>  </span>
-<span id="cb1-25"><a href="nachfrage-angebot-märkte.html#cb1-25" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(urn) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-26"><a href="nachfrage-angebot-märkte.html#cb1-26" tabindex="-1"></a>  <span class="fu">mutate</span>(Züge<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n))</span>
-<span id="cb1-27"><a href="nachfrage-angebot-märkte.html#cb1-27" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="nachfrage-angebot-märkte.html#cb1-28" tabindex="-1"></a><span class="co"># Rundenanzahl</span></span>
-<span id="cb1-29"><a href="nachfrage-angebot-märkte.html#cb1-29" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="nachfrage-angebot-märkte.html#cb1-30" tabindex="-1"></a><span class="co"># long format</span></span>
-<span id="cb1-31"><a href="nachfrage-angebot-märkte.html#cb1-31" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="nachfrage-angebot-märkte.html#cb1-32" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>   </span>
-<span id="cb1-33"><a href="nachfrage-angebot-märkte.html#cb1-33" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">&quot;Z&quot;</span>) ,</span>
-<span id="cb1-34"><a href="nachfrage-angebot-märkte.html#cb1-34" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Farbe&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Anzahl&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-35"><a href="nachfrage-angebot-märkte.html#cb1-35" tabindex="-1"></a>  <span class="fu">group_by</span>(Züge) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-36"><a href="nachfrage-angebot-märkte.html#cb1-36" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anteil=</span>Anzahl<span class="sc">/</span><span class="fu">sum</span>(Anzahl))</span>
-<span id="cb1-37"><a href="nachfrage-angebot-märkte.html#cb1-37" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="nachfrage-angebot-märkte.html#cb1-38" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb1-39"><a href="nachfrage-angebot-märkte.html#cb1-39" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anzahl, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
-<span id="cb1-40"><a href="nachfrage-angebot-märkte.html#cb1-40" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb1-41"><a href="nachfrage-angebot-märkte.html#cb1-41" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
-<span id="cb1-42"><a href="nachfrage-angebot-märkte.html#cb1-42" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;schwarz&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;grün&quot;</span>, <span class="st">&quot;rot&quot;</span>, <span class="st">&quot;gelb&quot;</span>))</span>
-<span id="cb1-43"><a href="nachfrage-angebot-märkte.html#cb1-43" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="nachfrage-angebot-märkte.html#cb1-44" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb1-45"><a href="nachfrage-angebot-märkte.html#cb1-45" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anteil, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
-<span id="cb1-46"><a href="nachfrage-angebot-märkte.html#cb1-46" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb1-47"><a href="nachfrage-angebot-märkte.html#cb1-47" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
-<span id="cb1-48"><a href="nachfrage-angebot-märkte.html#cb1-48" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;schwarz&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;grün&quot;</span>, <span class="st">&quot;rot&quot;</span>, <span class="st">&quot;gelb&quot;</span>))</span>
-<span id="cb1-49"><a href="nachfrage-angebot-märkte.html#cb1-49" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="nachfrage-angebot-märkte.html#cb1-50" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="nachfrage-angebot-märkte.html#cb1-51" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="nachfrage-angebot-märkte.html#cb2-1" tabindex="-1"></a>p2</span></code></pre></div>
-<p><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-2.svg" width="672" /></p>
+<span id="cb1-17"><a href="nachfrage-angebot-märkte.html#cb1-17" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)){</span>
+<span id="cb1-18"><a href="nachfrage-angebot-märkte.html#cb1-18" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span><span class="sc">+</span>j)</span>
+<span id="cb1-19"><a href="nachfrage-angebot-märkte.html#cb1-19" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n<span class="dv">-1</span>)) {</span>
+<span id="cb1-20"><a href="nachfrage-angebot-märkte.html#cb1-20" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> urn[i, ]</span>
+<span id="cb1-21"><a href="nachfrage-angebot-märkte.html#cb1-21" tabindex="-1"></a>  col_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(cols_unique, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> (urn[i, ] <span class="sc">/</span> <span class="fu">sum</span>(urn[i, ]))                       ) <span class="co"># sample ball</span></span>
+<span id="cb1-22"><a href="nachfrage-angebot-märkte.html#cb1-22" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="ot">&lt;-</span> urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="sc">+</span> <span class="dv">1</span> <span class="co"># add ball with same colour</span></span>
+<span id="cb1-23"><a href="nachfrage-angebot-märkte.html#cb1-23" tabindex="-1"></a>}</span>
+<span id="cb1-24"><a href="nachfrage-angebot-märkte.html#cb1-24" tabindex="-1"></a><span class="co"># Data frame erzeugen</span></span>
+<span id="cb1-25"><a href="nachfrage-angebot-märkte.html#cb1-25" tabindex="-1"></a>  </span>
+<span id="cb1-26"><a href="nachfrage-angebot-märkte.html#cb1-26" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(urn) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-27"><a href="nachfrage-angebot-märkte.html#cb1-27" tabindex="-1"></a>  <span class="fu">mutate</span>(Züge<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n))</span>
+<span id="cb1-28"><a href="nachfrage-angebot-märkte.html#cb1-28" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="nachfrage-angebot-märkte.html#cb1-29" tabindex="-1"></a><span class="co"># Rundenanzahl</span></span>
+<span id="cb1-30"><a href="nachfrage-angebot-märkte.html#cb1-30" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="nachfrage-angebot-märkte.html#cb1-31" tabindex="-1"></a><span class="co"># long format</span></span>
+<span id="cb1-32"><a href="nachfrage-angebot-märkte.html#cb1-32" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="nachfrage-angebot-märkte.html#cb1-33" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>   </span>
+<span id="cb1-34"><a href="nachfrage-angebot-märkte.html#cb1-34" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">&quot;Z&quot;</span>) ,</span>
+<span id="cb1-35"><a href="nachfrage-angebot-märkte.html#cb1-35" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Farbe&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Anzahl&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-36"><a href="nachfrage-angebot-märkte.html#cb1-36" tabindex="-1"></a>  <span class="fu">group_by</span>(Züge) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-37"><a href="nachfrage-angebot-märkte.html#cb1-37" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anteil=</span>Anzahl<span class="sc">/</span><span class="fu">sum</span>(Anzahl))</span>
+<span id="cb1-38"><a href="nachfrage-angebot-märkte.html#cb1-38" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="nachfrage-angebot-märkte.html#cb1-39" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-40"><a href="nachfrage-angebot-märkte.html#cb1-40" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anzahl, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
+<span id="cb1-41"><a href="nachfrage-angebot-märkte.html#cb1-41" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb1-42"><a href="nachfrage-angebot-märkte.html#cb1-42" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
+<span id="cb1-43"><a href="nachfrage-angebot-märkte.html#cb1-43" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;schwarz&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;grün&quot;</span>, <span class="st">&quot;rot&quot;</span>, <span class="st">&quot;gelb&quot;</span>))<span class="sc">+</span></span>
+<span id="cb1-44"><a href="nachfrage-angebot-märkte.html#cb1-44" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb1-45"><a href="nachfrage-angebot-märkte.html#cb1-45" tabindex="-1"></a>  <span class="co">#theme(legend.position = &#39;bottom&#39;, legend.direction = &quot;horizontal&quot;)+</span></span>
+<span id="cb1-46"><a href="nachfrage-angebot-märkte.html#cb1-46" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
+<span id="cb1-47"><a href="nachfrage-angebot-märkte.html#cb1-47" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="nachfrage-angebot-märkte.html#cb1-48" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-49"><a href="nachfrage-angebot-märkte.html#cb1-49" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anteil, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
+<span id="cb1-50"><a href="nachfrage-angebot-märkte.html#cb1-50" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb1-51"><a href="nachfrage-angebot-märkte.html#cb1-51" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
+<span id="cb1-52"><a href="nachfrage-angebot-märkte.html#cb1-52" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;schwarz&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;grün&quot;</span>, <span class="st">&quot;rot&quot;</span>, <span class="st">&quot;gelb&quot;</span>))<span class="sc">+</span></span>
+<span id="cb1-53"><a href="nachfrage-angebot-märkte.html#cb1-53" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb1-54"><a href="nachfrage-angebot-märkte.html#cb1-54" tabindex="-1"></a>  <span class="co">#theme(legend.position = &#39;bottom&#39;, legend.direction = &quot;horizontal&quot;)#+</span></span>
+<span id="cb1-55"><a href="nachfrage-angebot-märkte.html#cb1-55" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
+<span id="cb1-56"><a href="nachfrage-angebot-märkte.html#cb1-56" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="nachfrage-angebot-märkte.html#cb1-57" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="nachfrage-angebot-märkte.html#cb1-58" tabindex="-1"></a><span class="co">#p1 &lt;- p1+theme(legend.position = NULL)</span></span>
+<span id="cb1-59"><a href="nachfrage-angebot-märkte.html#cb1-59" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="nachfrage-angebot-märkte.html#cb1-60" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="nachfrage-angebot-märkte.html#cb1-61" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-62"><a href="nachfrage-angebot-märkte.html#cb1-62" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="nachfrage-angebot-märkte.html#cb1-63" tabindex="-1"></a><span class="fu">print</span>(p1<span class="sc">+</span> p2<span class="sc">+</span><span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&#39;collect&#39;</span>) <span class="sc">+</span></span>
+<span id="cb1-64"><a href="nachfrage-angebot-märkte.html#cb1-64" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;Pfadabhängigkeit in der Póliya-Urne&#39;</span>),</span>
+<span id="cb1-65"><a href="nachfrage-angebot-märkte.html#cb1-65" tabindex="-1"></a>                  <span class="at">subtitle=</span><span class="fu">paste0</span>(<span class="st">&#39;Durchlauf Nr. &#39;</span>, j)))</span>
+<span id="cb1-66"><a href="nachfrage-angebot-märkte.html#cb1-66" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-1.svg" width="1152" /><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-2.svg" width="1152" /><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-3.svg" width="1152" /><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-4.svg" width="1152" /><img src="Effiziente-Nutzung-knapper-Ressourcen_files/figure-html/unnamed-chunk-35-5.svg" width="1152" /></p>
+</div>
+<div id="ergebnis" class="section level3 hasAnchor" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> Ergebnis<a href="nachfrage-angebot-märkte.html#ergebnis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne</p></li>
+<li><p>Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position</p></li>
+</ul>
+</div>
+<div id="anwendung-auf-ökonomischen-wettbewerb" class="section level3 hasAnchor" number="8.7.4">
+<h3><span class="header-section-number">8.7.4</span> Anwendung auf ökonomischen Wettbewerb<a href="nachfrage-angebot-märkte.html#anwendung-auf-ökonomischen-wettbewerb" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
 </div>
 </div>
             </section>

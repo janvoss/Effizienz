@@ -2193,7 +2193,7 @@ chart
 
 Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in frühen Perioden können dann zu verfestigten Wettbewerbsstrukturen führen.
 
-Veranschaulichung anhand der sog. Pólya-Urne
+### Veranschaulichung anhand der Pólya-Urne
 
 - Es gibt Kugeln verschiedener Farben in einer Urne.
 
@@ -2206,21 +2206,9 @@ Veranschaulichung anhand der sog. Pólya-Urne
 - Die Prozedur wird wiederholt
 
 
-Ergebnis: 
+### Grafik
 
-- Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne 
-
-
-- Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
-
-
-Anwendung auf ökonomischen Wettbewerb
-
-- Netzwerkeffekte (Vorteile großer Nutzerzahlen)
-
-- Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
-
-```{r echo=T, warning=F, message=F}
+```{r echo=T, warning=F, message=F, fig.width=12}
 
 #Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]
 
@@ -2238,7 +2226,8 @@ cols_unique <- colnames(urn)
 
 # n-1 draws from Dirichelet distribution
 
-set.seed(1)
+for(j in (1:5)){
+set.seed(123+j)
 for (i in seq_len(n-1)) {
   urn[i+1, ] <- urn[i, ]
   col_sample <- sample(cols_unique, size = 1, prob = (urn[i, ] / sum(urn[i, ]))                       ) # sample ball
@@ -2263,20 +2252,43 @@ p1 <- df1 %>%
   ggplot(aes(x=Züge, y=Anzahl, group=Farbe, color=Farbe))+
   geom_line(size=1)+
   scale_color_manual(values=c(unique(df1$Farbe)),
-                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))+
+  theme_light()
+  #theme(legend.position = 'bottom', legend.direction = "horizontal")+
+  #theme(legend.position = NULL)
 
 p2 <- df1 %>% 
   ggplot(aes(x=Züge, y=Anteil, group=Farbe, color=Farbe))+
   geom_line(size=1)+
   scale_color_manual(values=c(unique(df1$Farbe)),
-                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))+
+  theme_light()
+  #theme(legend.position = 'bottom', legend.direction = "horizontal")#+
+  #theme(legend.position = NULL)
 
 
-p1
+#p1 <- p1+theme(legend.position = NULL)
 
-p2
+
+library(patchwork)
+
+print(p1+ p2+plot_layout(guides = 'collect') +
+  plot_annotation(title = paste0('Pfadabhängigkeit in der Póliya-Urne'),
+                  subtitle=paste0('Durchlauf Nr. ', j)))
+}
 
 ```
+
+### Ergebnis 
+
+- Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne 
+
+
+- Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
+
+
+
+### Anwendung auf ökonomischen Wettbewerb
 
 
 # Gutseigenschaften: Private und öffentliche Güter   
