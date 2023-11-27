@@ -2290,6 +2290,11 @@ print(p1+ p2+plot_layout(guides = 'collect') +
 
 ### Anwendung auf ökonomischen Wettbewerb
 
+- Netzwerkeffekte (Vorteile großer Nutzerzahlen)
+
+- Lock-in-Effekte (Tastaturlayout, Betriebssysteme, politischer Wettbewerb)
+
+- Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
 
 # Gutseigenschaften: Private und öffentliche Güter   
 
