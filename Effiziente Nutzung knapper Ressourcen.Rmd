@@ -1,7 +1,7 @@
 ---
 title: "Effiziente Nutzung knapper Ressourcen"
 author: "Prof. Dr. Jan S. Voßwinkel"
-date: "HfWU Zukunftsökonomie | WiSe 2023/24"
+date: "HfWU Zukunftsökonomie | SoSe 2024"
 
 output:
   bookdown::gitbook:
@@ -45,7 +45,7 @@ generate_svg(qr, filename = "qr.svg")
 
 # Organisatorisches {-}
 
-- Unterlagen in neo und auf github (s.o.)
+- Unterlagen online, s. QR-Code
 
 - Prüfungsleistung: K 60
 
@@ -56,11 +56,16 @@ generate_svg(qr, filename = "qr.svg")
 
 -   Was ist Effizienz und warum ist sie wichtig?
 
-- Wovon hängt es ab, ob Ressourcen effizienz alloziiert werden?
+- Wovon hängt es ab, ob Ressourcen effizient alloziiert werden?
 
 -   Wie wird die effiziente Nutzung von Ressourcen ökonomisch analysiert?
 
 - Wessen Handlungen wollen wir analysieren?
+
+  - Individuen
+  - Unternehmen
+  - staatliche Akteure
+  - $\dots$
 
 ## Begriff Effizienz
 
@@ -80,6 +85,8 @@ generate_svg(qr, filename = "qr.svg")
 
 - Für **langfristige Lösungen** ist Effizienz von großer Bedeutung.
 
+[Hier Priddat u accelerating growth]::
+
 
 ### Teilbereiche des Effizienzbegriffs
 
@@ -87,18 +94,9 @@ generate_svg(qr, filename = "qr.svg")
 - Kosteneffizienz  
 - Allokative Effizienz
 
- Erklärung auf Twitter:
+ X-University:
  
  <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
- 
-  
-```{r eval=F, include =F}
-
-Abgrenzung Effektivität
-
-Einbettung Schnellenbach
-
-```
 
 
 ## Der Blick in die Welt
@@ -390,7 +388,13 @@ p1 <- ggplotly(p)%>%
 p1
 ```
 
+# Bedeutung der Effizienz für Zukunftsherausforderungen
 
+- Effizienz ist nicht (länger) eine wünschenswert (aber auch verzichtbare) Forderung
+
+- In Anbetracht begrenzter Ressourcen und begrenzter Kapazität der Atmosphäre ist Effizienz eine notwendige Bedingung für künftigen Wohlstand 
+
+- Jeder Zuwachs der Verfügung über Ressourcen muss sich aus Effizienzsteigerungen speisen
 
 # Beobachten, beschreiben, erklären, bewerten, verändern
 
