@@ -396,6 +396,9 @@ p1
 
 - Jeder Zuwachs der Verfügung über Ressourcen muss sich aus Effizienzsteigerungen speisen
 
+# Zeit, Zukunft und Zufall
+
+
 # Beobachten, beschreiben, erklären, bewerten, verändern
 
 ![Abbildung: Jan S. Voßwinkel](./Tikz/Beobachten.svg)
