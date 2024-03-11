@@ -157,7 +157,7 @@ options(scipen = 999)
 p <- df %>% 
   filter(Year == 2019)%>%
   #Gruppen herauswerfen
-  filter(is.na(Code)==F,
+  filter(Code!="",
          Entity !="World")%>%
   ggplot(aes(x= GDP.per.capita..PPP..constant.2017.international...,
              y=  Life.expectancy.at.birth..historical.,
@@ -175,6 +175,7 @@ p <- df %>%
                  )
     )+
   geom_smooth(aes(group=NULL, weight=Population..historical.estimates.))+
+  theme_light()+
 #  coord_cartesian(xlim = c(100, 150000))+
   # shadow_wake(.5)+
   labs(title="BIP pro Kopf vs. Lebenserwartung",
@@ -184,11 +185,11 @@ p <- df %>%
        caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
   )
 
-# p
+p
 
-p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+#p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
                  #    trans = "log10"
-  )
+#  )
 
 library(plotly)
 
@@ -201,19 +202,11 @@ p1 <- ggplotly(p) %>%
 
 p1
 
-p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
-                     trans = "log10"
-  )
+library(canvasXpress)
 
+p2 <- canvasXpress(p)
+p2
 
-p1 <- ggplotly(p) %>%
-  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
-         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
-                            xref='paper', yref='paper', showarrow = F, 
-                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
-                            font = list(size = 11)))
-
-p1
 ```
 
 
