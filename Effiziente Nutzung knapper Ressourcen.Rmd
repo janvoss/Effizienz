@@ -390,9 +390,9 @@ p1
 
 # Bedeutung der Effizienz für Zukunftsherausforderungen
 
-- Effizienz ist nicht (länger) eine wünschenswert (aber auch verzichtbare) Forderung
+- Effizienz ist nicht (länger) eine nur wünschenswerte (aber auch verzichtbare) Forderung
 
-- In Anbetracht begrenzter Ressourcen und begrenzter Kapazität der Atmosphäre ist Effizienz eine notwendige Bedingung für künftigen Wohlstand 
+- In Anbetracht begrenzter Ressourcen und begrenzter Kapazität der Atmosphäre ist **Effizienz** eine **notwendige Bedingung für künftigen Wohlstand** 
 
 - Jeder Zuwachs der Verfügung über Ressourcen muss sich aus Effizienzsteigerungen speisen
 
@@ -408,11 +408,11 @@ p1
 
 ## Was macht Wissenschaft
 
-[s. Veranstaltung Science Lab](https://janvoss.github.io/sciencelab/wissenschaftstheorie.html)
+[s. Veranstaltung Science Lab](https://janvoss.github.io/Science_Lab/wissenschaftstheorie.html)
 
 ## Rolle der Wissenschaft in der Gesellschaft
 
-[s. Veranstaltung Science Lab](https://janvoss.github.io/sciencelab/wissenschaftstheorie.html)
+[s. Veranstaltung Science Lab](https://janvoss.github.io/Science_Lab/wissenschaftstheorie.html)
 
 # Soziale Phänomene und „Gleichgewichte"
 
@@ -434,8 +434,6 @@ p1
 
 ```{r echo=F, message=F, warning=F, cache=T}
 library(tidyverse) 
-#library(udunits2) #vor eurostat laden, um Probleme zu vermeiden. 
-#Prüfen: Redundant mit mosaic?
 library(eurostat)
 mydata <- get_eurostat("nama_10_gdp",
                        type = "label",
@@ -468,15 +466,17 @@ Entwicklung des BIPs
 ```{r echo=F, warning=F, message=F, cache=F}
 mydata %>%
     filter(geo=="Germany") %>%
-    ggplot(aes(time, values))+
+    ggplot(aes(TIME_PERIOD, values))+
     geom_point()+
     geom_line() +
     #geom_smooth(method = 'lm', formula = y ~ x + I(x^2))+
-    geom_smooth(method = 'lm'
-    )+
+    geom_smooth(method="glm",
+              formula = y~x,
+              method.args = list(family = gaussian(link = 'log')))+
   labs(title="Entwicklung des BIPs in Deutschland",
        x="Jahr",
-       y="BIP")
+       y="BIP",
+       caption="Eigene Darstellung, Daten: Eurostat Tabelle nama_10_gdp")
 
 
 ```
@@ -497,19 +497,24 @@ Die durchschnittliche Wachstumsrate des Bruttoinlandsprodukts für Deutschland i
 ```{r echo=F, warning=F, message=F, cache=F, eval=T}  
 mydata %>%
   filter(geo=="Germany") %>%
-  ggplot(aes(time, growth))+
+  ggplot(aes(TIME_PERIOD, growth))+
   geom_line(#color="red"
     )+
   geom_point()+
   #geom_smooth(method = 'lm'#, formula = y ~ x + I(x^2))
   geom_hline(yintercept = mean(mydata$growth[mydata$geo=="Germany"], na.rm=T), color="blue")+
-  geom_hline(yintercept = 0, color="red")
+  geom_hline(yintercept = 0, color="red")+
+  labs(title="Veränderungsraten des BIPs in Deutschland", 
+       x="Jahr",
+       y="Veränderungsrate",
+       caption="Eigene Darstellung, Daten: Eurostat Tabelle nama_10_gdp")
+
 
 ```
 
 
 ```{r echo=F, warning=F, message=F, cache=F, results = "asis"}
-model <- lm(log(values) ~ time, data= mydata %>%                             filter(geo=="Germany"))
+model <- lm(log(values) ~ TIME_PERIOD, data= mydata %>%                             filter(geo=="Germany"))
 
 library(stargazer)#
 
