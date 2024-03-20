@@ -185,7 +185,7 @@ p <- df %>%
        caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
   )
 
-p
+#p
 
 #p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
                  #    trans = "log10"
@@ -202,10 +202,10 @@ p1 <- ggplotly(p) %>%
 
 p1
 
-library(canvasXpress)
+#library(canvasXpress)
 
-p2 <- canvasXpress(p)
-p2
+#p2 <- canvasXpress(p)
+#p2
 
 ```
 
@@ -319,7 +319,7 @@ p1
 ``` 
 
 
-### Gini-Index 1990 vs. Gini-Index 2019
+[### Gini-Index 1990 vs. Gini-Index 2019]::
 
 ```{r echo=F, message=F, warning=F, cache=F, eval=F}
 
