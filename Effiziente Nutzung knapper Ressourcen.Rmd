@@ -392,6 +392,267 @@ p1
 # Zeit, Zukunft und Zufall
 
 
+## Zukunft
+
+-   Niemand hat je die Zukunft gesehen
+
+-   aber alle erwarten, dass es sie gibt\
+    $\rightarrow$ Sie rechnen damit, heute nach Hause zu kommen, oder?
+
+## Begriff
+
+-   Zukunft bezeichnet noch kommende zeitliche Perioden
+
+-   Zeit ordnet Perioden in eine Reihenfolge
+
+-   Einzelne Perioden hängen zusammen
+
+-   Zukunft ist aber nicht völlig determiniert
+
+## Vergangenheit, Gegenwart und Zukunft
+
+-   Die Vergangenheit war einmal eine/die Zukunft
+
+-   Blick in die Vergangenheit offenbart, wie Vergangenheit, Gegenwart und Zukunft zusammenhingen
+
+-   Arbeitshypothese: Vielleicht besteht dieser Zusammenhang fort
+
+```{r echo=F, message=F, warning=F, cache=T, cache.comments=FALSE}
+
+# knitr::opts_chunk$set(dev = 'svg') # set output device to svg
+
+
+library(tidyverse) 
+library(eurostat)
+
+mydata <- get_eurostat("nama_10_gdp",
+                       type = "label",
+                       time_format = "num",
+                       select_time="Y",
+                       cache = T
+) %>%
+  filter(na_item =="Gross domestic product at market prices",
+         unit =="Chain linked volumes (2015), million euro",
+         geo==c("Germany")
+         )
+
+
+model1 <- lm(values ~ TIME_PERIOD + I(TIME_PERIOD^2), data=mydata)
+
+options(scipen=999)
+#summary(model1)
+
+temp_var <- predict(model1, interval="prediction")
+
+mydata <- cbind(mydata, temp_var)
+```
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(tidyverse)
+
+mydata_short <- mydata %>% select(TIME_PERIOD, values, fit, lwr, upr)
+
+df <- data.frame(seq(2022, 2060, 1), NA, NA, NA, NA)
+names(df) <- c("TIME_PERIOD", "values", "fit", "lwr", "upr" )
+
+mydata_extended <- rbind(mydata_short, df)
+
+options(scipen = 999)
+
+p <- mydata_extended %>%
+    ggplot(aes(TIME_PERIOD, values))+
+   # xlim(1990, 2021)+
+    geom_point()+
+   # geom_line() +
+    geom_smooth(method = 'lm', 
+                formula = y ~ x+ I(x^2),
+                fullrange=T,
+    #            color="red"
+                )+
+   # geom_smooth(method = 'lm',
+   #             fullrange=T
+  #  )+
+  geom_vline(xintercept=2023,linetype = "dashed" )+
+geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
+geom_line(aes(y=upr), color = "red", linetype = "dashed")+
+    annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
+  annotate("text", x=2035, y=4500000, label="Zukunft", color="grey30")+
+  theme_classic() +
+    scale_x_continuous(breaks = 2023,
+                     labels = "Gegenwart") +
+      scale_y_continuous(#expand = c(0, 0), 
+                     breaks = NULL) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(#fill="Index",
+       title="Prognoseunsicherheit",
+       x="Zeit", y='Werte',
+       caption = paste('Illustration: Jan S. Voßwinkel, 2024'))
+
+
+
+p2 <- mydata_extended %>%
+    ggplot(aes(TIME_PERIOD, values))+
+   # xlim(1990, 2021)+
+    geom_point()+
+   # geom_line() +
+    geom_smooth(method = 'lm', 
+                formula = y ~ x+ I(x^2),
+                fullrange=F,
+    #            color="red"
+                )+
+   # geom_smooth(method = 'lm',
+   #             fullrange=T
+  #  )+
+  geom_vline(xintercept=2023,linetype = "dashed" )+
+geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
+geom_line(aes(y=upr), color = "red", linetype = "dashed")+
+    annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
+  annotate("text", x=2035, y=4500000, label="Zukunft", color="grey30")+
+  theme_classic() +
+    scale_x_continuous(breaks = 2023,
+                     labels = "Gegenwart") +
+      scale_y_continuous(#expand = c(0, 0), 
+                     breaks = NULL) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(#fill="Index",
+       title="Prognoseunsicherheit",
+       #subtitle= "Anteil am BIP, 2020",
+       x="Zeit", y='Werte',
+       caption = paste('Illustration: Jan S. Voßwinkel, 2024'))
+
+```
+
+```{r echo=F, warning=F, message=F, cache=T}
+
+p +
+  coord_cartesian(xlim = c(1990, 2023), ylim=c(min(mydata$values), max(mydata$values)))
+
+```
+
+-   Beobachtungen der Vergangenheit
+-   Regelmäßiger Prozess
+-   Erkennbarer Trend
+
+```{r echo=F, warning=F, message=F, cache=T}
+
+p2
+
+```
+
+-   Wie geht es weiter?
+
+```{r echo=F, warning=F, message=F, cache=T}
+
+p
+```
+
+## Unterschiedliche Modelle zeitlicher Verläufe
+
+### Zukunft hängt von der Gegenwart ab
+
+-   $x_t=f(x_{t-1})+e_t$
+
+### Zukunft hängt nur von der Zeit ab
+
+-   $x_t=\beta_0+ f(t)+e_t$
+
+$\rightarrow$ Ansatzpunkte zur Gestaltung der Zukunft:
+
+-   Der funktionale Zusammenhang $f(\cdot)$
+
+-   Die Gegenwart
+
+-   *Nicht*: Der Störterm
+
+### Zwischenfazit
+
+-   Die Zukunft ist ungewiss
+
+-   Selbst bei Fortschreibung der Gegenwart hohe Unsicherheit in fernerer Zukunft
+
+-   Noch höhere Unsicherheit bei Strukturbrüchen
+
+-   Zukunft hängt ab von
+
+    -   eigenen Entscheidungen und
+    -   Entscheidungen anderer
+
+$\rightarrow$ Ökonomische Analyse sozialer Phänomene
+
+### Teile der Zukunft sind bereits vergangen
+
+```{r echo=F, warning=F, message=F, cache=T}
+library(tidyverse)
+
+# Funktionen definieren
+  
+  x <- -3:3
+  
+  Grenze_oben <- function(x) x
+  Grenze_unten <- function(x) -x
+  
+  Grenze_oben1 <- function(x) -.5+x
+  Grenze_unten1 <- function(x) -1.5-x
+  
+  z  <- seq(-1, 0, 0.01)
+  z1  <- seq(-.5, .7, 0.01)
+  
+  # Grafik
+  
+  ggplot()+
+    annotate("point", x=0, y=0)+
+    
+    annotate("segment", x=0, xend=0, y=-2.2, yend=1, linetype="dashed")+
+   # stat_function(fun = Grenze_oben, xlim = c(0, 1))+
+  #  stat_function(fun = Grenze_unten, xlim = c(0, 1))+
+    geom_ribbon(aes(x = z, ymin = Grenze_unten(z), ymax = Grenze_oben(z)), alpha = 0.25) +
+    annotate("point", x=-.5, y=-1)+
+    geom_ribbon(aes(x = z1, ymin = Grenze_unten1(z1), ymax = Grenze_oben1(z1)), alpha = 0.25) +
+    annotate("segment", x=0, xend = .5, y=0, yend = 0, linetype="dashed")+
+    
+    geom_segment(aes(x = -.5, y = -1, xend = .5, yend = 0), size=.8,
+                 arrow = arrow(length = unit(0.2, "cm")))+
+    annotate("segment", x=.5, xend = .5, y=-2.2, yend=1, linetype="dashed")+
+    annotate("segment", x=-.5, xend = -.5, y=-2.2, yend=1, linetype="dashed")+
+    scale_x_continuous(breaks = c(-.5, 0, .5),
+                       labels = expression("t"[-1], "t"[0], "t"[1]))+
+    scale_y_continuous(breaks = NULL)+
+    theme_classic()+
+    theme(panel.grid = element_blank()) +
+    theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+    labs(title="Welche Information beeinflusst die Gegenwart",
+         caption="Darstellung: Jan S. Voßwinkel",
+         x = "Zeit", y = "Position", 
+         color="",
+         fill="")
+
+```
+
+$\rightarrow$ Teile der Zukunft sind nicht mehr änderbar
+
+## Prognose und Freiheit
+
+-   Passen Vorhersehbarkeit und Willensfreiheit zusammen?
+
+-   Individuelles Verhalten ist oft je nach Situation gut vorhersehbar (z.B. Straßenverkehr)
+
+-   Soziale Phänomene hängen oft nicht stark von individuellem Verhalten ab sondern vom Zusammenspiel vieler Entscheidungen (manchmal geben aber auch Individuen den Ausschlag)
+
+## Zur Planbarkeit sozialer Phänomene
+
+-   Die Zukunft ist (in Teilen) gestaltbar
+
+-   Gestaltbarkeit aber nicht beliebig: Gesellschaftliche Prozesse lassen sich nicht beliebig formen
+
+## Revolution vs Reform
+
+-   Revolution bedeutet das Verlassen des Rahmens, für den man (einigermaßen) verstanden hat.
+
+-   Reformen bedeuten, dass man innerhalb eines gegebenen Rahmens Veränderungen vornimmt.
+
+
+
 # Beobachten, beschreiben, erklären, bewerten, verändern
 
 ![Abbildung: Jan S. Voßwinkel](./Tikz/Beobachten.svg)
