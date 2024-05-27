@@ -1694,11 +1694,11 @@ chart <- ggplot() +
 
 # Anwendung: Das aktuelle Frühjahrsgutachten des Sachverständigenrates zur Begutachtgung der gesamtwirtschaftlichen Entwicklung {-}
 
-## Der Sachverständigenrat
+## Der Sachverständigenrat {-}
 
 [Zum Sachverständigenrat](https://www.sachverstaendigenrat-wirtschaft.de/)
 
-## Das aktuelle Frühjahrsgutachten
+## Das aktuelle Frühjahrsgutachten {-}
 
 [Das aktuelle Frühjahrsgutachten](https://www.sachverstaendigenrat-wirtschaft.de/fruehjahrsgutachten-2024.html?returnUrl=%2Findex.html&cHash=b112beed71f5312cb584097f9468c4ae)
 
@@ -1728,17 +1728,16 @@ plot(qr)
 
 
 
-
   a) Welche Fragen haben Sie?
   
   a) Welche Kernaussagen entnehmen Sie der Darstellung?
   
 
-    a) Welche Effizienzprobleme werden angesprochen?
+ a) Welche Effizienzprobleme werden angesprochen?
     
-    a) Welche Lösungsstrategien werden diskutiert?
+ a) Welche Lösungsstrategien werden diskutiert?
     
-    a) Wie bewerten Sie die Darstellung?
+  a) Wie bewerten Sie die Darstellung?
   
 
 # Nachfrage, Angebot Märkte
