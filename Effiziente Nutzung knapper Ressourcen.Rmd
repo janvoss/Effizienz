@@ -1692,43 +1692,54 @@ chart <- ggplot() +
 ```
 
 
-# Anwendung: Das aktuelle Jahresgutachten des Sachverständigenrates zur Begutachtgung der gesamtwirtschaftlichen Entwicklung {-}
+# Anwendung: Das aktuelle Frühjahrsgutachten des Sachverständigenrates zur Begutachtgung der gesamtwirtschaftlichen Entwicklung {-}
 
 ## Der Sachverständigenrat
 
 [Zum Sachverständigenrat](https://www.sachverstaendigenrat-wirtschaft.de/)
 
-## Das aktuelle Jahresgutachten
+## Das aktuelle Frühjahrsgutachten
 
-[Kapitel 4 des aktuellen Jahresgutachtens](https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Kapitel_4.pdf)
+[Das aktuelle Frühjahrsgutachten](https://www.sachverstaendigenrat-wirtschaft.de/fruehjahrsgutachten-2024.html?returnUrl=%2Findex.html&cHash=b112beed71f5312cb584097f9468c4ae)
 
 
 ```{r,  echo=FALSE, warning=FALSE, out.width="30%"}
 library(qrcode)
 
-qr <- qr_code('https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Kapitel_4.pdf')
+qr <- qr_code('https://www.sachverstaendigenrat-wirtschaft.de/fruehjahrsgutachten-2024.html?returnUrl=%2Findex.html&cHash=b112beed71f5312cb584097f9468c4ae')
 plot(qr)
 
 ```
 
-1. Bitte lesen Sie zunächst insb. den Abschnitt II.
+1. Wir verschaffen uns zunächst einen Überblick mit Hilfe der Pressemitteilung
+
+1. Schauen wir genauer in des Kapitel zum Güterverkehr
+
+[Kapitel 2 zum Güterverkehr](https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/fg2024/FG2024_Kapitel_2.pdf)
+
+```{r,  echo=FALSE, warning=FALSE, out.width="30%"}
+library(qrcode)
+
+qr <- qr_code('https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/fg2024/FG2024_Kapitel_2.pdf')
+
+plot(qr)
+
+```
+
+
+
 
   a) Welche Fragen haben Sie?
   
   a) Welche Kernaussagen entnehmen Sie der Darstellung?
   
-  a) Welche Anknüpfungspunkte sehen Sie an die Gerechtigkeitsdiskussion, die wir bislang geführt haben?
-  
-  a) Welche Effizienzprobleme werden angesprochen?
-  
-2. Lesen Sie nun bitte insbesondere Abschnitt IV.
 
-  a) Welche Fragen haben Sie?
+    a) Welche Effizienzprobleme werden angesprochen?
+    
+    a) Welche Lösungsstrategien werden diskutiert?
+    
+    a) Wie bewerten Sie die Darstellung?
   
-  a) Welche Kernaussagen entnehmen Sie der Darstellung?
-  
-  a) Sehen Sie in den Maßnahmen einen relevanten Beitrag zur Entschärfung etwaiger Gerechtigkeitsprobleme?
-
 
 # Nachfrage, Angebot Märkte
 
