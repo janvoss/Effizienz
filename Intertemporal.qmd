@@ -23,6 +23,14 @@
 
 ## Zwei-Perioden-Modell
 
+
+$U=u(x_0) + \frac{u(x_1)}{1+i}$
+
+hier mit $u(x_t) = ln(x_t)$
+
+$\Rightarrow u'(x_t) = \frac{1}{x_t}$ (sehr einfache Form des abnehmenden Grenznutzens)
+
+
 ```{python Zwei-Perioden}
 #| warning: false
 #| message: false
