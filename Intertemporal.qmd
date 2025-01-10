@@ -2,6 +2,25 @@
 
 ## Das Problem
 
+- Intertemporal effiziente Nutzung einer Ressource (stagnieren, wachsend, schrumpfend)
+
+- Wesentliche Elemente des Modells: 
+
+   - Nutzenfunktion, insb. Grad des abnehmenden Grenznutzens
+
+   - Grad der Gegenwartspräferenz, ausgedrückt im Diskontsatz
+
+   - Wachstumsrate der Ressource (negativ bei Schrumpfung)
+
+
+- Grundlegende Abwägung: 
+
+   - Konsum heute ist besser als Konsum morgen (Gegenwartspräferenz)
+
+   - Aber abnehmender Grenznutzen (daher Glättung des Konsums über die Zeit) und
+
+   - Wachstum ermöglicht mehr Konsum in der Zukunft bei Verzicht in der Gegenwart 
+
 ## Zwei-Perioden-Modell
 
 ```{python Zwei-Periodenf}
