@@ -2846,7 +2846,7 @@ chart <- ggplot() +
   stat_function(aes(color = "Grenzkosten"), fun = supply, xlim = c(0,3.5))+
   annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label=expression("S=MC"[pr]), color = "grey30")+ 
   annotate("point", x = q, y = p, color = "grey30")+
-  annotate("segment", x = q, xend = q, y = 0, yend = p,
+  annotate("segment", x = q, xend = q, y = 0, yend = p_ext,
            linetype = "dashed", color = "grey30") +
   annotate("segment", x = 0, xend = q, y = p, yend = p,
            linetype = "dashed", color = "grey30")+
@@ -2858,8 +2858,8 @@ chart <- ggplot() +
   annotate("point", x = q_t, y = p_t, color = "grey30")+
   annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
            linetype = "dashed", color = "grey30") +
-  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
-           linetype = "dashed", color = "grey30")+
+ # annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+ #          linetype = "dashed", color = "grey30")+
  # annotate("text", x=1, y=16, label="PR", color="grey30")+
   #Preis abzüglich steuer
   # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
@@ -2872,8 +2872,8 @@ chart <- ggplot() +
   #                fill = "Wohlfahrtsverlust"), alpha = 0.55)+
 #  annotate("text", x=1, y=28, label="KR", color="grey30")+
   #Sozialer Zusatznutzen Nutzen
-  geom_ribbon(aes(x = z_wfl, ymin = demand(z_wfl), ymax = demand_ext(z_wfl),
-                                 fill = "Soziale Zusatznutzen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand_ext(z_wfl),
+                                 fill = "Soziale Zusatznutzen"), alpha = 0.25)+
  # annotate("text", x=q+1, y=p_t, label="Wohlfahrtsverlust",color = "grey30")+
   scale_color_manual(values=c("green", "orange", "red"))+
   scale_fill_manual(values=c("red", "green", "orange"))+
@@ -2881,7 +2881,7 @@ chart <- ggplot() +
                      breaks = c(0,q_t,q), labels = expression(0, "x*","x"^0),
                      limits = c(0, 4)) +
   scale_y_continuous(expand = c(0, 0), 
-                     breaks = c(p, p_t), labels = expression("p"^0, "p*"),
+                     breaks = c(p), labels = expression("p"^0),
                      limits = c(0,70)) +
   theme_classic() +
   theme(panel.grid = element_blank(),
