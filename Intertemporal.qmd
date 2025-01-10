@@ -23,7 +23,7 @@
 
 ## Zwei-Perioden-Modell
 
-```{python Zwei-Periodenf}
+```{python Zwei-Perioden}
 #| warning: false
 #| message: false
 #| eval: true
