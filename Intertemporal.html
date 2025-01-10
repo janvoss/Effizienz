@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="zwei-perioden-modell" class="level2">
 <h2 class="anchored" data-anchor-id="zwei-perioden-modell">Zwei-Perioden-Modell</h2>
-<div id="43610250" class="cell" data-message="false" data-execution_count="1">
+<div id="93841bab" class="cell" data-message="false" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  <span class="co"># Import NumPy</span></span>
@@ -152,53 +152,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> np.arange(<span class="fl">0.01</span>, x1_budget <span class="op">+</span> <span class="fl">0.5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'x'</span>: x_values.tolist()}</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Use latex to create a LaTeX string for the subtitle</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>utility_latex <span class="op">=</span> <span class="ss">f"\(U=x_0^</span><span class="ch">\a</span><span class="ss">lpha+</span><span class="ch">\f</span><span class="ss">rac</span><span class="sc">{</span><span class="dv">1</span><span class="sc">}{</span>(<span class="dv">1</span><span class="op">+</span>i)<span class="sc">}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss">imes x_1^</span><span class="ch">\a</span><span class="ss">lpha)\), \(i=</span><span class="sc">{</span>given_values[i]<span class="sc">}</span><span class="ss">\), \(g=</span><span class="sc">{</span>given_values[g]<span class="sc">}</span><span class="ss">\)"</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the string to replace LaTeX-specific syntax if needed</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>utility_latex_modified <span class="op">=</span> (</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    utility_latex.replace(<span class="vs">r"\log"</span>, <span class="st">"ln"</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>                 .replace(<span class="vs">r"\left"</span>, <span class="st">""</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>                 .replace(<span class="vs">r"\right"</span>, <span class="st">""</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting with Lets-Plot</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ggplot() <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    geom_function(aes(<span class="st">'x'</span>), data<span class="op">=</span>data,</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>                  fun<span class="op">=</span><span class="kw">lambda</span> t: budget_line(t), color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, u <span class="kw">in</span> <span class="bu">enumerate</span>(U_values):</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    Indifference_curve <span class="op">=</span> solve(Utility.subs(U, u), x2)[<span class="dv">0</span>]</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    Ind_graph <span class="op">=</span> lambdify(x1, Indifference_curve)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    p <span class="op">+=</span> geom_function(aes(<span class="st">'x'</span>), data<span class="op">=</span>data,</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>                       fun<span class="op">=</span><span class="kw">lambda</span> t: Ind_graph(t), color<span class="op">=</span>colors[idx], size<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>         geom_text(x<span class="op">=</span>x1_budget <span class="op">+</span> <span class="fl">0.5</span>,</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>                   y<span class="op">=</span>Ind_graph(x1_budget),</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>                   label<span class="op">=</span><span class="ss">f"U=</span><span class="sc">{</span><span class="bu">round</span>(u, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>p <span class="op">+=</span> geom_segment(x<span class="op">=</span>x1_opt, y<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>                  xend<span class="op">=</span>x1_opt, yend<span class="op">=</span>x2_opt,</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>                  linetype<span class="op">=</span><span class="st">'dashed'</span>, size<span class="op">=</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>     geom_segment(x<span class="op">=</span><span class="dv">0</span>, y<span class="op">=</span>x2_opt,</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>                  xend<span class="op">=</span>x1_opt, yend<span class="op">=</span>x2_opt,</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>                  linetype<span class="op">=</span><span class="st">'dashed'</span>, size<span class="op">=</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>     geom_point(x<span class="op">=</span>x1_opt, y<span class="op">=</span>x2_opt) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>     labs(title<span class="op">=</span><span class="st">'The Optimal Consumption Profile'</span>,</span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>          <span class="co"># subtitle=utility_latex_modified,</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>          x<span class="op">=</span><span class="vs">r'\(x_0\)'</span>,</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>          y<span class="op">=</span><span class="vs">r'\(x_1\)'</span>,</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>          caption<span class="op">=</span><span class="st">'Caption'</span>) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>     coord_cartesian(xlim<span class="op">=</span>[<span class="dv">0</span>, x1_budget <span class="op">+</span> <span class="fl">5.</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>], ylim<span class="op">=</span>[<span class="dv">0</span>, x2_budget <span class="op">+</span> <span class="dv">10</span>]) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>     scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">0</span>, <span class="bu">round</span>(x1_opt, <span class="dv">2</span>), <span class="bu">round</span>(x1_budget)]) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>     scale_y_continuous(breaks<span class="op">=</span>[<span class="dv">0</span>, <span class="bu">round</span>(x2_opt, <span class="dv">2</span>), <span class="bu">round</span>(x2_budget)]) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>     theme_light()</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>p.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting with Lets-Plot</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ggplot() <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    geom_function(aes(<span class="st">'x'</span>), data<span class="op">=</span>data,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                  fun<span class="op">=</span><span class="kw">lambda</span> t: budget_line(t), color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, u <span class="kw">in</span> <span class="bu">enumerate</span>(U_values):</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    Indifference_curve <span class="op">=</span> solve(Utility.subs(U, u), x2)[<span class="dv">0</span>]</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    Ind_graph <span class="op">=</span> lambdify(x1, Indifference_curve)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    p <span class="op">+=</span> geom_function(aes(<span class="st">'x'</span>), data<span class="op">=</span>data,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>                       fun<span class="op">=</span><span class="kw">lambda</span> t: Ind_graph(t), color<span class="op">=</span>colors[idx], size<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>         geom_text(x<span class="op">=</span>x1_budget <span class="op">+</span> <span class="fl">0.5</span>,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>                   y<span class="op">=</span>Ind_graph(x1_budget),</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>                   label<span class="op">=</span><span class="ss">f"U=</span><span class="sc">{</span><span class="bu">round</span>(u, <span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>p <span class="op">+=</span> geom_segment(x<span class="op">=</span>x1_opt, y<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>                  xend<span class="op">=</span>x1_opt, yend<span class="op">=</span>x2_opt,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>                  linetype<span class="op">=</span><span class="st">'dashed'</span>, size<span class="op">=</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>     geom_segment(x<span class="op">=</span><span class="dv">0</span>, y<span class="op">=</span>x2_opt,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>                  xend<span class="op">=</span>x1_opt, yend<span class="op">=</span>x2_opt,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>                  linetype<span class="op">=</span><span class="st">'dashed'</span>, size<span class="op">=</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>     geom_point(x<span class="op">=</span>x1_opt, y<span class="op">=</span>x2_opt) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>     labs(title<span class="op">=</span><span class="st">'Intertemporale Konsumoptimierung im Zwei-Perioden-Model'</span>,</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>          <span class="co"># subtitle= 'Zwei-Perioden-Modell',</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>          x<span class="op">=</span><span class="vs">r'\(x_0\)'</span>,</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>          y<span class="op">=</span><span class="vs">r'\(x_1\)'</span>,</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>          caption<span class="op">=</span><span class="st">'Abbildung: Jan S. Voßwinkel'</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>     coord_cartesian(xlim<span class="op">=</span>[<span class="dv">0</span>, x1_budget <span class="op">+</span> <span class="fl">5.</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>], ylim<span class="op">=</span>[<span class="dv">0</span>, x2_budget <span class="op">+</span> <span class="dv">10</span>]) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>     scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">0</span>, <span class="bu">round</span>(x1_opt, <span class="dv">2</span>), <span class="bu">round</span>(x1_budget)]) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>     scale_y_continuous(breaks<span class="op">=</span>[<span class="dv">0</span>, <span class="bu">round</span>(x2_opt, <span class="dv">2</span>), <span class="bu">round</span>(x2_budget)]) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>     theme_light()</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>p.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
-            <div id="6USI4T"></div>
+            <div id="4YRfmu"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -222,22 +212,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("6USI4T").appendChild(div);
+                        document.getElementById("4YRfmu").appendChild(div);
                     };
-                    var e = document.getElementById("6USI4T");
+                    var e = document.getElementById("4YRfmu");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="MDH5Ih"></div>
+   <div id="nv77sy"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("MDH5Ih");
+   var containerDiv = document.getElementById("nv77sy");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -255,10 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 "data_meta":{
 },
 "ggtitle":{
-"text":"The Optimal Consumption Profile"
+"text":"Intertemporale Konsumoptimierung im Zwei-Perioden-Model"
 },
 "caption":{
-"text":"Caption"
+"text":"Abbildung: Jan S. Voßwinkel"
 },
 "guides":{
 "x":{
@@ -445,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 }],
 "metainfo_list":[],
-"spec_id":"1"
+"spec_id":"2"
 };
                window.letsPlotCall(function() {
        
