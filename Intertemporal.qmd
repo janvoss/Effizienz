@@ -1,0 +1,19 @@
+# Intertemporale Effizienz
+
+## Das Problem
+
+## Zwei-Perioden-Modell
+
+```{python Zwei-Periodenf}
+#| warning: false
+#| message: false
+#| eval: true
+
+{{< include _zwei-perioden.py >}}
+```
+
+## Unendlicher Planungshorizont
+
+### Diskrete Zeit
+
+### Kontinuierliche Zeit
