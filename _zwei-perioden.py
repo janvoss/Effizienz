@@ -67,7 +67,6 @@ p += geom_segment(x=x1_opt, y=0,
                   linetype='dashed', size=0.5) + \
      geom_point(x=x1_opt, y=x2_opt) + \
      labs(title='Intertemporale Konsumoptimierung im Zwei-Perioden-Model',
-          # subtitle= 'Zwei-Perioden-Modell',
           x=r'\(x_0\)',
           y=r'\(x_1\)',
           caption='Abbildung: Jan S. Voßwinkel') + \
