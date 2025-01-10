@@ -45,16 +45,6 @@ budget_line = lambdify(x1, solve(budget, x2)[0].subs(given_values))
 x_values = np.arange(0.01, x1_budget + 0.5, 0.1)
 data = {'x': x_values.tolist()}
 
-# Use latex to create a LaTeX string for the subtitle
-utility_latex = f"\(U=x_0^\alpha+\frac{1}{(1+i)} \times x_1^\alpha)\), \(i={given_values[i]}\), \(g={given_values[g]}\)"
-
-# Modify the string to replace LaTeX-specific syntax if needed
-utility_latex_modified = (
-    utility_latex.replace(r"\log", "ln")
-                 .replace(r"\left", "")
-                 .replace(r"\right", "")
-)
-
 # Plotting with Lets-Plot
 p = ggplot() + \
     geom_function(aes('x'), data=data,
@@ -76,11 +66,11 @@ p += geom_segment(x=x1_opt, y=0,
                   xend=x1_opt, yend=x2_opt,
                   linetype='dashed', size=0.5) + \
      geom_point(x=x1_opt, y=x2_opt) + \
-     labs(title='The Optimal Consumption Profile',
-          # subtitle=utility_latex_modified,
+     labs(title='Intertemporale Konsumoptimierung',
+          # subtitle= 'Zwei-Perioden-Modell',
           x=r'\(x_0\)',
           y=r'\(x_1\)',
-          caption='Caption') + \
+          caption='Abbildung: Jan S. Voßwinkel') + \
      coord_cartesian(xlim=[0, x1_budget + 5.
 ], ylim=[0, x2_budget + 10]) + \
      scale_x_continuous(breaks=[0, round(x1_opt, 2), round(x1_budget)]) + \
