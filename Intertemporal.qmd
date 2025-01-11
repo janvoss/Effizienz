@@ -37,6 +37,8 @@ $x_1 = (X_0 -x_0)(1+g)$
 
 ### Graphische Repräsentation der Lösung 
 
+$U$
+
 ```{python Zwei-Perioden}
 #| warning: false
 #| message: false
