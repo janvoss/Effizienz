@@ -11,12 +11,9 @@ book:
   language:  _language.yml
   repo-url: https://github.com/janvoss/Effizienz.git
 #  issued: "Sommersemester 2024"
+  license: "CC BY-SA"
   chapters:
     - index.qmd
-    - intro.qmd
-    xxx
-    - literatur.qmd
-    - Uebungsfragen.qmd
 
 bibliography: Effizienz.bib
 
