@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Effiziente Nutzung knapper Ressourcen"
+  author: "Prof. Dr. Jan S. Voßwinkel"
+  # date: "2025"
+  subtitle: "Sommersemester 2025"
+  #lang: de
+  language:  _language.yml
+  repo-url: https://github.com/janvoss/Effizienz.git
+#  issued: "Sommersemester 2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    xxx
+    - literatur.qmd
+    - Uebungsfragen.qmd
+
+bibliography: Effizienz.bib
+
+
+
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    code-overflow: wrap
+
+editor: source
+
