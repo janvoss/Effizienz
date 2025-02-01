@@ -47,6 +47,30 @@ $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
 {{< include _zwei-perioden.py >}}
 ```
 
+## n-Perioden-Modell
+
+### Diskrete vs kontinuierliche Zeit
+
+,,,
+
+### Ansatz
+
+### Nutzenfunktion
+
+$U= \int_{0}^{T} u(x_t) e^{-it} dt$
+
+mit $x_t= x_0 e^{(r-i)t}$
+
+
+### Budgetbeschränkung
+
+
+
+### Lösung 
+
+### Grafische Repräsentation
+
+
 ## Unendlicher Planungshorizont
 
 ### Diskrete Zeit
