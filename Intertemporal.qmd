@@ -47,6 +47,26 @@ $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
 {{< include _zwei-perioden.py >}}
 ```
 
+### Die Euler-Gleichung 
+
+- Aus der Grafik: Steigung der Budgetbeschränkung = Steigung der Indifferenzkurve
+
+...
+
+$u_1' = \frac{1+i}{1+g} u_0'$
+
+- Der *korrigierte* Grenznutzen ist in allen Perioden gleich
+
+- Sonst wäre (bei abnehmendem Grenznutzen) Periodensrbitrage durch Konsumverlagerung möglich.
+
+- korrigiert:  
+   - (1+i): Der Grenznutzen der zukünftigen Periode ist um den Faktor (1+i) *höher*, da der Nutzen der zukünftigen Periode mit $\frac{1}{1+i}$ diskontiert wird.  
+
+  - (1+g): Der Grenznutzen der zukünftigen Periode ist um den Faktor $\frac{1}{1+g}$ *geringer*, da durch Wachstum die Ressource weniger knapp ist und daher mehr konsumiert (und damit der geringere Grenznutzen ausgeglichen) werden kann.
+
+- Für die Nutzenfunktion $u(x_t)= ln(x_t)$ heißt das: 
+  
+
 ## n-Perioden-Modell
 
 ### Diskrete vs kontinuierliche Zeit
