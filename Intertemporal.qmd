@@ -64,7 +64,7 @@ $u_1' = \frac{1+i}{1+g} u_0'$
 
   - (1+g): Der Grenznutzen der zukünftigen Periode ist um den Faktor $\frac{1}{1+g}$ *geringer*, da durch Wachstum die Ressource weniger knapp ist und daher mehr konsumiert (und damit der geringere Grenznutzen ausgeglichen) werden kann.
 
-- Für die Nutzenfunktion $u(x_t)= ln(x_t)$ heißt das: $\frac{1}{x_1} = \frac{1+i}{1+g} \frac{1}{x_0}$ $\iff $
+- Für die Nutzenfunktion $u(x_t)= ln(x_t)$ heißt das: $\frac{1}{x_1} = \frac{1+i}{1+g} \frac{1}{x_0}$ $\iff x_1 = \frac{1+g}{1+i} x_0$
   
 
 ## n-Perioden-Modell
