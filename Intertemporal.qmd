@@ -51,6 +51,8 @@ $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
 
 - Aus der Grafik: Steigung der Budgetbeschränkung = Steigung der Indifferenzkurve
 
+
+- $\frac{u_0' (1+i)}{u_1'}$
 ...
 
 $u_1' = \frac{1+i}{1+g} u_0'$
