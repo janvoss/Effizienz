@@ -35,7 +35,7 @@ $\Rightarrow u'(x_t) = \frac{1}{x_t}$ (sehr einfache Form des abnehmenden Grenzn
 
 $x_1 = (X_0 -x_0)(1+g)$
 
-### Graphische Repräsentation der Lösung 
+### Grafische Repräsentation der Lösung 
 
 $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
 
@@ -52,10 +52,10 @@ $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
 - Aus der Grafik: Steigung der Budgetbeschränkung = Steigung der Indifferenzkurve
 
 
-- $\frac{u_0' (1+i)}{u_1'}$
-...
+- $- \frac{u_0' (1+i)}{u_1'} = -(1+g)$
 
-$u_1' = \frac{1+i}{1+g} u_0'$
+
+$\iff u_1' = \frac{1+i}{1+g} u_0'$
 
 - Der *korrigierte* Grenznutzen ist in allen Perioden gleich
 
