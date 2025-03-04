@@ -1,0 +1,330 @@
+# Einleitung
+
+## Fragestellungen
+
+-   Was ist Effizienz und warum ist sie wichtig?
+
+- Wovon hängt es ab, ob Ressourcen effizient alloziiert werden?
+
+-   Wie wird die effiziente Nutzung von Ressourcen ökonomisch analysiert?
+
+- Wessen Handlungen wollen wir analysieren?
+
+  - Individuen
+  - Unternehmen
+  - staatliche Akteure
+  - $\dots$
+
+## Begriff Effizienz
+
+### Abgrenzung
+
+- **Effektivität**:  
+  - Fähigkeit, ein Ziel zu erreichen/Zielerreichungsgrad  
+  - $\frac{\textrm{Ergebnis}}{\textrm{Ziel}}$
+  - Mögliche Übersetzung: Wirksamkeit
+
+- **Effizienz:**  
+  - Verhältnis von Ergebnis und Einsatz  
+  - $\frac{\textrm{Ergebnis}}{\textrm{Einsatz}}$
+
+- Eine Strategie kann effektiv aber ineffizient sein (Mit Kanonen auf Spatzen schießen)  
+- Eine Strategie kann grundsätzlich effizient aber ineffektiv sein (z.B. mangelnde Skalierung)
+
+- Für **langfristige Lösungen** ist Effizienz von großer Bedeutung.
+
+[Hier Priddat u accelerating growth]::
+
+
+### Teilbereiche des Effizienzbegriffs
+
+- Technische Effzienz  
+- Kosteneffizienz  
+- Allokative Effizienz
+
+ X-University:
+
+ <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+
+## Der Blick in die Welt
+
+Daten von [Our World in Data](https://ourworldindata.org/) zu (realem) BIP pro Kopf, Lebenserwartung, Gini-Index, Bevölkerungsgröße
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(tidyverse)
+# library(owidR)
+library(RColorBrewer)
+
+# Daten von OWID laden
+
+gdppc <- read.csv("gdp-per-capita-worldbank.csv")
+lifeex <- read.csv("life-expectancy.csv")
+gini <- read.csv("economic-inequality-gini-index.csv")
+pop <- read.csv("population-long-run-with-projections.csv")
+
+# Daten zusammenfügen
+
+df <- gdppc %>% 
+  left_join(lifeex) %>%
+  left_join(gini) %>%
+  left_join(pop) %>%
+
+   #Dummy for EU Member States
+  mutate(dummy_EU = as.numeric(Entity %in% c("Austria", "Belgium", "Denmark",
+                                             "Finland", "France", "Germany", 
+                                             "Greece", "Ireland", "Italy",
+                                             "Luxembourg", "Netherlands", "Portugal",
+                                             "Spain", "Sweden", "United Kingdom"))) %>%
+  #Dummy for USA
+  mutate(dummy_USA = as.numeric(Entity %in% c("United States")))
+
+## Lücken füllen
+
+df %<>%  group_by(Entity) %>% 
+  fill(Gini.coefficient, .direction = "downup") %>% 
+   ungroup()
+
+# Daten ansehen
+
+#library(psych)
+#  headTail(df, top = 2, bottom = 2, ellipsis = T)
+
+#library(knitr)
+#kable(headTail(df, top = 2, bottom = 2, ellipsis = T), digits=2)
+```
+
+
+### BIP pro Kopf vs. Lebenserwartung
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+options(scipen = 999)
+
+p <- df %>% 
+  filter(Year == 2019)%>%
+  #Gruppen herauswerfen
+  filter(Code!="",
+         Entity !="World")%>%
+  ggplot(aes(x= GDP.per.capita..PPP..constant.2017.international...,
+             y=  Life.expectancy.at.birth..historical.,
+             group=Entity)
+  )+
+  # scale_x_log10()+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) #,
+                  #   trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(aes(color=Gini.coefficient, size=Population..historical.estimates. #, frame=year
+                 )
+    )+
+  geom_smooth(aes(group=NULL, weight=Population..historical.estimates.))+
+  theme_light()+
+#  coord_cartesian(xlim = c(100, 150000))+
+  # shadow_wake(.5)+
+  labs(title="BIP pro Kopf vs. Lebenserwartung",
+       #subtitle= expression('2020=100'),
+       x="BIP pro Kopf",
+       y='Lebenserwartung',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+#p
+
+#p <- p + scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                 #    trans = "log10"
+#  )
+
+library(plotly)
+
+p1 <- ggplotly(p) %>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+
+#library(canvasXpress)
+
+#p2 <- canvasXpress(p)
+#p2
+
+```
+
+
+### BIP pro Kopf im Zeitverlauf
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(quantreg)
+
+p <- df %>% 
+  #Gruppen herauswerfen
+  filter(is.na(Code)==F,
+         Entity !="World")%>%
+  ggplot(aes(Year, GDP.per.capita..PPP..constant.2017.international..., label=Entity))+
+  geom_point(aes(color = Gini.coefficient),alpha=.7)+
+  scale_color_distiller(palette='Spectral')+
+  geom_quantile(size=1)+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) , 
+                         trans = "log10"
+  )+
+  labs(title="BIP pro Kopf im Zeitverlauf",
+       subtitle= "Kaufkraft- und inflationsbereinigt",
+       x="Jahr",
+       y='BIP pro Kopf',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+  
+
+# p
+  
+
+p1 <- ggplotly(p) %>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+
+```
+
+
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+
+### BIP pro Kopf 1990 vs. 2019
+
+#GDPPC einst und jetzt
+
+
+# neue Tabelle
+
+
+
+
+df1 <- df %>% 
+  filter(Year==1990) %>% 
+  select(Entity, Code, `GDP per capita`) %>% 
+  rename(GDPPC1990 = `GDP per capita`)
+
+df2 <- df %>% 
+  filter(year==2019) %>% 
+  select(entity, code, `GDP per capita`, Population, `Gini coefficient`) %>% 
+  rename(GDPPC2019 = `GDP per capita`)
+
+df3 <- df1 %>% 
+  left_join(df2)
+
+p <- df3 %>% 
+   filter(is.na(code)==F,
+         entity !="World")%>%
+  ggplot(aes(x=GDPPC1990,
+             y=GDPPC2019,
+             group=entity))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
+                     trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) ,
+                        trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(
+    aes(color=`Gini coefficient`, 
+      size=Population #, frame=year
+      )
+  )+
+  geom_smooth(aes(group=NULL, weight=Population))+
+  geom_abline(slope = 1,
+              intercept = 0,
+              color="red")+
+  labs(title="BIP pro Kopf 1990 vs. 2019",
+       #subtitle= expression('2020=100'),
+       x="BIP pro Kopf 1990",
+       y='BIP pro Kopf 2019',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+# p
+
+p1 <- ggplotly(p)%>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+``` 
+
+
+[### Gini-Index 1990 vs. Gini-Index 2019]::
+
+```{r echo=F, message=F, warning=F, cache=F, eval=F}
+
+#Gini einst und jetzt
+
+
+# neue Tabelle
+
+df1 <- df %>% 
+  filter(year==1990) %>% 
+  select(entity, code, `Gini coefficient`) %>% 
+  rename(Gini1990 = `Gini coefficient`)
+
+df2 <- df %>% 
+  filter(year==2019) %>% 
+  select(entity, code, `Gini coefficient`, Population, `GDP per capita`) %>% 
+  rename(Gini2019 = `Gini coefficient`)
+
+df3 <- df1 %>% 
+  left_join(df2)
+
+p <- df3 %>% 
+  filter(is.na(code)==F,
+         entity !="World")%>%
+  ggplot(aes(x=Gini1990,
+             y=Gini2019,
+             group=entity))+
+  scale_x_continuous(labels= function(x) format(x,scientific = F) #, 
+                    # trans = "log10"
+  )+
+  scale_y_continuous(labels= function(x) format(x,scientific = F) #,
+                    # trans="log10"
+  )+
+  scale_color_distiller(palette='Spectral')+
+  geom_point(
+    aes(color=`GDP per capita`, size=Population #, frame=year
+        )
+  )+
+  geom_smooth(aes(group=NULL, weight=Population))+
+  geom_abline(slope = 1,
+              intercept = 0,
+              color="red")+
+  labs(title="Gini-Index 1990 vs. 2019",
+       #subtitle= expression('2020=100'),
+       x="Gini-Index 1990",
+       y='Gini-Index 2019 ',
+       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
+  )
+
+# p
+
+p1 <- ggplotly(p)%>%
+  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
+         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 11)))
+
+p1
+```
