@@ -1,0 +1,23 @@
+# Organisatorisches {.unnumbered}
+
+```{r qr,  echo=FALSE, warning=FALSE}
+library(qrcode)
+
+qr <- qr_code('https://janvoss.github.io/Effizienz/')
+#plot(qr)
+
+generate_svg(qr, filename = "qr.svg")
+
+```
+
+|       ${}$        |  ${}$  |
+|:-----------------:|:--------------------------------------------------:|
+| ![logo](logo.png) |    ![](qr.svg){width="30%"}              |
+
+- Unterlagen: <https://janvoss.github.io/Effizienz/>
+
+- Modul: 209-021 Wachstum und Transformation [Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf) 
+
+- Weitere Veranstaltung im ModuL: -
+
+- Prüfungsleistung: K60
