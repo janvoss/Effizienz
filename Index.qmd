@@ -16,7 +16,7 @@ generate_svg(qr, filename = "qr.svg")
 
 - Unterlagen: <https://janvoss.github.io/Effizienz/>
 
-- Modul: 209-021 Wachstum und Transformation [Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf) 
+- Modul: 209-003: Effiziente Nutzung knapper Ressourcen [Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf) 
 
 - Weitere Veranstaltung im ModuL: -
 
