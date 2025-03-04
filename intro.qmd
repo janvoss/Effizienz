@@ -48,7 +48,21 @@
 
  <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
+## Effizienz und nachhaltige Entwicklung 
 
+```{python Lagrange}
+#| warning: false
+#| message: false
+#| eval: false
+
+{{< include _effizienz_nachhaltigkeit.py >}}
+
+```
+
+
+## Effizienz im Rahmen rationaler Entwicklung
+
+[Local Control]::
 
 
 ## Der Blick in die Welt
