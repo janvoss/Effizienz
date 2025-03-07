@@ -4,9 +4,69 @@
     "href": "index.html",
     "title": "Effiziente Nutzung knapper Ressourcen",
     "section": "",
-    "text": "Organisatorisches\n\n\n\n\n\n\n\n\\({}\\)\n\\({}\\)\n\n\n\n\n\n\n\n\n\n\nUnterlagen: https://janvoss.github.io/Effizienz/\nModul: XX Modulhandbuch\nPrüfungsleistung: K60",
+    "text": "Organisatorisches\n\n\n\n\n\n\n\n\\({}\\)\n\\({}\\)\n\n\n\n\n\n\n\n\n\n\nUnterlagen: https://janvoss.github.io/Effizienz/\nModul: 209-003: Effiziente Nutzung knapper Ressourcen Modulhandbuch\nWeitere Veranstaltung im ModuL: -\nPrüfungsleistung: K60",
     "crumbs": [
       "Organisatorisches"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Einleitung",
+    "section": "",
+    "text": "1.1 Fragestellungen",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#fragestellungen",
+    "href": "intro.html#fragestellungen",
+    "title": "1  Einleitung",
+    "section": "",
+    "text": "Was ist Effizienz und warum ist sie wichtig?\nIn welchem Verhältnis steht die effiziente Nutzung von Ressourcen zur nachhaltigen Entwicklung?\nWovon hängt es ab, ob Ressourcen effizient alloziiert werden?\nWie wird die effiziente Nutzung von Ressourcen ökonomisch analysiert?\nWessen Handlungen wollen wir analysieren?\n\nIndividuen\nUnternehmen\nstaatliche Akteure\n\\(\\dots\\)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#begriff-effizienz",
+    "href": "intro.html#begriff-effizienz",
+    "title": "1  Einleitung",
+    "section": "1.2 Begriff Effizienz",
+    "text": "1.2 Begriff Effizienz\n\n1.2.1 Abgrenzung\n\nEffektivität:\n\nFähigkeit, ein Ziel zu erreichen/Zielerreichungsgrad\n\n\\(\\frac{\\textrm{Ergebnis}}{\\textrm{Ziel}}\\)\nMögliche Übersetzung: Wirksamkeit\n\nEffizienz:\n\nVerhältnis von Ergebnis und Einsatz\n\n\\(\\frac{\\textrm{Ergebnis}}{\\textrm{Einsatz}}\\)\n\nEine Strategie kann effektiv aber ineffizient sein (Mit Kanonen auf Spatzen schießen)\n\nEine Strategie kann grundsätzlich effizient aber ineffektiv sein (z.B. mangelnde Skalierung)\nFür langfristige Lösungen ist Effizienz von großer Bedeutung, da sonst Ressourcen verschwendet werden und sich Strategien nicht durchhalten lassen.\n\n\n\n1.2.2 Teilbereiche des Effizienzbegriffs\n\nTechnische Effzienz\n\nKosteneffizienz\n\nAllokative Effizienz\n\nX-University:\n\n\nEin extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.1/ https://t.co/VomTcc7cLS\n\n— Jan Schnellenbach 🇺🇦🇺🇦 ((schnellenbachj?)) March 4, 2023",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#effizienz-und-nachhaltige-entwicklung",
+    "href": "intro.html#effizienz-und-nachhaltige-entwicklung",
+    "title": "1  Einleitung",
+    "section": "1.3 Effizienz und nachhaltige Entwicklung",
+    "text": "1.3 Effizienz und nachhaltige Entwicklung\n\n\nCode\n{{&lt; include _effizienz_nachhaltigkeit.py &gt;}}",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#effizienz-im-rahmen-rationaler-entwicklung",
+    "href": "intro.html#effizienz-im-rahmen-rationaler-entwicklung",
+    "title": "1  Einleitung",
+    "section": "1.4 Effizienz im Rahmen rationaler Entwicklung",
+    "text": "1.4 Effizienz im Rahmen rationaler Entwicklung",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#der-blick-in-die-welt",
+    "href": "intro.html#der-blick-in-die-welt",
+    "title": "1  Einleitung",
+    "section": "1.5 Der Blick in die Welt",
+    "text": "1.5 Der Blick in die Welt\nDaten von Our World in Data zu (realem) BIP pro Kopf, Lebenserwartung, Gini-Index, Bevölkerungsgröße\n\n1.5.1 BIP pro Kopf vs. Lebenserwartung\n\n\n\n\n\n\n\n\n1.5.2 BIP pro Kopf im Zeitverlauf",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
     ]
   }
 ]

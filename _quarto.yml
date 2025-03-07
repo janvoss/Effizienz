@@ -14,19 +14,18 @@ book:
   license: "CC BY-SA"
   chapters:
     - index.qmd
-    - Intro.qmd
-    - Bedeutung.qmd
-    - Zeit.qmd
-    - Wissenschaftstheorie.qmd
-    - Modelle-Rationalitaet.qmd
-    - Intertemporal.qmd
-    - Maerkte.qmd
-    - Marktversagen.qmd
-    - BIP.qmd
-    - Geld.qmd
-    - Handel.qmd
-    - Ausblick.qmd
-    - Literatur.qmd # Namen prüfen
+    - intro.qmd
+   # - Bedeutung.qmd
+  #  - Wissenschaftstheorie.qmd
+  #  - Modelle-Rationalitaet.qmd
+  #  - Intertemporal.qmd
+  #  - Maerkte.qmd
+  #  - Marktversagen.qmd
+  #  - BIP.qmd
+  #  - Geld.qmd
+   # - Handel.qmd
+  #  - Ausblick.qmd
+  #  - Literatur.qmd # Namen prüfen
 
 
 bibliography: Effizienz.bib
