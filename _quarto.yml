@@ -15,10 +15,11 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-   # - Bedeutung.qmd
+   # - Bedeutung.qmd # individuell vs sozial 
   #  - Wissenschaftstheorie.qmd
   #  - Modelle-Rationalitaet.qmd
   #  - Intertemporal.qmd
+  #  - Spieltheorie.qmd
   #  - Maerkte.qmd
   #  - Marktversagen.qmd
   #  - BIP.qmd
