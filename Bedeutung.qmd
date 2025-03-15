@@ -1,5 +1,7 @@
 # Bedeutung 
 
+[Hier Zusammenhang mit Nachhaltigkeit]::
+
 ## Abgrenzung Effizienz und Effektivität
 
 ## Effizienz und Rationalität
@@ -16,4 +18,10 @@
 
 ### Gesellschaftliches Entscheidungsproblem
 
-#### 
+#### Pareto-Verbesserungen und Pareto-Effizienz
+
+[Edgeworth]::
+
+[Hier auch potenzielle Pareto-Verbesserungen]::
+
+#### Auswahl zwischen verschiedenen effizienten Zuständen
