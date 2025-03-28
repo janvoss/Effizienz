@@ -5,13 +5,13 @@ library(qrcode)
 qr <- qr_code('https://janvoss.github.io/Effizienz/')
 #plot(qr)
 
-generate_svg(qr, filename = "qr.svg")
+generate_svg(qr, filename = "qr-titel.svg")
 
 ```
 
 |       ${}$        |  ${}$  |
 |:-----------------:|:--------------------------------------------------:|
-| ![logo](logo.png) |    ![](qr.svg){width="30%"}              |
+| ![logo](logo.png) |    ![](qr-titel.svg){width="30%"}              |
 
 
 :::{.callout-note 
