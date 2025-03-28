@@ -16,18 +16,21 @@ book:
     - index.qmd
     - intro.qmd
     - Zukunft.qmd
-   # - Bedeutung.qmd # individuell vs sozial 
-  #  - Wissenschaftstheorie.qmd
-  #  - Modelle-Rationalitaet.qmd
-  #  - Intertemporal.qmd
-  #  - Spieltheorie.qmd
-  #  - Maerkte.qmd
-  #  - Marktversagen.qmd
-  #  - BIP.qmd
-  #  - Geld.qmd
-   # - Handel.qmd
-  #  - Ausblick.qmd
-  #  - Literatur.qmd # Namen prüfen
+    - Bedeutung.qmd # individuell vs sozial 
+    - Wissenschaftstheorie.qmd
+    - Modelle-Rationalitaet.qmd
+    - Intertemporal.qmd
+    - Spieltheorie.qmd
+    - Maerkte.qmd
+    - Marktversagen.qmd
+    - BIP.qmd
+    - Geld.qmd
+    - Handel.qmd
+    - Ausblick.qmd
+    - literatur.qmd
+    - Uebungsaufgaben.qmd 
+
+
 
 
 bibliography: Effizienz.bib
