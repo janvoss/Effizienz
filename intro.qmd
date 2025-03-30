@@ -53,7 +53,7 @@
 ```{python Lagrange}
 #| warning: false
 #| message: false
-#| eval: false
+# #| eval: false
 
 {{< include _effizienz_nachhaltigkeit.py >}}
 
@@ -63,6 +63,15 @@
 ## Effizienz im Rahmen rationaler Entwicklung
 
 [Local Control]::
+
+```{python Lagrange}
+#| warning: false
+#| message: false
+# #| eval: false
+
+{{< include _local-control.py >}}
+
+```
 
 
 ## Der Blick in die Welt
