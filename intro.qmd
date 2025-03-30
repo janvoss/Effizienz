@@ -50,7 +50,7 @@
 
 ## Effizienz und nachhaltige Entwicklung 
 
-```{python Lagrange}
+```{python Nachhaltigkeit}
 #| warning: false
 #| message: false
 # #| eval: false
@@ -64,7 +64,7 @@
 
 [Local Control]::
 
-```{python Lagrange}
+```{python local-control}
 #| warning: false
 #| message: false
 # #| eval: false
