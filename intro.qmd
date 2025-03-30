@@ -55,7 +55,7 @@
 #| message: false
 # #| eval: false
 
-{{< include _effizienz_nachhaltigkeit.py >}}
+{{< include _effizienz-nachhaltigkeit.py >}}
 
 ```
 
