@@ -1,14 +1,4 @@
-# Bedeutung 
-
-[Hier Zusammenhang mit Nachhaltigkeit]::
-
-## Abgrenzung Effizienz und Effektivität
-
-## Effizienz und Rationalität
-
-[Detel]::
-
-[Local Control]::
+# Effizienz und Rationalität 
 
 ## Individuelles vs. gesellschaftliches Entscheidungsproblem
 
