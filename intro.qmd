@@ -53,7 +53,7 @@
 ```{python Nachhaltigkeit}
 #| warning: false
 #| message: false
-# #| eval: false
+#| eval: false
 
 from graphviz import Digraph
 from IPython.display import display
@@ -133,7 +133,7 @@ display(dot)
 ```{python local-control}
 #| warning: false
 #| message: false
-# #| eval: false
+#| eval: false
 
 {{< include _local-control.py >}}
 
