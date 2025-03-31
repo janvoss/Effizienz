@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Effiziente Nutzung knapper Ressourcen",
     "section": "",
-    "text": "Organisatorisches\n\n\n\n\n\n\n\n\\({}\\)\n\\({}\\)\n\n\n\n\n\n\n\n\n\n\nUnterlagen: https://janvoss.github.io/Effizienz/\nModul: 209-003: Effiziente Nutzung knapper Ressourcen Modulhandbuch\nWeitere Veranstaltung im ModuL: -\nPrüfungsleistung: K60",
+    "text": "\\({}\\)\n\\({}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrganisatorisches\n\n\n\n\n\n\nUnterlagen: https://janvoss.github.io/Effizienz/\nModul: 209-003: Effiziente Nutzung knapper Ressourcen (Modulhandbuch)\nWeitere Veranstaltung im ModuL: –\nPrüfungsleistung: K60",
     "crumbs": [
       "Organisatorisches"
     ]
@@ -44,7 +44,7 @@
     "href": "intro.html#effizienz-und-nachhaltige-entwicklung",
     "title": "1  Einleitung",
     "section": "1.3 Effizienz und nachhaltige Entwicklung",
-    "text": "1.3 Effizienz und nachhaltige Entwicklung\n\n\nCode\n{{&lt; include _effizienz_nachhaltigkeit.py &gt;}}",
+    "text": "1.3 Effizienz und nachhaltige Entwicklung\n\n\nCode\n# #| eval: false\n\nfrom graphviz import Digraph\nfrom IPython.display import display\n\n\ndot = Digraph()\n\n# Set common attributes for all nodes\ndot.attr('node', width='2.5', shape='none')\ndot.attr(nodesep='1.0')\n\ndot.attr(label='Effizienz und nachhaltige Entwicklung', labelloc='t', labeljust='c')\n\n# Main nodes A and B\ndot.node('A', 'Effizienz', shape='underline', labeljust='c')\ndot.node('B', 'nachhaltige Entwicklung', shape='underline', labeljust='c')\n\n# Sub-nodes under A and B with text wrapping\nsub_nodes_a = [\n    'Bestmöglicher\\l Umgang mit\\l knappen Ressourcen\\l',\n    'Präferenzen stehen\\l im Zentrum\\l',\n    'Nachhaltiger Umgang\\l mit Ressourcen endogen\\l',\n    'Neoklassik:\\l Anthropozentrisch\\l',\n    'Beinhaltet keine\\l Aussagen zur Verteilung\\l',\n    'Zeitliche Perspektive:\\l statisch vs. dynamisch\\l kurz- vs. langfristig\\l'\n]\n\nsub_nodes_b = [\n    'Langfristige\\l Nichtüberforderung\\l',\n    'Menschen: Selbst-\\l bestimmte langfristige\\l Lebensgestaltung\\l Natur: Erhalt von \\l Ökosystemen\\l',\n    'Nachhaltiger Umgang\\l mit Ressourcen postuliert\\l',\n    'Auch\\l ökosystemorientiert\\l',\n    'Beinhaltet\\l Verteilungsaussagen\\l',\n    'Zeitliche Perspektive:\\l Langfristorientierung\\l'\n]\n\n# Create sub-nodes and align them\nfor i in range(len(sub_nodes_a)):\n    a_node = f'A{i+1}'\n    b_node = f'B{i+1}'\n\n    dot.node(a_node, sub_nodes_a[i])\n    dot.node(b_node, sub_nodes_b[i])\n\n    # Positioning sub-nodes A[i] and B[i] in the same rank\n    with dot.subgraph() as s:\n        s.attr(rank='same')\n        s.node(a_node)\n        s.node(b_node)\n\n    # Invisible edges to enforce vertical alignment of sub-nodes under A and B\n    if i == 0:\n        dot.edge('A', a_node, style='invis')\n        dot.edge('B', b_node, style='invis')\n    else:\n        dot.edge(f'A{i}', a_node, style='invis')\n        dot.edge(f'B{i}', b_node, style='invis')\n\n    # Double arrows between corresponding sub-nodes\n    dot.edge(a_node, b_node, dir='both')\n\n# Render the graph (this will display the source code)\n#print(dot.source)\n\n# To render the graph to a file, use dot.render(filename='output.gv') or dot.view()\n\n# Diagramm im Notebook anzeigen\ndisplay(dot)\n\n\ndigraph {\n    node [shape=none width=2.5]\n    nodesep=1.0\n    label=\"Effizienz und nachhaltige Entwicklung\" labeljust=c labelloc=t\n    A [label=Effizienz labeljust=c shape=underline]\n    B [label=\"nachhaltige Entwicklung\" labeljust=c shape=underline]\n    A1 [label=\"Bestmöglicher\\l Umgang mit\\l knappen Ressourcen\\l\"]\n    B1 [label=\"Langfristige\\l Nichtüberforderung\\l\"]\n    {\n        rank=same\n        A1\n        B1\n    }\n    A -&gt; A1 [style=invis]\n    B -&gt; B1 [style=invis]\n    A1 -&gt; B1 [dir=both]\n    A2 [label=\"Präferenzen stehen\\l im Zentrum\\l\"]\n    B2 [label=\"Menschen: Selbst-\\l bestimmte langfristige\\l Lebensgestaltung\\l Natur: Erhalt von \\l Ökosystemen\\l\"]\n    {\n        rank=same\n        A2\n        B2\n    }\n    A1 -&gt; A2 [style=invis]\n    B1 -&gt; B2 [style=invis]\n    A2 -&gt; B2 [dir=both]\n    A3 [label=\"Nachhaltiger Umgang\\l mit Ressourcen endogen\\l\"]\n    B3 [label=\"Nachhaltiger Umgang\\l mit Ressourcen postuliert\\l\"]\n    {\n        rank=same\n        A3\n        B3\n    }\n    A2 -&gt; A3 [style=invis]\n    B2 -&gt; B3 [style=invis]\n    A3 -&gt; B3 [dir=both]\n    A4 [label=\"Neoklassik:\\l Anthropozentrisch\\l\"]\n    B4 [label=\"Auch\\l ökosystemorientiert\\l\"]\n    {\n        rank=same\n        A4\n        B4\n    }\n    A3 -&gt; A4 [style=invis]\n    B3 -&gt; B4 [style=invis]\n    A4 -&gt; B4 [dir=both]\n    A5 [label=\"Beinhaltet keine\\l Aussagen zur Verteilung\\l\"]\n    B5 [label=\"Beinhaltet\\l Verteilungsaussagen\\l\"]\n    {\n        rank=same\n        A5\n        B5\n    }\n    A4 -&gt; A5 [style=invis]\n    B4 -&gt; B5 [style=invis]\n    A5 -&gt; B5 [dir=both]\n    A6 [label=\"Zeitliche Perspektive:\\l statisch vs. dynamisch\\l kurz- vs. langfristig\\l\"]\n    B6 [label=\"Zeitliche Perspektive:\\l Langfristorientierung\\l\"]\n    {\n        rank=same\n        A6\n        B6\n    }\n    A5 -&gt; A6 [style=invis]\n    B5 -&gt; B6 [style=invis]\n    A6 -&gt; B6 [dir=both]\n}",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
     ]
@@ -54,7 +54,7 @@
     "href": "intro.html#effizienz-im-rahmen-rationaler-entwicklung",
     "title": "1  Einleitung",
     "section": "1.4 Effizienz im Rahmen rationaler Entwicklung",
-    "text": "1.4 Effizienz im Rahmen rationaler Entwicklung",
+    "text": "1.4 Effizienz im Rahmen rationaler Entwicklung\n\n\nCode\n# #| eval: false\n\nfrom graphviz import Digraph\nfrom IPython.display import display\n\n\ndot = Digraph()\n\n# Set common attributes for all nodes\n\ndot.attr('node', width='2.5', shape='box')\ndot.attr(nodesep='1.0')\ndot.attr(label='Local Control', labelloc='t', labeljust='c', fontsize='20', fontname = 'Times-Bold')\n\n# Increase the vertical distance between title and text\ndot.node('invis1', '', shape= 'none', width='0')\n\n\n# Sub-nodes with text wrapping\nsub_nodes_a = [\n    'Selbsterhaltung',\n    'Ziele setzen',\n    'Ziele verfolgen',\n    'Zugang zu Ressourcen',\n    'Effizienz',\n    'Kreativität'\n]\n\n\n# Create sub-nodes and set fontface for A3 and A4\nfor i in range(len(sub_nodes_a)):\n    a_node = f'A{i}'\n\n    if i == 3 or i == 4:\n        dot.node(a_node, sub_nodes_a[i], fontname='Times-Bold')\n    else:\n        dot.node(a_node, sub_nodes_a[i])\n\n    # Invisible edges to enforce vertical alignment of sub-nodes under A and B\n    if i &gt; 0:\n       dot.edge(f'A{i-1}', a_node, style='invis', weight='10')\n\ndot.edge('invis1', 'A0', style='invis', weight='10')\n\n# Arrows\nfor i in range(1, 5):\n    dot.edge('A5', f'A{i}')\n\nfor i in range(2, 4):\n    dot.edge('A4', f'A{i}')\n\n\ndot.node('invis', '', shape= 'none', width='0')\ndot.node('caption', label='Darstellung: Jan S. Voßwinkel in enger Anlehnung an Groviec (2022)', shape='none', width = '7', fontsize='10')\n\nwith dot.subgraph() as s:\n        s.attr(rank='same')\n        s.node('caption')\n        s.node('invis')\n\ndot.edge(f'A{len(sub_nodes_a) - 1}', 'caption', style='invis')\ndot.edge(f'A{len(sub_nodes_a) - 1}', 'invis', style='invis')\n\n\n\n# Render the graph (this will display the source code)\n# print(dot.source)\n\n# To render the graph to a file, use dot.render(filename='output.gv') or dot.view()\n#dot.render(view=True)\n\n# Diagramm im Notebook anzeigen\ndisplay(dot)\n\n\ndigraph {\n    node [shape=box width=2.5]\n    nodesep=1.0\n    fontname=\"Times-Bold\" fontsize=20 label=\"Local Control\" labeljust=c labelloc=t\n    invis1 [label=\"\" shape=none width=0]\n    A0 [label=Selbsterhaltung]\n    A1 [label=\"Ziele setzen\"]\n    A0 -&gt; A1 [style=invis weight=10]\n    A2 [label=\"Ziele verfolgen\"]\n    A1 -&gt; A2 [style=invis weight=10]\n    A3 [label=\"Zugang zu Ressourcen\" fontname=\"Times-Bold\"]\n    A2 -&gt; A3 [style=invis weight=10]\n    A4 [label=Effizienz fontname=\"Times-Bold\"]\n    A3 -&gt; A4 [style=invis weight=10]\n    A5 [label=\"Kreativität\"]\n    A4 -&gt; A5 [style=invis weight=10]\n    invis1 -&gt; A0 [style=invis weight=10]\n    A5 -&gt; A1\n    A5 -&gt; A2\n    A5 -&gt; A3\n    A5 -&gt; A4\n    A4 -&gt; A2\n    A4 -&gt; A3\n    invis [label=\"\" shape=none width=0]\n    caption [label=\"Darstellung: Jan S. Voßwinkel in enger Anlehnung an Groviec (2022)\" fontsize=10 shape=none width=7]\n    {\n        rank=same\n        caption\n        invis\n    }\n    A5 -&gt; caption [style=invis]\n    A5 -&gt; invis [style=invis]\n}",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
     ]
@@ -67,6 +67,156 @@
     "text": "1.5 Der Blick in die Welt\nDaten von Our World in Data zu (realem) BIP pro Kopf, Lebenserwartung, Gini-Index, Bevölkerungsgröße\n\n1.5.1 BIP pro Kopf vs. Lebenserwartung\n\n\n\n\n\n\n\n\n1.5.2 BIP pro Kopf im Zeitverlauf",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Einleitung</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html",
+    "href": "Zukunft.html",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "",
+    "text": "2.1 Begriff",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#begriff",
+    "href": "Zukunft.html#begriff",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "",
+    "text": "Zukunft bezeichnet noch kommende zeitliche Perioden\nZeit ordnet Perioden in eine Reihenfolge\nEinzelne Perioden hängen zusammen\nZukunft ist aber nicht völlig determiniert",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#vergangenheit-gegenwart-und-zukunft",
+    "href": "Zukunft.html#vergangenheit-gegenwart-und-zukunft",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "2.2 Vergangenheit, Gegenwart und Zukunft",
+    "text": "2.2 Vergangenheit, Gegenwart und Zukunft\n\nDie Vergangenheit war einmal eine/die Zukunft\nBlick in die Vergangenheit offenbart, wie Vergangenheit, Gegenwart und Zukunft zusammenhingen\nArbeitshypothese: Vielleicht besteht dieser Zusammenhang fort\n\n\n\nCode\n# knitr::opts_chunk$set(dev = 'svg') # set output device to svg\n\n\nlibrary(tidyverse) \nlibrary(eurostat)\n\nmydata &lt;- get_eurostat(\"nama_10_gdp\",\n                       type = \"label\",\n                       time_format = \"num\",\n                       select_time=\"Y\",\n                       cache = T\n) %&gt;%\n  filter(na_item ==\"Gross domestic product at market prices\",\n         unit ==\"Chain linked volumes (2015), million euro\",\n         geo==c(\"Germany\")\n         )\n\n\n\nindexed 0B in  0s, 0B/s\nindexed 2.15GB in  0s, 2.15GB/s\n                                                                              \n\n\nCode\nmodel1 &lt;- lm(values ~ TIME_PERIOD + I(TIME_PERIOD^2), data=mydata)\n\noptions(scipen=999)\n#summary(model1)\n\ntemp_var &lt;- predict(model1, interval=\"prediction\")\n\nmydata &lt;- cbind(mydata, temp_var)\n\n\n\n\nCode\nlibrary(tidyverse)\n\nmydata_short &lt;- mydata %&gt;% select(TIME_PERIOD, values, fit, lwr, upr)\n\ndf &lt;- data.frame(seq(2022, 2060, 1), NA, NA, NA, NA)\nnames(df) &lt;- c(\"TIME_PERIOD\", \"values\", \"fit\", \"lwr\", \"upr\" )\n\nmydata_extended &lt;- rbind(mydata_short, df)\n\noptions(scipen = 999)\n\np &lt;- mydata_extended %&gt;%\n    ggplot(aes(TIME_PERIOD, values))+\n   # xlim(1990, 2021)+\n    geom_point()+\n   # geom_line() +\n    geom_smooth(method = 'lm', \n                formula = y ~ x+ I(x^2),\n                fullrange=T,\n    #            color=\"red\"\n                )+\n   # geom_smooth(method = 'lm',\n   #             fullrange=T\n  #  )+\n  geom_vline(xintercept=2023,linetype = \"dashed\" )+\ngeom_line(aes(y=lwr), color = \"red\", linetype = \"dashed\")+\ngeom_line(aes(y=upr), color = \"red\", linetype = \"dashed\")+\n    annotate(\"text\", x=2000, y=4500000, label=\"Vergangenheit\", color=\"grey30\")+\n  annotate(\"text\", x=2035, y=4500000, label=\"Zukunft\", color=\"grey30\")+\n  theme_classic() +\n    scale_x_continuous(breaks = 2023,\n                     labels = \"Gegenwart\") +\n      scale_y_continuous(#expand = c(0, 0), \n                     breaks = NULL) +\n  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+\n  labs(#fill=\"Index\",\n       title=\"Prognoseunsicherheit\",\n       x=\"Zeit\", y='Werte',\n       caption = paste('Illustration: Jan S. Voßwinkel, 2024'))\n\n\n\np2 &lt;- mydata_extended %&gt;%\n    ggplot(aes(TIME_PERIOD, values))+\n   # xlim(1990, 2021)+\n    geom_point()+\n   # geom_line() +\n    geom_smooth(method = 'lm', \n                formula = y ~ x+ I(x^2),\n                fullrange=F,\n    #            color=\"red\"\n                )+\n   # geom_smooth(method = 'lm',\n   #             fullrange=T\n  #  )+\n  geom_vline(xintercept=2023,linetype = \"dashed\" )+\ngeom_line(aes(y=lwr), color = \"red\", linetype = \"dashed\")+\ngeom_line(aes(y=upr), color = \"red\", linetype = \"dashed\")+\n    annotate(\"text\", x=2000, y=4500000, label=\"Vergangenheit\", color=\"grey30\")+\n  annotate(\"text\", x=2035, y=4500000, label=\"Zukunft\", color=\"grey30\")+\n  theme_classic() +\n    scale_x_continuous(breaks = 2023,\n                     labels = \"Gegenwart\") +\n      scale_y_continuous(#expand = c(0, 0), \n                     breaks = NULL) +\n  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+\n  labs(#fill=\"Index\",\n       title=\"Prognoseunsicherheit\",\n       #subtitle= \"Anteil am BIP, 2020\",\n       x=\"Zeit\", y='Werte',\n       caption = paste('Illustration: Jan S. Voßwinkel, 2024'))\n\n\n\n\nCode\np +\n  coord_cartesian(xlim = c(1990, 2023), ylim=c(min(mydata$values), max(mydata$values)))\n\n\n\n\n\n\n\n\n\n\nBeobachtungen der Vergangenheit\nRegelmäßiger Prozess\nErkennbarer Trend\n\n\n\nCode\np2\n\n\n\n\n\n\n\n\n\n\nWie geht es weiter?\n\n\n\nCode\np",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#unterschiedliche-modelle-zeitlicher-verläufe",
+    "href": "Zukunft.html#unterschiedliche-modelle-zeitlicher-verläufe",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "2.3 Unterschiedliche Modelle zeitlicher Verläufe",
+    "text": "2.3 Unterschiedliche Modelle zeitlicher Verläufe\n\n2.3.1 Zukunft hängt von der Gegenwart ab\n\n\\(x_t=f(x_{t-1})+e_t\\)\n\n\n\n2.3.2 Zukunft hängt nur von der Zeit ab\n\n\\(x_t=\\beta_0+ f(t)+e_t\\)\n\n\\(\\rightarrow\\) Ansatzpunkte zur Gestaltung der Zukunft:\n\nDer funktionale Zusammenhang \\(f(\\cdot)\\)\nDie Gegenwart\nNicht: Der Störterm\n\n\n\n2.3.3 Zwischenfazit\n\nDie Zukunft ist ungewiss\nSelbst bei Fortschreibung der Gegenwart hohe Unsicherheit in fernerer Zukunft\nNoch höhere Unsicherheit bei Strukturbrüchen\nZukunft hängt ab von\n\neigenen Entscheidungen und\nEntscheidungen anderer\n\n\n\\(\\rightarrow\\) Ökonomische Analyse sozialer Phänomene\n\n\n2.3.4 Teile der Zukunft sind bereits vergangen\n\n\nCode\nlibrary(tidyverse)\n\n# Funktionen definieren\n  \n  x &lt;- -3:3\n  \n  Grenze_oben &lt;- function(x) x\n  Grenze_unten &lt;- function(x) -x\n  \n  Grenze_oben1 &lt;- function(x) -.5+x\n  Grenze_unten1 &lt;- function(x) -1.5-x\n  \n  z  &lt;- seq(-1, 0, 0.01)\n  z1  &lt;- seq(-.5, .7, 0.01)\n  \n  # Grafik\n  \n  ggplot()+\n    annotate(\"point\", x=0, y=0)+\n    \n    annotate(\"segment\", x=0, xend=0, y=-2.2, yend=1, linetype=\"dashed\")+\n   # stat_function(fun = Grenze_oben, xlim = c(0, 1))+\n  #  stat_function(fun = Grenze_unten, xlim = c(0, 1))+\n    geom_ribbon(aes(x = z, ymin = Grenze_unten(z), ymax = Grenze_oben(z)), alpha = 0.25) +\n    annotate(\"point\", x=-.5, y=-1)+\n    geom_ribbon(aes(x = z1, ymin = Grenze_unten1(z1), ymax = Grenze_oben1(z1)), alpha = 0.25) +\n    annotate(\"segment\", x=0, xend = .5, y=0, yend = 0, linetype=\"dashed\")+\n    \n    geom_segment(aes(x = -.5, y = -1, xend = .5, yend = 0), size=.8,\n                 arrow = arrow(length = unit(0.2, \"cm\")))+\n    annotate(\"segment\", x=.5, xend = .5, y=-2.2, yend=1, linetype=\"dashed\")+\n    annotate(\"segment\", x=-.5, xend = -.5, y=-2.2, yend=1, linetype=\"dashed\")+\n    scale_x_continuous(breaks = c(-.5, 0, .5),\n                       labels = expression(\"t\"[-1], \"t\"[0], \"t\"[1]))+\n    scale_y_continuous(breaks = NULL)+\n    theme_classic()+\n    theme(panel.grid = element_blank()) +\n    theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+\n    labs(title=\"Welche Information beeinflusst die Gegenwart\",\n         caption=\"Darstellung: Jan S. Voßwinkel\",\n         x = \"Zeit\", y = \"Position\", \n         color=\"\",\n         fill=\"\")\n\n\n\n\n\n\n\n\n\n\\(\\rightarrow\\) Teile der Zukunft sind nicht mehr änderbar",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#prognose-und-freiheit",
+    "href": "Zukunft.html#prognose-und-freiheit",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "2.4 Prognose und Freiheit",
+    "text": "2.4 Prognose und Freiheit\n\nPassen Vorhersehbarkeit und Willensfreiheit zusammen?\nIndividuelles Verhalten ist oft je nach Situation gut vorhersehbar (z.B. Straßenverkehr)\nSoziale Phänomene hängen oft nicht stark von individuellem Verhalten ab sondern vom Zusammenspiel vieler Entscheidungen (manchmal geben aber auch Individuen den Ausschlag)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#zur-planbarkeit-sozialer-phänomene",
+    "href": "Zukunft.html#zur-planbarkeit-sozialer-phänomene",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "2.5 Zur Planbarkeit sozialer Phänomene",
+    "text": "2.5 Zur Planbarkeit sozialer Phänomene\n\nDie Zukunft ist (in Teilen) gestaltbar\nGestaltbarkeit aber nicht beliebig: Gesellschaftliche Prozesse lassen sich nicht beliebig formen",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Zukunft.html#revolution-vs-reform",
+    "href": "Zukunft.html#revolution-vs-reform",
+    "title": "2  Zeit, Zukunft und Unsicherheit",
+    "section": "2.6 Revolution vs Reform",
+    "text": "2.6 Revolution vs Reform\n\nRevolution bedeutet das Verlassen des Rahmens, für den man (einigermaßen) verstanden hat.\nReformen bedeuten, dass man innerhalb eines gegebenen Rahmens Veränderungen vornimmt.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Zeit, Zukunft und Unsicherheit</span>"
+    ]
+  },
+  {
+    "objectID": "Bedeutung.html",
+    "href": "Bedeutung.html",
+    "title": "3  Effizienz und Rationalität",
+    "section": "",
+    "text": "3.1 Individuelles vs. gesellschaftliches Entscheidungsproblem",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Bedeutung.html#individuelles-vs.-gesellschaftliches-entscheidungsproblem",
+    "href": "Bedeutung.html#individuelles-vs.-gesellschaftliches-entscheidungsproblem",
+    "title": "3  Effizienz und Rationalität",
+    "section": "",
+    "text": "3.1.1 Individuelles Entscheidungsproblem\n\n\n3.1.2 Gesellschaftliches Entscheidungsproblem\n\n3.1.2.1 Pareto-Verbesserungen und Pareto-Effizienz\n\n\n3.1.2.2 Auswahl zwischen verschiedenen effizienten Zuständen",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Modelle-Rationalitaet.html",
+    "href": "Modelle-Rationalitaet.html",
+    "title": "5  Modelle und Rationalität",
+    "section": "",
+    "text": "5.1 Modelle",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Modelle und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Modelle-Rationalitaet.html#rationalität",
+    "href": "Modelle-Rationalitaet.html#rationalität",
+    "title": "5  Modelle und Rationalität",
+    "section": "5.2 Rationalität",
+    "text": "5.2 Rationalität",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Modelle und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Intertemporal.html",
+    "href": "Intertemporal.html",
+    "title": "6  Intertemporale Effizienz",
+    "section": "",
+    "text": "6.1 Das Problem",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Intertemporale Effizienz</span>"
+    ]
+  },
+  {
+    "objectID": "Intertemporal.html#zwei-perioden-modell",
+    "href": "Intertemporal.html#zwei-perioden-modell",
+    "title": "6  Intertemporale Effizienz",
+    "section": "6.2 Zwei-Perioden-Modell",
+    "text": "6.2 Zwei-Perioden-Modell\n\n\nCode\nfrom sympy import Eq, symbols, solve, diff, lambdify, Rational, latex, log\nfrom lets_plot import *\nimport numpy as np  # Import NumPy\n\n# Setup Lets-Plot for HTML output\nLetsPlot.setup_html()\n\n# Define symbols\nX, alpha, i, g, x1, x2, U, lambda_ = symbols('X alpha i g x1 x2 U lambda_')\n\n# Given values for substitution\ngiven_values = {alpha: .5, i: .1, g: .05, X: 100}\n\n# Define utility function\nUtility = Eq(U, log(x1) + 1 / (1 + i) * log(x2)).subs(given_values)\n\n# Define budget constraint\nbudget = Eq(x2, (X - x1) * (1 + g)).subs(given_values)\n\n# Lagrange function\nL = Utility.rhs + lambda_ * (budget.lhs - budget.rhs)\n\n# Solve for optimal values\nsolutions = solve((diff(L, x1), diff(L, x2), diff(L, lambda_)), (x1, x2, lambda_), dict=True)\n\n# Substitute solution into utility function\nU_opt = Utility.rhs.subs(solutions[0])\n\n# Extract optimal values of x1 and x2\nx1_opt = float(solutions[0][x1])\nx2_opt = float(solutions[0][x2])\n\n# Budget line endpoints\nx1_budget = float(given_values[X])  # Maximum value of x1\nx2_budget = float(given_values[X] * (1 + given_values[g]))  # Maximum value of x2\n\n# Indifference curve utility levels\nU_values = [float(U_opt) - 1, float(U_opt), float(U_opt) + 1]\ncolors = ['blue', 'green', 'blue']\n\n# Budget line function\nbudget_line = lambdify(x1, solve(budget, x2)[0].subs(given_values))\n\n# Generate x-values for plotting\nx_values = np.arange(0.01, x1_budget + 0.5, 0.1)\ndata = {'x': x_values.tolist()}\n\n# Plotting with Lets-Plot\np = ggplot() + \\\n    geom_function(aes('x'), data=data,\n                  fun=lambda t: budget_line(t), color='red')\n\nfor idx, u in enumerate(U_values):\n    Indifference_curve = solve(Utility.subs(U, u), x2)[0]\n    Ind_graph = lambdify(x1, Indifference_curve)\n    p += geom_function(aes('x'), data=data,\n                       fun=lambda t: Ind_graph(t), color=colors[idx], size=1) + \\\n         geom_text(x=x1_budget + 0.5,\n                   y=Ind_graph(x1_budget),\n                   label=f\"U={round(u, 2)}\")\n\np += geom_segment(x=x1_opt, y=0,\n                  xend=x1_opt, yend=x2_opt,\n                  linetype='dashed', size=0.5) + \\\n     geom_segment(x=0, y=x2_opt,\n                  xend=x1_opt, yend=x2_opt,\n                  linetype='dashed', size=0.5) + \\\n     geom_point(x=x1_opt, y=x2_opt) + \\\n     labs(title='Intertemporale Konsumoptimierung im Zwei-Perioden-Model',\n          x=r'\\(x_0\\)',\n          y=r'\\(x_1\\)',\n          caption='Abbildung: Jan S. Voßwinkel') + \\\n     coord_cartesian(xlim=[0, x1_budget + 5.\n], ylim=[0, x2_budget + 10]) + \\\n     scale_x_continuous(breaks=[0, round(x1_opt, 2), round(x1_budget)]) + \\\n     scale_y_continuous(breaks=[0, round(x2_opt, 2), round(x2_budget)]) + \\\n     theme_light()\n\n# Display the plot\np.show()",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Intertemporale Effizienz</span>"
+    ]
+  },
+  {
+    "objectID": "Intertemporal.html#unendlicher-planungshorizont",
+    "href": "Intertemporal.html#unendlicher-planungshorizont",
+    "title": "6  Intertemporale Effizienz",
+    "section": "6.3 Unendlicher Planungshorizont",
+    "text": "6.3 Unendlicher Planungshorizont\n\n6.3.1 Diskrete Zeit\n\n\n6.3.2 Kontinuierliche Zeit",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Intertemporale Effizienz</span>"
+    ]
+  },
+  {
+    "objectID": "literatur.html",
+    "href": "literatur.html",
+    "title": "Literatur",
+    "section": "",
+    "text": "Acemoğlu, Daron, and James A. Robinson. 2015. “The Rise and Decline of General Laws of Capitalism.” Journal of Economic Perspectives 29: 3–28.\n\n\nAllen, Robert C. 2015. Geschichte der Weltwirtschaft. Stuttgart.\n\n\nAthey, Susan, and Michael Luca. 2019. “Economists (and Economics) in Tech Companies.” Journal of Economic Perspectives 33 (1): 209–30.\n\n\nBackhaus, Jürgen. 2012. Handbook of the History of Economic Thought: Insights on the Founders of Modern Economics. New York Dordrecht Heidelberg London.\n\n\nBaßeler, Ulrich, Jürgen Heinrich, and Burkhard Utecht. 2010. Grundlagen und Probleme der Volkswirtschaft. Stuttgart.\n\n\nBlaug, M. 2001. “Is Competition Such a Good Thing? Static Efficiency Versus Dynamic Efficiency.” Review of Industrial Organization 19 (1): 37–48.\n\n\nBlum, Ulrich. 2016. Grundlagen der Volkswirtschaftslehre. Oldenburg.\n\n\nChang, Ha-Joon. 2014. Economics: The User’s Guide. London.\n\n\nConrad, Christian A. 2016. Wirtschaftsethik. Wiesbaden: Springer Fachmedien. https://doi.org/10.1007/978-3-658-12403-8.\n\n\nCore Project. 2016. The Economy. www.core-econ.org.\n\n\nDetel, Wolfgang. 2007. Grundkurs Philosophie. Band 5: Philosophie des Sozialen. Stuttgart.\n\n\n———. 2008. Grundkurs Philosophie Band 4: Erkenntnis- und Wissenschaftstheorie. Stuttgart.\n\n\nDeutsche Bundesbank. 2017. “Die Rolle von Banken, Nichtbanken Und Zentralbank Im Geldschöpfungsprozess.” Deutsche Bundesbank, Monatsbericht April: 15–36.\n\n\nGoolsbee, Austan, Steven Levitt, and Chad Syverson. 2013. Microeconomics. New York.\n\n\nHall, Joshua, ed. 2014. Homer Economicus. The Simpsons and Economics. Stanford, California.\n\n\nHealy, Kieran. 2017. “Fuck Nuance.” Sociological Theory 35 (2): 118–27. https://doi.org/10.1177/0735275117709046.\n\n\nHeidbrink, Ludger, Alexander Lorch, and Verena Rauen, eds. 2021. Handbuch Wirtschaftsphilosophie III: Praktische Wirtschaftsphilosophie. Wiesbaden: Springer Fachmedien. https://doi.org/10.1007/978-3-658-22107-2.\n\n\nKlein, Grady, and Yoram Bauman. 2010. The Cartoon Introduction to Economics. Volume One: Microeconomics. New York.\n\n\nMankiw, N. Gregory, and Mark P. Taylor. 2018. Grundzüge der Volkswirtschaftslehre. Stuttgart.\n\n\nRead, Leonard E. 1958. “I, Pencil: My Family Tree as Told to Leonard e.” Read Http://Www. Econlib. Org/Library/Essays/rdPncl1.html.\n\n\nSauer, Hanno. 2022. “The End of History.” Inquiry, 1–25. https://doi.org/10.1080/0020174X.2022.2124542.\n\n\n———. 2023. “The Ends of History: A Reply to Sauer.” Inquiry, 1–11. https://doi.org/10.1080/0020174X.2023.2190771.\n\n\nSchmidt, Christoph M. 2014. “Wirkungstreffer erzielen - Die Rolle der evidenzbasierten Politikberatung in einer aufgeklärten Gesellschaft.” Perspektiven der Wirtschaftspolitik 15: 219–33.\n\n\nSchneider, Dieter. 2011. Betriebswirtschaftslehre als Einzelwirtschaftstheorie der Institutionen. Wiesbaden.\n\n\nSell, Friedrich L. 2020. “Wahrnehmung und Wirklichkeit in der Volkswirtschaftslehre.” ORDO 71 (1): 63–89. https://doi.org/10.1515/ordo-2021-0003.\n\n\nSellenthin, Mark. 2022. Volkswirtschaftslehre – mathematisch gedacht. Wiesbaden: Springer Fachmedien. https://doi.org/10.1007/978-3-658-36071-9.\n\n\nVoigt, Stefan. 2009. Institutionenökonomik. München.",
+    "crumbs": [
+      "Literatur"
     ]
   }
 ]
