@@ -1,0 +1,17 @@
+# Effizienz und Rationalität 
+
+## Individuelles vs. gesellschaftliches Entscheidungsproblem
+
+### Individuelles Entscheidungsproblem
+
+[Maximierung einer Nutzenfunktion]::
+
+### Gesellschaftliches Entscheidungsproblem
+
+#### Pareto-Verbesserungen und Pareto-Effizienz
+
+[Edgeworth]::
+
+[Hier auch potenzielle Pareto-Verbesserungen]::
+
+#### Auswahl zwischen verschiedenen effizienten Zuständen

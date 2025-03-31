@@ -1,0 +1,31 @@
+
+```{r qr,  echo=FALSE, warning=FALSE}
+library(qrcode)
+
+qr <- qr_code('https://janvoss.github.io/Effizienz/')
+#plot(qr)
+
+generate_svg(qr, filename = "qr-titel.svg")
+
+```
+
+|       ${}$        |  ${}$  |
+|:-----------------:|:--------------------------------------------------:|
+| ![logo](logo.png) |    ![](qr-titel.svg){width="30%"}              |
+
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+
+# Organisatorisches {.unnumbered}
+
+- Unterlagen: <https://janvoss.github.io/Effizienz/>
+
+- Modul: 209-003: Effiziente Nutzung knapper Ressourcen ([Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf))
+
+- Weitere Veranstaltung im ModuL: --
+
+- Prüfungsleistung: K60
+
+:::

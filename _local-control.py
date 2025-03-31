@@ -68,3 +68,5 @@ dot.edge(f'A{len(sub_nodes_a) - 1}', 'invis', style='invis')
 # To render the graph to a file, use dot.render(filename='output.gv') or dot.view()
 #dot.render(view=True)
 
+# Diagramm im Notebook anzeigen
+display(dot)
