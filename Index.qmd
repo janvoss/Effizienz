@@ -8,7 +8,7 @@ qr <- qr_code('https://janvoss.github.io/Effizienz/')
 generate_svg(qr, filename = "qr-titel.svg")
 
 ```
-
+ 
 |       ${}$        |  ${}$  |
 |:-----------------:|:--------------------------------------------------:|
 | ![logo](logo.png) |    ![](qr-titel.svg){width="30%"}              |
