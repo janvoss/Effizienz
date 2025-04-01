@@ -1,0 +1,67 @@
+digraph {
+	node [shape=none width=2.5]
+	nodesep=1.0
+	label="Effizienz und nachhaltige Entwicklung" labeljust=c labelloc=t
+	A [label=Effizienz labeljust=c shape=underline]
+	B [label="nachhaltige Entwicklung" labeljust=c shape=underline]
+	A1 [label="Bestmöglicher\l Umgang mit\l knappen Ressourcen\l"]
+	B1 [label="Langfristige\l Nichtüberforderung\l"]
+	{
+		rank=same
+		A1
+		B1
+	}
+	A -> A1 [style=invis]
+	B -> B1 [style=invis]
+	A1 -> B1 [dir=both]
+	A2 [label="Präferenzen stehen\l im Zentrum\l"]
+	B2 [label="Menschen: Selbst-\l bestimmte langfristige\l Lebensgestaltung\l Natur: Erhalt von \l Ökosystemen\l"]
+	{
+		rank=same
+		A2
+		B2
+	}
+	A1 -> A2 [style=invis]
+	B1 -> B2 [style=invis]
+	A2 -> B2 [dir=both]
+	A3 [label="Nachhaltiger Umgang\l mit Ressourcen endogen\l"]
+	B3 [label="Nachhaltiger Umgang\l mit Ressourcen postuliert\l"]
+	{
+		rank=same
+		A3
+		B3
+	}
+	A2 -> A3 [style=invis]
+	B2 -> B3 [style=invis]
+	A3 -> B3 [dir=both]
+	A4 [label="Neoklassik:\l Anthropozentrisch\l"]
+	B4 [label="Auch\l ökosystemorientiert\l"]
+	{
+		rank=same
+		A4
+		B4
+	}
+	A3 -> A4 [style=invis]
+	B3 -> B4 [style=invis]
+	A4 -> B4 [dir=both]
+	A5 [label="Beinhaltet keine\l Aussagen zur Verteilung\l"]
+	B5 [label="Beinhaltet\l Verteilungsaussagen\l"]
+	{
+		rank=same
+		A5
+		B5
+	}
+	A4 -> A5 [style=invis]
+	B4 -> B5 [style=invis]
+	A5 -> B5 [dir=both]
+	A6 [label="Zeitliche Perspektive:\l statisch vs. dynamisch\l kurz- vs. langfristig\l"]
+	B6 [label="Zeitliche Perspektive:\l Langfristorientierung\l"]
+	{
+		rank=same
+		A6
+		B6
+	}
+	A5 -> A6 [style=invis]
+	B5 -> B6 [style=invis]
+	A6 -> B6 [dir=both]
+}

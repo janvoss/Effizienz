@@ -50,14 +50,14 @@
 
 ## Effizienz und nachhaltige Entwicklung 
 
-```{python Nachhaltigkeit}
+```{python}
 #| warning: false
 #| message: false
-#| eval: false
+##| output: asis
+##| #| include: false
 
 from graphviz import Digraph
 from IPython.display import display
-
 
 dot = Digraph()
 
@@ -115,16 +115,17 @@ for i in range(len(sub_nodes_a)):
     # Double arrows between corresponding sub-nodes
     dot.edge(a_node, b_node, dir='both')
 
-# Render the graph (this will display the source code)
-#print(dot.source)
-
-# To render the graph to a file, use dot.render(filename='output.gv') or dot.view()
 
 # Diagramm im Notebook anzeigen
-display(dot)
+#display(dot)
 
+#Datei erzeugen 
+dot.format = 'svg'  # Format setzen
+dot.render(filename='nachhaltigkeit', cleanup=True)  # Erzeugt output.svg
 ```
 
+
+![Effizienz und nachhhaltige Entwicklung](nachhaltigkeit.svg)
 
 ## Effizienz im Rahmen rationaler Entwicklung
 
@@ -133,12 +134,14 @@ display(dot)
 ```{python local-control}
 #| warning: false
 #| message: false
-#| eval: false
+#| eval: true
+#| include: false
 
 {{< include _local-control.py >}}
 
 ```
 
+![](local-control.svg)
 
 ## Der Blick in die Welt
 

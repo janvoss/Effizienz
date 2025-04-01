@@ -69,4 +69,7 @@ dot.edge(f'A{len(sub_nodes_a) - 1}', 'invis', style='invis')
 #dot.render(view=True)
 
 # Diagramm im Notebook anzeigen
-display(dot)
+# display(dot)
+
+dot.format = 'svg'  # Format setzen
+dot.render(filename='local-control', cleanup=True)  # Erzeugt output.svg
