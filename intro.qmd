@@ -50,11 +50,10 @@
 
 ## Effizienz und nachhaltige Entwicklung 
 
-```{python}
+```{python Nachhaltigkeit}
 #| warning: false
 #| message: false
-##| output: asis
-##| #| include: false
+#| include: false
 
 from graphviz import Digraph
 from IPython.display import display
