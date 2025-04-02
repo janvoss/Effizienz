@@ -23,7 +23,10 @@
 
 -   Arbeitshypothese: Vielleicht besteht dieser Zusammenhang fort
 
-```{r echo=T, message=F, warning=F, cache=T, cache.comments=FALSE}
+```{r}
+#| message: false
+#| warning: false
+#| include: false
 
 # knitr::opts_chunk$set(dev = 'svg') # set output device to svg
 
