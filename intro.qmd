@@ -255,7 +255,7 @@ p1
 
 ### BIP pro Kopf im Zeitverlauf
 
-```{r echo=F, warning=F, message=F, cache=F}
+```{r echo=T, warning=F, message=F, cache=F}
 
 library(quantreg)
 
@@ -294,132 +294,10 @@ p1
 
 
 
-```{r echo=F, message=F, warning=F, cache=F, eval=F}
+## Bedeutung der Effizienz für Zukunftsherausforderungen
 
+- Effizienz ist nicht (länger) eine nur wünschenswerte (aber auch verzichtbare) Forderung
 
-### BIP pro Kopf 1990 vs. 2019
+- In Anbetracht begrenzter Ressourcen und begrenzter Kapazität der Atmosphäre ist **Effizienz** eine **notwendige Bedingung für künftigen Wohlstand** 
 
-#GDPPC einst und jetzt
-
-
-# neue Tabelle
-
-
-
-
-df1 <- df %>% 
-  filter(Year==1990) %>% 
-  select(Entity, Code, `GDP per capita`) %>% 
-  rename(GDPPC1990 = `GDP per capita`)
-
-df2 <- df %>% 
-  filter(year==2019) %>% 
-  select(entity, code, `GDP per capita`, Population, `Gini coefficient`) %>% 
-  rename(GDPPC2019 = `GDP per capita`)
-
-df3 <- df1 %>% 
-  left_join(df2)
-
-p <- df3 %>% 
-   filter(is.na(code)==F,
-         entity !="World")%>%
-  ggplot(aes(x=GDPPC1990,
-             y=GDPPC2019,
-             group=entity))+
-  scale_x_continuous(labels= function(x) format(x,scientific = F) , 
-                     trans = "log10"
-  )+
-  scale_y_continuous(labels= function(x) format(x,scientific = F) ,
-                        trans="log10"
-  )+
-  scale_color_distiller(palette='Spectral')+
-  geom_point(
-    aes(color=`Gini coefficient`, 
-      size=Population #, frame=year
-      )
-  )+
-  geom_smooth(aes(group=NULL, weight=Population))+
-  geom_abline(slope = 1,
-              intercept = 0,
-              color="red")+
-  labs(title="BIP pro Kopf 1990 vs. 2019",
-       #subtitle= expression('2020=100'),
-       x="BIP pro Kopf 1990",
-       y='BIP pro Kopf 2019',
-       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
-  )
-
-# p
-
-p1 <- ggplotly(p)%>%
-  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
-         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
-                            xref='paper', yref='paper', showarrow = F, 
-                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
-                            font = list(size = 11)))
-
-p1
-``` 
-
-
-[### Gini-Index 1990 vs. Gini-Index 2019]::
-
-```{r echo=F, message=F, warning=F, cache=F, eval=F}
-
-#Gini einst und jetzt
-
-
-# neue Tabelle
-
-df1 <- df %>% 
-  filter(year==1990) %>% 
-  select(entity, code, `Gini coefficient`) %>% 
-  rename(Gini1990 = `Gini coefficient`)
-
-df2 <- df %>% 
-  filter(year==2019) %>% 
-  select(entity, code, `Gini coefficient`, Population, `GDP per capita`) %>% 
-  rename(Gini2019 = `Gini coefficient`)
-
-df3 <- df1 %>% 
-  left_join(df2)
-
-p <- df3 %>% 
-  filter(is.na(code)==F,
-         entity !="World")%>%
-  ggplot(aes(x=Gini1990,
-             y=Gini2019,
-             group=entity))+
-  scale_x_continuous(labels= function(x) format(x,scientific = F) #, 
-                    # trans = "log10"
-  )+
-  scale_y_continuous(labels= function(x) format(x,scientific = F) #,
-                    # trans="log10"
-  )+
-  scale_color_distiller(palette='Spectral')+
-  geom_point(
-    aes(color=`GDP per capita`, size=Population #, frame=year
-        )
-  )+
-  geom_smooth(aes(group=NULL, weight=Population))+
-  geom_abline(slope = 1,
-              intercept = 0,
-              color="red")+
-  labs(title="Gini-Index 1990 vs. 2019",
-       #subtitle= expression('2020=100'),
-       x="Gini-Index 1990",
-       y='Gini-Index 2019 ',
-       caption = paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " ")
-  )
-
-# p
-
-p1 <- ggplotly(p)%>%
-  layout(margin = list(l = 50, r = 50, b = 100, t = 50),
-         annotations = list(x = 1, y = -0.3, text =  paste('Abbildung: Jan S. Voßwinkel; Daten: Our World in Data, Datenabruf:', Sys.Date(), sep = " "),
-                            xref='paper', yref='paper', showarrow = F, 
-                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
-                            font = list(size = 11)))
-
-p1
-```
+- Jeder Zuwachs der Verfügung über Ressourcen muss sich aus Effizienzsteigerungen speisen
