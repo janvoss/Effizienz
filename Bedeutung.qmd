@@ -89,7 +89,7 @@ p
 
 Das Folgende ist fast wörtlich aus @detel_grundkurs_2007 S. 20 übernommen.
 
-## Basisschema der Handlungserklärung
+#### Basisschema der Handlungserklärung
 
 1. Person $S$ wünscht, Ziel $Z$ zu realisieren.
 
@@ -111,7 +111,7 @@ nicht vereinbar sind?
 $\Rightarrow$ **erweitertes Schema der Handlungserklärung**
 
 
-## Erweitertes Schema der Handlungserklärung
+#### Erweitertes Schema der Handlungserklärung
 
 1. $S$ hat die Absicht, Ziel $Z$ zu realisieren.
 
@@ -134,7 +134,7 @@ sie $Z$ gegenüber vorzieht.
 
 7. **$S$ vollzieht Handlung $H$.**
 
-## Zwischenfazit
+#### Zwischenfazit
 
 - Erklärungen rationaler Handlungen unterstellen nicht zwangsläufig,
 dass die handelnde Person "alles richtig"  macht. 
@@ -147,6 +147,7 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
   - Schwerpunkt **Spieltheorie**: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler  
   - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
 
+#### Nutzenmaximierung unter Nebenbedingungen
 
 [Maximierung einer Nutzenfunktion]::
 
