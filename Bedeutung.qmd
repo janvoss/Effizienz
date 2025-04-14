@@ -83,6 +83,28 @@ p
   - Beschränkung (zunächst) auf Zusammenhänge, von denen man annimmt, dass sie stark sind  
   - dann ggf sukzessive Aufnahme weiterer Zusammenhänge
 
+## Typische Grundannahmen in ökonomischen Modellen
+
+
+
+- **Methodologischer Individualismus**   	&bdquo;[A]lle sozialen Phänomene, insbesondere das Funktionieren der sozialen Institutionen [sollten] immer als das Resultat der Entscheidungen, Handlungen, Einstellungen menschlicher Individuen verstanden werden und (...) wir [dürfen] nie mit einer Erklärung aufgrund sogenannter 'Kollektive' (Staaten, Nationen, Rassen usw.) zufrieden sein.&ldquo; (Karl Popper 1992, S. 116)
+
+- **Normativer Individualismus **Die Ziele keines einzigen Menschen sind a priori wichtiger als die irgendeines anderen Menschen. Ausschließlich Individuen und alle Individuen sind Quelle von Werten.
+
+- **Rationalität** der handelnden Subjekte wird unterstellt (Verknüpfung
+von Situation und Handlung möglich)
+
+- **Präferenzen** werden als **gegeben** angenommen 
+
+- **Veränderliche Restriktionen** bestimmen folglich Ergebnisse
+
+
+## Twitter-Universität: Methodologischer Individualismus und sonstigen Annahmen in der Ökonomik {-}
+
+<blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Wie kann das sein? Die „Mainstream“-Ökonomie beschäftigt sich seit Jahren mit Fragen von Marktmacht und Einflussnahme. Vorschläge zu wirksamem Klimaschutz, die auf einer Analyse der Anreize und Machtverhältnisse basieren, werden seit Jahren nicht oder nur halbherzig umgesetzt. <a href="https://t.co/xxRjN3FgUy">https://t.co/xxRjN3FgUy</a></p>&mdash; Veronika Grimm (@GrimmVeronika) <a href="https://twitter.com/GrimmVeronika/status/1641749578754957313?ref_src=twsrc%5Etfw">March 31, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>    
+
+
+
 ## Individuelles vs. gesellschaftliches Entscheidungsproblem
 
 ### Individuelles Entscheidungsproblem
@@ -147,9 +169,294 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
   - Schwerpunkt **Spieltheorie**: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler  
   - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
 
+
+
+
 #### Nutzenmaximierung unter Nebenbedingungen
 
-[Maximierung einer Nutzenfunktion]::
+##### Nutzenfunktionen
+
+- Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
+
+- Der Nutzen hängt ab von den konsumierten Gütern $x_i$
+
+- Zur Vereinfachung: Beschränkung auf wenige Güter
+
+##### Perfekte Substitute
+
+Beispiel: $U(x_1, x_2)=x_1+x_2$
+
+###### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+
+
+library(tidyverse)
+library(plotly)
+
+f <- function(x1, x2){x1+x2}
+
+x1a <- 0
+x1b <- 100
+
+x2a <- 0
+x2b <- 100
+
+x1 <- seq(x1a, x1b)
+x2 <- seq(x2a, x2b)  
+
+u <- outer(x1, x2, f)
+
+
+
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+$x_2=\bar{U}-x_1$
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+##### Imperfekte Substitute
+
+$U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
+
+###### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(mosaic)
+library(plotly)
+
+f <- function(x1, x2){.5*(x1*x2)^.5}
+
+
+u <- outer(x1, x2, f)
+
+
+# Werte für x1 usw. werden aus dem anderen chunk übernommen
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+
+
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+##### Komplementärgüter
+
+$U(x_1, x_2)=\min(x_1, x_2)$
+
+###### 3D-Darstellung: Nutzengebirge
+
+```{r echo=F, warning=F, message=F, cache=F}
+
+library(mosaic)
+library(plotly)
+
+f <- function(x1, x2){
+  ifelse(x1< x2, x1, x2)}
+
+#f <- function(x1, x2){
+#  ifelse(x1< .25*x2, x1, floor(x2/4))}
+
+
+u <- outer(x1, x2, f)
+
+
+# Werte für x1 usw. werden aus dem anderen chunk übernommen
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p
+
+```
+
+###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+
+```{r echo=F, message=F, warning=F, cache=F}
+p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
+  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
+   config(displaylogo = FALSE)%>% 
+  hide_colorbar()
+
+p
+```
+
+##### Indifferenzkurven und Budgetrestriktionen
+
+Nutzenfunktion: $U(x_1, x_2)=x_1\times x_2$
+
+Indifferenzkurve: $x_2=\frac{\bar{U}}{x_1}$
+
+Budgetrestriktion: $I=p_1 x_1+p_2 x_2$
+
+Budgetlinie: $x_2=\frac{I}{p_2}- \frac{p_1}{p_2}x_1$
+
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(mosaic)
+library(latex2exp)
+
+# Funktionen definieren
+
+x <- 0:10
+
+I_1 <- function(x) 10/x
+I_2 <- function(x) 25/x
+I_3 <- function(x) (5*7.5)/x
+
+b1 <- function(x) 10-x
+b2 <- function(x) 10-(2/3)*x
+
+
+#Gleichgewichtsmenge x1^0
+x10 <- uniroot(function(x) -25/x^2 + 1, range(x))$root
+
+#Gleichgewichtsmenge x20
+
+x20 <- b1(x10)
+
+#Gleichgewichtsmenge x1^1
+x11 <- uniroot(function(x) -(5*7.5)/x^2 + 2/3, range(x))$root
+
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "I_1"), fun = I_1, xlim = c(uniroot(function(x) I_1(x) - 18, range(x))$root,18))+
+   annotate(geom = "text", x=18, y=I_1(18), hjust=-0.4, label=expression(I[1]),color = "grey30")+
+  #
+  stat_function(aes(color = "I_2"), fun = I_2, xlim = c(uniroot(function(x) I_2(x) - 18, range(x))$root,18)) +
+   annotate(geom = "text", x=18, y=I_2(18), hjust=-0.4, label=expression(I[2]),color = "grey30")+
+  #
+  stat_function(aes(color = "I_3"), fun = I_3, xlim = c(uniroot(function(x) I_3(x) - 18, range(x))$root,18)) +
+  annotate(geom = "text", x=18, y=I_3(18), hjust=-0.4, label=expression(I[3]),color = "grey30")+
+  #
+  stat_function(aes(color = "budget"), fun = b1, xlim=c(0,10))+
+  stat_function(aes(color = "budget"), fun = b2, linetype="dashed", xlim=c(0,15))+
+  #
+  annotate("segment", x = x10, xend = x10, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+  annotate("segment", x = 0, xend = x11, y = x20, yend = x20,
+           linetype = "dashed") +
+  #
+  annotate("segment", x = x10, xend = x10, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+    annotate("segment", x = x11, xend = x11, y = 0, yend = x20,
+           linetype = "dashed") +
+  #
+  scale_color_manual(values=c("red", "green", "green", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                    breaks = c(0, x10, x11, 10, 15), labels = expression("0",x[1]^0, x[1]^1, frac(I^0, p[1]^0), frac(I^0, p[1]^1) ),
+                     limits = c(0, 20)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(0,x20, 10), labels = c("0", latex2exp::TeX(r"($x_2^0=x_2^1$)"), latex2exp::TeX(r"($\frac{I^0}{p_1^0}$)") ),
+                     limits = c(0,20)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = latex2exp::TeX(r'($x_1$)'), y = latex2exp::TeX(r'($x_2$)'), 
+       color = NULL, fill = NULL)
+    chart
+
+```
+
+
+
 
 ### Gesellschaftliches Entscheidungsproblem
 
