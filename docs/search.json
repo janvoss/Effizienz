@@ -154,7 +154,7 @@
     "href": "Bedeutung.html#individuelles-vs.-gesellschaftliches-entscheidungsproblem",
     "title": "3  Effizienz und Rationalität",
     "section": "3.4 Individuelles vs. gesellschaftliches Entscheidungsproblem",
-    "text": "3.4 Individuelles vs. gesellschaftliches Entscheidungsproblem\n\n3.4.1 Individuelles Entscheidungsproblem\n\n\n3.4.2 Gesellschaftliches Entscheidungsproblem\n\n3.4.2.1 Pareto-Verbesserungen und Pareto-Effizienz\n\n\n3.4.2.2 Auswahl zwischen verschiedenen effizienten Zuständen",
+    "text": "3.4 Individuelles vs. gesellschaftliches Entscheidungsproblem\n\n3.4.1 Individuelles Entscheidungsproblem\nDas Folgende ist fast wörtlich aus (detel_grundkurs_2007?) S. 20 übernommen.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
     ]
@@ -244,7 +244,7 @@
     "href": "Bedeutung.html#gleichgewichte",
     "title": "3  Effizienz und Rationalität",
     "section": "3.2 Gleichgewichte",
-    "text": "3.2 Gleichgewichte\n\nEin Gleichgewicht liegt vor, wenn ein System ohne „Störungen“ durch äußere Einflüsse in Ruhe verbleibt.\nMuster: Individuelle Entscheidungen () Interaktion/Anpassung/Aggregation () Gleichgewicht. Exogener Schock () neue individuelle Entscheidungen () Interaktion/Anpassung/Aggregation () ()",
+    "text": "3.2 Gleichgewichte\n\nEin Gleichgewicht liegt vor, wenn ein System ohne „Störungen“ durch äußere Einflüsse in Ruhe verbleibt.\nMuster: Individuelle Entscheidungen \\(\\rightarrow\\) Interaktion/Anpassung/Aggregation \\(\\rightarrow\\) Gleichgewicht. Exogener Schock \\(\\rightarrow\\) neue individuelle Entscheidungen \\(\\rightarrow\\) Interaktion/Anpassung/Aggregation \\(\\rightarrow  \\dots\\)",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
     ]
@@ -255,6 +255,36 @@
     "title": "3  Effizienz und Rationalität",
     "section": "3.3 Erklärungen durch Modelle",
     "text": "3.3 Erklärungen durch Modelle\n(wissenschaftliche) Erklärung: Antwort auf eine Warum-Frage unter Rückgriff auf systematische Zusammenhänge\nTheorie: Systematische Vorstellung über Aspekte der Welt\nModell: Theoriegeleitetes Abbild einer Situation\nModellgestützte Erklärung:\n\nSystematischer Zusammenhang zwischen unabhängigen und abhängigen Variablen.\nErlaubt die Formulierung einer Erwartung über Entwicklung der abhängigen Variable in Abhängigkeit von der Entwicklung der unabhängigen Variable.\nErlaubt keine Prognose von Einzelereignissen\nIn jedem Einzelfall wirkt eine Vielzahl von unsystematischen Einzelfaktoren, die sich nicht systematisch erklären lassen.\n\n\n\n\n\n\n\n\n\n\n\nModelle erlauben es, den Grad an Komplexität zu steuern.\n\nBeschränkung (zunächst) auf Zusammenhänge, von denen man annimmt, dass sie stark sind\n\ndann ggf sukzessive Aufnahme weiterer Zusammenhänge",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Bedeutung.html#basisschema-der-handlungserklärung",
+    "href": "Bedeutung.html#basisschema-der-handlungserklärung",
+    "title": "3  Effizienz und Rationalität",
+    "section": "3.5 Basisschema der Handlungserklärung",
+    "text": "3.5 Basisschema der Handlungserklärung\n\nPerson \\(S\\) wünscht, Ziel \\(Z\\) zu realisieren.\n\\(S\\) glaubt, die Handlung \\(H\\) sei ein Mittel, um \\(Z\\) zu realisieren.\n\\(S\\) vollzieht Handlung \\(H\\).\n\nDas Basisschema ist noch unvollständig:\n\nWas ist, wenn es für \\(S\\) bessere Handlungen als \\(H\\) gibt, \\(Z\\) zu realisieren? Dann wäre es nicht vernünftig, \\(H\\) zu vollziehen.\nWas ist, wenn es \\(S\\) \\(H\\) gar nicht vollziehen kann?\nWas ist, wenn \\(H\\) mit negativen Folgen einhergeht, die schlimmer sind, als \\(Z\\) nicht zu realisieren?\nWas ist, wenn \\(S\\) noch weitere Ziele realisieren will, die mit \\(Z\\) nicht vereinbar sind?\n\n\\(\\Rightarrow\\) erweitertes Schema der Handlungserklärung",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Bedeutung.html#erweitertes-schema-der-handlungserklärung",
+    "href": "Bedeutung.html#erweitertes-schema-der-handlungserklärung",
+    "title": "3  Effizienz und Rationalität",
+    "section": "3.6 Erweitertes Schema der Handlungserklärung",
+    "text": "3.6 Erweitertes Schema der Handlungserklärung\n\n\\(S\\) hat die Absicht, Ziel \\(Z\\) zu realisieren.\n\\(S\\) glaubt, dass, wenn sie Handlung \\(H\\) vollzieht, sie somit \\(Z\\) realisieren kann.\n\\(S\\) glaubt in der Lage zu sein, \\(Z\\) zu realisieren und \\(H\\) zu vollziehen.\n\\(S\\) weiß, wie man \\(Z\\) realisiert und \\(H\\) vollzieht.\n\\(S\\) glaubt nicht, dass es etwas Besseres gibt als \\(H\\), um \\(Z\\) zu realisieren.\n\\(S\\) glaubt nicht, dass der Vollzug von \\(H\\) Folgen hat, die schlimmer sind als nicht \\(Z\\) realisieren zu können.\n\\(S\\) hat nicht die Absicht, ein Ziel zu realisieren, von dem \\(S\\) weiß, dass es unvereinbar damit ist, \\(Z\\) zu realisieren, und das sie \\(Z\\) gegenüber vorzieht.\n\\(S\\) vollzieht Handlung \\(H\\).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
+    ]
+  },
+  {
+    "objectID": "Bedeutung.html#zwischenfazit",
+    "href": "Bedeutung.html#zwischenfazit",
+    "title": "3  Effizienz und Rationalität",
+    "section": "3.7 Zwischenfazit",
+    "text": "3.7 Zwischenfazit\n\nErklärungen rationaler Handlungen unterstellen nicht zwangsläufig, dass die handelnde Person “alles richtig” macht.\nInsbesondere lässt es beschränkte Handlungsmöglichkeiten zu und unvollständige oder fehlerhafte Informationslagen.\nDas Rationalprinzip ist weniger eine Behauptung über die handelnde Person, sondern ein Schema, eine “Grammatik” der Erklärung.\nDiese Grammatik verwenden wir sowohl in der Spieltheorie als auch in der Verhaltensökonomik\n\nSchwerpunkt Spieltheorie: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler\n\nSchwerpunkt Verhaltensökonomik: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz “richtig” sind.\n\n\n\n3.7.1 Gesellschaftliches Entscheidungsproblem\n\n3.7.1.1 Pareto-Verbesserungen und Pareto-Effizienz\n\n\n3.7.1.2 Auswahl zwischen verschiedenen effizienten Zuständen",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Effizienz und Rationalität</span>"
     ]

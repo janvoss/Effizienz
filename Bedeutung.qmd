@@ -10,7 +10,7 @@
 
 - Ein Gleichgewicht liegt vor, wenn ein System ohne &bdquo;Störungen&ldquo;  durch äußere Einflüsse in Ruhe verbleibt. 
 
-- Muster: Individuelle Entscheidungen \(\rightarrow\) Interaktion/Anpassung/Aggregation \(\rightarrow\) Gleichgewicht. Exogener Schock \(\rightarrow\) neue individuelle Entscheidungen \(\rightarrow\) Interaktion/Anpassung/Aggregation \(\rightarrow\) \(\dots\)
+- Muster: Individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow$ Gleichgewicht. Exogener Schock $\rightarrow$ neue individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow  \dots$
 
 ## Erklärungen durch Modelle
 
@@ -86,6 +86,67 @@ p
 ## Individuelles vs. gesellschaftliches Entscheidungsproblem
 
 ### Individuelles Entscheidungsproblem
+
+Das Folgende ist fast wörtlich aus @detel_grundkurs_2007 S. 20 übernommen.
+
+## Basisschema der Handlungserklärung
+
+1. Person $S$ wünscht, Ziel $Z$ zu realisieren.
+
+2. $S$ glaubt, die Handlung $H$ sei ein Mittel, um $Z$ zu realisieren.
+
+3. **$S$ vollzieht Handlung $H$**.
+
+
+Das Basisschema ist noch unvollständig:
+
+- Was ist, wenn es für $S$ bessere Handlungen als $H$ gibt, $Z$ zu
+realisieren? Dann wäre es nicht vernünftig, $H$ zu vollziehen.
+-  Was ist, wenn es $S$ $H$ gar nicht vollziehen kann?
+-  Was ist, wenn $H$ mit negativen Folgen einhergeht, die schlimmer
+sind, als $Z$ nicht zu realisieren?
+-  Was ist, wenn $S$ noch weitere Ziele realisieren will, die mit $Z$
+nicht vereinbar sind?
+
+$\Rightarrow$ **erweitertes Schema der Handlungserklärung**
+
+
+## Erweitertes Schema der Handlungserklärung
+
+1. $S$ hat die Absicht, Ziel $Z$ zu realisieren.
+
+2. $S$ glaubt, dass, wenn sie Handlung $H$ vollzieht, sie somit $Z$
+realisieren kann.
+
+3. $S$ glaubt in der Lage zu sein, $Z$ zu realisieren und $H$ zu vollziehen.
+
+4. $S$ weiß, wie man $Z$ realisiert und $H$ vollzieht.
+
+4. $S$ glaubt nicht, dass es etwas Besseres gibt als $H$, um $Z$ zu
+realisieren.
+
+5. $S$ glaubt nicht, dass der Vollzug von $H$ Folgen hat, die schlimmer
+sind als nicht $Z$ realisieren zu können.
+
+6. $S$ hat nicht die Absicht, ein Ziel zu realisieren, von dem $S$
+weiß, dass es unvereinbar damit ist, $Z$ zu realisieren, und das
+sie $Z$ gegenüber vorzieht.
+
+7. **$S$ vollzieht Handlung $H$.**
+
+## Zwischenfazit
+
+- Erklärungen rationaler Handlungen unterstellen nicht zwangsläufig,
+dass die handelnde Person "alles richtig"  macht. 
+-  Insbesondere lässt es beschränkte Handlungsmöglichkeiten zu und unvollständige
+oder fehlerhafte Informationslagen.
+- Das **Rationalprinzip** ist weniger eine Behauptung über die handelnde
+Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
+
+- Diese Grammatik verwenden wir sowohl in der Spieltheorie als auch in der Verhaltensökonomik  
+  - Schwerpunkt **Spieltheorie**: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler  
+  - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
+
 
 [Maximierung einer Nutzenfunktion]::
 

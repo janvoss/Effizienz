@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -221,7 +250,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#individuelles-vs.-gesellschaftliches-entscheidungsproblem" id="toc-individuelles-vs.-gesellschaftliches-entscheidungsproblem" class="nav-link" data-scroll-target="#individuelles-vs.-gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.4</span> Individuelles vs.&nbsp;gesellschaftliches Entscheidungsproblem</a>
   <ul class="collapse">
   <li><a href="#individuelles-entscheidungsproblem" id="toc-individuelles-entscheidungsproblem" class="nav-link" data-scroll-target="#individuelles-entscheidungsproblem"><span class="header-section-number">3.4.1</span> Individuelles Entscheidungsproblem</a></li>
-  <li><a href="#gesellschaftliches-entscheidungsproblem" id="toc-gesellschaftliches-entscheidungsproblem" class="nav-link" data-scroll-target="#gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.4.2</span> Gesellschaftliches Entscheidungsproblem</a></li>
+  </ul></li>
+  <li><a href="#basisschema-der-handlungserklärung" id="toc-basisschema-der-handlungserklärung" class="nav-link" data-scroll-target="#basisschema-der-handlungserklärung"><span class="header-section-number">3.5</span> Basisschema der Handlungserklärung</a></li>
+  <li><a href="#erweitertes-schema-der-handlungserklärung" id="toc-erweitertes-schema-der-handlungserklärung" class="nav-link" data-scroll-target="#erweitertes-schema-der-handlungserklärung"><span class="header-section-number">3.6</span> Erweitertes Schema der Handlungserklärung</a></li>
+  <li><a href="#zwischenfazit" id="toc-zwischenfazit" class="nav-link" data-scroll-target="#zwischenfazit"><span class="header-section-number">3.7</span> Zwischenfazit</a>
+  <ul class="collapse">
+  <li><a href="#gesellschaftliches-entscheidungsproblem" id="toc-gesellschaftliches-entscheidungsproblem" class="nav-link" data-scroll-target="#gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.7.1</span> Gesellschaftliches Entscheidungsproblem</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -259,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="3.2" class="anchored" data-anchor-id="gleichgewichte"><span class="header-section-number">3.2</span> Gleichgewichte</h2>
 <ul>
 <li><p>Ein Gleichgewicht liegt vor, wenn ein System ohne „Störungen“ durch äußere Einflüsse in Ruhe verbleibt.</p></li>
-<li><p>Muster: Individuelle Entscheidungen () Interaktion/Anpassung/Aggregation () Gleichgewicht. Exogener Schock () neue individuelle Entscheidungen () Interaktion/Anpassung/Aggregation () ()</p></li>
+<li><p>Muster: Individuelle Entscheidungen <span class="math inline">\(\rightarrow\)</span> Interaktion/Anpassung/Aggregation <span class="math inline">\(\rightarrow\)</span> Gleichgewicht. Exogener Schock <span class="math inline">\(\rightarrow\)</span> neue individuelle Entscheidungen <span class="math inline">\(\rightarrow\)</span> Interaktion/Anpassung/Aggregation <span class="math inline">\(\rightarrow  \dots\)</span></p></li>
 </ul>
 </section>
 <section id="erklärungen-durch-modelle" class="level2" data-number="3.3">
@@ -296,14 +330,58 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="3.4" class="anchored" data-anchor-id="individuelles-vs.-gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.4</span> Individuelles vs.&nbsp;gesellschaftliches Entscheidungsproblem</h2>
 <section id="individuelles-entscheidungsproblem" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="individuelles-entscheidungsproblem"><span class="header-section-number">3.4.1</span> Individuelles Entscheidungsproblem</h3>
+<p>Das Folgende ist fast wörtlich aus <span class="citation" data-cites="detel_grundkurs_2007">(<a href="#ref-detel_grundkurs_2007" role="doc-biblioref"><strong>detel_grundkurs_2007?</strong></a>)</span> S. 20 übernommen.</p>
 </section>
-<section id="gesellschaftliches-entscheidungsproblem" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.4.2</span> Gesellschaftliches Entscheidungsproblem</h3>
-<section id="pareto-verbesserungen-und-pareto-effizienz" class="level4" data-number="3.4.2.1">
-<h4 data-number="3.4.2.1" class="anchored" data-anchor-id="pareto-verbesserungen-und-pareto-effizienz"><span class="header-section-number">3.4.2.1</span> Pareto-Verbesserungen und Pareto-Effizienz</h4>
 </section>
-<section id="auswahl-zwischen-verschiedenen-effizienten-zuständen" class="level4" data-number="3.4.2.2">
-<h4 data-number="3.4.2.2" class="anchored" data-anchor-id="auswahl-zwischen-verschiedenen-effizienten-zuständen"><span class="header-section-number">3.4.2.2</span> Auswahl zwischen verschiedenen effizienten Zuständen</h4>
+<section id="basisschema-der-handlungserklärung" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="basisschema-der-handlungserklärung"><span class="header-section-number">3.5</span> Basisschema der Handlungserklärung</h2>
+<ol type="1">
+<li><p>Person <span class="math inline">\(S\)</span> wünscht, Ziel <span class="math inline">\(Z\)</span> zu realisieren.</p></li>
+<li><p><span class="math inline">\(S\)</span> glaubt, die Handlung <span class="math inline">\(H\)</span> sei ein Mittel, um <span class="math inline">\(Z\)</span> zu realisieren.</p></li>
+<li><p><strong><span class="math inline">\(S\)</span> vollzieht Handlung <span class="math inline">\(H\)</span></strong>.</p></li>
+</ol>
+<p>Das Basisschema ist noch unvollständig:</p>
+<ul>
+<li>Was ist, wenn es für <span class="math inline">\(S\)</span> bessere Handlungen als <span class="math inline">\(H\)</span> gibt, <span class="math inline">\(Z\)</span> zu realisieren? Dann wäre es nicht vernünftig, <span class="math inline">\(H\)</span> zu vollziehen.</li>
+<li>Was ist, wenn es <span class="math inline">\(S\)</span> <span class="math inline">\(H\)</span> gar nicht vollziehen kann?</li>
+<li>Was ist, wenn <span class="math inline">\(H\)</span> mit negativen Folgen einhergeht, die schlimmer sind, als <span class="math inline">\(Z\)</span> nicht zu realisieren?</li>
+<li>Was ist, wenn <span class="math inline">\(S\)</span> noch weitere Ziele realisieren will, die mit <span class="math inline">\(Z\)</span> nicht vereinbar sind?</li>
+</ul>
+<p><span class="math inline">\(\Rightarrow\)</span> <strong>erweitertes Schema der Handlungserklärung</strong></p>
+</section>
+<section id="erweitertes-schema-der-handlungserklärung" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="erweitertes-schema-der-handlungserklärung"><span class="header-section-number">3.6</span> Erweitertes Schema der Handlungserklärung</h2>
+<ol type="1">
+<li><p><span class="math inline">\(S\)</span> hat die Absicht, Ziel <span class="math inline">\(Z\)</span> zu realisieren.</p></li>
+<li><p><span class="math inline">\(S\)</span> glaubt, dass, wenn sie Handlung <span class="math inline">\(H\)</span> vollzieht, sie somit <span class="math inline">\(Z\)</span> realisieren kann.</p></li>
+<li><p><span class="math inline">\(S\)</span> glaubt in der Lage zu sein, <span class="math inline">\(Z\)</span> zu realisieren und <span class="math inline">\(H\)</span> zu vollziehen.</p></li>
+<li><p><span class="math inline">\(S\)</span> weiß, wie man <span class="math inline">\(Z\)</span> realisiert und <span class="math inline">\(H\)</span> vollzieht.</p></li>
+<li><p><span class="math inline">\(S\)</span> glaubt nicht, dass es etwas Besseres gibt als <span class="math inline">\(H\)</span>, um <span class="math inline">\(Z\)</span> zu realisieren.</p></li>
+<li><p><span class="math inline">\(S\)</span> glaubt nicht, dass der Vollzug von <span class="math inline">\(H\)</span> Folgen hat, die schlimmer sind als nicht <span class="math inline">\(Z\)</span> realisieren zu können.</p></li>
+<li><p><span class="math inline">\(S\)</span> hat nicht die Absicht, ein Ziel zu realisieren, von dem <span class="math inline">\(S\)</span> weiß, dass es unvereinbar damit ist, <span class="math inline">\(Z\)</span> zu realisieren, und das sie <span class="math inline">\(Z\)</span> gegenüber vorzieht.</p></li>
+<li><p><strong><span class="math inline">\(S\)</span> vollzieht Handlung <span class="math inline">\(H\)</span>.</strong></p></li>
+</ol>
+</section>
+<section id="zwischenfazit" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="zwischenfazit"><span class="header-section-number">3.7</span> Zwischenfazit</h2>
+<ul>
+<li><p>Erklärungen rationaler Handlungen unterstellen nicht zwangsläufig, dass die handelnde Person “alles richtig” macht.</p></li>
+<li><p>Insbesondere lässt es beschränkte Handlungsmöglichkeiten zu und unvollständige oder fehlerhafte Informationslagen.</p></li>
+<li><p>Das <strong>Rationalprinzip</strong> ist weniger eine Behauptung über die handelnde Person, sondern ein Schema, eine <strong>“Grammatik” der Erklärung</strong>.</p></li>
+<li><p>Diese Grammatik verwenden wir sowohl in der Spieltheorie als auch in der Verhaltensökonomik</p>
+<ul>
+<li>Schwerpunkt <strong>Spieltheorie</strong>: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler<br>
+</li>
+<li>Schwerpunkt <strong>Verhaltensökonomik</strong>: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz “richtig” sind.</li>
+</ul></li>
+</ul>
+<section id="gesellschaftliches-entscheidungsproblem" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="gesellschaftliches-entscheidungsproblem"><span class="header-section-number">3.7.1</span> Gesellschaftliches Entscheidungsproblem</h3>
+<section id="pareto-verbesserungen-und-pareto-effizienz" class="level4" data-number="3.7.1.1">
+<h4 data-number="3.7.1.1" class="anchored" data-anchor-id="pareto-verbesserungen-und-pareto-effizienz"><span class="header-section-number">3.7.1.1</span> Pareto-Verbesserungen und Pareto-Effizienz</h4>
+</section>
+<section id="auswahl-zwischen-verschiedenen-effizienten-zuständen" class="level4" data-number="3.7.1.2">
+<h4 data-number="3.7.1.2" class="anchored" data-anchor-id="auswahl-zwischen-verschiedenen-effizienten-zuständen"><span class="header-section-number">3.7.1.2</span> Auswahl zwischen verschiedenen effizienten Zuständen</h4>
 
 
 </section>
