@@ -129,3 +129,107 @@ $\iff x_0 = \frac{i X_0}{1-e^{iT}}$
 $x_t= x_0\ e^{(r-i)t}$
 
 $$ \iff \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}$$
+
+
+### Effizienter intertemporaler Wachstumspfad
+
+$x_t= x_0\ e^{(r-i)t}$
+
+
+$$ \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}$$
+
+
+Mit $T \to \infty$
+
+$$ \boxed{x_t=i X_0\times e^{(r-i)t}}$$
+
+
+```{python}
+#| message: false
+#| warning: false
+
+import numpy as np
+from sympy import symbols, exp, log, integrate, lambdify
+from lets_plot import *
+from scipy.integrate import odeint
+from scipy.optimize import brentq
+LetsPlot.setup_html()
+
+# Konfiguration
+X_0, i, g = 100, 0.03, 0.06
+t_sym = symbols('t', real=True, positive=True)
+time = np.linspace(0, 100, 500)
+
+# SymPy Berechnungen
+x_t = X_0 * i * exp((g - i) * t_sym)
+U_t = integrate(log(x_t) * exp(-i * t_sym), (t_sym, 0, t_sym))
+Uz_t = integrate(log(X_0 * g) * exp(-i * t_sym), (t_sym, 0, t_sym))
+
+# Numerische Funktionen
+f_x, f_U, f_Uz = [lambdify(t_sym, f, 'numpy') for f in [x_t, U_t, Uz_t]]
+
+# Differentialgleichung für Ressourcenbestand
+def dXdt(X, t):
+    return g * X - f_x(t)  # Wachstum - Entnahme
+
+# Lösen der ODE
+X_values = odeint(dXdt, X_0, time).flatten()
+
+# Separaten DataFrames für jeden Plot erstellen
+df_entnahme = {
+    'Zeit': np.concatenate([time, time]),
+    'Wert': np.concatenate([f_x(time), np.full_like(time, X_0 * g)]),
+    'Kurve': ['x(t)'] * len(time) + ['z(t)'] * len(time)
+}
+
+df_nutzen = {
+    'Zeit': np.concatenate([time, time]),
+    'Nutzen': np.concatenate([f_U(time), f_Uz(time)]),
+    'Art': ['U(t)'] * len(time) + ['Uz(t)'] * len(time)
+}
+
+df_ressource = {
+    'Zeit': time,
+    'Bestand': X_values
+}
+
+# Plot Entnahmepfade
+plot_entnahme = (ggplot(df_entnahme)
+                + geom_line(aes('Zeit', 'Wert', color='Kurve'), size=1)
+                + scale_color_manual(values=['blue', 'red'])
+                + labs(title='Entnahmepfade',
+                      x='Zeit t',
+                      y='Entnahmerate',
+                      color='Legende:')
+                + theme(legend_position='right'))
+
+# Plot Nutzenfunktionen
+plot_nutzen = (ggplot(df_nutzen)
+              + geom_line(aes('Zeit', 'Nutzen', color='Art'), size=1)
+              + scale_color_manual(values=['blue', 'red'])
+              + labs(title='Abgezinster Gesamtnutzen',
+                    x='Zeit t',
+                    y='Gesamtnutzen',
+                    color='Legende:')
+              + theme(legend_position='right'))
+
+# Plot Ressourcenentwicklung
+plot_ressource = (ggplot(df_ressource)
+                 + geom_line(aes('Zeit', 'Bestand'), color='darkgreen', size=1)
+                 + labs(title='Entwicklung des Ressourcenbestands',
+                       x='Zeit t',
+                       y='Ressourcenbestand X(t)')
+                 + ylim(0, None))
+
+plot_entnahme.show()
+plot_nutzen.show()
+plot_ressource.show()
+
+# Nullstellensuche
+try:
+    t_root = brentq(lambda t: f_U(t) - f_Uz(t), 0.01, 200)
+    print(f"Schnittpunkt bei t = {t_root:.2f}")
+except ValueError:
+    print("Kein Schnittpunkt im Intervall gefunden")
+
+```
