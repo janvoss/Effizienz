@@ -37,7 +37,7 @@ $x_1 = (X_0 -x_0)(1+g)$
 
 ### Grafische Repräsentation der Lösung 
 
-$\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}$
+$\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}$
 
 ```{python Zwei-Perioden}
 #| warning: false
@@ -81,7 +81,7 @@ $\iff \frac{X_0}{x_0}=1+\frac{1}{1+i}$
 $$\iff \boxed{x_0 = X_0 \frac{1 + i}{2 + i}}$$  
   
 
-## n-Perioden-Modell, kontinuierliche Zeit
+## T-Perioden-Modell, kontinuierliche Zeit
 
 ### Vorüberlegungen
 
@@ -128,10 +128,10 @@ $\iff x_0 = \frac{i X_0}{1-e^{iT}}$
 
 $x_t= x_0\ e^{(r-i)t}$
 
-$$ \iff \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}$$
+$$ \iff \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}$$
 
 
-### Effizienter intertemporaler Wachstumspfad
+### Effizienter intertemporaler Konsumpfad
 
 $x_t= x_0\ e^{(r-i)t}$
 

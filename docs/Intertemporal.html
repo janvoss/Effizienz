@@ -289,11 +289,11 @@ window.Quarto = {
   <li><a href="#grafische-repräsentation-der-lösung" id="toc-grafische-repräsentation-der-lösung" class="nav-link" data-scroll-target="#grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</a></li>
   <li><a href="#die-euler-gleichung" id="toc-die-euler-gleichung" class="nav-link" data-scroll-target="#die-euler-gleichung"><span class="header-section-number">6.2.4</span> Die Euler-Gleichung</a></li>
   </ul></li>
-  <li><a href="#n-perioden-modell-kontinuierliche-zeit" id="toc-n-perioden-modell-kontinuierliche-zeit" class="nav-link" data-scroll-target="#n-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> n-Perioden-Modell, kontinuierliche Zeit</a>
+  <li><a href="#t-perioden-modell-kontinuierliche-zeit" id="toc-t-perioden-modell-kontinuierliche-zeit" class="nav-link" data-scroll-target="#t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</a>
   <ul class="collapse">
   <li><a href="#vorüberlegungen" id="toc-vorüberlegungen" class="nav-link" data-scroll-target="#vorüberlegungen"><span class="header-section-number">6.3.1</span> Vorüberlegungen</a></li>
   <li><a href="#ressourcenbeschränkung" id="toc-ressourcenbeschränkung" class="nav-link" data-scroll-target="#ressourcenbeschränkung"><span class="header-section-number">6.3.2</span> Ressourcenbeschränkung</a></li>
-  <li><a href="#effizienter-intertemporaler-wachstumspfad" id="toc-effizienter-intertemporaler-wachstumspfad" class="nav-link" data-scroll-target="#effizienter-intertemporaler-wachstumspfad"><span class="header-section-number">6.3.3</span> Effizienter intertemporaler Wachstumspfad</a></li>
+  <li><a href="#effizienter-intertemporaler-konsumpfad" id="toc-effizienter-intertemporaler-konsumpfad" class="nav-link" data-scroll-target="#effizienter-intertemporaler-konsumpfad"><span class="header-section-number">6.3.3</span> Effizienter intertemporaler Konsumpfad</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -352,8 +352,8 @@ window.Quarto = {
 </section>
 <section id="grafische-repräsentation-der-lösung" class="level3" data-number="6.2.3">
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</h3>
-<p><span class="math inline">\(\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_0}\frac{1}{1+i}}\)</span></p>
-<div id="ba5a6c1f" class="cell" data-message="false" data-execution_count="1">
+<p><span class="math inline">\(\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}\)</span></p>
+<div id="b6df8acf" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
@@ -439,7 +439,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="wmxdqO"></div>
+            <div id="bIKUXj"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -463,22 +463,22 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("wmxdqO").appendChild(div);
+                        document.getElementById("bIKUXj").appendChild(div);
                     };
-                    var e = document.getElementById("wmxdqO");
+                    var e = document.getElementById("bIKUXj");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="O9vbES"></div>
+   <div id="6hMSXc"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("O9vbES");
+   var containerDiv = document.getElementById("6hMSXc");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -743,8 +743,8 @@ window.Quarto = {
 <p><span class="math display">\[\iff \boxed{x_0 = X_0 \frac{1 + i}{2 + i}}\]</span></p>
 </section>
 </section>
-<section id="n-perioden-modell-kontinuierliche-zeit" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="n-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> n-Perioden-Modell, kontinuierliche Zeit</h2>
+<section id="t-perioden-modell-kontinuierliche-zeit" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</h2>
 <section id="vorüberlegungen" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="vorüberlegungen"><span class="header-section-number">6.3.1</span> Vorüberlegungen</h3>
 <p>Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate <span class="math inline">\(g\)</span> wächst, und sie ursprünglich <span class="math inline">\(X_0\)</span> beträgt, dann beträgt sie nach <span class="math inline">\(T\)</span> Perioden <span class="math inline">\(X_T=X_0 \times  e^{g\times T}\)</span> Einheiten.</p>
@@ -770,15 +770,15 @@ window.Quarto = {
 <p><span class="math inline">\(X_0=\frac{x(0)}{i}( 1 - e^{-iT})\)</span></p>
 <p><span class="math inline">\(\iff x_0 = \frac{i X_0}{1-e^{iT}}\)</span></p>
 <p><span class="math inline">\(x_t= x_0\ e^{(r-i)t}\)</span></p>
-<p><span class="math display">\[ \iff \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}\]</span></p>
+<p><span class="math display">\[ \iff \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}\]</span></p>
 </section>
-<section id="effizienter-intertemporaler-wachstumspfad" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="effizienter-intertemporaler-wachstumspfad"><span class="header-section-number">6.3.3</span> Effizienter intertemporaler Wachstumspfad</h3>
+<section id="effizienter-intertemporaler-konsumpfad" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="effizienter-intertemporaler-konsumpfad"><span class="header-section-number">6.3.3</span> Effizienter intertemporaler Konsumpfad</h3>
 <p><span class="math inline">\(x_t= x_0\ e^{(r-i)t}\)</span></p>
 <p><span class="math display">\[ \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}\]</span></p>
 <p>Mit <span class="math inline">\(T \to \infty\)</span></p>
 <p><span class="math display">\[ \boxed{x_t=i X_0\times e^{(r-i)t}}\]</span></p>
-<div id="5625a641" class="cell" data-message="false" data-execution_count="2">
+<div id="a0a4b496" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -867,7 +867,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="FGX7Mt"></div>
+            <div id="NzHslh"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -891,22 +891,22 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("FGX7Mt").appendChild(div);
+                        document.getElementById("NzHslh").appendChild(div);
                     };
-                    var e = document.getElementById("FGX7Mt");
+                    var e = document.getElementById("NzHslh");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="9rEZiP"></div>
+   <div id="YARCeI"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("9rEZiP");
+   var containerDiv = document.getElementById("YARCeI");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1007,13 +1007,13 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="4av5E4"></div>
+   <div id="0VeMTM"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("4av5E4");
+   var containerDiv = document.getElementById("0VeMTM");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
@@ -1114,13 +1114,13 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="oagSma"></div>
+   <div id="5KMiqZ"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
    // ----------
    
-   var containerDiv = document.getElementById("oagSma");
+   var containerDiv = document.getElementById("5KMiqZ");
    var observer = new ResizeObserver(function(entries) {
        for (let entry of entries) {
            var width = containerDiv.clientWidth
