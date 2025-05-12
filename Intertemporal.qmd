@@ -124,7 +124,7 @@ $X_T=0$, also
 
 $X_0=\frac{x(0)}{i}( 1 - e^{-iT})$
 
-$\iff x_0 = \frac{i X_0}{1-e^{iT}}$
+$\iff x_0 = \frac{i X_0}{1-e^{-iT}}$
 
 $x_t= x_0\ e^{(r-i)t}$
 
@@ -136,7 +136,7 @@ $$ \iff \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}$$
 $x_t= x_0\ e^{(r-i)t}$
 
 
-$$ \boxed{ x_t=\frac{i X_0}{1-e^{iT}}\ e^{(r-i)t}}$$
+$$ \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}$$
 
 
 Mit $T \to \infty$

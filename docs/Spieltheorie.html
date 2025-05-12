@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,7 +102,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -211,7 +277,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Überblick</h2>
+   
+  <ul>
+  <li><a href="#nicht-kooperative-spieltheorie" id="toc-nicht-kooperative-spieltheorie" class="nav-link active" data-scroll-target="#nicht-kooperative-spieltheorie"><span class="header-section-number">7.1</span> Nicht kooperative Spieltheorie</a></li>
+  <li><a href="#simultane-spiele" id="toc-simultane-spiele" class="nav-link" data-scroll-target="#simultane-spiele"><span class="header-section-number">7.2</span> Simultane Spiele</a>
+  <ul class="collapse">
+  <li><a href="#grundsätzliche-struktur-eines-spiels" id="toc-grundsätzliche-struktur-eines-spiels" class="nav-link" data-scroll-target="#grundsätzliche-struktur-eines-spiels"><span class="header-section-number">7.2.1</span> Grundsätzliche Struktur eines Spiels</a></li>
+  <li><a href="#definition-nash-gleichgewicht" id="toc-definition-nash-gleichgewicht" class="nav-link" data-scroll-target="#definition-nash-gleichgewicht"><span class="header-section-number">7.2.2</span> Definition Nash-Gleichgewicht</a></li>
+  <li><a href="#typische-spielkonstellationen" id="toc-typische-spielkonstellationen" class="nav-link" data-scroll-target="#typische-spielkonstellationen"><span class="header-section-number">7.2.3</span> Typische Spielkonstellationen</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -235,8 +313,1030 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="nicht-kooperative-spieltheorie" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="nicht-kooperative-spieltheorie"><span class="header-section-number">7.1</span> Nicht kooperative Spieltheorie</h2>
+<ul>
+<li><p>Modellierung strategischer Interaktion</p></li>
+<li><p>Der Erfolg des Verhaltens eines Akteurs ist abhängig vom Verhalten anderer Akteure</p></li>
+<li><p>Die Akteure können sich nicht absprechen</p></li>
+</ul>
+</section>
+<section id="simultane-spiele" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="simultane-spiele"><span class="header-section-number">7.2</span> Simultane Spiele</h2>
+<section id="grundsätzliche-struktur-eines-spiels" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="grundsätzliche-struktur-eines-spiels"><span class="header-section-number">7.2.1</span> Grundsätzliche Struktur eines Spiels</h3>
+<div id="78e93b1c" class="cell" data-message="false" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ggplot() <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span> <span class="fl">.5</span>, y<span class="op">=</span> <span class="dv">2</span>   , label<span class="op">=</span><span class="st">'a'</span>) <span class="op">+\</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=</span>  <span class="fl">.75</span>, label<span class="op">=</span><span class="st">'A'</span>) <span class="op">+\</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span> <span class="fl">.5</span>, y<span class="op">=-</span><span class="dv">1</span>   , label<span class="op">=</span><span class="st">'b'</span>) <span class="op">+\</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span><span class="st">'B'</span>) <span class="op">+\</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="fl">1.5</span>, y<span class="op">=</span> <span class="dv">2</span>   , label<span class="op">=</span><span class="st">'c'</span>) <span class="op">+\</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span>  <span class="fl">.5</span>, y<span class="op">=</span>  <span class="fl">.75</span>, label<span class="op">=</span><span class="st">'C'</span>) <span class="op">+\</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="fl">1.5</span>, y<span class="op">=-</span><span class="dv">1</span>   , label<span class="op">=</span><span class="st">'d'</span>) <span class="op">+\</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span>  <span class="fl">.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span><span class="st">'D'</span>) <span class="op">+\</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="dv">1</span>  , y<span class="op">=</span> <span class="fl">3.3</span> , label<span class="op">=</span><span class="st">'links'</span>)<span class="op">+\</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="dv">1</span>  , y<span class="op">=</span> <span class="fl">3.3</span> , label<span class="op">=</span><span class="st">'rechts'</span>)<span class="op">+\</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=</span> <span class="fl">1.375</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'oben'</span>)<span class="op">+\</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=-</span><span class="fl">1.625</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'unten'</span>)<span class="op">+\</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="dv">0</span> , y<span class="op">=</span> <span class="dv">4</span> ,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          fontface <span class="op">=</span> <span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'Spieler 2'</span>)<span class="op">+\</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.7</span> , y<span class="op">=</span> <span class="dv">0</span> , angle<span class="op">=</span><span class="dv">90</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          fontface <span class="op">=</span> <span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'Spieler 1'</span>)<span class="op">+\</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=</span> <span class="dv">0</span>, yend<span class="op">=</span> <span class="dv">0</span>) <span class="op">+\</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=</span> <span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=-</span><span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=-</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=</span> <span class="dv">0</span>,  xend<span class="op">=</span> <span class="dv">0</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=</span> <span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>theme_void()<span class="op">+\</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>labs(title<span class="op">=</span><span class="st">'Auszahlungen in einem simultanen Spiel'</span> <span class="co">#,</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># caption = 'Caption'</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="dOsF9W"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("dOsF9W").appendChild(div);
+                    };
+                    var e = document.getElementById("dOsF9W");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+   <div id="n38PDu"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   var containerDiv = document.getElementById("n38PDu");
+   var observer = new ResizeObserver(function(entries) {
+       for (let entry of entries) {
+           var width = containerDiv.clientWidth
+           if (entry.contentBoxSize && width > 0) {
+           
+               // Render plot
+               if (observer) {
+                   observer.disconnect();
+                   observer = null;
+               }
+
+               var plotSpec={
+"mapping":{
+},
+"data_meta":{
+},
+"theme":{
+"name":"classic",
+"line":"blank",
+"axis":"blank"
+},
+"ggtitle":{
+"text":"Auszahlungen in einem simultanen Spiel"
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-0.5,
+"y":2.0,
+"label":"a",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-1.5,
+"y":0.75,
+"label":"A",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-0.5,
+"y":-1.0,
+"label":"b",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-1.5,
+"y":-2.25,
+"label":"B",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":1.5,
+"y":2.0,
+"label":"c",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":0.5,
+"y":0.75,
+"label":"C",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":1.5,
+"y":-1.0,
+"label":"d",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":0.5,
+"y":-2.25,
+"label":"D",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-1.0,
+"y":3.3,
+"label":"links",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":1.0,
+"y":3.3,
+"label":"rechts",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.2,
+"y":1.375,
+"angle":90.0,
+"label":"oben",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.2,
+"y":-1.625,
+"angle":90.0,
+"label":"unten",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":0.0,
+"y":4.0,
+"fontface":"bold",
+"label":"Spieler 2",
+"data":{
+}
+},{
+"geom":"text",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.7,
+"y":0.0,
+"angle":90.0,
+"fontface":"bold",
+"label":"Spieler 1",
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.0,
+"xend":2.0,
+"y":0.0,
+"yend":0.0,
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.0,
+"xend":2.0,
+"y":3.0,
+"yend":3.0,
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.0,
+"xend":2.0,
+"y":-3.0,
+"yend":-3.0,
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":-2.0,
+"xend":-2.0,
+"y":-3.0,
+"yend":3.0,
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":0.0,
+"xend":0.0,
+"y":-3.0,
+"yend":3.0,
+"data":{
+}
+},{
+"geom":"segment",
+"mapping":{
+},
+"data_meta":{
+},
+"x":2.0,
+"xend":2.0,
+"y":-3.0,
+"yend":3.0,
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"2"
+};
+               window.letsPlotCall(function() {
+       
+               var toolbar = null;
+               var plotContainer = containerDiv;               
+               
+                   var options = {
+                       sizing: {
+                           width_mode: "min",
+                           height_mode: "scaled",
+                           width: width
+                       }
+                   };
+                   var fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, -1, -1, plotContainer, options);
+                   if (toolbar) {
+                     toolbar.bind(fig);
+                   }
+               });
+               
+               break;
+           }
+       }
+   });
+   
+   observer.observe(containerDiv);
+   
+   // ----------
+   })();
+   
+   </script>
+</div>
+</div>
+</section>
+<section id="definition-nash-gleichgewicht" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="definition-nash-gleichgewicht"><span class="header-section-number">7.2.2</span> Definition Nash-Gleichgewicht</h3>
+<p>Ein Nash-Gleichgewicht liegt vor, wenn jeder Spieler die beste Antwort auf die beste Strategie des Gegenspielers spielt.</p>
+<p>Formal:</p>
+<p><span class="math inline">\(u_{i}\left(s_{i}^{*},s_{-i}^{*}\right)\geq u_{i}\left(s_{i},s_{-i}^{*}\right)\mbox{ für alle }i,\mbox{ }s_{i}\in S_{i}\)</span></p>
+<p>Intuition: Ein Nash-Gleichgewicht liegt vor, wenn kein Spieler mehr die Möglichkeit hat, seine Situation durch eine <strong>nur eigene</strong> Entscheidungsänderung zu verbessern.</p>
+<p>Es kann kein oder ein Nash-Gleichgewicht existieren oder mehrere Nash-Gleichgewichte</p>
+</section>
+<section id="typische-spielkonstellationen" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="typische-spielkonstellationen"><span class="header-section-number">7.2.3</span> Typische Spielkonstellationen</h3>
+<section id="allgemeine-struktur" class="level4" data-number="7.2.3.1">
+<h4 data-number="7.2.3.1" class="anchored" data-anchor-id="allgemeine-struktur"><span class="header-section-number">7.2.3.1</span> Allgemeine Struktur</h4>
+<div id="ed9ead33" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Ganzzahlen zwischen 0 und 9 generieren</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">123</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatierte Bimatrix ausgeben</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"     l    r\n o  {A},{a}  {C},{c}\n # u  {B},{b}  {D},{d}")</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lets_plot <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>LetsPlot.setup_html()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ggplot() <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span> <span class="fl">.5</span>, y<span class="op">=</span> <span class="dv">2</span>   , label<span class="op">=</span>a) <span class="op">+\</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=</span>  <span class="fl">.75</span>, label<span class="op">=</span>A) <span class="op">+\</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span> <span class="fl">.5</span>, y<span class="op">=-</span><span class="dv">1</span>   , label<span class="op">=</span>b) <span class="op">+\</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span>B) <span class="op">+\</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="fl">1.5</span>, y<span class="op">=</span> <span class="dv">2</span>   , label<span class="op">=</span>c) <span class="op">+\</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span>  <span class="fl">.5</span>, y<span class="op">=</span>  <span class="fl">.75</span>, label<span class="op">=</span>C) <span class="op">+\</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="fl">1.5</span>, y<span class="op">=-</span><span class="dv">1</span>   , label<span class="op">=</span>d) <span class="op">+\</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span>  <span class="fl">.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span>D) <span class="op">+\</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="dv">1</span>  , y<span class="op">=</span> <span class="fl">3.3</span> , label<span class="op">=</span><span class="st">'links'</span>)<span class="op">+\</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="dv">1</span>  , y<span class="op">=</span> <span class="fl">3.3</span> , label<span class="op">=</span><span class="st">'rechts'</span>)<span class="op">+\</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=</span> <span class="fl">1.375</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'oben'</span>)<span class="op">+\</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=-</span><span class="fl">1.625</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'unten'</span>)<span class="op">+\</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=</span> <span class="dv">0</span> , y<span class="op">=</span> <span class="dv">4</span> ,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>          fontface <span class="op">=</span> <span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'Spieler 2'</span>)<span class="op">+\</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>geom_text(x<span class="op">=-</span><span class="fl">2.7</span> , y<span class="op">=</span> <span class="dv">0</span> , angle<span class="op">=</span><span class="dv">90</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>          fontface <span class="op">=</span> <span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'SPieler 1'</span>)<span class="op">+\</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=</span> <span class="dv">0</span>, yend<span class="op">=</span> <span class="dv">0</span>) <span class="op">+\</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=</span> <span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=-</span><span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=-</span><span class="dv">2</span>,  xend<span class="op">=-</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=</span> <span class="dv">0</span>,  xend<span class="op">=</span> <span class="dv">0</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>geom_segment(x<span class="op">=</span> <span class="dv">2</span>,  xend<span class="op">=</span> <span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span> <span class="dv">3</span>) <span class="op">+\</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>theme_void()<span class="op">+\</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>labs(title<span class="op">=</span><span class="st">'Auszahlungen in einem simultanen Spiel'</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktionen für Nash-Bedingungen</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ol_nash(A, B, a, c):</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ol"</span> <span class="cf">if</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c) <span class="cf">else</span> <span class="st">"not_ol"</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ul_nash(B, A, b, d):</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ul"</span> <span class="cf">if</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d) <span class="cf">else</span> <span class="st">"not_ul"</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_or_nash(C, D, c, a):</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"or"</span> <span class="cf">if</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a) <span class="cf">else</span> <span class="st">"not_or"</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ur_nash(D, C, d, b):</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ur"</span> <span class="cf">if</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b) <span class="cf">else</span> <span class="st">"not_ur"</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="co">#print(Nash_GG_filtered)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="IJvv2d"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("IJvv2d").appendChild(div);
+                    };
+                    var e = document.getElementById("IJvv2d");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+</div>
+<div id="a4771f8b" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ur']</code></pre>
+</div>
+</div>
+</section>
+<section id="koordinationsspiel" class="level4" data-number="7.2.3.2">
+<h4 data-number="7.2.3.2" class="anchored" data-anchor-id="koordinationsspiel"><span class="header-section-number">7.2.3.2</span> Koordinationsspiel</h4>
+<div id="c81f9d59" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">123</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Ganzzahlen zwischen 0 und 9 generieren</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> random.randint(<span class="dv">1</span>, <span class="dv">9</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> B</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> A</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> A</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> B</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> C</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> D</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatierte Bimatrix ausgeben</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#print(f"     l    r\n o  #{A},{a}  {C},{c}\n u  {B},{b} # {D},{d}")</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_plot():</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    LetsPlot.setup_html()</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        ggplot() <span class="op">+</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">0.5</span>, y<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>a) <span class="op">+</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=</span><span class="fl">0.75</span>, label<span class="op">=</span>A) <span class="op">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">0.5</span>, y<span class="op">=-</span><span class="dv">1</span>, label<span class="op">=</span>b) <span class="op">+</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">1.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span>B) <span class="op">+</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="fl">1.5</span>, y<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>c) <span class="op">+</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="fl">0.5</span>, y<span class="op">=</span><span class="fl">0.75</span>, label<span class="op">=</span>C) <span class="op">+</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="fl">1.5</span>, y<span class="op">=-</span><span class="dv">1</span>, label<span class="op">=</span>d) <span class="op">+</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="fl">0.5</span>, y<span class="op">=-</span><span class="fl">2.25</span>, label<span class="op">=</span>D) <span class="op">+</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="dv">1</span>, y<span class="op">=</span><span class="fl">3.3</span>, label<span class="op">=</span><span class="st">'links'</span>) <span class="op">+</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="fl">3.3</span>, label<span class="op">=</span><span class="st">'rechts'</span>) <span class="op">+</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=</span><span class="fl">1.375</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'oben'</span>) <span class="op">+</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">2.2</span>, y<span class="op">=-</span><span class="fl">1.625</span>, angle<span class="op">=</span><span class="dv">90</span>, label<span class="op">=</span><span class="st">'unten'</span>) <span class="op">+</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=</span><span class="dv">0</span> , y<span class="op">=</span><span class="dv">4</span> , fontface<span class="op">=</span><span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'Spieler 2'</span>) <span class="op">+</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        geom_text(x<span class="op">=-</span><span class="fl">2.7</span> , y<span class="op">=</span><span class="dv">0</span> , angle<span class="op">=</span><span class="dv">90</span> , fontface<span class="op">=</span><span class="st">"bold"</span>, label<span class="op">=</span><span class="st">'Spieler 1'</span>) <span class="op">+</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=-</span><span class="dv">2</span>, xend<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">0</span>, yend<span class="op">=</span><span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=-</span><span class="dv">2</span>, xend<span class="op">=</span><span class="dv">2</span>, y<span class="op">=</span><span class="dv">3</span>, yend<span class="op">=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=-</span><span class="dv">2</span>, xend<span class="op">=</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=-</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=-</span><span class="dv">2</span>, xend<span class="op">=-</span><span class="dv">2</span>, y<span class="op">=-</span><span class="dv">3</span>, yend<span class="op">=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=</span><span class="dv">0</span> , xend<span class="op">=</span><span class="dv">0</span> , y<span class="op">=-</span><span class="dv">3</span> , yend<span class="op">=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        geom_segment(x<span class="op">=</span><span class="dv">2</span> , xend<span class="op">=</span><span class="dv">2</span> , y<span class="op">=-</span><span class="dv">3</span> , yend<span class="op">=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        theme_void() <span class="op">+</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        labs(title<span class="op">=</span><span class="st">'Auszahlungen in einem simultanen Spiel'</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot()</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktionen für Nash-Bedingungen</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ol_nash(A, B, a, c):</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ol"</span> <span class="cf">if</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c) <span class="cf">else</span> <span class="st">"not_ol"</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ul_nash(B, A, b, d):</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ul"</span> <span class="cf">if</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d) <span class="cf">else</span> <span class="st">"not_ul"</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_or_nash(C, D, c, a):</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"or"</span> <span class="cf">if</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a) <span class="cf">else</span> <span class="st">"not_or"</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ur_nash(D, C, d, b):</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ur"</span> <span class="cf">if</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b) <span class="cf">else</span> <span class="st">"not_ur"</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="rfXArg"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("rfXArg").appendChild(div);
+                    };
+                    var e = document.getElementById("rfXArg");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ul', 'or']</code></pre>
+</div>
+</div>
+</section>
+<section id="chicken-game" class="level4" data-number="7.2.3.3">
+<h4 data-number="7.2.3.3" class="anchored" data-anchor-id="chicken-game"><span class="header-section-number">7.2.3.3</span> Chicken Game</h4>
+<div id="e4b85c84" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Ganzzahlen zwischen 0 und 9 generieren</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> random.randint(<span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> random.randint(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> random.randint(<span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> random.randint(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatierte Bimatrix ausgeben</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot()</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktionen für Nash-Bedingungen</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ol_nash(A, B, a, c):</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ol"</span> <span class="cf">if</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c) <span class="cf">else</span> <span class="st">"not_ol"</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ul_nash(B, A, b, d):</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ul"</span> <span class="cf">if</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d) <span class="cf">else</span> <span class="st">"not_ul"</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_or_nash(C, D, c, a):</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"or"</span> <span class="cf">if</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a) <span class="cf">else</span> <span class="st">"not_or"</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ur_nash(D, C, d, b):</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ur"</span> <span class="cf">if</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b) <span class="cf">else</span> <span class="st">"not_ur"</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="vJvSpk"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("vJvSpk").appendChild(div);
+                    };
+                    var e = document.getElementById("vJvSpk");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ul', 'or']</code></pre>
+</div>
+</div>
+</section>
+<section id="geschlechterkampf" class="level4" data-number="7.2.3.4">
+<h4 data-number="7.2.3.4" class="anchored" data-anchor-id="geschlechterkampf"><span class="header-section-number">7.2.3.4</span> Geschlechterkampf</h4>
+<div id="8194ac13" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Ganzzahlen zwischen 0 und 9 generieren</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> random.randint(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> random.randint(<span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> random.randint(<span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> random.randint(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatierte Bimatrix ausgeben</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktionen für Nash-Bedingungen</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ol_nash(A, B, a, c):</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ol"</span> <span class="cf">if</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c) <span class="cf">else</span> <span class="st">"not_ol"</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ul_nash(B, A, b, d):</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ul"</span> <span class="cf">if</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d) <span class="cf">else</span> <span class="st">"not_ul"</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_or_nash(C, D, c, a):</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"or"</span> <span class="cf">if</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a) <span class="cf">else</span> <span class="st">"not_or"</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ur_nash(D, C, d, b):</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ur"</span> <span class="cf">if</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b) <span class="cf">else</span> <span class="st">"not_ur"</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="g5cfQj"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("g5cfQj").appendChild(div);
+                    };
+                    var e = document.getElementById("g5cfQj");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ol', 'ur']</code></pre>
+</div>
+</div>
+</section>
+<section id="spiel-ohne-gleichgewicht" class="level4" data-number="7.2.3.5">
+<h4 data-number="7.2.3.5" class="anchored" data-anchor-id="spiel-ohne-gleichgewicht"><span class="header-section-number">7.2.3.5</span> Spiel ohne Gleichgewicht</h4>
+<div id="614ccf28" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    B <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    C <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bedingungen prüfen</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    cond1 <span class="op">=</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    cond2 <span class="op">=</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    cond3 <span class="op">=</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    cond4 <span class="op">=</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wenn keine Bedingung erfüllt ist, Schleife beenden</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> (cond1 <span class="kw">or</span> cond2 <span class="kw">or</span> cond3 <span class="kw">or</span> cond4):</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot()</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="UDyKXv"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("UDyKXv").appendChild(div);
+                    };
+                    var e = document.getElementById("UDyKXv");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[]</code></pre>
+</div>
+</div>
+</section>
+<section id="gefangenendilemma" class="level4" data-number="7.2.3.6">
+<h4 data-number="7.2.3.6" class="anchored" data-anchor-id="gefangenendilemma"><span class="header-section-number">7.2.3.6</span> Gefangenendilemma</h4>
+<div id="1823acdb" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Ganzzahlen zwischen 0 und 9 generieren</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> random.randint(<span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> random.randint(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> random.randint(<span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> random.randint(<span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> random.randint(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatierte Bimatrix ausgeben</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plot</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktionen für Nash-Bedingungen</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ol_nash(A, B, a, c):</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ol"</span> <span class="cf">if</span> (A <span class="op">&gt;=</span> B) <span class="kw">and</span> (a <span class="op">&gt;=</span> c) <span class="cf">else</span> <span class="st">"not_ol"</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ul_nash(B, A, b, d):</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ul"</span> <span class="cf">if</span> (B <span class="op">&gt;=</span> A) <span class="kw">and</span> (b <span class="op">&gt;=</span> d) <span class="cf">else</span> <span class="st">"not_ul"</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_or_nash(C, D, c, a):</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"or"</span> <span class="cf">if</span> (C <span class="op">&gt;=</span> D) <span class="kw">and</span> (c <span class="op">&gt;=</span> a) <span class="cf">else</span> <span class="st">"not_or"</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_ur_nash(D, C, d, b):</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"ur"</span> <span class="cf">if</span> (D <span class="op">&gt;=</span> C) <span class="kw">and</span> (d <span class="op">&gt;=</span> b) <span class="cf">else</span> <span class="st">"not_ur"</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Nash-Bedingungen überprüfen und Strings zuweisen</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ol <span class="op">=</span> is_ol_nash(A, B, a, c)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ul <span class="op">=</span> is_ul_nash(B, A, b, d)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>Cand_Nash_or <span class="op">=</span> is_or_nash(C, D, c, a)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>Cand_Nash_ur <span class="op">=</span> is_ur_nash(D, C, d, b)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnisse kombinieren und NAs entfernen</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>Nash_GG <span class="op">=</span> np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>Nash_GG_filtered <span class="op">=</span> []</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> Nash_GG:</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> element <span class="op">==</span> <span class="st">"ol"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ul"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"or"</span> <span class="kw">or</span> element <span class="op">==</span> <span class="st">"ur"</span>:</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    Nash_GG_filtered.append(element)</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Ergebnis ausgeben</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Nash_GG_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+            <div id="zIGU06"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.5.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("zIGU06").appendChild(div);
+                    };
+                    var e = document.getElementById("zIGU06");
+                    e.appendChild(script);
+                })()
+            </script>
+            
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ur']</code></pre>
+</div>
+</div>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

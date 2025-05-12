@@ -1,2 +1,478 @@
 # Spieltheorie
 
+## Nicht kooperative Spieltheorie
+
+- Modellierung strategischer Interaktion
+
+- Der Erfolg des Verhaltens eines Akteurs ist abhängig vom Verhalten anderer Akteure
+
+- Die Akteure können sich nicht absprechen
+
+## Simultane Spiele
+
+### Grundsätzliche Struktur eines Spiels
+
+[![Allgemeines Struktur eines Spiels](figure/Allgemeine-Struktur.png){width="50%"}]::
+
+```{python}
+#| message: false
+#| warning: false
+
+from lets_plot import *
+
+LetsPlot.setup_html()
+
+ggplot() + \
+geom_text(x=- .5, y= 2   , label='a') +\
+geom_text(x=-1.5, y=  .75, label='A') +\
+geom_text(x=- .5, y=-1   , label='b') +\
+geom_text(x=-1.5, y=-2.25, label='B') +\
+geom_text(x= 1.5, y= 2   , label='c') +\
+geom_text(x=  .5, y=  .75, label='C') +\
+geom_text(x= 1.5, y=-1   , label='d') +\
+geom_text(x=  .5, y=-2.25, label='D') +\
+geom_text(x=-1  , y= 3.3 , label='links')+\
+geom_text(x= 1  , y= 3.3 , label='rechts')+\
+geom_text(x=-2.2, y= 1.375, angle=90, label='oben')+\
+geom_text(x=-2.2, y=-1.625, angle=90, label='unten')+\
+geom_text(x= 0 , y= 4 ,
+          fontface = "bold", label='Spieler 2')+\
+geom_text(x=-2.7 , y= 0 , angle=90,
+          fontface = "bold", label='Spieler 1')+\
+geom_segment(x=-2,  xend= 2, y= 0, yend= 0) +\
+geom_segment(x=-2,  xend= 2, y= 3, yend= 3) +\
+geom_segment(x=-2,  xend= 2, y=-3, yend=-3) +\
+geom_segment(x=-2,  xend=-2, y=-3, yend= 3) +\
+geom_segment(x= 0,  xend= 0, y=-3, yend= 3) +\
+geom_segment(x= 2,  xend= 2, y=-3, yend= 3) +\
+theme_void()+\
+labs(title='Auszahlungen in einem simultanen Spiel' #,
+    # caption = 'Caption'
+)
+
+```
+
+
+
+### Definition Nash-Gleichgewicht
+
+Ein Nash-Gleichgewicht liegt vor, wenn jeder Spieler die beste Antwort auf die beste Strategie des Gegenspielers spielt.
+
+Formal:
+
+$u_{i}\left(s_{i}^{*},s_{-i}^{*}\right)\geq u_{i}\left(s_{i},s_{-i}^{*}\right)\mbox{ für alle }i,\mbox{ }s_{i}\in S_{i}$
+
+Intuition: Ein Nash-Gleichgewicht liegt vor, wenn kein Spieler mehr die Möglichkeit hat, seine Situation durch eine **nur eigene** Entscheidungsänderung zu verbessern.
+
+
+Es kann kein oder ein Nash-Gleichgewicht existieren oder mehrere Nash-Gleichgewichte
+
+### Typische Spielkonstellationen
+
+#### Allgemeine Struktur
+
+
+```{python}
+
+import numpy as np
+
+import random
+
+# Zufällige Ganzzahlen zwischen 0 und 9 generieren
+
+random.seed(123)
+
+A = random.randint(0, 9)
+B = random.randint(0, 9)
+C = random.randint(0, 9)
+D = random.randint(0, 9)
+a = random.randint(0, 9)
+b = random.randint(0, 9)
+c = random.randint(0, 9)
+d = random.randint(0, 9)
+
+# Formatierte Bimatrix ausgeben
+# print(f"     l    r\n o  {A},{a}  {C},{c}\n # u  {B},{b}  {D},{d}")
+
+from lets_plot import *
+
+LetsPlot.setup_html()
+
+ggplot() + \
+geom_text(x=- .5, y= 2   , label=a) +\
+geom_text(x=-1.5, y=  .75, label=A) +\
+geom_text(x=- .5, y=-1   , label=b) +\
+geom_text(x=-1.5, y=-2.25, label=B) +\
+geom_text(x= 1.5, y= 2   , label=c) +\
+geom_text(x=  .5, y=  .75, label=C) +\
+geom_text(x= 1.5, y=-1   , label=d) +\
+geom_text(x=  .5, y=-2.25, label=D) +\
+geom_text(x=-1  , y= 3.3 , label='links')+\
+geom_text(x= 1  , y= 3.3 , label='rechts')+\
+geom_text(x=-2.2, y= 1.375, angle=90, label='oben')+\
+geom_text(x=-2.2, y=-1.625, angle=90, label='unten')+\
+geom_text(x= 0 , y= 4 ,
+          fontface = "bold", label='Spieler 2')+\
+geom_text(x=-2.7 , y= 0 , angle=90,
+          fontface = "bold", label='SPieler 1')+\
+geom_segment(x=-2,  xend= 2, y= 0, yend= 0) +\
+geom_segment(x=-2,  xend= 2, y= 3, yend= 3) +\
+geom_segment(x=-2,  xend= 2, y=-3, yend=-3) +\
+geom_segment(x=-2,  xend=-2, y=-3, yend= 3) +\
+geom_segment(x= 0,  xend= 0, y=-3, yend= 3) +\
+geom_segment(x= 2,  xend= 2, y=-3, yend= 3) +\
+theme_void()+\
+labs(title='Auszahlungen in einem simultanen Spiel')
+
+
+
+# Funktionen für Nash-Bedingungen
+def is_ol_nash(A, B, a, c):
+  return "ol" if (A >= B) and (a >= c) else "not_ol"
+
+def is_ul_nash(B, A, b, d):
+  return "ul" if (B >= A) and (b >= d) else "not_ul"
+
+def is_or_nash(C, D, c, a):
+  return "or" if (C >= D) and (c >= a) else "not_or"
+
+def is_ur_nash(D, C, d, b):
+  return "ur" if (D >= C) and (d >= b) else "not_ur"
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+#print(Nash_GG_filtered)
+
+```
+
+```{python}
+print(Nash_GG_filtered)
+```
+
+#### Koordinationsspiel
+
+[![Koordinationsspiel](figure/Koordinationsspiel-1.png){width="50%"}]::
+
+```{python}
+
+import numpy as np
+
+import random
+
+random.seed(123)
+
+# Zufällige Ganzzahlen zwischen 0 und 9 generieren
+A = 0
+B = random.randint(1, 9)
+C = B
+D = A
+a = A
+b = B
+c = C
+d = D
+
+# Formatierte Bimatrix ausgeben
+#print(f"     l    r\n o  #{A},{a}  {C},{c}\n u  {B},{b} # {D},{d}")
+
+
+def create_plot():
+    LetsPlot.setup_html()
+    return (
+        ggplot() +
+        geom_text(x=-0.5, y=2, label=a) +
+        geom_text(x=-1.5, y=0.75, label=A) +
+        geom_text(x=-0.5, y=-1, label=b) +
+        geom_text(x=-1.5, y=-2.25, label=B) +
+        geom_text(x=1.5, y=2, label=c) +
+        geom_text(x=0.5, y=0.75, label=C) +
+        geom_text(x=1.5, y=-1, label=d) +
+        geom_text(x=0.5, y=-2.25, label=D) +
+        geom_text(x=-1, y=3.3, label='links') +
+        geom_text(x=1, y=3.3, label='rechts') +
+        geom_text(x=-2.2, y=1.375, angle=90, label='oben') +
+        geom_text(x=-2.2, y=-1.625, angle=90, label='unten') +
+        geom_text(x=0 , y=4 , fontface="bold", label='Spieler 2') +
+        geom_text(x=-2.7 , y=0 , angle=90 , fontface="bold", label='Spieler 1') +
+        geom_segment(x=-2, xend=2, y=0, yend=0) +
+        geom_segment(x=-2, xend=2, y=3, yend=3) +
+        geom_segment(x=-2, xend=2, y=-3, yend=-3) +
+        geom_segment(x=-2, xend=-2, y=-3, yend=3) +
+        geom_segment(x=0 , xend=0 , y=-3 , yend=3) +
+        geom_segment(x=2 , xend=2 , y=-3 , yend=3) +
+        theme_void() +
+        labs(title='Auszahlungen in einem simultanen Spiel')
+    )
+
+    
+plot = create_plot()
+
+plot
+
+
+# Funktionen für Nash-Bedingungen
+def is_ol_nash(A, B, a, c):
+  return "ol" if (A >= B) and (a >= c) else "not_ol"
+
+def is_ul_nash(B, A, b, d):
+  return "ul" if (B >= A) and (b >= d) else "not_ul"
+
+def is_or_nash(C, D, c, a):
+  return "or" if (C >= D) and (c >= a) else "not_or"
+
+def is_ur_nash(D, C, d, b):
+  return "ur" if (D >= C) and (d >= b) else "not_ur"
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+print(Nash_GG_filtered)
+```
+
+#### Chicken Game
+
+[![Chicken Game](figure/Chicken-Game-1.png){width="50%"}]::
+
+```{python}
+
+import numpy as np
+
+import random
+
+# Zufällige Ganzzahlen zwischen 0 und 9 generieren
+A = random.randint(5, 7)
+B = random.randint(8, 9)
+C = random.randint(2, 4)
+D = random.randint(0, 1)
+a = random.randint(5, 7)
+b = random.randint(2, 4)
+c = random.randint(8, 9)
+d = random.randint(0, 1)
+
+# Formatierte Bimatrix ausgeben
+# print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")
+
+plot = create_plot()
+
+plot
+
+
+# Funktionen für Nash-Bedingungen
+def is_ol_nash(A, B, a, c):
+  return "ol" if (A >= B) and (a >= c) else "not_ol"
+
+def is_ul_nash(B, A, b, d):
+  return "ul" if (B >= A) and (b >= d) else "not_ul"
+
+def is_or_nash(C, D, c, a):
+  return "or" if (C >= D) and (c >= a) else "not_or"
+
+def is_ur_nash(D, C, d, b):
+  return "ur" if (D >= C) and (d >= b) else "not_ur"
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+print(Nash_GG_filtered)
+
+```
+
+#### Geschlechterkampf
+
+[![Geschlechterkampf](figure/Geschlechterkampf-1.png){width="50%"}]::
+
+```{python}
+
+import numpy as np
+
+import random
+
+# Zufällige Ganzzahlen zwischen 0 und 9 generieren
+A = random.randint(8, 9)
+B = random.randint(0, 2)
+C = random.randint(3, 5)
+D = random.randint(6, 7)
+a = random.randint(6, 7)
+b = random.randint(0, 2)
+c = random.randint(3, 5)
+d = random.randint(8, 9)
+
+# Formatierte Bimatrix ausgeben
+# print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")
+
+plot = create_plot()
+
+plot
+
+# Funktionen für Nash-Bedingungen
+def is_ol_nash(A, B, a, c):
+  return "ol" if (A >= B) and (a >= c) else "not_ol"
+
+def is_ul_nash(B, A, b, d):
+  return "ul" if (B >= A) and (b >= d) else "not_ul"
+
+def is_or_nash(C, D, c, a):
+  return "or" if (C >= D) and (c >= a) else "not_or"
+
+def is_ur_nash(D, C, d, b):
+  return "ur" if (D >= C) and (d >= b) else "not_ur"
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+print(Nash_GG_filtered)
+
+```
+
+#### Spiel ohne Gleichgewicht
+
+```{python}
+
+import numpy as np
+import random
+
+while True:
+    A = random.randint(0, 9)
+    a = random.randint(0, 9)
+    B = random.randint(0, 9)
+    b = random.randint(0, 9)
+    C = random.randint(0, 9)
+    c = random.randint(0, 9)
+    D = random.randint(0, 9)
+    d = random.randint(0, 9)
+
+    # Bedingungen prüfen
+    cond1 = (A >= B) and (a >= c)
+    cond2 = (B >= A) and (b >= d)
+    cond3 = (C >= D) and (c >= a)
+    cond4 = (D >= C) and (d >= b)
+
+    # Wenn keine Bedingung erfüllt ist, Schleife beenden
+    if not (cond1 or cond2 or cond3 or cond4):
+        break
+
+plot = create_plot()
+
+plot
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+print(Nash_GG_filtered)
+```
+
+
+
+#### Gefangenendilemma
+
+[![Gefangenendilemma](figure/Gefangenendilemma-1.png){width="50%"}]::
+
+```{python}
+
+
+import numpy as np
+
+import random
+
+# Zufällige Ganzzahlen zwischen 0 und 9 generieren
+A = random.randint(5, 7)
+B = random.randint(8, 9)
+C = random.randint(0, 1)
+D = random.randint(2, 4)
+a = random.randint(5, 7)
+b = random.randint(0, 1)
+c = random.randint(8, 9)
+d = random.randint(2, 4)
+
+# Formatierte Bimatrix ausgeben
+# print(f"     l    r\n o  {A},{a}  {C},{c}\n u  {B},{b}  {D},{d}")
+
+plot = create_plot()
+
+plot
+
+# Funktionen für Nash-Bedingungen
+def is_ol_nash(A, B, a, c):
+  return "ol" if (A >= B) and (a >= c) else "not_ol"
+
+def is_ul_nash(B, A, b, d):
+  return "ul" if (B >= A) and (b >= d) else "not_ul"
+
+def is_or_nash(C, D, c, a):
+  return "or" if (C >= D) and (c >= a) else "not_or"
+
+def is_ur_nash(D, C, d, b):
+  return "ur" if (D >= C) and (d >= b) else "not_ur"
+
+# Nash-Bedingungen überprüfen und Strings zuweisen
+Cand_Nash_ol = is_ol_nash(A, B, a, c)
+Cand_Nash_ul = is_ul_nash(B, A, b, d)
+Cand_Nash_or = is_or_nash(C, D, c, a)
+Cand_Nash_ur = is_ur_nash(D, C, d, b)
+
+# Ergebnisse kombinieren und NAs entfernen
+Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
+Nash_GG_filtered = []
+for element in Nash_GG:
+  if element == "ol" or element == "ul" or element == "or" or element == "ur":
+    Nash_GG_filtered.append(element)
+
+# Ergebnis ausgeben
+print(Nash_GG_filtered)
+```
+
