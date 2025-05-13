@@ -12,8 +12,6 @@
 
 ### Grundsätzliche Struktur eines Spiels
 
-[![Allgemeines Struktur eines Spiels](figure/Allgemeine-Struktur.png){width="50%"}]::
-
 ```{python}
 #| message: false
 #| warning: false
@@ -53,7 +51,6 @@ labs(title='Auszahlungen in einem simultanen Spiel' #,
 ```
 
 
-
 ### Definition Nash-Gleichgewicht
 
 Ein Nash-Gleichgewicht liegt vor, wenn jeder Spieler die beste Antwort auf die beste Strategie des Gegenspielers spielt.
@@ -67,10 +64,10 @@ Intuition: Ein Nash-Gleichgewicht liegt vor, wenn kein Spieler mehr die Möglich
 
 Es kann kein oder ein Nash-Gleichgewicht existieren oder mehrere Nash-Gleichgewichte
 
+
 ### Typische Spielkonstellationen
 
 #### Allgemeine Struktur
-
 
 ```{python}
 
@@ -114,7 +111,7 @@ geom_text(x=-2.2, y=-1.625, angle=90, label='unten')+\
 geom_text(x= 0 , y= 4 ,
           fontface = "bold", label='Spieler 2')+\
 geom_text(x=-2.7 , y= 0 , angle=90,
-          fontface = "bold", label='SPieler 1')+\
+          fontface = "bold", label='Spieler 1')+\
 geom_segment(x=-2,  xend= 2, y= 0, yend= 0) +\
 geom_segment(x=-2,  xend= 2, y= 3, yend= 3) +\
 geom_segment(x=-2,  xend= 2, y=-3, yend=-3) +\
@@ -124,46 +121,13 @@ geom_segment(x= 2,  xend= 2, y=-3, yend= 3) +\
 theme_void()+\
 labs(title='Auszahlungen in einem simultanen Spiel')
 
-
-
-# Funktionen für Nash-Bedingungen
-def is_ol_nash(A, B, a, c):
-  return "ol" if (A >= B) and (a >= c) else "not_ol"
-
-def is_ul_nash(B, A, b, d):
-  return "ul" if (B >= A) and (b >= d) else "not_ul"
-
-def is_or_nash(C, D, c, a):
-  return "or" if (C >= D) and (c >= a) else "not_or"
-
-def is_ur_nash(D, C, d, b):
-  return "ur" if (D >= C) and (d >= b) else "not_ur"
-
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-#print(Nash_GG_filtered)
-
 ```
 
-```{python}
-print(Nash_GG_filtered)
-```
+
 
 #### Koordinationsspiel
 
-[![Koordinationsspiel](figure/Koordinationsspiel-1.png){width="50%"}]::
+
 
 ```{python}
 
@@ -220,40 +184,12 @@ plot = create_plot()
 
 plot
 
-
-# Funktionen für Nash-Bedingungen
-def is_ol_nash(A, B, a, c):
-  return "ol" if (A >= B) and (a >= c) else "not_ol"
-
-def is_ul_nash(B, A, b, d):
-  return "ul" if (B >= A) and (b >= d) else "not_ul"
-
-def is_or_nash(C, D, c, a):
-  return "or" if (C >= D) and (c >= a) else "not_or"
-
-def is_ur_nash(D, C, d, b):
-  return "ur" if (D >= C) and (d >= b) else "not_ur"
-
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-print(Nash_GG_filtered)
 ```
+
 
 #### Chicken Game
 
-[![Chicken Game](figure/Chicken-Game-1.png){width="50%"}]::
+
 
 ```{python}
 
@@ -277,42 +213,12 @@ d = random.randint(0, 1)
 plot = create_plot()
 
 plot
-
-
-# Funktionen für Nash-Bedingungen
-def is_ol_nash(A, B, a, c):
-  return "ol" if (A >= B) and (a >= c) else "not_ol"
-
-def is_ul_nash(B, A, b, d):
-  return "ul" if (B >= A) and (b >= d) else "not_ul"
-
-def is_or_nash(C, D, c, a):
-  return "or" if (C >= D) and (c >= a) else "not_or"
-
-def is_ur_nash(D, C, d, b):
-  return "ur" if (D >= C) and (d >= b) else "not_ur"
-
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-print(Nash_GG_filtered)
-
 ```
+
 
 #### Geschlechterkampf
 
-[![Geschlechterkampf](figure/Geschlechterkampf-1.png){width="50%"}]::
+
 
 ```{python}
 
@@ -337,36 +243,8 @@ plot = create_plot()
 
 plot
 
-# Funktionen für Nash-Bedingungen
-def is_ol_nash(A, B, a, c):
-  return "ol" if (A >= B) and (a >= c) else "not_ol"
-
-def is_ul_nash(B, A, b, d):
-  return "ul" if (B >= A) and (b >= d) else "not_ul"
-
-def is_or_nash(C, D, c, a):
-  return "or" if (C >= D) and (c >= a) else "not_or"
-
-def is_ur_nash(D, C, d, b):
-  return "ur" if (D >= C) and (d >= b) else "not_ur"
-
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-print(Nash_GG_filtered)
-
 ```
+
 
 #### Spiel ohne Gleichgewicht
 
@@ -399,28 +277,10 @@ plot = create_plot()
 
 plot
 
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-print(Nash_GG_filtered)
 ```
 
 
-
 #### Gefangenendilemma
-
-[![Gefangenendilemma](figure/Gefangenendilemma-1.png){width="50%"}]::
 
 ```{python}
 
@@ -446,33 +306,4 @@ plot = create_plot()
 
 plot
 
-# Funktionen für Nash-Bedingungen
-def is_ol_nash(A, B, a, c):
-  return "ol" if (A >= B) and (a >= c) else "not_ol"
-
-def is_ul_nash(B, A, b, d):
-  return "ul" if (B >= A) and (b >= d) else "not_ul"
-
-def is_or_nash(C, D, c, a):
-  return "or" if (C >= D) and (c >= a) else "not_or"
-
-def is_ur_nash(D, C, d, b):
-  return "ur" if (D >= C) and (d >= b) else "not_ur"
-
-# Nash-Bedingungen überprüfen und Strings zuweisen
-Cand_Nash_ol = is_ol_nash(A, B, a, c)
-Cand_Nash_ul = is_ul_nash(B, A, b, d)
-Cand_Nash_or = is_or_nash(C, D, c, a)
-Cand_Nash_ur = is_ur_nash(D, C, d, b)
-
-# Ergebnisse kombinieren und NAs entfernen
-Nash_GG = np.array([Cand_Nash_ol, Cand_Nash_ul, Cand_Nash_or, Cand_Nash_ur])
-Nash_GG_filtered = []
-for element in Nash_GG:
-  if element == "ol" or element == "ul" or element == "or" or element == "ur":
-    Nash_GG_filtered.append(element)
-
-# Ergebnis ausgeben
-print(Nash_GG_filtered)
 ```
-
