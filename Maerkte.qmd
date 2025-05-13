@@ -1,2 +1,283 @@
 # Effiziente Allokation auf Märkten
 
+## Die Idee des gegenseitig vorteilhaften Tausches
+
+s. Tafelaufschrieb
+
+## Nachfrage und Angebot auf Märkten
+
+### Herleitung der Nachfragefunktion
+
+s. Tafelaufschrieb
+
+### Aggregation der Nachfragefunktion
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand2 <- function(x) 4-x
+demand1 <- function(x) 3-.8*x
+
+# x=4-p
+#(4/5)*x=3-p
+#x=(15/4)-(5/4)p
+
+#x=(31/4)-(9/4)p
+
+#(9/4)p=(31/4)-x
+
+#p=(31/9)-(4/9)x 
+
+demandg <- function(x) (31/9)-(4/9)*x 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) demand2(x) - demandg(x), range(x))$root
+
+p0 <- function(x) 2.5
+
+q1 <- uniroot(function(x) demand1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) demand2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) demandg(x) - p0(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand1, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand1(3.3), hjust=-0.1, label=expression('D'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand2(3.3), hjust=-0.1, label=expression('D'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demandg, xlim = c(q0,3.3), size=1)+
+   annotate(geom = "text", x=3.3, y=demandg(3.3), hjust=-0.1, label=expression('D'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,q0), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), linetype= "dashed")+
+  #
+  annotate("point", x = q1, y = demand1(q1), color = "grey30")+
+  annotate("point", x = q2, y = demand2(q2), color = "grey30")+
+  annotate("point", x = qg, y = demandg(qg), color = "grey30")+
+  annotate("point", x=0, y=demand1(0))+
+  annotate("point", x=q0, y=demandg(q0))+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = demand1(q1),
+                    linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = demand2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = demandg(qg),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x=0, xend=q0, y=demandg(q0), yend=demandg(q0), linetype = "dashed")+
+    #
+  scale_color_manual(values=c("green"))+
+#  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "x"[1], "x"[2], "x"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("p"[0]),
+                     limits = c(0,5)
+                    ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+### Herleitung der Angebotsfunktion
+
+
+[Angebotsfunktion herleiten?]::
+
+$$\max \pi=\bar{p}\times x-TC(x)$$
+
+$$\frac{d\pi}{dx}=\bar{p}-MC\overset{!}{=}0  \iff \bar{p}=MC$$
+
+[TR-TC]::
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+TC <- function(x) x^2.2+2
+TR <- function(x) 4.5*x
+
+
+# Gewinnmaximum
+
+## Steigungen gleich
+
+
+q <- uniroot(function(x) x^1.2*2.2 - 4.5 , range(x))$root
+
+help <- TR(q)-TC(q)
+
+help2 <- function(x) 4.5*x-help
+
+#Gleichgewichtspreis
+#p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+#z <- seq(0, q, 0.01)
+
+# Abbildung
+
+p <- ggplot() +
+  stat_function(aes(color = "TC"), fun = TC, xlim = c(0,3.5))+
+ #  annotate(geom = "text", x=3.5, y=TC(3.5), hjust=-0.1, label="TC",color = "grey30")+
+  stat_function(aes(color = "TR"), fun = TR, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=TR(3.5), hjust=-0.1, label="TR",color = "grey30")+ 
+  annotate("point", x = q, y = TC(q), color = "grey30")+
+  annotate("point", x = q, y = TR(q), color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = TC(q),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2, xlim=c(q-1, q+1))+
+  annotate("segment", x=q, xend=q, y=TC(q), yend=TR(q),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+   #geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+    #              fill = "Produzentenrente"), alpha = 0.25) +
+  #geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+   #               fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("red", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q), labels = c(0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = NULL, labels = NULL,
+                     limits = c(0,19)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "TC, TR", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+Höherer Preis $\rightarrow$ Menge ausdehnen, bis wieder Preis=Grenzkosten
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+TC <- function(x) x^2.2+2
+TR <- function(x) 4.5*x
+
+TRN <- function(x) 5.5*x
+
+
+# Gewinnmaximum
+
+## Steigungen gleich
+
+
+q <- uniroot(function(x) x^1.2*2.2 - 4.5 , range(x))$root
+
+help <- TR(q)-TC(q)
+
+help2 <- function(x) 4.5*x-help
+
+qn <- uniroot(function(x) x^1.2*2.2 - 5.5 , range(x))$root
+
+helpn <- TRN(qn)-TC(qn)
+
+help2n <- function(x) 5.5*x-helpn
+
+#Gleichgewichtspreis
+#p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+#z <- seq(0, q, 0.01)
+
+# Abbildung
+
+p <- ggplot() +
+  stat_function(aes(color = "TC"), fun = TC, xlim = c(0,3.5))+
+ #  annotate(geom = "text", x=3.5, y=TC(3.5), hjust=-0.1, label="TC",color = "grey30")+
+  stat_function(aes(color = "TR"), fun = TR, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=TR(3.5), hjust=-0.1, label="TR",color = "grey30")+ 
+  stat_function(aes(color = "TR"), fun = TRN, xlim = c(0,3.5),  linetype= "dashed")+
+  annotate("point", x = q, y = TC(q), color = "grey30")+
+  annotate("point", x = q, y = TR(q), color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = TC(q),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2, xlim=c(q-1, q+1))+
+  annotate("segment", x=q, xend=q, y=TC(q), yend=TR(q),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+  annotate("point", x = qn, y = TC(qn), color = "grey30")+
+  annotate("point", x = qn, y = TRN(qn), color = "grey30")+
+  annotate("segment", x = qn, xend = qn, y = 0, yend = TC(qn),
+           linetype = "dashed", color = "grey30") +
+  stat_function(aes(),linetype="dashed", fun=help2n, xlim=c(qn-1, qn+1))+
+  annotate("segment", x=qn, xend=qn, y=TC(qn), yend=TRN(qn),
+           #linetype="dotted",
+           arrow=arrow(ends="both", length = unit(.3, "cm")))+
+  #Pfeil
+  geom_curve(
+    aes(x = 2.5, y = TR(2.5), xend = 2.8, yend = TRN(2.8)),
+    arrow = arrow(length = unit(0.03, "npc")),
+    angle=90
+  )+
+  
+   #geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+    #              fill = "Produzentenrente"), alpha = 0.25) +
+  #geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+   #               fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("red", "green"))+
+  #scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q, qn), labels = c(0,"x*", "x*'"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = NULL, labels = NULL,
+                     limits = c(0,19)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "TC, TR", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+$\rightarrow$ Die  Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. **Damit ist die Grenzkostenfunktion die Angebotsfunktion**.
+
+
+### Aggregation der Angebotsfunktion
+
+## Das Marktgleichgewich
+
+## Kosumenten- und

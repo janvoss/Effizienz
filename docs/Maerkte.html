@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -211,7 +240,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Überblick</h2>
+   
+  <ul>
+  <li><a href="#die-idee-des-gegenseitig-vorteilhaften-tausches" id="toc-die-idee-des-gegenseitig-vorteilhaften-tausches" class="nav-link active" data-scroll-target="#die-idee-des-gegenseitig-vorteilhaften-tausches"><span class="header-section-number">8.1</span> Die Idee des gegenseitig vorteilhaften Tausches</a></li>
+  <li><a href="#nachfrage-und-angebot-auf-märkten" id="toc-nachfrage-und-angebot-auf-märkten" class="nav-link" data-scroll-target="#nachfrage-und-angebot-auf-märkten"><span class="header-section-number">8.2</span> Nachfrage und Angebot auf Märkten</a>
+  <ul class="collapse">
+  <li><a href="#herleitung-der-nachfragefunktion" id="toc-herleitung-der-nachfragefunktion" class="nav-link" data-scroll-target="#herleitung-der-nachfragefunktion"><span class="header-section-number">8.2.1</span> Herleitung der Nachfragefunktion</a></li>
+  <li><a href="#aggregation-der-nachfragefunktion" id="toc-aggregation-der-nachfragefunktion" class="nav-link" data-scroll-target="#aggregation-der-nachfragefunktion"><span class="header-section-number">8.2.2</span> Aggregation der Nachfragefunktion</a></li>
+  <li><a href="#herleitung-der-angebotsfunktion" id="toc-herleitung-der-angebotsfunktion" class="nav-link" data-scroll-target="#herleitung-der-angebotsfunktion"><span class="header-section-number">8.2.3</span> Herleitung der Angebotsfunktion</a></li>
+  <li><a href="#aggregation-der-angebotsfunktion" id="toc-aggregation-der-angebotsfunktion" class="nav-link" data-scroll-target="#aggregation-der-angebotsfunktion"><span class="header-section-number">8.2.4</span> Aggregation der Angebotsfunktion</a></li>
+  </ul></li>
+  <li><a href="#das-marktgleichgewich" id="toc-das-marktgleichgewich" class="nav-link" data-scroll-target="#das-marktgleichgewich"><span class="header-section-number">8.3</span> Das Marktgleichgewich</a></li>
+  <li><a href="#kosumenten--und" id="toc-kosumenten--und" class="nav-link" data-scroll-target="#kosumenten--und"><span class="header-section-number">8.4</span> Kosumenten- und</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -235,8 +279,69 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="die-idee-des-gegenseitig-vorteilhaften-tausches" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="die-idee-des-gegenseitig-vorteilhaften-tausches"><span class="header-section-number">8.1</span> Die Idee des gegenseitig vorteilhaften Tausches</h2>
+<ol start="19" type="a">
+<li>Tafelaufschrieb</li>
+</ol>
+</section>
+<section id="nachfrage-und-angebot-auf-märkten" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="nachfrage-und-angebot-auf-märkten"><span class="header-section-number">8.2</span> Nachfrage und Angebot auf Märkten</h2>
+<section id="herleitung-der-nachfragefunktion" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="herleitung-der-nachfragefunktion"><span class="header-section-number">8.2.1</span> Herleitung der Nachfragefunktion</h3>
+<ol start="19" type="a">
+<li>Tafelaufschrieb</li>
+</ol>
+</section>
+<section id="aggregation-der-nachfragefunktion" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="aggregation-der-nachfragefunktion"><span class="header-section-number">8.2.2</span> Aggregation der Nachfragefunktion</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="herleitung-der-angebotsfunktion" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="herleitung-der-angebotsfunktion"><span class="header-section-number">8.2.3</span> Herleitung der Angebotsfunktion</h3>
+<p><span class="math display">\[\max \pi=\bar{p}\times x-TC(x)\]</span></p>
+<p><span class="math display">\[\frac{d\pi}{dx}=\bar{p}-MC\overset{!}{=}0  \iff \bar{p}=MC\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Höherer Preis <span class="math inline">\(\rightarrow\)</span> Menge ausdehnen, bis wieder Preis=Grenzkosten</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(\rightarrow\)</span> Die Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. <strong>Damit ist die Grenzkostenfunktion die Angebotsfunktion</strong>.</p>
+</section>
+<section id="aggregation-der-angebotsfunktion" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="aggregation-der-angebotsfunktion"><span class="header-section-number">8.2.4</span> Aggregation der Angebotsfunktion</h3>
+</section>
+</section>
+<section id="das-marktgleichgewich" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="das-marktgleichgewich"><span class="header-section-number">8.3</span> Das Marktgleichgewich</h2>
+</section>
+<section id="kosumenten--und" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="kosumenten--und"><span class="header-section-number">8.4</span> Kosumenten- und</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

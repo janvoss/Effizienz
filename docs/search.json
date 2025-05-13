@@ -398,5 +398,55 @@
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Spieltheorie</span>"
     ]
+  },
+  {
+    "objectID": "Maerkte.html",
+    "href": "Maerkte.html",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "",
+    "text": "8.1 Die Idee des gegenseitig vorteilhaften Tausches",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#nachfrage-und-angebot-auf-märkten",
+    "href": "Maerkte.html#nachfrage-und-angebot-auf-märkten",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "8.2 Nachfrage und Angebot auf Märkten",
+    "text": "8.2 Nachfrage und Angebot auf Märkten\n\n8.2.1 Herleitung der Nachfragefunktion\n\nTafelaufschrieb\n\n\n\n8.2.2 Aggregation der Nachfragefunktion\n\n\n\n\n\n\n\n\n\n\n\n8.2.3 Herleitung der Angebotsfunktion\n\\[\\max \\pi=\\bar{p}\\times x-TC(x)\\]\n\\[\\frac{d\\pi}{dx}=\\bar{p}-MC\\overset{!}{=}0  \\iff \\bar{p}=MC\\]\n\n\n\n\n\n\n\n\n\nHöherer Preis \\(\\rightarrow\\) Menge ausdehnen, bis wieder Preis=Grenzkosten\n\n\n\n\n\n\n\n\n\n\\(\\rightarrow\\) Die Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. Damit ist die Grenzkostenfunktion die Angebotsfunktion.\n\n\n8.2.4 Aggregation der Angebotsfunktion",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#das-marktgleichgewich",
+    "href": "Maerkte.html#das-marktgleichgewich",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "8.3 Das Marktgleichgewich",
+    "text": "8.3 Das Marktgleichgewich",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#kosumenten--und",
+    "href": "Maerkte.html#kosumenten--und",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "8.4 Kosumenten- und",
+    "text": "8.4 Kosumenten- und",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#die-idee-des-gegenseitig-vorteilhaften-tausches",
+    "href": "Maerkte.html#die-idee-des-gegenseitig-vorteilhaften-tausches",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "",
+    "text": "Tafelaufschrieb",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
   }
 ]
