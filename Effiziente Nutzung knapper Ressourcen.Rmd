@@ -2164,6 +2164,7 @@ chart
 
 ## Der Wohlfahrtsverlust von Mindest- und Höchstpreisen
 
+
 ### Mindestpreis
 
 ```{r echo=F, warning=F, message=F, cache=F}

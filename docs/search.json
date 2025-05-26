@@ -402,21 +402,21 @@
   {
     "objectID": "Maerkte.html",
     "href": "Maerkte.html",
-    "title": "8  Effiziente Allokation auf Märkten",
+    "title": "9  Effiziente Allokation auf Märkten",
     "section": "",
-    "text": "8.1 Die Idee des gegenseitig vorteilhaften Tausches",
+    "text": "9.1 Nachfrage und Angebot auf Märkten",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
     ]
   },
   {
     "objectID": "Maerkte.html#nachfrage-und-angebot-auf-märkten",
     "href": "Maerkte.html#nachfrage-und-angebot-auf-märkten",
-    "title": "8  Effiziente Allokation auf Märkten",
-    "section": "8.2 Nachfrage und Angebot auf Märkten",
-    "text": "8.2 Nachfrage und Angebot auf Märkten\n\n8.2.1 Herleitung der Nachfragefunktion\n\nTafelaufschrieb\n\n\n\n8.2.2 Aggregation der Nachfragefunktion\n\n\n\n\n\n\n\n\n\n\n\n8.2.3 Herleitung der Angebotsfunktion\n\\[\\max \\pi=\\bar{p}\\times x-TC(x)\\]\n\\[\\frac{d\\pi}{dx}=\\bar{p}-MC\\overset{!}{=}0  \\iff \\bar{p}=MC\\]\n\n\n\n\n\n\n\n\n\nHöherer Preis \\(\\rightarrow\\) Menge ausdehnen, bis wieder Preis=Grenzkosten\n\n\n\n\n\n\n\n\n\n\\(\\rightarrow\\) Die Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. Damit ist die Grenzkostenfunktion die Angebotsfunktion.\n\n\n8.2.4 Aggregation der Angebotsfunktion",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "",
+    "text": "9.1.1 Herleitung der Nachfragefunktion\n\nTafelaufschrieb\n\n\n\n9.1.2 Aggregation der Nachfragefunktion\n\n\n\n\n\n\n\n\n\n\n\n9.1.3 Herleitung der Angebotsfunktion\n\\[\\max \\pi=\\bar{p}\\times x-TC(x)\\]\n\\[\\frac{d\\pi}{dx}=\\bar{p}-MC\\overset{!}{=}0  \\iff \\bar{p}=MC\\]\n\n\n\n\n\n\n\n\n\nHöherer Preis \\(\\rightarrow\\) Menge ausdehnen, bis wieder Preis=Grenzkosten\n\\(\\rightarrow\\) Die Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. Damit ist die Grenzkostenfunktion die Angebotsfunktion.\n\n\n9.1.4 Aggregation der Angebotsfunktion",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
     ]
   },
   {
@@ -447,6 +447,76 @@
     "text": "Tafelaufschrieb",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#das-marktgleichgewicht",
+    "href": "Maerkte.html#das-marktgleichgewicht",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "9.2 Das Marktgleichgewicht",
+    "text": "9.2 Das Marktgleichgewicht",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#kosumenten--und-produzentenrente",
+    "href": "Maerkte.html#kosumenten--und-produzentenrente",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "9.3 Kosumenten- und Produzentenrente",
+    "text": "9.3 Kosumenten- und Produzentenrente",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Edgeworth.html",
+    "href": "Edgeworth.html",
+    "title": "8  Die Idee des gegenseitig vorteilhaften Tausches",
+    "section": "",
+    "text": "Tafelaufschrieb\n\n\n\nCode\nfrom sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log\nimport numpy as np\nfrom lets_plot import *\n\n# Define variables\nx1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')\n\n# Define constants\nx1_max = 100\nx2_max = 100\n\n# Utility functions\nUtility_A = Eq(U_A, x1**.3 * x2**.7)\nUtility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)\n\n# Given utility level for B\nUB_values = np.linspace(1, 91, 10)\n\n# Use latex to create a LaTeX string for the subtitle\nutility_latex = f\"\\({latex(Utility_A)}\\), \\({latex(Utility_B)}\\)\"\n\n# Modify the string\nutility_latex_modified = (\n    utility_latex.replace(r\"\\log\", \"ln\")\n                 .replace(r\"\\left\", \"\")\n                 .replace(r\"\\right\", \"\")\n)\n\n# Lagrangian\nL = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)\n\n# Precompute derivatives\ndL_dx1 = diff(L, x1)\ndL_dx2 = diff(L, x2)\ndL_dlambda = diff(L, lambda_)\n\n# x1 values for graph\nx_values = np.arange(0.01, x1_max + 0.01, 0.3)\ndata = {'x': x_values.tolist()}\n\n# List to store optimal points\noptimal_points = []\n\n# Setup Lets-Plot for HTML output\nLetsPlot.setup_html()\n\np = ggplot()\n\nfor u in UB_values:\n    # Solve the system of equations once and substitute `u` in the solutions\n    solutions = solve(\n        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),\n        (x1, x2, lambda_),\n        dict=True,\n        simplify = False\n    )\n\n    # Extract optimal x1, x2 values\n    x1_opt = float(solutions[0].get(x1))\n    x2_opt = float(solutions[0].get(x2))\n\n    optimal_points.append({'x': x1_opt, 'y': x2_opt})\n\n    UtilityA_value = Utility_A.rhs.subs(solutions[0])\n\n    # Indifference Curves\n    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))\n    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))\n\n    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \\\n         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \\\n         geom_point(x=x1_opt, y=x2_opt)\n\n# Convert optimal_points to a format suitable for geom_line\noptimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}\n\np += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')\n\np += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \\\n     theme_light() + \\\n     labs(title='Eine Edgeworth Box',\n          subtitle=utility_latex_modified,\n          x='\\(x_1\\)',\n          y='\\(x_2\\)',\n          caption='Eine Edgeworth Box')\n\np.show()\n\n\n\n            \n            \n            \n\n\n   \n   \n\n\n\n\nCode\nfrom sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log\nimport numpy as np\nfrom lets_plot import *\n\n# Define variables\nx1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')\n\n# Define constants\nx1_max = 100\nx2_max = 100\n\n# Utility functions\nUtility_A = Eq(U_A, x1**.5 * x2**.5)\nUtility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)\n\n# Given utility level for B\nUB_values = np.linspace(1, 91, 10)\n\n# Use latex to create a LaTeX string for the subtitle\nutility_latex = f\"\\({latex(Utility_A)}\\), \\({latex(Utility_B)}\\)\"\n\n# Modify the string\nutility_latex_modified = (\n    utility_latex.replace(r\"\\log\", \"ln\")\n                 .replace(r\"\\left\", \"\")\n                 .replace(r\"\\right\", \"\")\n)\n\n# Lagrangian\nL = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)\n\n# Precompute derivatives\ndL_dx1 = diff(L, x1)\ndL_dx2 = diff(L, x2)\ndL_dlambda = diff(L, lambda_)\n\n# x1 values for graph\nx_values = np.arange(0.01, x1_max + 0.01, 0.3)\ndata = {'x': x_values.tolist()}\n\n# List to store optimal points\noptimal_points = []\n\n# Setup Lets-Plot for HTML output\nLetsPlot.setup_html()\n\np = ggplot()\n\nfor u in UB_values:\n    # Solve the system of equations once and substitute `u` in the solutions\n    solutions = solve(\n        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),\n        (x1, x2, lambda_),\n        dict=True,\n        simplify = False\n    )\n\n    # Extract optimal x1, x2 values\n    x1_opt = float(solutions[0].get(x1))\n    x2_opt = float(solutions[0].get(x2))\n\n    optimal_points.append({'x': x1_opt, 'y': x2_opt})\n\n    UtilityA_value = Utility_A.rhs.subs(solutions[0])\n\n    # Indifference Curves\n    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))\n    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))\n\n    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \\\n         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \\\n         geom_point(x=x1_opt, y=x2_opt)\n\n# Convert optimal_points to a format suitable for geom_line\noptimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}\n\np += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')\n\np += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \\\n     theme_light() + \\\n     labs(title='Eine Edgeworth Box',\n          subtitle=utility_latex_modified,\n          x='\\(x_1\\)',\n          y='\\(x_2\\)',\n          caption='Eine Edgeworth Box')\n\np.show()",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Die Idee des gegenseitig vorteilhaften Tausches</span>"
+    ]
+  },
+  {
+    "objectID": "Edgeworth.html#die-idee-des-gegenseitig-vorteilhaften-tausches",
+    "href": "Edgeworth.html#die-idee-des-gegenseitig-vorteilhaften-tausches",
+    "title": "8  Effiziente Allokation auf Märkten",
+    "section": "",
+    "text": "Tafelaufschrieb",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#das-marktgleichgewicht-konsumenten--und-produzentenrente",
+    "href": "Maerkte.html#das-marktgleichgewicht-konsumenten--und-produzentenrente",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "9.2 Das Marktgleichgewicht, Konsumenten- und Produzentenrente",
+    "text": "9.2 Das Marktgleichgewicht, Konsumenten- und Produzentenrente",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#der-wohlfahrtsverlust-von-mindest--und-höchstpreisen",
+    "href": "Maerkte.html#der-wohlfahrtsverlust-von-mindest--und-höchstpreisen",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "9.3 Der Wohlfahrtsverlust von Mindest- und Höchstpreisen",
+    "text": "9.3 Der Wohlfahrtsverlust von Mindest- und Höchstpreisen\n\n9.3.1 Mindestpreis\n\n\n\n\n\n\n\n\n\n\n\n9.3.2 Höchstpreis",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
+    ]
+  },
+  {
+    "objectID": "Maerkte.html#der-wohlfahrtsverlust-einer-mengensteuer",
+    "href": "Maerkte.html#der-wohlfahrtsverlust-einer-mengensteuer",
+    "title": "9  Effiziente Allokation auf Märkten",
+    "section": "9.4 Der Wohlfahrtsverlust einer Mengensteuer",
+    "text": "9.4 Der Wohlfahrtsverlust einer Mengensteuer",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
     ]
   }
 ]

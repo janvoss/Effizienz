@@ -1,0 +1,199 @@
+---
+title: "Edgeworth-Test"
+
+code-fold: true
+---
+
+```{python}
+#| message: false
+#| warning: false
+
+
+from sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log
+import numpy as np
+from lets_plot import *
+
+# Define variables
+x1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')
+
+# Define constants
+x1_max = 100
+x2_max = 100
+
+# Utility functions
+Utility_A = Eq(U_A, x1**.3 * x2**.7)
+Utility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)
+
+# Given utility level for B
+UB_values = np.linspace(1, 91, 10)
+
+# Use latex to create a LaTeX string for the subtitle
+utility_latex = f"\({latex(Utility_A)}\), \({latex(Utility_B)}\)"
+
+# Modify the string
+utility_latex_modified = (
+    utility_latex.replace(r"\log", "ln")
+                 .replace(r"\left", "")
+                 .replace(r"\right", "")
+)
+
+# Lagrangian
+L = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)
+
+# Precompute derivatives
+dL_dx1 = diff(L, x1)
+dL_dx2 = diff(L, x2)
+dL_dlambda = diff(L, lambda_)
+
+# x1 values for graph
+x_values = np.arange(0.01, x1_max + 0.01, 0.3)
+data = {'x': x_values.tolist()}
+
+# List to store optimal points
+optimal_points = []
+
+# Setup Lets-Plot for HTML output
+LetsPlot.setup_html()
+
+p = ggplot()
+
+for u in UB_values:
+    # Solve the system of equations once and substitute `u` in the solutions
+    solutions = solve(
+        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),
+        (x1, x2, lambda_),
+        dict=True,
+        simplify = False
+    )
+
+    # Extract optimal x1, x2 values
+    x1_opt = float(solutions[0].get(x1))
+    x2_opt = float(solutions[0].get(x2))
+
+    optimal_points.append({'x': x1_opt, 'y': x2_opt})
+
+    UtilityA_value = Utility_A.rhs.subs(solutions[0])
+
+    # Indifference Curves
+    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))
+    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))
+
+    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \
+         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \
+         geom_point(x=x1_opt, y=x2_opt)
+
+# Convert optimal_points to a format suitable for geom_line
+optimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}
+
+p += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')
+
+p += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \
+     theme_light() + \
+     labs(title='Eine Edgeworth Box',
+          subtitle=utility_latex_modified,
+          x='\(x_1\)',
+          y='\(x_2\)',
+          caption='Eine Edgeworth Box')
+
+p.show()
+
+```
+
+
+
+
+## Nachfrage und Angebot auf Märkten
+
+### Herleitung der Nachfragefunktion
+
+s. Tafelaufschrieb
+
+### Aggregation der Nachfragefunktion
+
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand2 <- function(x) 4-x
+demand1 <- function(x) 3-.8*x
+
+# x=4-p
+#(4/5)*x=3-p
+#x=(15/4)-(5/4)p
+
+#x=(31/4)-(9/4)p
+
+#(9/4)p=(31/4)-x
+
+#p=(31/9)-(4/9)x 
+
+demandg <- function(x) (31/9)-(4/9)*x 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) demand2(x) - demandg(x), range(x))$root
+
+p0 <- function(x) 2.5
+
+q1 <- uniroot(function(x) demand1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) demand2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) demandg(x) - p0(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand1, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand1(3.3), hjust=-0.1, label=expression('D'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=demand2(3.3), hjust=-0.1, label=expression('D'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demandg, xlim = c(q0,3.3), size=1)+
+   annotate(geom = "text", x=3.3, y=demandg(3.3), hjust=-0.1, label=expression('D'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,q0), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), linetype= "dashed")+
+  #
+  annotate("point", x = q1, y = demand1(q1), color = "grey30")+
+  annotate("point", x = q2, y = demand2(q2), color = "grey30")+
+  annotate("point", x = qg, y = demandg(qg), color = "grey30")+
+  annotate("point", x=0, y=demand1(0))+
+  annotate("point", x=q0, y=demandg(q0))+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = demand1(q1),
+                    linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = demand2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = demandg(qg),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x=0, xend=q0, y=demandg(q0), yend=demandg(q0), linetype = "dashed")+
+    #
+  scale_color_manual(values=c("green"))+
+#  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "x"[1], "x"[2], "x"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("p"[0]),
+                     limits = c(0,5)
+                    ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+p
+
+```
+

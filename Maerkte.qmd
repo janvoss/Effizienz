@@ -1,9 +1,5 @@
 # Effiziente Allokation auf Märkten
 
-## Die Idee des gegenseitig vorteilhaften Tausches
-
-s. Tafelaufschrieb
-
 ## Nachfrage und Angebot auf Märkten
 
 ### Herleitung der Nachfragefunktion
@@ -269,7 +265,6 @@ p <- ggplot() +
   theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
   labs(x = "Menge", y = "TC, TR", 
        color = NULL, fill = NULL)
-p
 
 ```
 
@@ -278,6 +273,424 @@ $\rightarrow$ Die  Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem P
 
 ### Aggregation der Angebotsfunktion
 
-## Das Marktgleichgewich
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
 
-## Kosumenten- und
+# Funktionen definieren
+
+x <- 0:6
+
+supply2 <- function(x) 1+x
+supply1 <- function(x) 2+.8*x
+
+# x=p-1
+#(4/5)*x=p-2
+#x=(5/4)p-(10/4)
+
+#x=(9/4)p-(14/4)
+
+#(9/4)p=(14/4)+x |*(4/9)
+
+#p=(14/9)+(4/9)x 
+
+supplyg <- function(x) (14/9)+(4/9)*x 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) supply2(x) - supplyg(x), range(x))$root
+
+p0 <- function(x) 3
+
+q1 <- uniroot(function(x) supply1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) supply2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) supplyg(x) - p0(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Angebot"), fun = supply1, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=supply1(3.3), hjust=-0.1, label=expression('S'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supply2, xlim = c(0,3.3))+
+   annotate(geom = "text", x=3.3, y=supply2(3.3), hjust=-0.1, label=expression('S'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supplyg, xlim = c(q0,3.3), size=1)+
+   annotate(geom = "text", x=3.3, y=supplyg(3.3), hjust=-0.1, label=expression('S'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Angebot"), fun = supply2, xlim = c(0,q0), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), linetype= "dashed")+
+  #
+  annotate("point", x = q1, y = supply1(q1), color = "grey30")+
+  annotate("point", x = q2, y = supply2(q2), color = "grey30")+
+  annotate("point", x = qg, y = supplyg(qg), color = "grey30")+
+  annotate("point", x=0, y=supply1(0))+
+  annotate("point", x=q0, y=supplyg(q0))+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = supply1(q1),
+                    linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = supply2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = supplyg(qg),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x=0, xend=q0, y=supplyg(q0), yend=supplyg(q0), linetype = "dashed")+
+    #
+  scale_color_manual(values=c("orange"))+
+#  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "x"[1], "x"[2], "x"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("p"[0]),
+                     limits = c(0,5)
+                    ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+
+## Das Marktgleichgewicht, Konsumenten- und Produzentenrente
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis
+p <- supply(q)
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.1, label="Nachfrage",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.1, label="Angebot",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  annotate("text", x=1, y=16, label="PR", color="grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", "green"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q), labels = c(0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p, labels = "p*",
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Der Wohlfahrtsverlust von Mindest- und Höchstpreisen
+
+
+### Mindestpreis
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart (Erzeugt aus Abb. mit Steuer)
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_t, ymin = supply(z_t), ymax = p_t,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+  # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+   #        linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z_t, ymin = p_t, ymax = demand(z_t),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", #"blue",
+                              "green"))+
+  scale_fill_manual(values=c("green", "orange", #"blue",
+                             "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^0,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p*", "p"^min),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+### Höchstpreis
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart (Erzeugt aus Abb. mit Steuer)
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_t, ymin = supply(z_t), ymax = p_t-t,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+#  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+#  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+ #          linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+   annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+           linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = demand(z_t),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", #"blue",
+                              "green"))+
+  scale_fill_manual(values=c("green", "orange", #"blue",
+                             "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^1,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t-t), labels = expression("p*", "p"^max),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+## Der Wohlfahrtsverlust einer Mengensteuer
+
+```{r echo=F, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+t <-10
+supply_t <- function(x) x^2.5 + 2.5*x + 8+t
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_t(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_t(q_t)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(q_t, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S=MC",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  stat_function(aes(color = "Angebot mit Steuer"), fun = supply_t, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply_t(3.5), hjust=-0.4, label="MC+t",color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+   annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+           linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+                  fill = "Steuereinnahmen"), alpha = 0.55)+
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+                  fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  scale_color_manual(values=c("orange", "blue", "green"))+
+  scale_fill_manual(values=c("green", "orange", "blue", "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x"^t,"x*"),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p*", "p"^t),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
