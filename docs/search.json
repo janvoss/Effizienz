@@ -538,5 +538,35 @@
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Effiziente Allokation auf Märkten</span>"
     ]
+  },
+  {
+    "objectID": "Handel.html",
+    "href": "Handel.html",
+    "title": "13  Außenhandel",
+    "section": "",
+    "text": "13.1 Weltmarktpreis &lt; Autarkiepreis\nCode\nlibrary(tidyverse)\n# Funktionen definieren\n\nx &lt;- 0:5\n\ndemand &lt;- function(x) (x - 8)^2-5*x\nsupply &lt;- function(x) x^3 + 3*x + 2\n\n#labels &lt;- c(\"Nachfrage\", \"Angebot\")\n\n#Gleichgewichtsmenge Autarkie\nq &lt;- uniroot(function(x) demand(x) - supply(x), range(x))$root\n\n#Gleichgewichtspreis Autarkie\np &lt;- supply(q)\n\n# Weltmarktpreis\nwmp &lt;- function(x) supply(q)-8\n\n# Gleichgewichtsmenge Freihandel\n\nq_wmp &lt;- uniroot(function(x) demand(x) - wmp(x), range(x))$root\n\n# Menge inländischer Produktion\nq_wmp_i &lt;- uniroot(function(x) supply(x) - wmp(x), range(x))$root\n\n# Konsumenten- und Produzentenrente\n\nz &lt;- seq(0, q, 0.01)\nz_wmp &lt;- seq(0, q_wmp, 0.01)\n\n# Chart\n\nchart &lt;- ggplot() +\n  stat_function(aes(color = \"Heimische Nachfrage\"), fun = demand, xlim = c(0,3.5))+\n   annotate(geom = \"text\", x=3.5, y=demand(3.5), hjust=-0.4, label=\"D\",color = \"grey30\")+\n  stat_function(aes(color = \"Heimisches Angebot\"), fun = supply, xlim = c(0,3.5))+\n  annotate(geom = \"text\", x=3.5, y=supply(3.5), hjust=-0.4, label=\"S\",color = \"grey30\")+ \n  annotate(\"point\", x = q, y = p, color = \"grey30\")+\n  annotate(\"segment\", x = q, xend = q, y = 0, yend = p,\n           linetype = \"dashed\", color = \"grey30\") +\n  annotate(\"segment\", x = 0, xend = q, y = p, yend = p,\n           linetype = \"dashed\", color = \"grey30\")+\n   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,\n                  fill = \"Produzentenrente\"), alpha = 0.25) +\n#  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),\n#                  fill = \"Konsumentenrente\"), alpha = 0.25)+\n  #\n  #\n  #\n  #\n  #Weltmarktpreis\n  stat_function(aes(color = \"Weltmarktpreis\"), fun = wmp, xlim = c(0,3.5))+\n  annotate(geom = \"text\", x=3.5, y=wmp(3.5), hjust=-0.4, label=\"WMP\",color = \"grey30\")+ \n  #\n  #\n  #Gleichgewichtsmenge wmp\n  #\n   annotate(\"point\", x = q_wmp, y = wmp(q_wmp), color = \"grey30\")+\n  annotate(\"segment\", x = q_wmp, xend = q_wmp, y = 0, yend = wmp(q_wmp),\n           linetype = \"dashed\", color = \"grey30\") +\n  #\n  #\n  #Menge inländische Produktion\n  annotate(\"point\", x = q_wmp_i, y = wmp(q_wmp_i), color = \"grey30\")+\n  annotate(\"segment\", x = q_wmp_i, xend = q_wmp_i, y = 0, yend = wmp(q_wmp_i),\n           linetype = \"dashed\", color = \"grey30\") +\n  #\n  #\n  #Konsumentenrente neu\n  #\n    geom_ribbon(aes(x = z_wmp, ymin = wmp(q_wmp), ymax = demand(z_wmp),\n                  fill = \"Konsumentenrente\"), alpha = 0.25)+\n  scale_color_manual(values=c(\"green\", \"orange\", \"purple\"))+\n  scale_fill_manual(values=c(\"green\", \"orange\"))+\n  scale_x_continuous(expand = c(0, 0), \n                     breaks = c(0,q_wmp_i,q, q_wmp), labels = expression(0, \"x\"^inl, \"x\"^0, \"x\"^wmp),\n                     limits = c(0, 4)) +\n  scale_y_continuous(expand = c(0, 0), \n                     breaks = c(wmp(q_wmp), p), labels = expression(\"WMP\", \"p\"^0),\n                     limits = c(0,70)) +\n  theme_classic() +\n  theme(panel.grid = element_blank(),\n       # legend.position = \"none\", #Damit Legende unterdrückt.\n       ) +\n  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+\n  labs(x = \"Menge\", y = \"Preis\", \n       color = NULL, fill = NULL)\nchart",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Außenhandel</span>"
+    ]
+  },
+  {
+    "objectID": "Handel.html#weltmarktpreis-autarkiepreis-1",
+    "href": "Handel.html#weltmarktpreis-autarkiepreis-1",
+    "title": "13  Außenhandel",
+    "section": "13.2 Weltmarktpreis > Autarkiepreis",
+    "text": "13.2 Weltmarktpreis &gt; Autarkiepreis",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Außenhandel</span>"
+    ]
+  },
+  {
+    "objectID": "Handel.html#der-effekt-eines-einfuhrzolls",
+    "href": "Handel.html#der-effekt-eines-einfuhrzolls",
+    "title": "13  Außenhandel",
+    "section": "13.3 Der Effekt eines Einfuhrzolls",
+    "text": "13.3 Der Effekt eines Einfuhrzolls",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Außenhandel</span>"
+    ]
   }
 ]

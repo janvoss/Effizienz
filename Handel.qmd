@@ -1,2 +1,318 @@
 # Außenhandel
 
+
+## Weltmarktpreis \< Autarkiepreis
+
+```{r echo=T, message=F, warning=F, cache=F}
+
+library(tidyverse)
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)-8
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+# Menge inländischer Produktion
+q_wmp_i <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+#                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  #Gleichgewichtsmenge wmp
+  #
+   annotate("point", x = q_wmp, y = wmp(q_wmp), color = "grey30")+
+  annotate("segment", x = q_wmp, xend = q_wmp, y = 0, yend = wmp(q_wmp),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Produktion
+  annotate("point", x = q_wmp_i, y = wmp(q_wmp_i), color = "grey30")+
+  annotate("segment", x = q_wmp_i, xend = q_wmp_i, y = 0, yend = wmp(q_wmp_i),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Konsumentenrente neu
+  #
+    geom_ribbon(aes(x = z_wmp, ymin = wmp(q_wmp), ymax = demand(z_wmp),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("green", "orange", "purple"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_i,q, q_wmp), labels = expression(0, "x"^inl, "x"^0, "x"^wmp),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), p), labels = expression("WMP", "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Weltmarktpreis \> Autarkiepreis
+
+```{r echo=F, message=F, warning=F, cache=F}
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)+8
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+# Menge inländische Nachfrage
+q_wmp_i <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+ #  geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+#                  fill = "Produzentenrente"), alpha = 0.25) +
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  #Gleichgewichtsmenge wmp
+  #
+   annotate("point", x = q_wmp, y = wmp(q_wmp), color = "grey30")+
+  annotate("segment", x = q_wmp, xend = q_wmp, y = 0, yend = wmp(q_wmp),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Nachfrage
+  annotate("point", x = q_wmp_i, y = wmp(q_wmp_i), color = "grey30")+
+  annotate("segment", x = q_wmp_i, xend = q_wmp_i, y = 0, yend = wmp(q_wmp_i),
+           linetype = "dashed", color = "grey30") +
+ #
+ #
+ # Produzentenrente neu
+ #
+    geom_ribbon(aes(x = z_wmp, ymin = supply(z_wmp), ymax = wmp(q_wmp),
+                  fill = "Produzentenrente"), alpha = 0.25)+
+  scale_color_manual(values=c("green", "orange", "purple"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_i,q, q_wmp), labels = expression(0, "x"^inl, "x"^0, "x"^wmp),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), p), labels = expression("WMP", "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
+## Der Effekt eines Einfuhrzolls
+
+```{r echo=F, message=F, warning=F, cache=F}
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^3 + 3*x + 2
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmenge Autarkie
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreis Autarkie
+p <- supply(q)
+
+# Weltmarktpreis
+wmp <- function(x) supply(q)-8
+
+t <- 4
+wmp_t <- function(x) wmp(q)+t
+
+# Gleichgewichtsmenge Freihandel
+
+q_wmp <- uniroot(function(x) demand(x) - wmp(x), range(x))$root
+
+q_wmp_t <- uniroot(function(x) demand(x) - wmp_t(x), range(x))$root
+
+# Menge inländischer Produktion
+q_wmp_i <- uniroot(function(x) supply(x) - wmp(x), range(x))$root
+
+q_wmp_it <- uniroot(function(x) supply(x) - wmp_t(x), range(x))$root
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_wmp <- seq(0, q_wmp, 0.01)
+z_wmp_it <- seq(0, q_wmp_it, 0.01)
+
+# Steuereinnahmen
+ z_t <- seq(q_wmp_it, q_wmp_t, 0.01)
+ 
+# Wohlfahrtsverlust
+ z_wfl1 <- seq(q_wmp_i, q_wmp_it, 0.01)
+ z_wfl2 <- seq(q_wmp_t, q_wmp, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Heimische Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Heimisches Angebot"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label="S",color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+   geom_ribbon(aes(x = z_wmp_it , ymin = supply(z_wmp_it), ymax = wmp_t(q_wmp_it),
+                  fill = "Produzentenrente"), alpha = 0.25) +
+#  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+#                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #
+  #
+  #
+  #Weltmarktpreis
+  stat_function(aes(color = "Weltmarktpreis"), fun = wmp, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp(3.5), hjust=-0.4, label="WMP",color = "grey30")+ 
+  #
+  #
+  # Weltmarktpreis mit Zoll
+    stat_function(aes(color = "Importpreis"), fun = wmp_t, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=wmp_t(3.5), hjust=-0, label="WMP+t",color = "grey30")+ 
+  #Gleichgewichtsmenge wmp_t
+  #
+   annotate("point", x = q_wmp_t, y = wmp_t(q_wmp_t), color = "grey30")+
+  annotate("segment", x = q_wmp_t, xend = q_wmp_t, y = 0, yend = wmp_t(q_wmp_t),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Menge inländische Produktion
+  annotate("point", x = q_wmp_it, y = wmp_t(q_wmp_it), color = "grey30")+
+  annotate("segment", x = q_wmp_it, xend = q_wmp_it, y = 0, yend = wmp_t(q_wmp_it),
+           linetype = "dashed", color = "grey30") +
+  #
+  #
+  #Konsumentenrente neu
+  #
+    geom_ribbon(aes(x = z_wmp, ymin = wmp(q_wmp), ymax = demand(z_wmp),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+  #
+  #Steuereinnahmen
+      geom_ribbon(aes(x = z_t, ymin = wmp(z_t), ymax = wmp_t(z_t),
+                  fill = "Steuereinnahmen"), alpha = 0.25)+
+  #
+  #Wohlfahrtsverlust
+  ## erster Teil
+  geom_ribbon(aes(x = z_wfl1, ymin = wmp(z_wfl1), ymax = supply(z_wfl1),
+                  fill = "Wohlfahrsverlust"), alpha = 1)+
+  #
+  ## zweiter Teil
+  geom_ribbon(aes(x = z_wfl2, ymin = wmp(z_wfl2), ymax = demand(z_wfl2),
+                  fill = "Wohlfahrsverlust"), alpha = 1)+
+  scale_color_manual(values=c("green", "orange", "blue", "purple"))+
+  scale_fill_manual(values=c("green", "orange", "blue", "red"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_wmp_it,q, q_wmp_t), labels = expression(0, "x"^inl, "x"^0, "x"^t),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(wmp(q_wmp), wmp_t(q_wmp_t), p), labels = expression("WMP", "p"^t, "p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+chart
+
+```
+
