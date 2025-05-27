@@ -608,7 +608,8 @@ chart
 
 ## Der Wohlfahrtsverlust einer Mengensteuer
 
-```{r echo=F, warning=F, message=F, cache=F}
+
+```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
 library(tidyverse)
 library(ggtext)
@@ -694,3 +695,141 @@ chart <- ggplot() +
 chart
 
 ```
+
+
+## Wettbewerbsfunktionen
+[@conradWirtschaftsethik2016]
+
+**Statische Wettbewerbsfunktionen**
+
+- Steuerungsfunktion
+
+- Allokationsfunktion
+
+- Anreizfunktion
+
+- Sanktionsfunktion
+
+- Verteilungsfunktion
+
+- Freiheitsfunktion
+
+- Kontrollfunktion
+
+
+**Dynamische Wettbewerbsfunktionen**
+
+- Innovationsfunktion
+
+- Imitationsfunktion
+
+- Anpassungsfunktion
+
+[Irgendwo auch: Entlassung von Mitarbeitenden: Funktion und ethische Bewertung]::
+
+## Pfadabhängigkeit
+
+Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in frühen Perioden können dann zu verfestigten Wettbewerbsstrukturen führen.
+
+### Veranschaulichung anhand der Pólya-Urne
+
+- Es gibt Kugeln verschiedener Farben in einer Urne.
+
+- Es wird zufällig eine Kugel gezogen
+
+- Die gezogene Kugel wird zurückgelegt
+
+- Es wird eine zusätzliche Kugel (oder mehrere zusätzliche Kugeln) der Urne hinzugefügt, die die gleiche Farbe hat (haben), wie die zuvor gehogene Kugel. 
+
+- Die Prozedur wird wiederholt
+
+
+### Grafik
+
+```{r echo=T, warning=F, message=F, fig.width=12}
+
+#Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]
+
+# Nun mit ggplot
+library(tidyverse)
+
+# Matrix aufbauen
+cols = c("black", "blue", "green", "red", "yellow")
+
+n=1000
+
+urn <- cols |> table() |> as.matrix() |> t()
+urn <- rbind(urn, matrix(NA, nrow = n-1, ncol = ncol(urn)))
+cols_unique <- colnames(urn)
+
+# n-1 draws from Dirichelet distribution
+
+for(j in (1:5)){
+set.seed(123+j)
+for (i in seq_len(n-1)) {
+  urn[i+1, ] <- urn[i, ]
+  col_sample <- sample(cols_unique, size = 1, prob = (urn[i, ] / sum(urn[i, ]))                       ) # sample ball
+  urn[i+1, col_sample] <- urn[i+1, col_sample] + 1 # add ball with same colour
+}
+# Data frame erzeugen
+  
+df <- as.data.frame(urn) %>% 
+  mutate(Züge=seq(1:n))
+
+# Rundenanzahl
+
+# long format
+
+df1 <- df %>%   
+  pivot_longer( !starts_with("Z") ,
+               names_to = "Farbe", values_to = "Anzahl") %>% 
+  group_by(Züge) %>% 
+  mutate(Anteil=Anzahl/sum(Anzahl))
+
+p1 <- df1 %>% 
+  ggplot(aes(x=Züge, y=Anzahl, group=Farbe, color=Farbe))+
+  geom_line(size=1)+
+  scale_color_manual(values=c(unique(df1$Farbe)),
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))+
+  theme_light()
+  #theme(legend.position = 'bottom', legend.direction = "horizontal")+
+  #theme(legend.position = NULL)
+
+p2 <- df1 %>% 
+  ggplot(aes(x=Züge, y=Anteil, group=Farbe, color=Farbe))+
+  geom_line(size=1)+
+  scale_color_manual(values=c(unique(df1$Farbe)),
+                     labels=c("schwarz", "blau", "grün", "rot", "gelb"))+
+  theme_light()
+  #theme(legend.position = 'bottom', legend.direction = "horizontal")#+
+  #theme(legend.position = NULL)
+
+
+#p1 <- p1+theme(legend.position = NULL)
+
+
+library(patchwork)
+
+print(p1+ p2+plot_layout(guides = 'collect') +
+  plot_annotation(title = paste0('Pfadabhängigkeit in der Póliya-Urne'),
+                  subtitle=paste0('Durchlauf Nr. ', j)))
+}
+
+```
+
+### Ergebnis 
+
+- Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne 
+
+
+- Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
+
+
+
+### Anwendung auf ökonomischen Wettbewerb
+
+- Netzwerkeffekte (Vorteile großer Nutzerzahlen)
+
+- Lock-in-Effekte (Tastaturlayout, Betriebssysteme, politischer Wettbewerb)
+
+- Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
