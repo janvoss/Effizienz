@@ -1,2 +1,343 @@
 # Marktversagen
 
+## Gutseigenschaften: Private und öffentliche Güter   
+
+```{tikz,  fig.ext = 'png', cache=F, echo=T,  out.width="75%"}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}
+
+\sffamily % Keine Serifen
+
+\renewcommand{\familydefault}{\sfdefault} 
+
+\matrix[matrix of nodes, every node/.style={text width=3.5cm, minimum height=1.2cm, text centered, rectangle}] (m) {
+	{Private Güter} & {Allmendegüter}\\ 
+	{Clubgüter}   & {Öffentliche Güter}\\
+};
+\draw (m.north east) rectangle (m.south west);
+\draw (m.north) -- (m.south);
+\draw (m.east) -- (m.west);
+
+\coordinate (a) at ($(m.north west)!0.25!(m.north east)$);
+\coordinate (b) at ($(m.north west)!0.75!(m.north east)$);
+\node[above=5pt of a,anchor=base] {Ja};
+\node[above=5pt of b,anchor=base] {Nein};
+
+\coordinate (c) at ($(m.north west)!0.25!(m.south west)$);
+\coordinate (d) at ($(m.north west)!0.75!(m.south west)$);
+%\node[left=0pt of c, red]{c};
+\node[left=12pt of c,text width=1.5cm,rotate=90,align=center,anchor=center]  {Ja};
+\node[left=12pt of d,text width=1.5cm,rotate=90,align=center,anchor=center]  {Nein};
+
+
+\node[above=18pt of m.north] (Spaltenspieler) {Ausschließbarkeit};
+\node[left=30pt of m.west,rotate=90,align=center,anchor=center] {Rivalität};
+
+\node[above=20pt of Spaltenspieler]  {\textbf{Gutseigenschaften}};
+
+\end{tikzpicture}
+
+```
+
+
+## Öffentliche Güter
+
+- Nichtausschließbarkeit
+
+- Nichtrivalität im Konsum
+
+
+```{r echo=T, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand2 <- function(x) 3-x
+demand1 <- function(x) 2-.8*x
+
+#Vertikale Aggregation
+demandg <- function(x) demand1(x)+demand2(x) 
+
+# Schnittpunkt 
+
+q0 <- uniroot(function(x) demand2(x) - demandg(x), range(x))$root
+
+p0 <- function(x) 1.3 #Horizontale Grenzkosten
+
+q1 <- uniroot(function(x) demand1(x) - p0(x), range(x))$root
+
+q2 <- uniroot(function(x) demand2(x) - p0(x), range(x))$root
+
+qg <- uniroot(function(x) demandg(x) - p0(x), range(x))$root
+
+q_knick <- uniroot(function(x) demand1(x), range(x))$root
+
+
+# Chart
+
+p  <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand1, xlim = c(0,3.3))+
+  annotate(geom = "text", x=.5, y=demand1(.5), hjust=-0.1, label=expression('MB'[1]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(0,3.3))+
+  annotate(geom = "text", x=.5, y=demand2(0.5), hjust=-0.1, label=expression('MB'[2]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demandg, xlim = c(0,q_knick), size=1)+
+  annotate(geom = "text", x=.5, y=demandg(.5), hjust=-0.1, label=expression('MB'[ges]),color = "grey30")+
+  
+  stat_function(aes(color = "Nachfrage"), fun = demand2, xlim = c(q_knick,3.3), size=1)+
+  stat_function(fun = p0, xlim = c(0,3.3), color="orange")+
+  #
+  annotate("point", x = q1, y = demand1(q1), color = "grey30")+
+  annotate("point", x = q2, y = demand2(q2), color = "grey30")+
+  annotate("point", x = qg, y = demandg(qg), color = "grey30")+
+  #
+  annotate("segment", x = q1, xend = q1, y = 0, yend = demand1(q1),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = q2, xend = q2, y = 0, yend = demand2(q2),
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = qg, xend = qg, y = 0, yend = demandg(qg),
+           linetype = "dashed", color = "grey30") +  
+  scale_color_manual(values=c("green"))+
+  #  scale_fill_manual(values=c("green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0, q1, q2, qg), labels = expression(0, "G"[1], "G"[2], "G"[ges]),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = p0,
+                     labels=expression("MC"[G]),
+                     limits = c(0,5)
+  ) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        legend.position = "none", #Damit Legende unterdrückt.
+  ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge des öffentlichen Guts", y = "Steuerpreis", 
+       color = NULL, fill = NULL)
+p
+
+```
+
+
+## Externe Effekte
+
+- Nicht alle Kosten- u/o Nutzenwirkungen werden im Preis berücksichtigt. 
+
+- Beispielsweise negative Umweltwirkungen
+
+```{r echo=T, warning=F, message=F, cache=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+#t <-10
+supply_ext <- function(x) x^2.5 + 7.5*x + 8
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand(x) - supply_ext(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- supply_ext(q_t)
+
+p_ext <- supply_ext(q)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(0, q, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Private Grenzkosten"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label=expression("S=MC"[pr]), color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+  annotate("point", x = q, y = p_ext, color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  stat_function(aes(color = "Soziale Grenzkosten"), fun = supply_ext, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply_ext(3.5), hjust=-0.4, label=expression("MC"[soc]),color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+           linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+  # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+   #        linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+ # geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+  #                fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  #Soziale Kosten
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = supply_ext(z_wfl),
+                                 fill = "Externe Kosten"), alpha = 0.55)+
+ # annotate("text", x=q+1, y=p_t, label="Wohlfahrtsverlust",color = "grey30")+
+  scale_color_manual(values=c("green", "orange", "red"))+
+  scale_fill_manual(values=c("red", "green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x*","x"^0),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p, p_t), labels = expression("p"^0, "p*"),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+- Beispielsweise positive Wirkungen einer Grippeschutzimpfung
+
+
+```{r echo=T, warning=F, message=F, cache=F, eval=F}
+# Bibliotheken laden
+library(tidyverse)
+library(ggtext)
+
+# Funktionen definieren
+
+x <- 0:5
+
+demand <- function(x) (x - 8)^2-5*x
+supply <- function(x) x^2.5 + 2.5*x + 8
+#t <-10
+demand_ext <- function(x) (x - 8)^2-1.5*x
+
+#labels <- c("Nachfrage", "Angebot")
+
+#Gleichgewichtsmengen
+q <- uniroot(function(x) demand(x) - supply(x), range(x))$root
+
+q_t <- uniroot(function(x) demand_ext(x) - supply(x), range(x))$root
+
+#Gleichgewichtspreise
+p <- supply(q)
+p_t <- demand_ext(q_t)
+
+p_ext <- demand_ext(q)
+
+test <- "x^t"
+
+# Konsumenten- und Produzentenrente
+
+z <- seq(0, q, 0.01)
+z_t <- seq(0, q_t, 0.01)
+z_wfl <- seq(0, q_t, 0.01)
+
+# Chart
+
+chart <- ggplot() +
+  stat_function(aes(color = "Nachfrage"), fun = demand, xlim = c(0,3.5))+
+   annotate(geom = "text", x=3.5, y=demand(3.5), hjust=-0.4, label="D",color = "grey30")+
+  stat_function(aes(color = "Grenzkosten"), fun = supply, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=supply(3.5), hjust=-0.4, label=expression("S=MC"[pr]), color = "grey30")+ 
+  annotate("point", x = q, y = p, color = "grey30")+
+  annotate("segment", x = q, xend = q, y = 0, yend = p_ext,
+           linetype = "dashed", color = "grey30") +
+  annotate("segment", x = 0, xend = q, y = p, yend = p,
+           linetype = "dashed", color = "grey30")+
+  annotate("point", x = q, y = p_ext, color = "grey30")+
+   geom_ribbon(aes(x = z, ymin = supply(z), ymax = p,
+                  fill = "Produzentenrente"), alpha = 0.25) +
+  stat_function(aes(color = "Sozialer Grenzbenefit"), fun = demand_ext, xlim = c(0,3.5))+
+  annotate(geom = "text", x=3.5, y=demand_ext(3.5), hjust=-0.4, label=expression("D"[soc]),color = "grey30")+
+  annotate("point", x = q_t, y = p_t, color = "grey30")+
+  annotate("segment", x = q_t, xend = q_t, y = 0, yend = p_t,
+           linetype = "dashed", color = "grey30") +
+ # annotate("segment", x = 0, xend = q_t, y = p_t, yend = p_t,
+ #          linetype = "dashed", color = "grey30")+
+ # annotate("text", x=1, y=16, label="PR", color="grey30")+
+  #Preis abzüglich steuer
+  # annotate("segment", x = 0, xend = q_t, y = p_t-t, yend = p_t-t,
+   #        linetype = "dashed", color = "grey30")+
+  geom_ribbon(aes(x = z, ymin = p, ymax = demand(z),
+                  fill = "Konsumentenrente"), alpha = 0.25)+
+ # geom_ribbon(aes(x = z_t, ymin = p_t-t, ymax = p_t,
+  #                fill = "Steuereinnahmen"), alpha = 0.55)+
+ # geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand(z_wfl),
+  #                fill = "Wohlfahrtsverlust"), alpha = 0.55)+
+#  annotate("text", x=1, y=28, label="KR", color="grey30")+
+  #Sozialer Zusatznutzen Nutzen
+  geom_ribbon(aes(x = z_wfl, ymin = supply(z_wfl), ymax = demand_ext(z_wfl),
+                                 fill = "Soziale Zusatznutzen"), alpha = 0.25)+
+ # annotate("text", x=q+1, y=p_t, label="Wohlfahrtsverlust",color = "grey30")+
+  scale_color_manual(values=c("green", "orange", "red"))+
+  scale_fill_manual(values=c("red", "green", "orange"))+
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = c(0,q_t,q), labels = expression(0, "x*","x"^0),
+                     limits = c(0, 4)) +
+  scale_y_continuous(expand = c(0, 0), 
+                     breaks = c(p), labels = expression("p"^0),
+                     limits = c(0,70)) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+       # legend.position = "none", #Damit Legende unterdrückt.
+       #axis.breaks.x=element_markdown()
+       ) +
+  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
+  labs(x = "Menge", y = "Preis", 
+       color = NULL, fill = NULL)
+
+
+chart
+
+```
+
+
+
+## Natürliche Monopole
+
+- Wettbewerb ist gar nicht gewünscht, da unnötig hohe Kosten
+
+- Wettbewerb aufgrund von Größenvorteilen nur eingeschränkt möglich
+
+## Informationsasymmetrien
+
+[Hier auch PA]::
+
+- Nicht alle relevanten Informationen liegen allen Vertragspartnern vor  
+  - Vor Vertragsabschluss: Adverse Selection
+  - Nach Vertragsabschluss: Moral Hazard
+
+- Potenziell wohlfahrtssteigernde Verträge kommen ggf. nicht zustande
