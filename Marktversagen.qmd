@@ -230,7 +230,7 @@ chart
 - Beispielsweise positive Wirkungen einer Grippeschutzimpfung
 
 
-```{r echo=T, warning=F, message=F, cache=F, eval=F}
+```{r echo=T, warning=F, message=F, cache=F, eval=T}
 # Bibliotheken laden
 library(tidyverse)
 library(ggtext)
