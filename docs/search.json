@@ -618,5 +618,55 @@
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Marktversagen</span>"
     ]
+  },
+  {
+    "objectID": "BIP.html",
+    "href": "BIP.html",
+    "title": "11  Das Bruttoinlandsprodukt",
+    "section": "",
+    "text": "11.1 Begriff\nDefinition: Das Bruttoinlandsprodukt (BIP) ist der Marktwert aller für den Endverbrauch bestimmten Waren und Dienstleistungen, die in einem Land in einem bestimmten Zeitabschnitt hergestellt werden.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Das Bruttoinlandsprodukt</span>"
+    ]
+  },
+  {
+    "objectID": "BIP.html#begriff",
+    "href": "BIP.html#begriff",
+    "title": "11  Das Bruttoinlandsprodukt",
+    "section": "",
+    "text": "Marktwert (staatliche Leistungen ohne Preis: Kosten)\nNur Endverbrauch. ZWischenprodukte werden nicht mitgezählt, um Doppelzählung zu vermeiden\nKeine gebrauchten Güter\nLagerbestandsänderungen \\(\\rightarrow\\) Investitionen\nGeografische Abgrenzung (Inland, nicht Inländer)\nzeitliche Abgrenzung. Saison- und Feiertagsbereinigung",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Das Bruttoinlandsprodukt</span>"
+    ]
+  },
+  {
+    "objectID": "BIP.html#entwicklung",
+    "href": "BIP.html#entwicklung",
+    "title": "11  Das Bruttoinlandsprodukt",
+    "section": "11.2 Entwicklung",
+    "text": "11.2 Entwicklung\n\n\n\n\n\n\n\n\n\n\ngeschätzte Durchschnittliche jährliche Wachstumsrate (%) 1990-2021, Daten: Ourworldindata.org\n\n\nStaat\nWachstumsrate (%)\n\n\n\n\nChina\n8,32\n\n\nFrance\n0,97\n\n\nGermany\n1,25\n\n\nGreece\n0,57\n\n\nIndia\n4,59\n\n\nIreland\n3,71\n\n\nItaly\n0,28\n\n\nTurkey\n3,05\n\n\nUnited States\n1,44",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Das Bruttoinlandsprodukt</span>"
+    ]
+  },
+  {
+    "objectID": "BIP.html#zusammenhänge",
+    "href": "BIP.html#zusammenhänge",
+    "title": "11  Das Bruttoinlandsprodukt",
+    "section": "11.4 Zusammenhänge",
+    "text": "11.4 Zusammenhänge\nVerwendungsgleichung: \\(Y=C+I+G+(Ex-Im)\\)\noder: \\(Y+Im=C+I+Ex\\)\nGespart wird, was nicht konsumiert wird.\n\nGeschlossene Volkswirtschaft \\(S=Y-C-G \\Leftrightarrow I=S\\)\nOffene Volkswirtschaft: \\(Y=C+I+G+NX\\Leftrightarrow Y-C-G=I+NX\\Leftrightarrow I=Y-C-G-NX\\)\nNominales vs. reales BIP",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Das Bruttoinlandsprodukt</span>"
+    ]
+  },
+  {
+    "objectID": "BIP.html#effizienzfragen",
+    "href": "BIP.html#effizienzfragen",
+    "title": "11  Das Bruttoinlandsprodukt",
+    "section": "11.3 Effizienzfragen",
+    "text": "11.3 Effizienzfragen\n\nKosten der Schwankung des BIP\nKosten es Wachstums des BIP\nMisst das BIP Wohlstand?",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Das Bruttoinlandsprodukt</span>"
+    ]
   }
 ]
