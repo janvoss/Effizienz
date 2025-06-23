@@ -1,2 +1,106 @@
 # Geld
 
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Bank mit 100% Reservehaltung
+
+library(knitr)
+library(kableExtra)
+# library(IRdisplay)
+
+df <- data.frame(
+  Spalte1 = c("Reserven", ""),
+  Spalte2 = c("100", ""),
+  leer1   = c(" "," "),
+  leer2   = c(" "," "),
+  Spalte3 = c("Einlage", ""),
+  Spalte4 = c("100", "")
+)
+
+tbl <- kable(df, "html", col.names = rep("", 6), align = "lrcclr") %>%  # Spalte 1 & 3 links, 2 & 4 rechts, Leer-Spalten zentriert
+  kable_styling(full_width = FALSE) %>%
+  add_header_above(c("Aktiv" = 3, "Passiv" = 3), line = FALSE) %>%
+  add_header_above(c("Erste Bank" = 6)) #%>%
+# column_spec(4, border_left = TRUE)  # vertikale Linie vor Spalte 3
+
+# IRdisplay::display_html(as.character(tbl))
+
+tbl
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Bankensystem mit 10% Reservehaltung
+
+library(knitr)
+library(kableExtra)
+
+df <- data.frame(
+  Spalte1 = c("Reserven", "Kredit"),
+  Spalte2 = c("10", "90"),
+  leer1   = c(" "," "),
+  leer2   = c(" "," "),
+  Spalte3 = c("Einlage", ""),
+  Spalte4 = c("100", "")
+)
+
+tbl1 <- kable(df, "html", col.names = rep("", 6), align = "lrcclr") %>%  # Spalte 1 & 3 links, 2 & 4 rechts, Leer-Spalten zentriert
+  kable_styling(full_width = FALSE) %>%
+  add_header_above(c("Aktiv" = 3, "Passiv" = 3), line = FALSE) %>%
+  add_header_above(c("Erste Bank" = 6)) #%>%
+# column_spec(4, border_left = TRUE)  # vertikale Linie vor Spalte 3
+
+#IRdisplay::display_html(as.character(tbl))
+
+Einlage <- 90
+Reserve <- .1* Einlage
+
+
+df <- data.frame(
+  Spalte1 = c("Reserven", "Kredit"),
+  Spalte2 = c(Reserve, Einlage-Reserve),
+  leer1   = c(" "," "),
+  leer2   = c(" "," "),
+  Spalte3 = c("Einlage", ""),
+  Spalte4 = c(Einlage, "")
+)
+
+tbl2 <- kable(df, "html", col.names = rep("", 6), align = "lrcclr") %>%  # Spalte 1 & 3 links, 2 & 4 rechts, Leer-Spalten zentriert
+  kable_styling(full_width = FALSE) %>%
+  add_header_above(c("Aktiv" = 3, "Passiv" = 3), line = FALSE) %>%
+  add_header_above(c("Zweite Bank" = 6)) #%>%
+# column_spec(4, border_left = TRUE)  # vertikale Linie vor Spalte 3
+
+# IRdisplay::display_html(as.character(tbl))
+
+library(knitr)
+library(kableExtra)
+
+Einlage <- 81
+Reserve <- .1* Einlage
+
+
+df <- data.frame(
+  Spalte1 = c("Reserven", "Kredit"),
+  Spalte2 = c(Reserve, Einlage-Reserve),
+  leer1   = c(" "," "),
+  leer2   = c(" "," "),
+  Spalte3 = c("Einlage", ""),
+  Spalte4 = c(Einlage, "")
+)
+
+tbl3 <- kable(df, "html", col.names = rep("", 6), align = "lrcclr") %>%  # Spalte 1 & 3 links, 2 & 4 rechts, Leer-Spalten zentriert
+  kable_styling(full_width = FALSE) %>%
+  add_header_above(c("Aktiv" = 3, "Passiv" = 3), line = FALSE) %>%
+  add_header_above(c("Dritte Bank" = 6)) #%>%
+# column_spec(4, border_left = TRUE)  # vertikale Linie vor Spalte 3
+
+# IRdisplay::display_html(as.character(tbl))
+
+tbl1
+tbl2
+tbl3
+```
+
