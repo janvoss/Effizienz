@@ -109,6 +109,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -256,8 +285,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Überblick</h2>
+   
+  <ul>
+  <li><a href="#geldbegriff-und-geldfunkionen" id="toc-geldbegriff-und-geldfunkionen" class="nav-link active" data-scroll-target="#geldbegriff-und-geldfunkionen"><span class="header-section-number">12.1</span> Geldbegriff und Geldfunkionen</a></li>
+  <li><a href="#geldschöpfung-durch-kreditvergabe" id="toc-geldschöpfung-durch-kreditvergabe" class="nav-link" data-scroll-target="#geldschöpfung-durch-kreditvergabe"><span class="header-section-number">12.2</span> Geldschöpfung durch Kreditvergabe</a>
+  <ul class="collapse">
+  <li><a href="#keine-kreditvergabe-durch-banken" id="toc-keine-kreditvergabe-durch-banken" class="nav-link" data-scroll-target="#keine-kreditvergabe-durch-banken"><span class="header-section-number">12.2.1</span> Keine Kreditvergabe durch Banken</a></li>
+  <li><a href="#kreditvergabe-aus-einlagen-bei-teilweiser-reservehaltung" id="toc-kreditvergabe-aus-einlagen-bei-teilweiser-reservehaltung" class="nav-link" data-scroll-target="#kreditvergabe-aus-einlagen-bei-teilweiser-reservehaltung"><span class="header-section-number">12.2.2</span> Kreditvergabe aus Einlagen bei teilweiser Reservehaltung</a></li>
+  <li><a href="#kreditvergabe-ohne-einlagen" id="toc-kreditvergabe-ohne-einlagen" class="nav-link" data-scroll-target="#kreditvergabe-ohne-einlagen"><span class="header-section-number">12.2.3</span> Kreditvergabe ohne Einlagen</a></li>
+  </ul></li>
+  <li><a href="#geldmenge-und-preisniveau" id="toc-geldmenge-und-preisniveau" class="nav-link" data-scroll-target="#geldmenge-und-preisniveau"><span class="header-section-number">12.3</span> Geldmenge und Preisniveau</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -281,6 +323,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="geldbegriff-und-geldfunkionen" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="geldbegriff-und-geldfunkionen"><span class="header-section-number">12.1</span> Geldbegriff und Geldfunkionen</h2>
+<ul>
+<li><p>Geld ist ein Begrif für Aktiva, die regelmäßig Bezahlvorgänge genutzt werden.</p></li>
+<li><p>Aus ökonomischer Sicht gibt es Geld jenseits gesetzlicher Zahlungsmittel (Beispiele?)</p></li>
+<li><p>Geldfunktionen</p>
+<ul>
+<li>Zahlungsfunktion</li>
+<li>Wertaufbewahrungsfunktion</li>
+<li>Recheneinheit</li>
+</ul></li>
+</ul>
+</section>
+<section id="geldschöpfung-durch-kreditvergabe" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="geldschöpfung-durch-kreditvergabe"><span class="header-section-number">12.2</span> Geldschöpfung durch Kreditvergabe</h2>
+<section id="keine-kreditvergabe-durch-banken" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="keine-kreditvergabe-durch-banken"><span class="header-section-number">12.2.1</span> Keine Kreditvergabe durch Banken</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -382,6 +441,9 @@ Einlage
 <p>Bank mit 100% Reservehaltung</p>
 </div>
 </div>
+</section>
+<section id="kreditvergabe-aus-einlagen-bei-teilweiser-reservehaltung" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="kreditvergabe-aus-einlagen-bei-teilweiser-reservehaltung"><span class="header-section-number">12.2.2</span> Kreditvergabe aus Einlagen bei teilweiser Reservehaltung</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -689,8 +751,20 @@ Kredit
 <p>Bankensystem mit 10% Reservehaltung</p>
 </div>
 </div>
+</section>
+<section id="kreditvergabe-ohne-einlagen" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="kreditvergabe-ohne-einlagen"><span class="header-section-number">12.2.3</span> Kreditvergabe ohne Einlagen</h3>
+<p>Ja, das geht</p>
+</section>
+</section>
+<section id="geldmenge-und-preisniveau" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="geldmenge-und-preisniveau"><span class="header-section-number">12.3</span> Geldmenge und Preisniveau</h2>
+<p><span class="math inline">\(PY=VM\)</span></p>
+<p>Mit <span class="math inline">\(P\)</span>: Preisniveau, <span class="math inline">\(Y\)</span>: BIP, <span class="math inline">\(V\)</span>: Umlaufgeschwindigkeit des Geldes, <span class="math inline">\(M\)</span>: Geldmenge</p>
+<p>Was passiert, wenn sich <span class="math inline">\(M\)</span> erhöht?</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

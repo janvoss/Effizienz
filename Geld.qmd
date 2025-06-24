@@ -1,5 +1,21 @@
 # Geld
 
+## Geldbegriff und Geldfunkionen
+
+- Geld ist ein Begrif für Aktiva, die regelmäßig Bezahlvorgänge genutzt werden.
+
+- Aus ökonomischer Sicht gibt es Geld jenseits gesetzlicher Zahlungsmittel (Beispiele?)
+
+- Geldfunktionen
+
+  - Zahlungsfunktion
+  - Wertaufbewahrungsfunktion
+  - Recheneinheit
+
+## Geldschöpfung durch Kreditvergabe
+
+### Keine Kreditvergabe durch Banken
+
 ```{r}
 #| message: false
 #| warning: false
@@ -29,6 +45,8 @@ tbl <- kable(df, "html", col.names = rep("", 6), align = "lrcclr") %>%  # Spalte
 tbl
 ```
 
+
+### Kreditvergabe aus Einlagen bei teilweiser Reservehaltung
 ```{r}
 #| message: false
 #| warning: false
@@ -104,3 +122,16 @@ tbl2
 tbl3
 ```
 
+
+### Kreditvergabe ohne Einlagen
+
+Ja, das geht
+
+## Geldmenge und Preisniveau
+
+
+$PY=VM$
+
+Mit $P$: Preisniveau, $Y$: BIP, $V$: Umlaufgeschwindigkeit des Geldes, $M$: Geldmenge
+
+Was passiert, wenn sich $M$ erhöht?
