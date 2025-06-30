@@ -1,6 +1,6 @@
 # Geld
 
-## Geldbegriff und Geldfunkionen
+## Geldbegriff und Geldfunktionen
 
 - Geld ist ein Begrif für Aktiva, die regelmäßig Bezahlvorgänge genutzt werden.
 
@@ -123,11 +123,22 @@ tbl3
 ```
 
 
+
+Geldmengenmultiplikator: $\frac{1}{R}$ mit $R$: Reservehalungssatz
+
 ### Kreditvergabe ohne Einlagen
 
 Ja, das geht
 
 ## Geldmenge und Preisniveau
+
+## Inflation
+
+### Begriff
+
+### Probleme
+
+### Inflation vs. Deflation
 
 
 $PY=VM$
