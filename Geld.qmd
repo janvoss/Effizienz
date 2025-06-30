@@ -130,6 +130,14 @@ Geldmengenmultiplikator: $\frac{1}{R}$ mit $R$: Reservehalungssatz
 
 Ja, das geht
 
+### Geldpolitische Instrumente (Auswahl)
+
+- Offenmarktgeschäfte
+
+- Refinanzierungssatz (Zinspolitik)
+
+- Mindestreserveforderungen
+
 ## Geldmenge und Preisniveau
 
 ## Inflation
