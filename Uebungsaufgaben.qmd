@@ -1,2 +1,173 @@
 # Übungsaufgaben {.unnumbered}
 
+
+1.  Was unterscheidet positive von normativen Aussagen?
+
+1.  Wofür werden in der Ökonomik ,,Modelle" eingesetzt? Nennen Sie
+    Beispiele für ,,Modelle", die Sie in Ihrem Alltag einsetzen.
+
+1.  Welche Rolle spielt die ,,Rationalitätsannahme" in ökonomischen
+    Modellen?
+
+1.  Was sind ,,rationale Entscheidungen"?
+
+1.  Erfordern rationale Entscheidungen ,,vollständige Informationen"?
+
+1.  Erläutern Sie die ,,ceteris-paribus-Annahme"!
+
+1. In der ÖkonomikL werden Entscheidungssituationen üblicherweise vor
+    dem Hintergrund der Knappheit analysiert. Erläutern Sie, was unter
+    Knappheit zu verstehen ist und welche Formen von Knappheit auftreten
+    können. sich die Teildisziplinen?
+
+1. Was kann man anhand einer ,,Indifferenzkurve" ablesen?
+
+1. Welche Eigenschaften haben Indifferenzkurven, wenn Individuen sich
+    rational verhalten?
+
+1. Zeichnen Sie eine Indifferenzkurve für zwei Güter, die beide positiv
+    bewertet werden.
+
+1. Zeichnen Sie eine Indifferenzkurve für zwei Güter, die beide negativ
+    bewertet werden.
+
+1. Zeichnen Sie eine Indifferenzkurve für zwei Güter, wobei das eine
+    Gut positiv, das andere negativ bewertet wird.
+
+1. Was ist ein Pareto-Optimum?
+
+1. Was ist eine Pareto-Verbesserung?
+
+1. Was ist eine Budgetgerade?
+
+1. Wie ändert sich die Budgetgerade, wenn das Einkommen steigt?
+
+1. Wie ändert sich die Budgetgerade, wenn der Preis eines Gutes sich
+    verändert?
+
+1. Welche Bedingung gilt für den Grenznutzen im Vergleich zweiter aufeinander folgenden Perioden/Zeitpunkte bei intertemporler Optimierung nach der Euler-Gleichung?
+
+1. Wovon hängt es ab, ob intertemporale Effizienz mit nachhaltiger Entwicklung vereinbar ist?
+
+1. Wodurch ist ein Nash-Gleichgewicht gekennzeichnet?
+
+1. Konstruieren Sie ein Beispiel für ein Spiel mit zwei Personen, die je zwei Strategien zur Auswahl haben, in dem es kein Nash-Gleichgewicht gibt.
+
+1. Wodurch ist ein Gefangenendilemma gekennzeichnet?
+
+
+1. Was kann man anhand einer Nachfragekurve ablesen?
+
+1. Warum verläuft sie (üblicherweise) fallend?
+
+1. Wie ändert sich die Nachfragekurve, wenn das Einkommen steigt?
+
+1. Wie kann man aus vielen individuellen Nachfragekurven die
+    Gesamtnachfragekurve für einen Markt bilden?
+
+1. Was bezeichnet ,,Konsumentenrente"?
+
+1. Hängen alle Kosten einer Produktion typischerweise von der
+    produzierten Menge ab?
+
+1. Gibt es Fixkosten Ihres Studiums?
+
+1. Warum ist die Grenzkostenfunktion die Angebotsfunktion eines
+    Unternehmens bei vollkommenem Wettbewerb?
+
+1. Wie ergibt sich aus den individuellen Angebotsfunktionen vieler
+    Unternehmen eine Gesamtangebotsfunktion für einen Markt?
+
+1. Was bezeichnet ,,Produzentenrente"? In welchem Verhältnis steht sie
+    zum Gewinn eines Unternehmens?
+
+1. Charakterisieren Sie das Marktgleichgewicht unter vollkommenem
+    Wettbewerb. Warum ergibt sich ein Gleichgewicht? Wie ist es zu
+    beurteilen?
+    
+1. Zeigen Sie den Wohlfahrtsverlust, der durch einen Mindestpreis resultiert.
+
+1. Zeigen Sie den Wohlfahrtsverlust, der durch einen Höchstpreis resultiert.
+
+1. Zeigen Sie den Wohlfahrtsverlust, der aus einer Mengensteuer resultiert. Sollte der Staat daher auf Steuern ganz verzichten?
+
+1. Erläutern Sie statische und dynamische Wettbewerbsfunktionen
+
+1. Was bedeutet Pfadabhängigkeit?
+
+1. Wie beeinflusst Pfadabhängigkeit die Beurteilung von
+    Wettbewerbsgleichgewichten?
+
+1. Was sind öffentliche Güter?
+
+1. Was ist Marktversagen?
+
+1. Können öffentliche Güter effizient auf Märkten angeboten werden?
+
+1. Wie werden öffentliche Güter effizient bereitgestellt?
+
+1. Was sind externe Effekte? Warum führen sie zu einem Marktversagen?
+
+1. Führen nur negative externe Effekte zu einem Marktversagen? 
+
+1. Wodurch ist ein natürliches Monopol gekennzeichnet?
+
+1. Warum können asymmetrische Informationen zu einem Marktversagen
+    führen?
+
+1. Was versteht man unter dem Bruttoinlandsprodukt (BIP)?
+
+1. Wozu dient die Messung des BIPs?
+
+1. Welche Probleme sind mit seiner Messung verbunden?
+
+1. Wozu kann man das BIP verwenden?
+
+1. Sie studieren und haben daher nur begrenzt oder gar keine Zeit, Ihre
+    Arbeitsleistung anderen anzubieten und etwas zu produzieren. Ist das
+    gut oder schlecht für das BIP?
+
+1. Wenn ein Staat ein höheres BIP pro Kopf aufweist als ein anderer --
+    inwiefern ist er dann reicher?
+
+1. Ein spanischer Angestellter arbeitet in Deutschland bei einer
+    französischen Firma. Erläutern Sie, wie seine Wertschöpfung zum BIP
+    von Spanien, Deutschland und Frankreich beiträgt.
+
+1. Welchen Einfluss hat eine Grippewelle auf das BIP? Welchen eine
+    umfassende Grippeschutzimpfung?
+
+1. Im Königreich Bhutan ist das ,,Bruttosozialglück" das Ziel der
+    Wirtschaftspolitik. Sollte Deutschland diesem Beispiel folgen?
+
+1. Wie kann man Veränderungen des Preisniveaus messen?
+
+1. Wozu dient Geld?
+
+1. Woher kommt Geld?
+
+1. Woher hat das Geld seinen Wert -- welchen Wert hat es überhaupt?
+
+1. Wie kann eine Notenbank das Preisniveau beeinflussen?
+
+1. Welchen Einfluss haben Banken auf die Geldmenge?
+
+1. Was ist die ,,Umlaufgeschwindigkeit" des Geldes.
+
+1. Was ist Inflation?
+
+1. Ist Inflation immer schädlich? Warum (nicht)?
+
+1. Welchen Einfluss haben Investitionen auf heutige und zukünftige
+    Konsummöglichkeiten in einer Volkswirtschaft? produziert werden
+    können?
+
+1. Was ist eine potenzielle Pareto-Verbesserung?
+
+1. Zeigen Sie, wer von einer Öffnung einer (kleinen) Volkswirtschaft zu
+    Freihandel profitiert. Von welchen Bedingungen hängt das ab?
+
+1. Wie wirkt ein Importzoll auf die Konsumentenrente und die
+    Produzentenrente heimischer Unternehmen?
+    
+1. Sind Zölle daher immer falsch?
