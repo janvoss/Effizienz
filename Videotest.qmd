@@ -1,0 +1,168 @@
+---
+title: "Videotest"
+---
+
+```{r, cache=TRUE, eval=FALSE}
+# Install and load necessary libraries
+# install.packages("ggplot2")
+# install.packages("gganimate")
+# install.packages("ggforce")
+library(ggplot2)
+library(gganimate)
+library(ggforce)  # Für präzise Kreise
+library(dplyr)
+library(av)
+
+# Define parameters
+max_radius <- 1
+circle_center_x <- 0
+circle_center_y <- 0
+
+# Create data for animation
+animation_data <- data.frame(
+  frame = 1:100,
+  radius = seq(0.01, max_radius, length.out = 100)
+)
+
+# Create the plot
+p <- ggplot() +
+  # Schwarzer Hintergrund für den gesamten Plot
+  theme_void() +
+  theme(plot.background = element_rect(fill = "black", color = NA)) +
+  
+  # Schwarzes Rechteck als Hintergrund
+  annotate("rect", 
+           xmin = -max_radius*1.2, 
+           xmax = max_radius*1.2, 
+           ymin = -max_radius*1.2, 
+           ymax = max_radius*1.2, 
+           fill = "black") +
+  
+  # Weißer Kreis mit präzisen Grenzen
+  geom_circle(data = animation_data,
+              aes(x0 = circle_center_x, 
+                  y0 = circle_center_y, 
+                  r = radius),
+              fill = "white",
+              color = NA) +
+  
+  # "Wissen" Text
+  geom_text(aes(x = 0, y = 0, label = "Wissen"),
+            color = "black",
+            size = 6) +
+  
+  # "Unwissen" Text (positioniert außerhalb des Kreises)
+  annotate("text",
+           x = max_radius * 1.1,
+           y = max_radius * 1.1,
+           label = "Unwissen",
+           color = "white",
+           size = 5) +
+  
+  # Fester Koordinatenbereich
+  coord_fixed(xlim = c(-max_radius*1.2, max_radius*1.2),
+              ylim = c(-max_radius*1.2, max_radius*1.2)) +
+  
+  # Animation
+  transition_manual(frame)
+
+# Animate the plot
+animate(p, nframes = 100)
+
+
+```
+
+
+```{r, cache=TRUE, eval=FALSE}
+
+g <- animate(p, nframes = 100)
+
+anim_save("my_animation.mp4", animation = g, fps = 10)
+```
+
+
+```{r, eval=F}
+## Code erzeugt und speichert das gewünschte Video, führt aber in einen Error.
+
+## Workaround: Einmal laufen lassen, um Video zu erzeugen, dann auf eval=F setzen, damit Error umgangen wird, und Seite weiter erzeugen
+
+# Install and load necessary libraries
+# install.packages("ggplot2")
+# install.packages("gganimate")
+# install.packages("ggforce")
+# install.packages("av")  # Für Video-Export
+library(ggplot2)
+library(gganimate)
+library(ggforce)
+library(av)  # Für Video-Export
+library(dplyr)
+
+# Define parameters
+max_radius <- 1
+circle_center_x <- 0
+circle_center_y <- 0
+
+# Create data for animation
+animation_data <- data.frame(
+  frame = 1:100,
+  radius = seq(0.01, max_radius, length.out = 100)
+)
+
+# Create the plot
+p <- ggplot() +
+  # Schwarzer Hintergrund für den gesamten Plot
+  theme_void() +
+  theme(plot.background = element_rect(fill = "black", color = NA)) +
+  
+  # Schwarzes Rechteck als Hintergrund
+  annotate("rect", 
+           xmin = -max_radius*1.2, 
+           xmax = max_radius*1.2, 
+           ymin = -max_radius*1.2, 
+           ymax = max_radius*1.2, 
+           fill = "black") +
+  
+  # Weißer Kreis mit präzisen Grenzen
+  geom_circle(data = animation_data,
+              aes(x0 = circle_center_x, 
+                  y0 = circle_center_y, 
+                  r = radius),
+              fill = "white",
+              color = NA) +
+  
+  # "Wissen" Text
+  geom_text(aes(x = 0, y = 0, label = "Wissen"),
+            color = "black",
+            size = 6) +
+  
+  # "Unwissen" Text (positioniert außerhalb des Kreises)
+  annotate("text",
+           x = max_radius * 1.1,
+           y = max_radius * 1.1,
+           label = "Unwissen",
+           color = "white",
+           size = 5) +
+  
+  # Fester Koordinatenbereich
+  coord_fixed(xlim = c(-max_radius*1.2, max_radius*1.2),
+              ylim = c(-max_radius*1.2, max_radius*1.2)) +
+  
+  # Animation
+  transition_manual(frame)
+
+# Create animation
+anim <- animate(p, 
+                nframes = 100, 
+                width = 800, 
+                height = 800, 
+                fps = 20,
+                renderer = av_renderer())
+
+# Save as MP4 video
+anim_save("animation_video.mp4", animation = anim)
+
+# Optional: Auch als GIF speichern
+anim_save("animation.gif", animation = anim)
+```
+
+![animation_video.mp4](animation_video.mp4) 
