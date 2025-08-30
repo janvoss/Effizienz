@@ -498,11 +498,15 @@ digraph clusters_example {
 }
 '''
 
-src = Source(dot)
-display(src)
+# src = Source(dot)
+# display(src)
+
+#Datei erzeugen 
+dot.format = 'svg'  # Format setzen
+dot.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 ```
 
-
+![Nutzen und Rationalität](Rationalitaet.svg)
 
 ### Gesellschaftliches Entscheidungsproblem
 
