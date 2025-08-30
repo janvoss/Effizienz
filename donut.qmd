@@ -4,6 +4,35 @@
 #| message: false
 #| warning: false
 
+library(ggplot2)
+library(dplyr)
+library(scales)
 
+# Anzahl der Ringe (Segment-Dicke)
+n <- 200
+
+# Farbverlauf von innen (rot) nach außen (Rot-Orange-Gelb-Grün-Gelb-Orange-Rot)
+farben <- colorRampPalette(c("red", "orange", "yellow", "green", "yellow", "orange", "red"))(n)
+
+# Daten mit Segmenten in radialer Richtung
+farbverlauf <- data.frame(
+  xmin = seq(3, 3.3 - 0.3/n, length.out = n),
+  xmax = seq(3 + 0.3/n, 3.3, length.out = n),
+  ymin = 0,
+  ymax = 1,
+  Farbe = farben
+)
+
+ggplot(farbverlauf) +
+  geom_rect(aes(
+    fill = Farbe,
+    xmin = xmin, xmax = xmax,
+    ymin = ymin, ymax = ymax
+  ), color = NA) +
+  scale_fill_identity() +
+  coord_polar(theta = "y") +
+  xlim(c(2.8, 3.3)) + # mit oder ohne Loch?
+  theme_void() +
+  labs(title = "Radialer Farbverlaufring mit Loch im Zentrum")
 
 ```
