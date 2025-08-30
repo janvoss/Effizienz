@@ -36,3 +36,64 @@ ggplot(farbverlauf) +
   labs(title = "Radialer Farbverlaufring mit Loch im Zentrum")
 
 ```
+
+
+```{r}
+#| message: false
+#| warning: false
+
+library(ggplot2)
+
+df <- data.frame(
+  x = rep(1:100, each = 100),
+  y = rep(1:100, times = 100)
+)
+
+
+
+farben <- c("red", "orange", "yellow", "green", "yellow", "orange", "red")
+
+# Hier wird der Bereich für die Enden gestreckt (Rot bei 1 und 25 sowie 75 und 100)
+values <- scales::rescale(c(1, 25, 40, 50, 60, 75, 100))
+
+ggplot(df, aes(x = x, y = y, fill = y)) +
+  geom_raster() +
+  scale_fill_gradientn(
+    colours = farben,
+    values = values,
+    guide = "none"
+  )+
+   annotate("text", x = 50, y = 15, label = "Armut", size=7) +
+   annotate("text", x = 50, y = 90, label = "Planetare Grenzen", size=7) +
+#  geom_hline(yintercept = c(30, 70), linetype="dashed") +
+  geom_curve(x=1, y=50, xend=80, yend=75,
+             curvature=-.1,
+             arrow=arrow())+
+  labs(title = "Obere und  untere Grenzen der Ressourcennutzung, -transformation und -zerstörung",
+      subtitle="Statische Betrachtung",
+      x="Zeit",
+      y= "Materieller Wohlstand")+
+  # Die theme()-Funktion ist der Schlüssel zur Anpassung des Aussehens.
+  theme(
+    # --- Gitterlinien entfernen ---
+    # Entfernt die Hauptgitterlinien (major grids)
+    panel.grid.major = element_blank(),
+    # Entfernt die Nebengitterlinien (minor grids)
+    panel.grid.minor = element_blank(),
+
+    # --- Achsen-Ticks und deren Beschriftungen entfernen ---
+    # Entfernt die Ticks (die kleinen Striche an den Achsen)
+    axis.ticks = element_blank(),
+    # Entfernt die Tick-Beschriftungen (die Zahlen an den Achsen)
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+
+    # --- Zusätzliche ästhetische Anpassungen ---
+    # Setzt einen sauberen, weißen Hintergrund für das Panel
+    panel.background = element_rect(fill = "white")#,
+    # Fügt die Achsenlinien wieder hinzu, da sie durch das Entfernen des Gitters verschwinden können
+    #axis.line = element_line(colour = "black")
+  )
+
+```
+
