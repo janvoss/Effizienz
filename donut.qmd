@@ -97,3 +97,85 @@ ggplot(df, aes(x = x, y = y, fill = y)) +
 
 ```
 
+
+
+```{r}
+#| message: false
+#| warning: false
+
+library(ggplot2)
+
+df <- data.frame(
+  x = rep(1:100, each = 100),
+  y = rep(1:100, times = 100)
+)
+
+# Parameter für den Trichter
+w0 <- 20   # Startbreite bei x=1
+w1 <- 60   # Endbreite bei x=100
+mitte <- 50 # Zentrum des Trichters
+
+# Neue Variable: Normalisierter Abstand vom Zentrum (abhängig von X)
+df$w <- w0 + (w1 - w0) * (df$x - 1) / 99
+df$z <- (df$y - mitte) / df$w
+
+# Normalisierungsparameter für Farbverlauf
+z_min <- -5
+z_max <- 5
+df$z_normalized <- (df$z - z_min) / (z_max - z_min)
+
+# Farben und Positionen im Gradienten
+farben <- c("red", "orange", "yellow", "green", "yellow", "orange", "red")
+values <- c(0, 0.35, 0.4, 0.5, 0.6, 0.65, 1)
+
+# Grenzlinien für den Trichter (|z| = 1)
+df_lines <- data.frame(
+  x = 1:100,
+  untere_grenze = mitte - (w0 + (w1 - w0) * (1:100 - 1)/99),
+  obere_grenze = mitte + (w0 + (w1 - w0) * (1:100 - 1)/99)
+)
+
+# Plot mit dynamischem Trichter
+ggplot(df, aes(x = x, y = y, fill = z_normalized)) +
+  geom_raster() +
+  scale_fill_gradientn(
+    colours = farben,
+    values = values,
+    guide = "none"
+  ) +
+#  geom_line(data = df_lines, aes(x = x, y = untere_grenze), linetype = "dashed", inherit.aes = FALSE) +
+#  geom_line(data = df_lines, aes(x = x, y = obere_grenze), linetype = "dashed", inherit.aes = FALSE) +
+  geom_curve(x=1, y=50, xend=80, yend=75,
+             curvature=-.1,
+             arrow=arrow())+
+  labs(
+    title = "Obere und untere Grenzen der Ressourcennutzung, -transformation und -zerstörung",
+    subtitle = "Optimistische dynamische Betrachtung",
+    x = "Zeit",
+    y= "Materieller Wohlstand"
+  ) +
+  # Die theme()-Funktion ist der Schlüssel zur Anpassung des Aussehens.
+  theme(
+    # --- Gitterlinien entfernen ---
+    # Entfernt die Hauptgitterlinien (major grids)
+    panel.grid.major = element_blank(),
+    # Entfernt die Nebengitterlinien (minor grids)
+    panel.grid.minor = element_blank(),
+
+    # --- Achsen-Ticks und deren Beschriftungen entfernen ---
+    # Entfernt die Ticks (die kleinen Striche an den Achsen)
+    axis.ticks = element_blank(),
+    # Entfernt die Tick-Beschriftungen (die Zahlen an den Achsen)
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+
+    # --- Zusätzliche ästhetische Anpassungen ---
+    # Setzt einen sauberen, weißen Hintergrund für das Panel
+    panel.background = element_rect(fill = "white")#,
+    # Fügt die Achsenlinien wieder hinzu, da sie durch das Entfernen des Gitters verschwinden können
+    #axis.line = element_line(colour = "black")
+  )
+
+```
+
+
