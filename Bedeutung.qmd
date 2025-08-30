@@ -170,15 +170,13 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
   - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
 
 
-
-
 #### Nutzenmaximierung unter Nebenbedingungen
 
 ##### Nutzenfunktionen
 
 - Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
 
-- Der Nutzen hängt ab von den konsumierten Gütern $x_i$
+- Der Nutzen hängt ab von den konsumierten Gütern oder sonstigen Umständen $x_i$
 
 - Zur Vereinfachung: Beschränkung auf wenige Güter
 
@@ -455,6 +453,54 @@ chart <- ggplot() +
 
 ```
 
+
+
+#### Das Verhältnis zwischen Rationalität und Nutzenmaximierung
+
+[Code auf eigene Seite auslagern, damit python funktioniert]::
+
+```{python}
+#| warning: false
+#| message: false
+
+from graphviz import Source
+from IPython.display import display
+
+dot = '''
+digraph clusters_example {
+  graph [rankdir=LR]
+
+  node [style=filled, color=white, fixedsize=true, width=2.5, height=1.2]
+
+  subgraph cluster_3 {
+    style=filled; color="#00ffff30"
+    c1 [label="Eigenschaften des\n Entscheidungsverhaltens"]
+    c2 [label="Rationalität"]
+    c1 -> c2
+    label = "Axiomatischer Rationalitätsbegriff"
+  }
+
+  subgraph cluster_2 {
+    style=filled; color="#00ffff65"
+    b1 [label="(Rationale) Entscheidung"]
+    b2 [label="Nutzenfunktion"]
+    b1 -> b2
+    label = "Offenbarte Präferenzen"
+  }
+
+  subgraph cluster_1 {
+    style=filled; color="#00ffff"
+    a1 [label="Nutzenfunktion"]
+    a2 [label="Rationale Entscheidung"]
+    a1 -> a2
+    label = "Hedonistischer Nutzenbegriff"
+  }
+}
+'''
+
+src = Source(dot)
+display(src)
+```
 
 
 
