@@ -16,6 +16,7 @@ book:
     - index.qmd
     - intro.qmd
     - Zukunft.qmd
+    - donut.qmd
     - Bedeutung.qmd # individuell vs sozial 
     - Wissenschaftstheorie.qmd
     - Modelle-Rationalitaet.qmd
