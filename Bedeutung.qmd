@@ -462,6 +462,7 @@ chart <- ggplot() +
 ```{python}
 #| warning: false
 #| message: false
+#| output: false
 
 from graphviz import Source
 from IPython.display import display
@@ -498,12 +499,12 @@ digraph clusters_example {
 }
 '''
 
-# src = Source(dot)
+src = Source(dot)
 # display(src)
 
 #Datei erzeugen 
-dot.format = 'svg'  # Format setzen
-dot.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
+src.format = 'svg'  # Format setzen
+src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 ```
 
 ![Nutzen und Rationalität](Rationalitaet.svg)
