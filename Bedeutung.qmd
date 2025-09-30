@@ -88,13 +88,11 @@ von Situation und Handlung möglich)
 
 
 
-## Individuelles vs. gesellschaftliches Entscheidungsproblem
-
-### Individuelles Entscheidungsproblem
+## Individuelles Entscheidungsproblem
 
 Das Folgende ist fast wörtlich aus @detel_grundkurs_2007 S. 20 übernommen.
 
-#### Basisschema der Handlungserklärung
+### Basisschema der Handlungserklärung
 
 1. Person $S$ wünscht, Ziel $Z$ zu realisieren.
 
@@ -116,7 +114,7 @@ nicht vereinbar sind?
 $\Rightarrow$ **erweitertes Schema der Handlungserklärung**
 
 
-#### Erweitertes Schema der Handlungserklärung
+### Erweitertes Schema der Handlungserklärung
 
 1. $S$ hat die Absicht, Ziel $Z$ zu realisieren.
 
@@ -139,7 +137,7 @@ sie $Z$ gegenüber vorzieht.
 
 7. **$S$ vollzieht Handlung $H$.**
 
-#### Zwischenfazit
+### Zwischenfazit
 
 - Erklärungen rationaler Handlungen unterstellen nicht zwangsläufig,
 dass die handelnde Person "alles richtig"  macht. 
@@ -153,9 +151,9 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
   - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
 
 
-#### Nutzenmaximierung unter Nebenbedingungen
+### Nutzenmaximierung unter Nebenbedingungen
 
-##### Nutzenfunktionen
+#### Nutzenfunktionen
 
 - Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
 
@@ -163,7 +161,7 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 - Zur Vereinfachung: Beschränkung auf wenige Güter
 
-##### Perfekte Substitute
+#### Perfekte Substitute
 
 Beispiel: $U(x_1, x_2)=x_1+x_2$
 
@@ -218,7 +216,7 @@ p
 
 ```
 
-###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
+##### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
 
 $x_2=\bar{U}-x_1$
 
@@ -231,7 +229,7 @@ p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
 p
 ```
 
-##### Imperfekte Substitute
+#### Imperfekte Substitute
 
 $U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
 
