@@ -36,46 +36,29 @@
 ```{r Modell-Stoerung, echo=F, warning=F, message=F, cache=F}
 library(tidyverse)
 
-# df erzeugen
-set.seed(123)
+set.seed(77)
 
-index <- 1:100
+df <- data.frame(x = 0:100) %>%
+  mutate(y = exp(x)^.02,
+         obs = y + rnorm(n = n(), mean = 0, sd = .5))
 
-df <- as.data.frame(index) %>% 
-  mutate(trend = .2*index^2+30,
-         beobachtung = trend+rnorm(100, 0, 150))
+model <- df %>% lm(obs ~ x + I(x^2), .)
+df$fit <- fitted(model)
 
-#(Zusätzlicher df, um vertikale Linien in Grafik zu erzeugen, s. https://stackoverflow.com/questions/12253239/vertical-lines-between-points-with-ggplot2)
-
-trend1 <- df$trend
-beobachtung1 <- df$beobachtung
-index1 <- rep(1:100,2)
-
-df1 <- data.frame(index1=index1,
-                 y=c(trend1, beobachtung1))
-
-# Bild erzeugen
-
-p <- df %>% 
-  ggplot(aes(index, beobachtung))+
-  geom_point(aes(color="Beobachtungen"))+
-#  geom_line()+
-  geom_line(aes(x=index1, y=y, group=df1$index1, color="zufällige Störungen"), data=df1)+
-  geom_line(aes(y=trend, color= "Erklärung"))+
-  scale_color_manual(values=c("blue", "red", "gray"))+
-  scale_x_continuous(breaks= NULL) +
-  scale_y_continuous(breaks= NULL) +
-  theme_classic()+
-  theme(panel.grid = element_blank()) +
-  theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
-  labs(title="Erklärung und Zufall",
-       caption="Darstellung: Jan S. Voßwinkel",
-    x = "unabhängige Variable", y = "abhängige Variable", 
-       color="",
-       fill="")
-
-p
-
+ggplot(df, aes(x, obs)) +
+  geom_point(aes(color = "Beobachtungen")) +
+  geom_line(aes(y = fit, color = "Erklärter Zusammenhang")) +
+  geom_segment(aes(x = x, xend = x, y = obs, yend = fit, color = "Unerklärter Rest"), alpha = 0.5) +
+  scale_color_manual(values = c("Beobachtungen" = "black", "Erklärter Zusammenhang" = "blue", "Unerklärter Rest" = "red")) +
+  scale_x_continuous(breaks=NULL)+
+  scale_y_continuous(breaks=NULL)+
+  labs(title= "Erklärter und unerklärter Teil von Bebachtungen",
+      x= "Unabhängige Variable",
+      y= "Abhängige Variable",
+      color = "",
+      caption="Darstellung: Jan S. Voßwinkel") +
+  theme_light()+
+  theme(legend.position = "bottom")
 ```
 
 
