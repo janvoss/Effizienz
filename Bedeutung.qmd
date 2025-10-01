@@ -154,7 +154,7 @@ oder fehlerhafte Informationslagen.
 Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 
-### Nutzenmaximierung
+### Rationales Handeln als Nutzenmaximierung
 
 
 - Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
@@ -218,7 +218,7 @@ p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
 
 p
 ```
-
+[Hier Nutzenfunktion und Indifferenzkurven]::
 
 #### Indifferenzkurven und Budgetrestriktionen
 
@@ -234,7 +234,7 @@ Budgetlinie: $x_2=\frac{I}{p_2}- \frac{p_1}{p_2}x_1$
 
 ```{r echo=F, warning=F, message=F, cache=F}
 # Bibliotheken laden
-library(mosaic)
+library(tidyverse)
 library(latex2exp)
 
 # Funktionen definieren
