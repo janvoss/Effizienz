@@ -153,10 +153,6 @@ oder fehlerhafte Informationslagen.
 - Das **Rationalprinzip** ist weniger eine Behauptung über die handelnde
 Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
-- Diese Grammatik verwenden wir sowohl in der Spieltheorie als auch in der Verhaltensökonomik  
-  - Schwerpunkt **Spieltheorie**: Individuen handeln nach (dem richtigen) mathematischen Kalkül und machen höchstens zufällig Fehler  
-  - Schwerpunkt **Verhaltensökonomik**: Individuen handeln nachvollziehbar, aber nach Kalkülen, die nicht ganz "richtig" sind.
-
 
 ### Nutzenmaximierung unter Nebenbedingungen
 
