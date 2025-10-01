@@ -29,7 +29,10 @@
 
 - Erlaubt die Formulierung einer **Erwartung** über Entwicklung der abhängigen Variable in Abhängigkeit von der Entwicklung der unabhängigen Variable(n). 
 
-- Komplexität des Modells steuerbar. 
+- **Komplexität** des Modells **steuerbar**  
+$\rightarrow$ möglichst **einfache Modelle** verwenden
+
+- Fokussierung auf **interessante Zusammenhänge**
 
 - Erlaubt **keine** Prognose von **Einzel**ereignissen
 
