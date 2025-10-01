@@ -10,6 +10,8 @@
 
 - Ein Gleichgewicht liegt vor, wenn ein System ohne &bdquo;Störungen&ldquo;  durch äußere Einflüsse in Ruhe verbleibt. 
 
+[Kasten mit ausführlicher Erläuterung?]::
+
 - Muster: Individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow$ Gleichgewicht. Exogener Schock $\rightarrow$ neue individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow  \dots$
 
 ## Erklärungen durch Modelle
@@ -25,9 +27,11 @@
 
 - **Systematischer Zusammenhang** zwischen unabhängigen und abhängigen Variablen.
 
-- Erlaubt die Formulierung einer **Erwartung** über Entwicklung der abhängigen Variable in Abhängigkeit von der Entwicklung der unabhängigen Variable. 
+- Erlaubt die Formulierung einer **Erwartung** über Entwicklung der abhängigen Variable in Abhängigkeit von der Entwicklung der unabhängigen Variable(n). 
 
-- Erlaubt **keine** Prognose von Einzelereignissen
+- Komplexität des Modells steuerbar. 
+
+- Erlaubt **keine** Prognose von **Einzel**ereignissen
 
 - In jedem **Einzelfall** wirkt eine **Vielzahl von unsystematischen Einzelfaktoren**, die sich nicht systematisch erklären lassen. 
 
