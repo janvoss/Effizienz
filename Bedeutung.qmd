@@ -154,9 +154,8 @@ oder fehlerhafte Informationslagen.
 Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 
-### Nutzenmaximierung unter Nebenbedingungen
+### Nutzenmaximierung
 
-#### Nutzenfunktionen
 
 - Darstellung der Ziele eines Individuums mittels Nutzenfunktionen: $U=U(x_1, x_2, \dots, x_n)$.
 
@@ -164,79 +163,10 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 - Zur Vereinfachung: Beschränkung auf wenige Güter
 
-#### Perfekte Substitute
 
-Beispiel: $U(x_1, x_2)=x_1+x_2$
+- Ein Beispiel: $U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
 
-###### 3D-Darstellung: Nutzengebirge
-
-```{r echo=F, warning=F, message=F, cache=F}
-
-
-
-library(tidyverse)
-library(plotly)
-
-f <- function(x1, x2){x1+x2}
-
-x1a <- 0
-x1b <- 100
-
-x2a <- 0
-x2b <- 100
-
-x1 <- seq(x1a, x1b)
-x2 <- seq(x2a, x2b)  
-
-u <- outer(x1, x2, f)
-
-
-
-
-p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
- #
-  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
-   config(displaylogo = FALSE,
-          scrollZoom = F) %>%            add_surface(
-      contours = list(
-      z = list(
-      show=T,
-      usecolormap=T,
-      highlightcolor="#ff0000",
-      project=list(z=TRUE)
-      )
-    )
-  )%>% layout(
-    scene = list(
-      camera=list(
-        eye = list(x=-1, y=-2, z=.2)
-        )
-      )
-  )%>% 
-  hide_colorbar()
-
-p
-
-```
-
-##### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
-
-$x_2=\bar{U}-x_1$
-
-```{r echo=F, message=F, warning=F, cache=F}
-p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
-  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
-   config(displaylogo = FALSE)%>% 
-  hide_colorbar()
-
-p
-```
-
-#### Imperfekte Substitute
-
-$U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
-
-###### 3D-Darstellung: Nutzengebirge
+#### 3D-Darstellung: Nutzengebirge
 
 ```{r echo=F, warning=F, message=F, cache=F}
 
@@ -277,9 +207,7 @@ p
 
 ```
 
-###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
-
-
+#### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
 
 
 ```{r echo=F, message=F, warning=F, cache=F}
@@ -291,67 +219,8 @@ p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
 p
 ```
 
-##### Komplementärgüter
 
-$U(x_1, x_2)=\min(x_1, x_2)$
-
-###### 3D-Darstellung: Nutzengebirge
-
-```{r echo=F, warning=F, message=F, cache=F}
-
-library(mosaic)
-library(plotly)
-
-f <- function(x1, x2){
-  ifelse(x1< x2, x1, x2)}
-
-#f <- function(x1, x2){
-#  ifelse(x1< .25*x2, x1, floor(x2/4))}
-
-
-u <- outer(x1, x2, f)
-
-
-# Werte für x1 usw. werden aus dem anderen chunk übernommen
-
-p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
- #
-  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
-   config(displaylogo = FALSE,
-          scrollZoom = F) %>%            add_surface(
-      contours = list(
-      z = list(
-      show=T,
-      usecolormap=T,
-      highlightcolor="#ff0000",
-      project=list(z=TRUE)
-      )
-    )
-  )%>% layout(
-    scene = list(
-      camera=list(
-        eye = list(x=-1, y=-2, z=.2)
-        )
-      )
-  )%>% 
-  hide_colorbar()
-
-p
-
-```
-
-###### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
-
-```{r echo=F, message=F, warning=F, cache=F}
-p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
-  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
-   config(displaylogo = FALSE)%>% 
-  hide_colorbar()
-
-p
-```
-
-##### Indifferenzkurven und Budgetrestriktionen
+#### Indifferenzkurven und Budgetrestriktionen
 
 Nutzenfunktion: $U(x_1, x_2)=x_1\times x_2$
 
