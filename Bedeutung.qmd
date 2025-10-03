@@ -168,7 +168,7 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 #### 3D-Darstellung: Nutzengebirge
 
-```{r echo=F, warning=F, message=F, cache=F, eval=F}
+```{r echo=F, warning=F, message=F, cache=F, eval=T}
 
 library(tidyverse)
 library(plotly)
@@ -222,7 +222,7 @@ p
 ```{r echo=F, message=F, warning=F, cache=F}
 p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
   layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
-   config(displaylogo = FALSE)%>% 
+   config(displaylogo = FALSE) %>%
   hide_colorbar()
 
 p
@@ -318,8 +318,6 @@ chart <- ggplot() +
 
 
 #### Das Verhältnis zwischen Rationalität und Nutzenmaximierung
-
-[Code auf eigene Seite auslagern, damit python funktioniert]::
 
 ```{python}
 #| warning: false
