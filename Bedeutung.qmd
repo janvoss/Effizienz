@@ -170,16 +170,25 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 ```{r echo=F, warning=F, message=F, cache=F}
 
-library(mosaic)
+library(tidyverse)
 library(plotly)
+
+f <- function(x1, x2){x1+x2}
+
+x1a <- 0
+x1b <- 100
+
+x2a <- 0
+x2b <- 100
+
+x1 <- seq(x1a, x1b)
+x2 <- seq(x2a, x2b)  
+
 
 f <- function(x1, x2){.5*(x1*x2)^.5}
 
 
 u <- outer(x1, x2, f)
-
-
-# Werte für x1 usw. werden aus dem anderen chunk übernommen
 
 p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
  #
