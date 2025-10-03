@@ -168,7 +168,7 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 #### 3D-Darstellung: Nutzengebirge
 
-```{r echo=F, warning=F, message=F, cache=F}
+```{r echo=F, warning=F, message=F, cache=F, eval=F}
 
 library(mosaic)
 library(plotly)
