@@ -82,13 +82,13 @@ p <- mydata_extended %>%
    # geom_smooth(method = 'lm',
    #             fullrange=T
   #  )+
-  geom_vline(xintercept=2023,linetype = "dashed" )+
+  geom_vline(xintercept=2025,linetype = "dashed" )+
 geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
 geom_line(aes(y=upr), color = "red", linetype = "dashed")+
     annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
   annotate("text", x=2035, y=4500000, label="Zukunft", color="grey30")+
   theme_classic() +
-    scale_x_continuous(breaks = 2023,
+    scale_x_continuous(breaks = 2024,
                      labels = "Gegenwart") +
       scale_y_continuous(#expand = c(0, 0), 
                      breaks = NULL) +
@@ -113,13 +113,13 @@ p2 <- mydata_extended %>%
    # geom_smooth(method = 'lm',
    #             fullrange=T
   #  )+
-  geom_vline(xintercept=2023,linetype = "dashed" )+
+  geom_vline(xintercept=2024,linetype = "dashed" )+
 geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
 geom_line(aes(y=upr), color = "red", linetype = "dashed")+
     annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
   annotate("text", x=2035, y=4500000, label="Zukunft", color="grey30")+
   theme_classic() +
-    scale_x_continuous(breaks = 2023,
+    scale_x_continuous(breaks = 2024,
                      labels = "Gegenwart") +
       scale_y_continuous(#expand = c(0, 0), 
                      breaks = NULL) +
@@ -128,14 +128,14 @@ geom_line(aes(y=upr), color = "red", linetype = "dashed")+
        title="Prognoseunsicherheit",
        #subtitle= "Anteil am BIP, 2020",
        x="Zeit", y='Werte',
-       caption = paste('Illustration: Jan S. Voßwinkel, 2024'))
+       caption = 'Illustration: Jan S. Voßwinkel')
 
 ```
 
 ```{r echo=T, warning=F, message=F, cache=T}
 
 p +
-  coord_cartesian(xlim = c(1990, 2023), ylim=c(min(mydata$values), max(mydata$values)))
+  coord_cartesian(xlim = c(1990, 2024), ylim=c(min(mydata$values), max(mydata$values)))
 
 ```
 
