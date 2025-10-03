@@ -17,7 +17,8 @@ book:
     - intro.qmd
     - Zukunft.qmd
     - donut.qmd
-    - Bedeutung.qmd # individuell vs sozial 
+    - Soziale_Phaenomene.qmd
+    - Bedeutung.qmd
     - Wissenschaftstheorie.qmd
     - Modelle-Rationalitaet.qmd
     - Intertemporal.qmd
