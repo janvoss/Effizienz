@@ -112,7 +112,7 @@ df <- data.frame(
 
 # Parameter für den Trichter
 w0 <- 20   # Startbreite bei x=1
-w1 <- 60   # Endbreite bei x=100
+w1 <- 70   # Endbreite bei x=100
 mitte <- 50 # Zentrum des Trichters
 
 # Neue Variable: Normalisierter Abstand vom Zentrum (abhängig von X)
