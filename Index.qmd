@@ -24,8 +24,23 @@ generate_svg(qr, filename = "qr-titel.svg")
 
 - Modul: 209-003: Effiziente Nutzung knapper Ressourcen ([Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf))
 
-- Weitere Veranstaltung im ModuL: --
+- Weitere Veranstaltungen im Modul: --
 
 - Prüfungsleistung: K60
+
+:::
+
+:::{.callout-tip 
+    icon=false 
+    collapse=true }
+
+# Technische Anmerkung {.unnumbered}
+
+Die Unterlagen beinhalten Elemente, die mit [R](https://www.r-project.org/) oder mit [Python](https://www.python.org/) erstellt wurden. Der jeweilige Code wird (fast immer) an der entsprechenden Stelle angezeigt.
+
+
+Die Unterlagen selbst werden mit [Quarto](https://quarto.org/) in der Sprache [Markdown](https://www.markdownguide.org) erstellt und beinhalten auch Elemente von [$\LaTeX$](https://www.latex-project.org/). Das Literaturverzeichnis beruht auf einem [BibTeX](https://www.bibtex.org/de/)-Export aus [Zotero](https://www.zotero.org/) Der Quellcode ist auf [GitHub](https://github.com/) einsehbar.
+
+Die Kenntnis dieser Sprachen/Programme wird für die Modulprüfung *nicht* vorausgesetzt. Sie ist aber für das weitere Studium und das Leben danach vermutlich hilfreich.
 
 :::

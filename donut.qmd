@@ -103,7 +103,7 @@ ggplot(df, aes(x = x, y = y, fill = y)) +
 #| message: false
 #| warning: false
 
-library(ggplot2)
+library(tidyverse)
 
 df <- data.frame(
   x = rep(1:100, each = 100),
@@ -117,34 +117,25 @@ mitte <- 50 # Zentrum des Trichters
 
 # Neue Variable: Normalisierter Abstand vom Zentrum (abhängig von X)
 df$w <- w0 + (w1 - w0) * (df$x - 1) / 99
-df$z <- (df$y - mitte) / df$w
 
-# Normalisierungsparameter für Farbverlauf
-z_min <- -5
-z_max <- 5
-df$z_normalized <- (df$z - z_min) / (z_max - z_min)
+df <- df %>% mutate(z = ifelse(y > mitte, (y - mitte)/w, 5*(y-mitte)/100))
+
+df$z1 <- (df$y - mitte) / df$w
+
 
 # Farben und Positionen im Gradienten
 farben <- c("red", "orange", "yellow", "green", "yellow", "orange", "red")
 values <- c(0, 0.35, 0.4, 0.5, 0.6, 0.65, 1)
 
-# Grenzlinien für den Trichter (|z| = 1)
-df_lines <- data.frame(
-  x = 1:100,
-  untere_grenze = mitte - (w0 + (w1 - w0) * (1:100 - 1)/99),
-  obere_grenze = mitte + (w0 + (w1 - w0) * (1:100 - 1)/99)
-)
 
 # Plot mit dynamischem Trichter
-ggplot(df, aes(x = x, y = y, fill = z_normalized)) +
+ggplot(df, aes(x = x, y = y, fill = z)) +
   geom_raster() +
   scale_fill_gradientn(
     colours = farben,
     values = values,
     guide = "none"
   ) +
-#  geom_line(data = df_lines, aes(x = x, y = untere_grenze), linetype = "dashed", inherit.aes = FALSE) +
-#  geom_line(data = df_lines, aes(x = x, y = obere_grenze), linetype = "dashed", inherit.aes = FALSE) +
   geom_curve(x=1, y=50, xend=80, yend=75,
              curvature=-.1,
              arrow=arrow())+

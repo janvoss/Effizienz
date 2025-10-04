@@ -1,11 +1,9 @@
 {
-  "hash": "9d89f9cf79ca6a15d9e6210ab7424d1b",
+  "hash": "e2d36d08d355f8d6c6543e6cd4ae8caa",
   "result": {
     "engine": "knitr",
-    "markdown": "# Organisatorisches {.unnumbered}\n\n\n::: {.cell}\n\n:::\n\n\n|       ${}$        |  ${}$  |\n|:-----------------:|:--------------------------------------------------:|\n| ![logo](logo.png) |    ![](qr.svg){width=\"30%\"}              |\n\n- Unterlagen: <https://janvoss.github.io/Effizienz/>\n\n- Modul: 209-003: Effiziente Nutzung knapper Ressourcen [Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf) \n\n- Weitere Veranstaltung im ModuL: -\n\n- Prüfungsleistung: K60",
-    "supporting": [
-      "index_files"
-    ],
+    "markdown": "\n\n::: {.cell}\n\n:::\n\n \n|       ${}$        |  ${}$  |\n|:-----------------:|:--------------------------------------------------:|\n| ![logo](logo.png) |    ![](qr-titel.svg){width=\"30%\"}              |\n\n\n:::{.callout-note \n    icon=false \n    collapse=true }\n\n# Organisatorisches {.unnumbered}\n\n- Unterlagen: <https://janvoss.github.io/Effizienz/>\n\n- Modul: 209-003: Effiziente Nutzung knapper Ressourcen ([Modulhandbuch](https://www.hfwu.de/fileadmin/user_upload/FAVM/ZuB/Module/Modulhandbuch_spob_zub_2022_WiSe_Stand_2022_WiSe.pdf))\n\n- Weitere Veranstaltungen im Modul: --\n\n- Prüfungsleistung: K60\n\n:::\n\n:::{.callout-tip \n    icon=false \n    collapse=true }\n\n# Technische Anmerkung {.unnumbered}\n\nDie Unterlagen beinhalten Elemente, die mit [R](https://www.r-project.org/) oder mit [Python](https://www.python.org/) erstellt wurden. Der jeweilige Code wird (fast immer) an der entsprechenden Stelle angezeigt.\n\n\nDie Unterlagen selbst werden mit [Quarto](https://quarto.org/) in der Sprache [Markdown](https://www.markdownguide.org) erstellt und beinhalten auch Elemente von [$\\LaTeX$](https://www.latex-project.org/). Das Literaturverzeichnis beruht auf einem [BibTeX](https://www.bibtex.org/de/)-Export aus [Zotero](https://www.zotero.org/) Der Quellcode ist auf [GitHub](https://github.com/) einsehbar.\n\nDie Kenntnis dieser Sprachen/Programme wird für die Modulprüfung *nicht* vorausgesetzt. Sie ist aber für das weitere Studium und das Leben danach vermutlich hilfreich.\n\n:::",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
