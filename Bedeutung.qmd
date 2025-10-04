@@ -2,7 +2,7 @@
 
 ## Individuelles Entscheidungsproblem
 
-Das Folgende ist fast wörtlich aus @detel_grundkurs_2007 S. 20 übernommen.
+Das Folgende ist fast wörtlich aus @Detel07_Soz S. 20 übernommen.
 
 ### Basisschema der Handlungserklärung
 
@@ -133,6 +133,60 @@ p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
 p
 ```
 [Hier Nutzenfunktion und Indifferenzkurven]::
+
+```{python}
+#| message: false
+#| warning: false
+#| include: false
+
+from lets_plot import *
+import numpy as np
+from sympy import symbols, Eq, solve, lambdify, latex
+
+# Setup Lets-Plot for HTML output
+LetsPlot.setup_html()
+
+# Define the symbols and the equation
+x1, x2, U = symbols('x1 x2 U')
+equation = Eq(U, x1**0.5 * x2**0.5  - .15*x1**2)
+
+# Solve for x2 and lambdify the solution
+solution_x2 = solve(equation, x2)[0]
+x2_func = lambdify((x1, U), solution_x2)
+
+# Define specific values for U
+U_value = 3
+U_values = [U_value - 1, U_value, U_value + 1]
+colors = ['red', 'blue', 'green']
+labels = ['U=2', 'U=3', 'U=4']
+
+# Create data with values from 0 to 6 in steps of 0.1
+x_values = np.arange(1.5, 6.1, 0.1)
+data = {'x': x_values.tolist()}
+
+# Initialize the plot
+plot = ggplot()
+
+# Add curves using a loop and annotate each curve
+for i, u in enumerate(U_values):
+    plot += geom_function(aes('x'), data=data, fun=lambda t, u=u: x2_func(t, u), color=colors[i])
+    # Annotate each curve at a specific point (e.g., x=4)
+    y_value = x2_func(6, u)
+    plot += geom_text(x=6.5, y=y_value, label= labels[i], size=6
+)
+
+# Add title and labels
+plot += ggtitle(f'Indifferenzkurven zu U') + \
+        labs(x='\( x_1 \)', y='\(x_2\)', caption='Caption') + \
+        theme_light()
+
+# Display the plot
+# plot.show()
+
+ggsave(plot, filename='plot.svg')
+```
+
+![Indifferenzkurven](lets-plot-images/plot.svg)
 
 #### Indifferenzkurven und Budgetrestriktionen
 
@@ -274,12 +328,16 @@ src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 
 ![Nutzen und Rationalität](Rationalitaet.svg)
 
-### Gesellschaftliches Entscheidungsproblem
+## Gesellschaftliches Entscheidungsproblem
 
-#### Pareto-Verbesserungen und Pareto-Effizienz
+### Pareto-Verbesserungen und Pareto-Effizienz
 
 [Edgeworth]::
 
 [Hier auch potenzielle Pareto-Verbesserungen]::
 
-#### Auswahl zwischen verschiedenen effizienten Zuständen
+### Auswahl zwischen verschiedenen effizienten Zuständen
+
+## Individuelle Rationalität und gesellschaftliche Effizienz
+
+[Hier Spieltheorie]::
