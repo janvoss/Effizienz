@@ -19,11 +19,11 @@ book:
     - donut.qmd
     - Soziale_Phaenomene.qmd
     - Bedeutung.qmd
-    - Wissenschaftstheorie.qmd
-    - Modelle-Rationalitaet.qmd
+  # - Wissenschaftstheorie.qmd
+    # - Modelle-Rationalitaet.qmd
     - Intertemporal.qmd
-    - Spieltheorie.qmd
-    - Edgeworth.qmd
+  #  - Spieltheorie.qmd
+   # - Edgeworth.qmd
     - Maerkte.qmd
     - Marktversagen.qmd
     - BIP.qmd
