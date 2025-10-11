@@ -1,8 +1,12 @@
-# Das Donut-Modell
+# Das Doughnut-Modell
+
+## Grundmodell
 
 ```{r}
 #| message: false
 #| warning: false
+#| fig-cap: Der Doughnut
+#| fig-link: Doughnut
 
 library(ggplot2)
 library(dplyr)
@@ -30,17 +34,22 @@ ggplot(farbverlauf) +
     ymin = ymin, ymax = ymax
   ), color = NA) +
   scale_fill_identity() +
-  coord_polar(theta = "y") +
+  coord_polar(theta = "y", clip="off" ) +
   xlim(c(2.8, 3.3)) + # mit oder ohne Loch?
   theme_void() +
-  labs(title = "Radialer Farbverlaufring mit Loch im Zentrum")
+  labs(title = "Das Doughnut-Model",
+       caption= "Darstellung: Jan S Voßwinkel basierend auf Raworth (2012)") +
+  annotate("text", x = 2.8, y = 0.5, label = "Armut", size = 7) + # Added text annotation
+  annotate("text", x = 3.2, y = 0.1, label = "Planetare\n Grenzen", size = 7, hjust = -.9) # Adjusted text annotation position and
 
 ```
 
+## Entwicklung in der Zeit: Statische Betrachtung
 
 ```{r}
-#| message: false
 #| warning: false
+#| message: false
+#| fig-cap: Entwicklung im statischen Doughnut
 
 library(ggplot2)
 
@@ -94,10 +103,9 @@ ggplot(df, aes(x = x, y = y, fill = y)) +
     # Fügt die Achsenlinien wieder hinzu, da sie durch das Entfernen des Gitters verschwinden können
     #axis.line = element_line(colour = "black")
   )
-
 ```
 
-
+## Entwickung in der Zeit: Dynamischer Doughnut
 
 ```{r}
 #| message: false

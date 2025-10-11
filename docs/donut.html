@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Das Donut-Modell – Effiziente Nutzung knapper Ressourcen</title>
+<title>3&nbsp; Das Doughnut-Modell – Effiziente Nutzung knapper Ressourcen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./donut.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Donut-Modell</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./donut.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Doughnut-Modell</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./donut.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Donut-Modell</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Doughnut-Modell</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -240,15 +240,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Überblick</h2>
+   
+  <ul>
+  <li><a href="#grundmodell" id="toc-grundmodell" class="nav-link active" data-scroll-target="#grundmodell"><span class="header-section-number">3.1</span> Grundmodell</a></li>
+  <li><a href="#entwicklung-in-der-zeit-statische-betrachtung" id="toc-entwicklung-in-der-zeit-statische-betrachtung" class="nav-link" data-scroll-target="#entwicklung-in-der-zeit-statische-betrachtung"><span class="header-section-number">3.2</span> Entwicklung in der Zeit: Statische Betrachtung</a></li>
+  <li><a href="#entwickung-in-der-zeit-dynamischer-doughnut" id="toc-entwickung-in-der-zeit-dynamischer-doughnut" class="nav-link" data-scroll-target="#entwickung-in-der-zeit-dynamischer-doughnut"><span class="header-section-number">3.3</span> Entwickung in der Zeit: Dynamischer Doughnut</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Donut-Modell</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Das Doughnut-Modell</span></h1>
 </div>
 
 
@@ -265,6 +273,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="grundmodell" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="grundmodell"><span class="header-section-number">3.1</span> Grundmodell</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -294,19 +304,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_identity</span>() <span class="sc">+</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>, <span class="at">clip=</span><span class="st">"off"</span> ) <span class="sc">+</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">2.8</span>, <span class="fl">3.3</span>)) <span class="sc">+</span> <span class="co"># mit oder ohne Loch?</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Radialer Farbverlaufring mit Loch im Zentrum"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Das Doughnut-Model"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span> <span class="st">"Darstellung: Jan S Voßwinkel basierend auf Raworth (2012)"</span>) <span class="sc">+</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.8</span>, <span class="at">y =</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="st">"Armut"</span>, <span class="at">size =</span> <span class="dv">7</span>) <span class="sc">+</span> <span class="co"># Added text annotation</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.2</span>, <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">label =</span> <span class="st">"Planetare</span><span class="sc">\n</span><span class="st"> Grenzen"</span>, <span class="at">size =</span> <span class="dv">7</span>, <span class="at">hjust =</span> <span class="sc">-</span>.<span class="dv">9</span>) <span class="co"># Adjusted text annotation position and</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="donut_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><a href="Doughnut"><img src="donut_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figcaption>Der Doughnut</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="entwicklung-in-der-zeit-statische-betrachtung" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="entwicklung-in-der-zeit-statische-betrachtung"><span class="header-section-number">3.2</span> Entwicklung in der Zeit: Statische Betrachtung</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -364,13 +381,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="donut_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Entwicklung im statischen Doughnut</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="entwickung-in-der-zeit-dynamischer-doughnut" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="entwickung-in-der-zeit-dynamischer-doughnut"><span class="header-section-number">3.3</span> Entwickung in der Zeit: Dynamischer Doughnut</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -448,6 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
