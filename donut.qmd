@@ -2,6 +2,17 @@
 
 ## Grundmodell
 
+- Das Doughnut-Modell geht auf @raworth_safe_2012 und nachfolgende Publikationen der gleichen Autorin zurück
+
+- Der Kern des Modells wird durch eine **ringförmige Struktur** beschrieben  
+  - Im Inneren liegt die sog. **soziale Basis**. Diese muss mindestens erfüllt werden, sonst drohen Entbehrungen wie Hunger, Analphabetismus, mangelnde Gesundheitsversorgung usw.
+  
+  - Außerhalb des Ringes liegen die planetaren (und lokalen) Grenzen der Natur. Hier drohen eine zu hohe Konzentration von Treibhausgasen in der Atmosphäre, der Abbau der Ozonschicht oder ein Verlust der Biodiversität. 
+  
+  - Es ist auch möglich, dass sich eine Gesellschaft sowohl im Innern als auch im Äußeren des Ringes befindet (insofern ist die grafische Repräsentation nicht ganz passend).
+  
+  - Erstrebenswert ist der innere Ring (hier grün dargestellt), der Doughnut.
+
 ```{r}
 #| message: false
 #| warning: false
