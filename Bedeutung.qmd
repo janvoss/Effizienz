@@ -137,7 +137,7 @@ p
 ```{python}
 #| message: false
 #| warning: false
-#| include: false
+#| output: false
 
 from lets_plot import *
 import numpy as np
@@ -148,7 +148,7 @@ LetsPlot.setup_html()
 
 # Define the symbols and the equation
 x1, x2, U = symbols('x1 x2 U')
-equation = Eq(U, x1**0.5 * x2**0.5  - .15*x1**2)
+equation = Eq(U,.5*(x1*x2)**.5)
 
 # Solve for x2 and lambdify the solution
 solution_x2 = solve(equation, x2)[0]
@@ -161,7 +161,7 @@ colors = ['red', 'blue', 'green']
 labels = ['U=2', 'U=3', 'U=4']
 
 # Create data with values from 0 to 6 in steps of 0.1
-x_values = np.arange(1.5, 6.1, 0.1)
+x_values = np.arange(.5, 4.1, 0.1)
 data = {'x': x_values.tolist()}
 
 # Initialize the plot
@@ -171,8 +171,8 @@ plot = ggplot()
 for i, u in enumerate(U_values):
     plot += geom_function(aes('x'), data=data, fun=lambda t, u=u: x2_func(t, u), color=colors[i])
     # Annotate each curve at a specific point (e.g., x=4)
-    y_value = x2_func(6, u)
-    plot += geom_text(x=6.5, y=y_value, label= labels[i], size=6
+    y_value = x2_func(4, u)
+    plot += geom_text(x=4.5, y=y_value, label= labels[i], size=6
 )
 
 # Add title and labels
