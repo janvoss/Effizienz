@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -284,6 +319,147 @@ window.Quarto = {
 <ul>
 <li>Muster: Individuelle Entscheidungen <span class="math inline">\(\rightarrow\)</span> Interaktion/Anpassung/Aggregation <span class="math inline">\(\rightarrow\)</span> Gleichgewicht. Exogener Schock <span class="math inline">\(\rightarrow\)</span> neue individuelle Entscheidungen <span class="math inline">\(\rightarrow\)</span> Interaktion/Anpassung/Aggregation <span class="math inline">\(\rightarrow  \dots\)</span></li>
 </ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Sind wir je im Gleichgewicht?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="einleitung" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="einleitung">Einleitung</h2>
+<p>In ökonomischen Analysen spielt der Gleichgewichtsbegriff eine zentrale Rolle.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Ein (ökonomisches) <strong>Gleichgewicht</strong> ist ein (Modell-)Zustand, der stabil ist, wenn keine zusätzlichen Einflüsse auf ihn wirken.</td>
+</tr>
+</tbody>
+</table>
+<p>Folgende gedachte Abfolge ist in ökonomischen Modellen üblich:</p>
+<ul>
+<li><p>Ein System befindet sich in einem Gleichgewicht</p></li>
+<li><p>Ein exogener Schock wirkt auf das System und bewegt ein Modellelement aus dem Gleichgewicht heraus und/oder verändert die Bedingungen für das Vorliegen eines Gleichgewichts</p></li>
+<li><p>Die Modellakteure passen ihre Entscheidungen an, sodass wieder ein Gleichgewicht erreicht wird.</p></li>
+</ul>
+<p>Der Übergang in das Gleichgewicht wird in der Regel nicht explizit analysiert, sondern es werden nur gleichgewichtige Zustände (und ggf ein ungleichgewichtiger Zustand nach dem Schock) miteinander verglichen (komparative Statik).</p>
+<p>Gegebenenfalls kann aber geprüft werden, ob das System zu einem Gleichgewicht strebt oder nicht.</p>
+</section>
+<section id="referenzszenario-die-welt-im-gleichgewicht" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="referenzszenario-die-welt-im-gleichgewicht">Referenzszenario: Die Welt im Gleichgewicht</h2>
+<p>Stellen wir uns zunächst als Referenzfall eine Welt vor, die nur aus Gleichgewichtszuständen besteht. Hierzu nehmen wir an, dass wir Ausprägungen einer Variable <span class="math inline">\(y\)</span> zu unterschiedlichen Zeitpunkten <span class="math inline">\(t\)</span> beobachten können. Nehmen wir an, dass wir eine theoretische Vorstellung über die Entwicklung von <span class="math inline">\(y\)</span> haben, sodass gilt: <span class="math display">\[y_t=\underbrace{e^{rt}}_{\text{Gleichgewicht zum Zeitpunkt } t}\]</span></p>
+<p><span class="math inline">\(y\)</span> wächst also in <span class="math inline">\(t\)</span> mit einer Rate von <span class="math inline">\(r~\%\)</span>. Grafisch lässt sich das wie folgt veranschaulichen. Jede Beobachtung (schwarze Punkte) liegt exakt auf der blauen Linie des gleichgewichtigen Wachstumspfads.</p>
+<p>In jeder Periode ist das Gleichgewicht auch der erwartete und der tatsächliche Wert.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> .<span class="dv">013</span> <span class="co"># Trend</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> .<span class="dv">6</span> <span class="co"># Faktor für Gedächtnis</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> .<span class="dv">1</span> <span class="co"># Varianz</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">Zeit   =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">49</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">Schock =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, sigma), <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">20</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">Trend =</span> <span class="fu">exp</span>(Zeit<span class="sc">*</span>r),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>   Gedächtnis <span class="ot">=</span> <span class="fu">accumulate</span>(Schock, <span class="sc">~</span> beta <span class="sc">*</span> .x <span class="sc">+</span> .y))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Trend</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Zeit, Trend)) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Soziale_Phaenomene_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Alle Beobachtungen liegen im Gleichgewicht</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="die-realität-außerhalb-des-gleichgewichts" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="die-realität-außerhalb-des-gleichgewichts">Die Realität außerhalb des Gleichgewichts</h2>
+<p>Die analytische Fokussierung auf Gleichgewichtszustände bedeutet <em>nicht</em>, dass sich ein gleichgewichtiger Zustand ohne weiteres beobachten lässt. Im Gegenteil, man geht in empirischen Analysen regelmäßig davon aus, dass zu jedem Zeitpunkt eine <strong>exogene Störung</strong> auf den zu beobachtenen Sachverhalt wirkt. Diese Störung, oder dieser <strong>Schock</strong>, entfernt das System aus dem gleichgewichtigen Zustand. Typischerweise wird dabei unterstellt, dass die Störungen unabhängig voneinander normalverteilt sind.</p>
+<p>Eine Möglichkeit sich diese Störungen vorzustellen besteht darin, dass sie zu jedem Beobachtungszeutpunkt eine Störung auf auf das System wirkt, das sich im Gleichgewicht befindet.</p>
+<p><span class="math display">\[y_t = \underbrace{e^{rt}}_{\text{Gleichgewicht zum Zeitpunkt } t} + \underbrace{\epsilon_t}_{\text{Schock}}\]</span></p>
+<p>Jede einzelne Beobachtung zum Zeitpunkt <span class="math inline">\(t\)</span> setzt sich also zusammen aus dem gleichgewichtigen Trend (dem durch ein Modell erklärten Teil einer Beobachtung), und einem jeweils einmaligen zufälligen Schock. Die Schocks wirken nur temporär, sie haben keine Auswirkungen auf zukünftige Beobachtungen. Ein Modellgleichgewicht kann also nie die ganze Realität erklären. Es bleibt immer ein unerklärter Rest.</p>
+<p>Sobald keine neuen Schocks hinzukommen (hier ab Periode <span class="math inline">\(t=30\)</span>) liegen alle Beobachtungen auf dem Gleichgewichtspfad. <strong>Das Gleichgewicht ist also der Systemzustand in Abwesenheit gegenwärtiger Schocks.</strong></p>
+<p>In jeder Periode ist das Gleichgewicht zwar nicht der tatsächliche aber der erwartete Wert.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trend u Schock</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Zeit, Trend <span class="sc">+</span> Schock)) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#  geom_smooth(aes(x=ifelse(Zeit &lt; 31, Zeit, NA)),method= 'glm',</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="co">#              formula = y ~ x + I(x^2)) +</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span> Trend), <span class="at">color=</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">30</span>, <span class="at">linetype =</span><span class="st">'dashed'</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Soziale_Phaenomene_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="trend-und-persistente-schocks" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="trend-und-persistente-schocks">Trend und persistente Schocks</h2>
+<p>Die Vorstellung, dass jeder Schock noch in der laufenden Periode absorbiert wird und jede neue Periode ihren Schock aus dem Gleichgewicht heraus erhält, ist vielleicht nicht immer ganz passend. Man kann sich auch vorstellen, dass ein Schock über mehrere Perioden abgebaut wird und in der Zeit neue Schocks auf das System einwirken. Eine Beobachtung zum Zeitpunkt <span class="math inline">\(t\)</span> ist dann das Resultat aus dem eigentlichen Gleichgewicht, einem aktuellen Schock in Periode <span class="math inline">\(t\)</span> und der Summe der (gewichteten) vergangenen Schocks. Hierbei wird das Gewicht der Schocks immer kleiner, je länger sie vergangen sind. Dies lässt sich wie folgt notieren:</p>
+<p><span class="math display">\[y_t= \underbrace{e^{rt}}_{\text{Gleichgewicht zum Zeitpunkt }t} + \underbrace {\sum_{\tau=0}^t \beta^{t - \tau} \epsilon_\tau}_{\text {Schockgedächtnis}}\]</span></p>
+<p>Jede Störung, die sich zum Zeitpunkt <span class="math inline">\(\tau\)</span> ereignet hat, wird zum Zeitpunkt <span class="math inline">\(t\)</span> mit <span class="math inline">\(\beta^{t-\tau}\)</span> gewichtet, mit <span class="math inline">\(0 \leq \beta \leq 1\)</span>. <span class="math inline">\(\tau\)</span> bezeichnet die Periode, in der die Störung auf das Systen wirkt. Schocks aus entfernteren Perioden erhalten ein geringeres Gewicht als aktuelle Schocks. Interessant sind zwei Grenzfälle: <span class="math inline">\(\beta = 0\)</span> ist gleichbedeutend mit dem Fall aus dem vorherigen Abschnitt, in dem die Schocks nur in der aktuellen Periode wirken (man beachte für die aktuelle Periode, dass <span class="math inline">\(\beta^{t - \tau} = 0^0 = 1\)</span>). <span class="math inline">\(\beta = 1\)</span> beschreibt den Fall, dass alle Schocks unvermindert auf die Gegenwart wirken. In dem Fall würden Beobachtungen auch ohne das Hinzukommen neuer Schocks außerhalb des Trends verharren (die Schocks hätten einen neuen gleichgewichtigen Pfad bewirkt).</p>
+<p>Die folgende Abbildung zeigt eine Folge von Beobachtungen für <span class="math inline">\(\beta = 0,6\)</span>. Man sieht, dass die Beobachtungen anders um den Trend angeordnet sind als in der Abbildung davor. Sobald keine neuen Störungen hinzukommen, konvertieren die Beobachtungen wieder gegen den Trend. <strong>Das Gleichgewicht beschreibt also einen Zustand, auf den sich ein System in der Abwesenheit neuer Schocks zubewegt.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Trend u Gedächtnis</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(Zeit, Trend <span class="sc">+</span> Gedächtnis)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_smooth(aes(x=ifelse(Zeit&lt;31, Zeit, NA)), method='glm',</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#              formula = y ~ x + I(x^2)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#              ) +</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span> Trend), <span class="at">color=</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">30</span>, <span class="at">linetype =</span><span class="st">'dashed'</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_light</span>()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Soziale_Phaenomene_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
 </section>
 <section id="erklärungen-durch-modelle" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="erklärungen-durch-modelle"><span class="header-section-number">4.3</span> Erklärungen durch Modelle</h2>

@@ -278,6 +278,10 @@ chart <- ggplot() +
 
 #### Das Verhältnis zwischen Rationalität und Nutzenmaximierung
 
+- Unter Sicherheit führt rationales Verhalten individuell zu effizienten Ergebnissen.
+
+- Wodurch sich die individuell effizienzten Ergebnisse auszeichnen, hängt von der Beschaffenheit der Nutzenfunktion ab.
+
 ```{python}
 #| warning: false
 #| message: false
@@ -329,6 +333,14 @@ src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 ![Nutzen und Rationalität](Rationalitaet.svg)
 
 ## Gesellschaftliches Entscheidungsproblem
+
+:::{.callout-note 
+    icon=false}
+    
+# Kernbotschaft {-}
+Individuell rationales Verhalten kann, muss aber nicht zu gesellschaftlich effizienten Zuständen führen.
+:::
+
 
 ### Pareto-Verbesserungen und Pareto-Effizienz
 
