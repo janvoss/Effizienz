@@ -123,7 +123,7 @@ $$y_t= \underbrace{e^{rt}}_{\text{Gleichgewicht zum Zeitpunkt }t} + \underbrace 
 
 Jede Störung, die sich zum Zeitpunkt $\tau$ ereignet hat, wird zum Zeitpunkt $t$ mit $\beta^{t-\tau}$ gewichtet, mit $0 \leq \beta \leq 1$.  $\tau$ bezeichnet die Periode, in der die Störung auf das Systen wirkt. Schocks aus entfernteren Perioden erhalten ein geringeres Gewicht als aktuelle Schocks. Interessant sind  zwei Grenzfälle: $\beta = 0$ ist gleichbedeutend mit dem Fall aus dem vorherigen Abschnitt, in dem  die Schocks nur in der aktuellen Periode wirken (man beachte für die aktuelle Periode, dass $\beta^{t - \tau} = 0^0 = 1$). $\beta = 1$ beschreibt den Fall, dass alle Schocks unvermindert auf die Gegenwart wirken. In dem Fall würden Beobachtungen auch ohne das Hinzukommen neuer Schocks außerhalb des Trends verharren (die Schocks hätten einen neuen gleichgewichtigen Pfad bewirkt).
 
-Die folgende Abbildung zeigt eine Folge von Beobachtungen für $\beta = 0,6$. Man sieht, dass die Beobachtungen anders um den Trend angeordnet sind als in der Abbildung davor. Sobald keine neuen Störungen hinzukommen, konvertieren die Beobachtungen wieder gegen den Trend. **Das Gleichgewicht beschreibt also einen Zustand, auf den sich ein System in der Abwesenheit neuer Schocks zubewegt.**
+Die folgende Abbildung zeigt eine Folge von Beobachtungen für $\beta = 0,6$. Man sieht, dass die Beobachtungen anders um den Trend angeordnet sind als in der Abbildung davor. Sobald keine neuen Störungen hinzukommen, konvergieren die Beobachtungen wieder gegen den Trend. **Das Gleichgewicht beschreibt also einen Zustand, auf den sich ein System in der Abwesenheit neuer Schocks zubewegt.**
 
 ```{r}
 #| message: false
