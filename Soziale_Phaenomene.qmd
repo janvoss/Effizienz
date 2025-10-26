@@ -174,7 +174,7 @@ $\rightarrow$ möglichst **einfache Modelle** verwenden
 
 
 
-```{r Modell-Stoerung, echo=F, warning=F, message=F, cache=F}
+```{r Modell-Stoerung, echo=T, warning=F, message=F, cache=F}
 library(tidyverse)
 
 set.seed(77)
