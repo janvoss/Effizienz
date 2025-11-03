@@ -10,7 +10,7 @@ Das Folgende ist fast wörtlich aus @Detel07_Soz S. 20 übernommen.
 
 2. $S$ glaubt, die Handlung $H$ sei ein Mittel, um $Z$ zu realisieren.
 
-3. **$S$ vollzieht Handlung $H$**.
+3. **$S$ vollzieht Handlung $H$**. 
 
 
 Das Basisschema ist noch unvollständig:
@@ -73,7 +73,11 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 #### 3D-Darstellung: Nutzengebirge
 
-```{r echo=F, warning=F, message=F, cache=F, eval=T}
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+#| include: false
 
 library(tidyverse)
 library(plotly)
@@ -117,14 +121,25 @@ p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
   )%>% 
   hide_colorbar()
 
-p
 
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Ein Nutzengebirge"
+#| 
+p
 ```
 
 #### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
 
 
-```{r echo=F, message=F, warning=F, cache=F}
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: 2D-Ansicht des Nutzengebirges
+
 p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
   layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
    config(displaylogo = FALSE) %>%
@@ -200,7 +215,12 @@ Budgetlinie: $x_2=\frac{I}{p_2}- \frac{p_1}{p_2}x_1$
 
 
 
-```{r echo=F, warning=F, message=F, cache=F}
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Indifferenzkurven und Budgetrestriktionen"
+
+
 # Bibliotheken laden
 library(tidyverse)
 library(latex2exp)
@@ -268,19 +288,48 @@ chart <- ggplot() +
         legend.position = "none", #Damit Legende unterdrückt.
        ) +
   theme(axis.line = element_line(arrow = arrow(type='closed', length = unit(5,'pt'))))+
-  labs(x = latex2exp::TeX(r'($x_1$)'), y = latex2exp::TeX(r'($x_2$)'), 
-       color = NULL, fill = NULL)
-    chart
+  labs(title= "Indifferenzkurven und Budgetrestriktionen",
+      x = latex2exp::TeX(r'($x_1$)'),
+      y = latex2exp::TeX(r'($x_2$)'), 
+      color = NULL, fill = NULL)
+chart
 
 ```
-
-
 
 #### Das Verhältnis zwischen Rationalität und Nutzenmaximierung
 
 - Unter Sicherheit führt rationales Verhalten individuell zu effizienten Ergebnissen.
 
 - Wodurch sich die individuell effizienzten Ergebnisse auszeichnen, hängt von der Beschaffenheit der Nutzenfunktion ab.
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Indifferenzkurven unterschiedlicher Nutzenfunktionen
+
+library(ggplot2)
+
+ggplot() +
+  xlim(c(0.8, 3)) +
+  ylim(c(0, 2))+
+  geom_function(fun = function(x) 1/x, colour = "blue", lwd = 1) +
+  geom_function(fun = function(x) 1/x^(.7/.3), colour = "red", lwd = 1) +
+  geom_function(fun = function(x) 1/x^(.45/.3), colour = "grey", lwd = 1) +
+  geom_point(aes(x = 1, y = 1), size = 3) + # Add a red point at (1,1)
+  geom_text(aes(x = 1, y = 1, label = "A", vjust = -1)) + # Add label for the first point
+  geom_point(aes(x = 2, y = 1/2^(.45/.3)), size = 3) +
+  geom_text(aes(x = 2, y = 1/2^(.45/.3), label = "B", vjust = -1)) + # Add label for the second point
+ # geom_text(aes(x = 3, y = 1/3, label = "y = 1/x^2.5"), hjust = 1, vjust = 2.5) + # Label for the red curve
+ # geom_text(aes(x = 3, y = 1/3, label = "y = 1/x"), hjust = 1, vjust = -1) + # Label for the blue curve
+  theme_light()+
+  labs(x=expression(x[1]), y = expression(x[2]), title = "Indifferenzkurven unterschiedlicher Nutzenfunktionen")
+```
+
+**Hedonistischer Nutzenbegriff**: *Weil* die blaue Indifferenzkurve deine Nutzenfunktion repräsentiert, bevorzugst du $A$ gegenüber $B$.
+
+**Offenbarte Präferenzen**: *Weil* du $A$ gegenüber $B$ bevorzugst, ist deine Nutzenfunktion durch die blaue Indifferenzkurve besser repräsentiert als durch die rote.
+
+**Axiomatischer Nutzenbegriff**: Wenn du jeden denkbaren Punkt $A$ mit jedem denkbaren Punkt $B$ vergleichen kannst, sodass immer in transitiver Weise entweder gilt $A \succeq B$, $A \preceq B$ oder beides, dann lässt sich die Entscheidung als rationale Nutzenmaximierung beschreiben.
 
 ```{python}
 #| warning: false
@@ -301,7 +350,7 @@ digraph clusters_example {
     c1 [label="Eigenschaften des\n Entscheidungsverhaltens"]
     c2 [label="Rationalität"]
     c1 -> c2
-    label = "Axiomatischer Rationalitätsbegriff"
+    label = "Axiomatischer Nutzenbegriff"
   }
 
   subgraph cluster_2 {
@@ -330,7 +379,7 @@ src.format = 'svg'  # Format setzen
 src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 ```
 
-![Nutzen und Rationalität](Rationalitaet.svg)
+![Nutzen und Rationalität nach @klonschinski_nutzen_2021](Rationalitaet.svg)
 
 ## Gesellschaftliches Entscheidungsproblem
 
@@ -338,7 +387,7 @@ src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
     icon=false}
     
 # Kernbotschaft {-}
-Individuell rationales Verhalten kann, muss aber nicht zu gesellschaftlich effizienten Zuständen führen.
+Individuell rationales Verhalten kann, muss aber nicht zu gesellschaftlich effizienten Zuständen führen. 
 :::
 
 

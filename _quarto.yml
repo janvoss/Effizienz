@@ -33,11 +33,8 @@ book:
     - literatur.qmd
     - Uebungsaufgaben.qmd 
 
-
-
-
 bibliography: Effizienz.bib
-
+  
 
 
 format:
@@ -45,6 +42,7 @@ format:
     theme: cosmo
     code-fold: true
     code-overflow: wrap
+#    csl: technische-universitat-dresden-betriebswirtschaftslehre-rechnungswesen-controlling.csl
 
 editor: source
 
