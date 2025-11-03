@@ -58,6 +58,16 @@ oder fehlerhafte Informationslagen.
 - Das **Rationalprinzip** ist weniger eine Behauptung über die handelnde
 Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+# Rationalitätsannahme und Intuition/implizites Wissen {-} 
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/l1ZnWc-sFd0?si=QYyCtZqroT568_sy&amp;start=335" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+"Now, before everybody starts saying, 'Well, Kurt Cobain didn't really know what he's doing...' that doesn't matter. **I** know what he's doing, and I'm going to tell you what he's doing. That's really the essence of this. **It doesn't matter if people know what they're doing if they can just do it intuitively**." (Rick Beato)
+:::
+
 
 ### Rationales Handeln als Nutzenmaximierung
 
