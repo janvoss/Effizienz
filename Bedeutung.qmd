@@ -403,9 +403,115 @@ Individuell rationales Verhalten kann, muss aber nicht zu gesellschaftlich effiz
 
 ### Pareto-Verbesserungen und Pareto-Effizienz
 
-[Edgeworth]::
+***
+Eine **Pareto-Verbesserung** liegt vor, wenn es möglich ist, den Nutzen mindestens eines Individuums zu steigern, ohne gleichzeitig den Nutzen eines anderen Individuums senken zu müssen.
 
-[Hier auch potenzielle Pareto-Verbesserungen]::
+Wenn keiene Pareto-Verbesserungen mehr möglich sind, liegt **Pareto-Effizienz** vor.
+
+***
+
+```{python}
+#| message: false
+#| warning: false
+#| cache: true
+#| eval: false # sonst so lange render-Zeit
+#| output: false
+
+
+from sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log
+import numpy as np
+from lets_plot import *
+
+# Define variables
+x1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')
+
+# Define constants
+x1_max = 100
+x2_max = 100
+
+# Utility functions
+Utility_A = Eq(U_A, x1**.3 * x2**.7)
+Utility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)
+
+# Given utility level for B
+UB_values = np.linspace(1, 91, 10)
+
+# Use latex to create a LaTeX string for the subtitle
+utility_latex = f"\({latex(Utility_A)}\), \({latex(Utility_B)}\)"
+
+# Modify the string
+utility_latex_modified = (
+    utility_latex.replace(r"\log", "ln")
+                 .replace(r"\left", "")
+                 .replace(r"\right", "")
+)
+
+# Lagrangian
+L = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)
+
+# Precompute derivatives
+dL_dx1 = diff(L, x1)
+dL_dx2 = diff(L, x2)
+dL_dlambda = diff(L, lambda_)
+
+# x1 values for graph
+x_values = np.arange(0.01, x1_max + 0.01, 0.3)
+data = {'x': x_values.tolist()}
+
+# List to store optimal points
+optimal_points = []
+
+# Setup Lets-Plot for HTML output
+LetsPlot.setup_html()
+
+p = ggplot()
+
+for u in UB_values:
+    # Solve the system of equations once and substitute `u` in the solutions
+    solutions = solve(
+        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),
+        (x1, x2, lambda_),
+        dict=True,
+        simplify = False
+    )
+
+    # Extract optimal x1, x2 values
+    x1_opt = float(solutions[0].get(x1))
+    x2_opt = float(solutions[0].get(x2))
+
+    optimal_points.append({'x': x1_opt, 'y': x2_opt})
+
+    UtilityA_value = Utility_A.rhs.subs(solutions[0])
+
+    # Indifference Curves
+    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))
+    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))
+
+    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \
+         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \
+         geom_point(x=x1_opt, y=x2_opt)
+
+# Convert optimal_points to a format suitable for geom_line
+optimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}
+
+p += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')
+
+p += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \
+     theme_light() + \
+     labs(title='Eine Edgeworth Box',
+          subtitle=utility_latex_modified,
+          x='\(x_1\)',
+          y='\(x_2\)',
+          caption='Eine Edgeworth Box')
+
+# p.show()
+
+ggsave(p, filename='Edgeworth_1.svg')
+
+```
+
+![Eine Edgeworth-Box](./lets-plot-images/Edgeworth_1.svg)
+
 
 ### Auswahl zwischen verschiedenen effizienten Zuständen
 
