@@ -632,9 +632,335 @@ ggsave(p, filename='Edgeworth_2.svg')
 
 #### Freiwilliger Tausch
 
-s. Edgeworth-Box
+- s. Edgeworth-Box
+
+- Mögliche Probleme: Transaktionskosten, also Kosten, die mit dem Tauschakt verbunden sind
+
+- Bei hohen Transaktionskosten unterbleiben potenziell effizienzsteigernde Tauschgeschäfte
 
 #### Ohne Absprachen
 [Nicht kooperative Spieltheorie]:: 
 
+- Analyse mittels nicht-kooperativer Spieltheorie
+
+- Mehrere (2) Personen treffen unabhängig voneinander gleichzeitig eine Entscheidung
+
+- Der gesellschaftliche Zustand gibt sich aus der Kombination beider Entscheidungen 
+
+- Bindende Absprachen zwischen den Personen sind nicht möglich
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Grundstruktur einer Auszahlungsmatrix
+
+# Matrix Muster
+
+library(ggplot2)
+
+ggplot() +
+  geom_text(aes(x = -0.5, y = 2, label = 'a')) +
+  geom_text(aes(x = -1.5, y = 0.75, label = 'A')) +
+  geom_text(aes(x = -0.5, y = -1, label = 'b')) +
+  geom_text(aes(x = -1.5, y = -2.25, label = 'B')) +
+  geom_text(aes(x = 1.5, y = 2, label = 'c')) +
+  geom_text(aes(x = 0.5, y = 0.75, label = 'C')) +
+  geom_text(aes(x = 1.5, y = -1, label = 'd')) +
+  geom_text(aes(x = 0.5, y = -2.25, label = 'D')) +
+  geom_text(aes(x = -1, y = 3.3, label = 'links')) +
+  geom_text(aes(x = 1, y = 3.3, label = 'rechts')) +
+  geom_text(aes(x = -2.2, y = 1.375, label = 'oben'), angle = 90) +
+  geom_text(aes(x = -2.2, y = -1.625, label = 'unten'), angle = 90) +
+  geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold") +
+  geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1'), angle = 90, fontface = "bold") +
+  geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0)) +
+  geom_segment(aes(x = -2, xend = 2, y = 3, yend = 3)) +
+  geom_segment(aes(x = -2, xend = 2, y = -3, yend = -3)) +
+  geom_segment(aes(x = -2, xend = -2, y = -3, yend = 3)) +
+  geom_segment(aes(x = 0, xend = 0, y = -3, yend = 3)) +
+  geom_segment(aes(x = 2, xend = 2, y = -3, yend = 3)) +
+  theme_void() +
+  labs(title = "Auszahlungen in einem simultanen Spiel")
+
+```
+
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Ein effizientes Gleichgewicht"
+
+# Auszahlungen generieren
+
+# set.seed(123)
+
+A <- 6
+B <- 5
+C <- 4
+D <- 3
+a <- 6
+b <- 4
+c <- 5
+d <- 3
+
+
+
+# Matrix ausgeben
+
+library(ggplot2)
+
+Auszahlungsmatrix <- ggplot() +
+  geom_text(aes(x = -0.5, y = 2, label = a)) +
+  geom_text(aes(x = -1.5, y = 0.75, label = A)) +
+  geom_text(aes(x = -0.5, y = -1, label = b)) +
+  geom_text(aes(x = -1.5, y = -2.25, label = B)) +
+  geom_text(aes(x = 1.5, y = 2, label = c)) +
+  geom_text(aes(x = 0.5, y = 0.75, label = C)) +
+  geom_text(aes(x = 1.5, y = -1, label = d)) +
+  geom_text(aes(x = 0.5, y = -2.25, label = D)) +
+  geom_text(aes(x = -1, y = 3.3, label = 'links')) +
+  geom_text(aes(x = 1, y = 3.3, label = 'rechts')) +
+  geom_text(aes(x = -2.2, y = 1.375, label = 'oben'), angle = 90) +
+  geom_text(aes(x = -2.2, y = -1.625, label = 'unten'), angle = 90) +
+  geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold") +
+  geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1'), angle = 90, fontface = "bold") +
+  geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0)) +
+  geom_segment(aes(x = -2, xend = 2, y = 3, yend = 3)) +
+  geom_segment(aes(x = -2, xend = 2, y = -3, yend = -3)) +
+  geom_segment(aes(x = -2, xend = -2, y = -3, yend = 3)) +
+  geom_segment(aes(x = 0, xend = 0, y = -3, yend = 3)) +
+  geom_segment(aes(x = 2, xend = 2, y = -3, yend = 3)) +
+  theme_void() +
+  labs(title = "Auszahlungen in einem simultanen Spiel")
+
+
+Auszahlungsmatrix
+
+# Nash-GG ermitteln
+
+df <- data.frame(
+  label = c("ol", "ul", "or", "ur"),
+  x1 = c(A, B, C, D),
+  x2 = c(B, A, D, C),
+  y1 = c(a, b, c, d),
+  y2 = c(c, d, a, b)
+)
+
+Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
+# print(Nash_GG_filtered)
+
+#cat("Nash-Gleichgewicht(e): ",  paste(Nash_GG_filtered, collapse = ", "))
+```
+
+
 ### Konflikt zwischen individueller Rationalität und gesellschaftlicher Effizienz
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Ein Gefangenendilemma"
+
+# Auszahlungen generieren
+
+# set.seed(123)
+
+A <- 6
+B <- 8
+C <- 0
+D <- 2
+a <- 6
+b <- 0
+c <- 8
+d <- 2
+
+
+
+# Matrix ausgeben
+
+library(ggplot2)
+
+Auszahlungsmatrix <- ggplot() +
+  geom_text(aes(x = -0.5, y = 2, label = a)) +
+  geom_text(aes(x = -1.5, y = 0.75, label = A)) +
+  geom_text(aes(x = -0.5, y = -1, label = b)) +
+  geom_text(aes(x = -1.5, y = -2.25, label = B)) +
+  geom_text(aes(x = 1.5, y = 2, label = c)) +
+  geom_text(aes(x = 0.5, y = 0.75, label = C)) +
+  geom_text(aes(x = 1.5, y = -1, label = d)) +
+  geom_text(aes(x = 0.5, y = -2.25, label = D)) +
+  geom_text(aes(x = -1, y = 3.3, label = 'nicht gestehen')) +
+  geom_text(aes(x = 1, y = 3.3, label = 'gestehen')) +
+  geom_text(aes(x = -2.2, y = 1.375, label = 'nicht gestehen'), angle = 90) +
+  geom_text(aes(x = -2.2, y = -1.625, label = 'gestehen'), angle = 90) +
+  geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold") +
+  geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1'), angle = 90, fontface = "bold") +
+  geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0)) +
+  geom_segment(aes(x = -2, xend = 2, y = 3, yend = 3)) +
+  geom_segment(aes(x = -2, xend = 2, y = -3, yend = -3)) +
+  geom_segment(aes(x = -2, xend = -2, y = -3, yend = 3)) +
+  geom_segment(aes(x = 0, xend = 0, y = -3, yend = 3)) +
+  geom_segment(aes(x = 2, xend = 2, y = -3, yend = 3)) +
+  theme_void() +
+  labs(title = "Auszahlungen in einem simultanen Spiel")
+
+
+Auszahlungsmatrix
+
+# Nash-GG ermitteln
+
+df <- data.frame(
+  label = c("ol", "ul", "or", "ur"),
+  x1 = c(A, B, C, D),
+  x2 = c(B, A, D, C),
+  y1 = c(a, b, c, d),
+  y2 = c(c, d, a, b)
+)
+
+Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
+# print(Nash_GG_filtered)
+
+#cat("Nash-Gleichgewicht(e): ",  paste(Nash_GG_filtered, collapse = ", "))
+```
+
+$\rightarrow$ Individuell rationales Verhalten kann zu einem Zustand führen, den niemand so will
+
+$\rightarrow$ Rationalität ist also keine hinreichende Bedingung für Effizienz
+
+$\rightarrow$ Mögliche Lösung: Bindende Absprachen mit Bestrafung
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Ein Gefangenendilemma mit Bestrafung"
+
+# Auszahlungen generieren
+
+# set.seed(123)
+
+A <- 6
+B <- "-5 (8)"
+C <- 0
+D <- "-5 (2)"
+a <- 6
+b <- 0
+c <- "-5 (8)"
+d <- "-5 (2)"
+
+
+
+# Matrix ausgeben
+
+library(ggplot2)
+
+Auszahlungsmatrix <- ggplot() +
+  geom_text(aes(x = -0.5, y = 2, label = a)) +
+  geom_text(aes(x = -1.5, y = 0.75, label = A)) +
+  geom_text(aes(x = -0.5, y = -1, label = b)) +
+  geom_text(aes(x = -1.5, y = -2.25, label = B)) +
+  geom_text(aes(x = 1.5, y = 2, label = c)) +
+  geom_text(aes(x = 0.5, y = 0.75, label = C)) +
+  geom_text(aes(x = 1.5, y = -1, label = d)) +
+  geom_text(aes(x = 0.5, y = -2.25, label = D)) +
+  geom_text(aes(x = -1, y = 3.3, label = 'nicht gestehen')) +
+  geom_text(aes(x = 1, y = 3.3, label = 'gestehen')) +
+  geom_text(aes(x = -2.2, y = 1.375, label = 'nicht gestehen'), angle = 90) +
+  geom_text(aes(x = -2.2, y = -1.625, label = 'gestehen'), angle = 90) +
+  geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold") +
+  geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1'), angle = 90, fontface = "bold") +
+  geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0)) +
+  geom_segment(aes(x = -2, xend = 2, y = 3, yend = 3)) +
+  geom_segment(aes(x = -2, xend = 2, y = -3, yend = -3)) +
+  geom_segment(aes(x = -2, xend = -2, y = -3, yend = 3)) +
+  geom_segment(aes(x = 0, xend = 0, y = -3, yend = 3)) +
+  geom_segment(aes(x = 2, xend = 2, y = -3, yend = 3)) +
+  theme_void() +
+  labs(title = "Auszahlungen in einem simultanen Spiel")
+
+
+Auszahlungsmatrix
+
+# Nash-GG ermitteln
+
+df <- data.frame(
+  label = c("ol", "ul", "or", "ur"),
+  x1 = c(A, B, C, D),
+  x2 = c(B, A, D, C),
+  y1 = c(a, b, c, d),
+  y2 = c(c, d, a, b)
+)
+
+Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
+# print(Nash_GG_filtered)
+
+#cat("Nash-Gleichgewicht(e): ",  paste(Nash_GG_filtered, collapse = ", "))
+```
+
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Ein Koordinationsspiel"
+
+# Auszahlungen generieren
+
+# set.seed(123)
+
+A <- 6
+B <- 0
+C <- 0
+D <- 6
+a <- 6
+b <- 0
+c <- 0
+d <- 6
+
+
+
+# Matrix ausgeben
+
+library(ggplot2)
+
+Auszahlungsmatrix <- ggplot() +
+  geom_text(aes(x = -0.5, y = 2, label = a)) +
+  geom_text(aes(x = -1.5, y = 0.75, label = A)) +
+  geom_text(aes(x = -0.5, y = -1, label = b)) +
+  geom_text(aes(x = -1.5, y = -2.25, label = B)) +
+  geom_text(aes(x = 1.5, y = 2, label = c)) +
+  geom_text(aes(x = 0.5, y = 0.75, label = C)) +
+  geom_text(aes(x = 1.5, y = -1, label = d)) +
+  geom_text(aes(x = 0.5, y = -2.25, label = D)) +
+  geom_text(aes(x = -1, y = 3.3, label = 'links')) +
+  geom_text(aes(x = 1, y = 3.3, label = 'rechts')) +
+  geom_text(aes(x = -2.2, y = 1.375, label = 'oben'), angle = 90) +
+  geom_text(aes(x = -2.2, y = -1.625, label = 'unten'), angle = 90) +
+  geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold") +
+  geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1'), angle = 90, fontface = "bold") +
+  geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0)) +
+  geom_segment(aes(x = -2, xend = 2, y = 3, yend = 3)) +
+  geom_segment(aes(x = -2, xend = 2, y = -3, yend = -3)) +
+  geom_segment(aes(x = -2, xend = -2, y = -3, yend = 3)) +
+  geom_segment(aes(x = 0, xend = 0, y = -3, yend = 3)) +
+  geom_segment(aes(x = 2, xend = 2, y = -3, yend = 3)) +
+  theme_void() +
+  labs(title = "Auszahlungen in einem simultanen Spiel")
+
+
+Auszahlungsmatrix
+
+# Nash-GG ermitteln
+
+df <- data.frame(
+  label = c("ol", "ul", "or", "ur"),
+  x1 = c(A, B, C, D),
+  x2 = c(B, A, D, C),
+  y1 = c(a, b, c, d),
+  y2 = c(c, d, a, b)
+)
+
+Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
+# print(Nash_GG_filtered)
+
+#cat("Nash-Gleichgewicht(e): ",  paste(Nash_GG_filtered, collapse = ", "))
+```
+
+$\rightarrow$ Rationalität allein reicht nicht, Verhalten muss koordiniert werden
