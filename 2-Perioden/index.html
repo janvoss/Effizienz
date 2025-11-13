@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intertemporale Konsumoptimierung (Shiny Live)</title>
+    <!-- Bindet die Shiny Live-Bibliothek ein -->
+    <script src="https://pagecdn.io/lib/shiny-live/latest/shiny-live.js" async></script>
+</head>
+<body>
+    <!-- 
+        Das 'shiny-app' Tag weist Shiny Live an, die R-Anwendung
+        zu laden und zu starten. Der Inhalt dieses Tags dient als Fallback-Ladebildschirm.
+    -->
+    <shiny-app pkg-json-file="package.json">
+        <div style="text-align: center; padding-top: 50vh; transform: translateY(-50%);">
+            <h1>Lade App...</h1>
+            <p>Bitte warten Sie, die R-Umgebung wird im Browser geladen (WebAssembly).</p>
+        </div>
+    </shiny-app>
+
+    <script type="application/json" id="package.json">
+        {
+            "packages": [
+                "shiny",
+                "ggplot2"
+            ],
+            "files": {
+                "app.R": "app.R"
+            }
+        }
+    </script>
+</body>
+</html>
