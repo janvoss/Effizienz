@@ -159,7 +159,7 @@ server <- function(input, output, session) {
       div(class = "alert alert-warning", HTML(paste0("<strong>Ergebnis:</strong> ", result_text)))
     } else {
       # Bootstrap-Klasse: alert-success (Grün)
-      div(class = "alert alert-success", HTML(paste0("<strong>Reines Nash-Gleichgewicht(e) gefunden (P1, P2):</strong><br>", result_text)))
+      div(class = "alert alert-success", HTML(paste0("<strong>Reine(s) Nash-Gleichgewicht(e) gefunden:</strong><br>", result_text)))
     }
   })
   
