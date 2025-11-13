@@ -1,0 +1,13 @@
+name: Intertemporale_Konsumoptimierung
+title: Intertemporale_Konsumoptimierung
+username: janvoss
+account: janvoss
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16054176
+bundleId: 11172933
+url: https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: index.txt
