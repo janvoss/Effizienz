@@ -28,7 +28,7 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      h3("Auszahlungsmatrix (Hervorhebung = Nash-GG)"),
+      h3("Auszahlungsmatrix"),
       # Hinzufügen des Plot-Outputs für die Matrix
       plotOutput("payoff_matrix_plot"),
       
@@ -235,9 +235,9 @@ server <- function(input, output, session) {
       geom_text(aes(x = -2.2, y = 1.375, label = 'oben (O)'), angle = 90, size = 5, color = "#1a5276") +
       geom_text(aes(x = -2.2, y = -1.625, label = 'unten (U)'), angle = 90, size = 5, color = "#1a5276") +
       
-      # Spieler-Titel (Habe die Buchstaben in den Klammern angepasst)
-      geom_text(aes(x = 0, y = 4, label = 'Spieler 2 (Spalten, {a,b,c,d})'), fontface = "bold", size = 6, color = "#b03a2e") + 
-      geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1 (Zeilen, {A,B,C,D})'), angle = 90, fontface = "bold", size = 6, color = "#1a5276") + 
+      # Spieler-Titel 
+      geom_text(aes(x = 0, y = 4, label = 'Spieler 2'), fontface = "bold", size = 6, color = "#b03a2e") + 
+      geom_text(aes(x = -2.7, y = 0, label = 'Spieler 1 '), angle = 90, fontface = "bold", size = 6, color = "#1a5276") + 
       
       # Matrix-Linien 
       geom_segment(aes(x = -2, xend = 2, y = 0, yend = 0), linewidth = 1) + 
