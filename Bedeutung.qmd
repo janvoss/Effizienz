@@ -760,6 +760,17 @@ Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
 
 Hier kann man nach Nash-Gleichgewichten suchen.
 
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+#| eval: false
+
+{{< include ./Spielegenerator/app.R >}}
+
+```
+
+
 <iframe 
   src="https://janvoss.shinyapps.io/Spielegenerator/" 
   width="100%" 
