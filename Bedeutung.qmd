@@ -766,6 +766,8 @@ Hier kann man nach Nash-Gleichgewichten suchen.
 #| output: false
 #| eval: false
 
+# Pfad zur Datei nur für Transparenz. Der Spielegenerator wird über den u.s. Link eingebettet.
+
 {{< include ./Spielegenerator/app.R >}}
 
 ```
