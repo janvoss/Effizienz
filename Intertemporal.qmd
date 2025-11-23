@@ -37,7 +37,9 @@ $x_1 = (X_0 -x_0)(1+r)$
 
 ### Grafische Repräsentation der Lösung 
 
-Steigung der Indifferenzkurve: $\frac{MU_0}{MU_1} = \frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}$
+Steigung der Indifferenzkurve: $-\frac{u'_0}{u'_1} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}$
+
+Steigung der Budgetgerade:$-(1+r)$
 
 ```{python Zwei-Perioden}
 #| warning: false
