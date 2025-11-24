@@ -49,6 +49,14 @@ Steigung der Budgetgerade:$-(1+r)$
 {{< include _zwei-perioden.py >}}
 ```
 
+
+<iframe 
+  src="https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/" 
+  width="100%" 
+  height="800" 
+  title="Intertemporale Optimierung">
+</iframe>
+
 ### Die Euler-Gleichung 
 
 - Aus der Grafik: Steigung der Budgetbeschränkung = Steigung der Indifferenzkurve

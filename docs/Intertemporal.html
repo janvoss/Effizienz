@@ -351,9 +351,9 @@ window.Quarto = {
 </section>
 <section id="grafische-repräsentation-der-lösung" class="level3" data-number="6.2.3">
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</h3>
-<p>Steigung der Indifferenzkurve: <span class="math inline">\(-\frac{u'_0}{u'_1} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}\)</span></p>
+<p>Steigung der Indifferenzkurve: <span class="math inline">\(-\frac{u'_0}{u'_1\times \frac{1}{1+i}} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}\)</span></p>
 <p>Steigung der Budgetgerade:<span class="math inline">\(-(1+r)\)</span></p>
-<div id="aef2773c" class="cell" data-message="false" data-execution_count="1">
+<div id="97eaf023" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
@@ -439,7 +439,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="ttAf3c"></div>
+            <div id="31p9jV"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -463,16 +463,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("ttAf3c").appendChild(div);
+                        document.getElementById("31p9jV").appendChild(div);
                     };
-                    var e = document.getElementById("ttAf3c");
+                    var e = document.getElementById("31p9jV");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="ZW3Xja"></div>
+   <div id="1T0QB2"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -497,7 +497,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("ZW3Xja");
+   const containerDiv = document.getElementById("1T0QB2");
    let fig = null;
    
    function renderPlot() {
@@ -698,7 +698,7 @@ window.Quarto = {
 }
 }],
 "metainfo_list":[],
-"spec_id":"5"
+"spec_id":"1"
 };
            window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
        } else {
@@ -743,6 +743,8 @@ window.Quarto = {
    </script>
 </div>
 </div>
+<iframe src="https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/" width="100%" height="800" title="Intertemporale Optimierung">
+</iframe>
 </section>
 <section id="die-euler-gleichung" class="level3" data-number="6.2.4">
 <h3 data-number="6.2.4" class="anchored" data-anchor-id="die-euler-gleichung"><span class="header-section-number">6.2.4</span> Die Euler-Gleichung</h3>
@@ -802,7 +804,7 @@ window.Quarto = {
 <p><span class="math display">\[ \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}\]</span></p>
 <p>Mit <span class="math inline">\(T \to \infty\)</span></p>
 <p><span class="math display">\[ \boxed{x_t=i X_0\times e^{(r-i)t}}\]</span></p>
-<div id="45f4ef8a" class="cell" data-message="false" data-execution_count="2">
+<div id="8d8c139d" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -891,7 +893,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="zeke8b"></div>
+            <div id="qDgXjd"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -915,16 +917,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("zeke8b").appendChild(div);
+                        document.getElementById("qDgXjd").appendChild(div);
                     };
-                    var e = document.getElementById("zeke8b");
+                    var e = document.getElementById("qDgXjd");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="w66SOF"></div>
+   <div id="nZq1gs"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -949,7 +951,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("w66SOF");
+   const containerDiv = document.getElementById("nZq1gs");
    let fig = null;
    
    function renderPlot() {
@@ -1010,7 +1012,7 @@ window.Quarto = {
 }
 }],
 "metainfo_list":[],
-"spec_id":"6"
+"spec_id":"2"
 };
            window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
        } else {
@@ -1055,7 +1057,7 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="Uxwa8e"></div>
+   <div id="fiXdVd"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1080,7 +1082,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("Uxwa8e");
+   const containerDiv = document.getElementById("fiXdVd");
    let fig = null;
    
    function renderPlot() {
@@ -1141,7 +1143,7 @@ window.Quarto = {
 }
 }],
 "metainfo_list":[],
-"spec_id":"7"
+"spec_id":"3"
 };
            window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
        } else {
@@ -1186,7 +1188,7 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="wxUgJz"></div>
+   <div id="DjczRh"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1211,7 +1213,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("wxUgJz");
+   const containerDiv = document.getElementById("DjczRh");
    let fig = null;
    
    function renderPlot() {
@@ -1262,7 +1264,7 @@ window.Quarto = {
 }
 }],
 "metainfo_list":[],
-"spec_id":"8"
+"spec_id":"4"
 };
            window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
        } else {
