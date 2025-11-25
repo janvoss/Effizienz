@@ -353,7 +353,7 @@ window.Quarto = {
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</h3>
 <p>Steigung der Indifferenzkurve: <span class="math inline">\(-\frac{u'_0}{u'_1\times \frac{1}{1+i}} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}\)</span></p>
 <p>Steigung der Budgetgerade:<span class="math inline">\(-(1+r)\)</span></p>
-<div id="97eaf023" class="cell" data-message="false" data-execution_count="1">
+<div id="b6f6d1c8" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
@@ -439,7 +439,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="31p9jV"></div>
+            <div id="2RJiHJ"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -463,16 +463,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("31p9jV").appendChild(div);
+                        document.getElementById("2RJiHJ").appendChild(div);
                     };
-                    var e = document.getElementById("31p9jV");
+                    var e = document.getElementById("2RJiHJ");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="1T0QB2"></div>
+   <div id="J5wKIV"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -497,7 +497,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("1T0QB2");
+   const containerDiv = document.getElementById("J5wKIV");
    let fig = null;
    
    function renderPlot() {
@@ -743,7 +743,7 @@ window.Quarto = {
    </script>
 </div>
 </div>
-<iframe src="https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/" width="100%" height="800" title="Intertemporale Optimierung">
+<iframe src="https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/" width="100%" height="1200" title="Intertemporale Optimierung">
 </iframe>
 </section>
 <section id="die-euler-gleichung" class="level3" data-number="6.2.4">
@@ -773,7 +773,7 @@ window.Quarto = {
 <h2 data-number="6.3" class="anchored" data-anchor-id="t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</h2>
 <section id="vorüberlegungen" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="vorüberlegungen"><span class="header-section-number">6.3.1</span> Vorüberlegungen</h3>
-<p>Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate <span class="math inline">\(g\)</span> wächst, und sie ursprünglich <span class="math inline">\(X_0\)</span> beträgt, dann beträgt sie nach <span class="math inline">\(T\)</span> Perioden <span class="math inline">\(X_T=X_0 \times  e^{g\times T}\)</span> Einheiten.</p>
+<p>Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate <span class="math inline">\(g\)</span> wächst, und sie ursprünglich <span class="math inline">\(X_0\)</span> beträgt, dann beträgt sie nach <span class="math inline">\(T\)</span> Perioden <span class="math inline">\(X_T=X_0 \times  e^{r\times T}\)</span> Einheiten.</p>
 <p>Wenn der Nutzen zukünftiger Prioden mit der Rate <span class="math inline">\(i\)</span> diskontiert wird, dann beträgt der Gegenwartswert zukünftigesn Nutzens in Periode <span class="math inline">\(T\)</span> <span class="math inline">\(u_{PV}(x_T)=u(x_T) \times e^{-i \times T}\)</span>.</p>
 <p>Die <strong>Euler-Gleichung</strong> in kontinuierlicher Zeit lautet dann <span class="math display">\[u'(x_1)=u'(x_0) e^{(i-r)}\]</span></p>
 <p>Der Gegenwartswert mehrerer zukünftiger Perioden ergibt sich aus dem Integral der absdiskontierten Nutzenwerte über die Zeit.</p>
@@ -804,7 +804,7 @@ window.Quarto = {
 <p><span class="math display">\[ \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}\]</span></p>
 <p>Mit <span class="math inline">\(T \to \infty\)</span></p>
 <p><span class="math display">\[ \boxed{x_t=i X_0\times e^{(r-i)t}}\]</span></p>
-<div id="8d8c139d" class="cell" data-message="false" data-execution_count="2">
+<div id="22ca87d6" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -893,7 +893,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="qDgXjd"></div>
+            <div id="o00cq0"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -917,16 +917,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("qDgXjd").appendChild(div);
+                        document.getElementById("o00cq0").appendChild(div);
                     };
-                    var e = document.getElementById("qDgXjd");
+                    var e = document.getElementById("o00cq0");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="nZq1gs"></div>
+   <div id="WTSDTL"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -951,7 +951,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("nZq1gs");
+   const containerDiv = document.getElementById("WTSDTL");
    let fig = null;
    
    function renderPlot() {
@@ -1057,7 +1057,7 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="fiXdVd"></div>
+   <div id="qK7UON"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1082,7 +1082,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("fiXdVd");
+   const containerDiv = document.getElementById("qK7UON");
    let fig = null;
    
    function renderPlot() {
@@ -1188,7 +1188,7 @@ window.Quarto = {
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="DjczRh"></div>
+   <div id="2qpy3Q"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1213,7 +1213,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("DjczRh");
+   const containerDiv = document.getElementById("2qpy3Q");
    let fig = null;
    
    function renderPlot() {
@@ -1312,6 +1312,8 @@ window.Quarto = {
 <pre><code>Schnittpunkt bei t = 67.68</code></pre>
 </div>
 </div>
+<iframe src="https://janvoss.shinyapps.io/Intertemporal-unendlich/" width="100%" height="1600" title="Intertemporale Optimierung, unendlicher Horizont">
+</iframe>
 
 
 </section>

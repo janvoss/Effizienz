@@ -53,7 +53,7 @@ Steigung der Budgetgerade:$-(1+r)$
 <iframe 
   src="https://janvoss.shinyapps.io/Intertemporale_Konsumoptimierung/" 
   width="100%" 
-  height="800" 
+  height="1200" 
   title="Intertemporale Optimierung">
 </iframe>
 
@@ -95,7 +95,7 @@ $$\iff \boxed{x_0 = X_0 \frac{1 + i}{2 + i}}$$
 
 ### Vorüberlegungen
 
-Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate $g$ wächst, und sie ursprünglich $X_0$ beträgt, dann beträgt sie nach $T$ Perioden $X_T=X_0 \times  e^{g\times T}$ Einheiten.
+Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate $g$ wächst, und sie ursprünglich $X_0$ beträgt, dann beträgt sie nach $T$ Perioden $X_T=X_0 \times  e^{r\times T}$ Einheiten.
 
 Wenn der Nutzen zukünftiger Prioden mit der Rate $i$ diskontiert wird, dann beträgt der Gegenwartswert zukünftigesn Nutzens in Periode $T$ $u_{PV}(x_T)=u(x_T) \times e^{-i \times T}$.
 
@@ -243,3 +243,10 @@ except ValueError:
     print("Kein Schnittpunkt im Intervall gefunden")
 
 ```
+
+<iframe 
+  src="https://janvoss.shinyapps.io/Intertemporal-unendlich/" 
+  width="100%" 
+  height="1600" 
+  title="Intertemporale Optimierung, unendlicher Horizont">
+</iframe>

@@ -265,7 +265,7 @@ server <- function(input, output) {
       }
     }, error = function(e) {
       if (data$r < data$i) {
-        return("Spezialfall (r < i): Kein Schnittpunkt im Intervall. Der Optimalpfad x(t) führt zu geringerem Nutzen.")
+        return("Spezialfall (r < i): Der Optimalpfad x(t) führt immer zu einem höheren Nutzen.")
       }
       return("Fehler bei der Nullstellensuche (Wahrscheinlich kein Schnittpunkt im Intervall).")
     })

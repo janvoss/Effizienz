@@ -5,7 +5,7 @@ account: janvoss
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 16160895
-bundleId: 11227685
+bundleId: 11229712
 url: https://janvoss.shinyapps.io/Intertemporal-unendlich/
 version: 1
 asMultiple: FALSE
