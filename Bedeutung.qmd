@@ -993,3 +993,229 @@ Nash_GG_filtered <- df$label[(df$x1 >= df$x2) & (df$y1 >= df$y2)]
 ```
 
 $\rightarrow$ Rationalität allein reicht nicht, Verhalten muss koordiniert werden
+
+## Exkurs: Asymmetrie von Gewinnen und Verlusten {-}
+
+### Wertefunktion {-}
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Eine Nutzenfunktion
+
+library(ggplot2)
+
+#  Sigmoid-Funktion
+sigmoid_sym <- function(x, k, lambda) {
+  ifelse(x>=0, x / (1 + abs(x)^k)^(1/k),
+         (lambda)*x / (1 + abs(x)^k)^(1/k))
+}
+
+# Daten erzeugen
+df <- data.frame(x = seq(-5, 5, length.out = 200))
+df$y <- sigmoid_sym(df$x, k = .88, lambda=2.25)
+
+# Hilfslinien und Achsen-Breaks
+x_vals <- c(-3, -2, -1, 1, 2, 3)
+y_vals <- sigmoid_sym(x_vals, k = .88, lambda=2.25)
+lines_df <- data.frame(x = x_vals, y = y_vals)
+
+p <- ggplot(df, aes(x, y)) +
+  geom_line(size = 1.2, color = "blue") +
+  # Vertikale Hilfslinien
+  geom_segment(
+    data = lines_df,
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dashed", color = "red"
+  ) +
+  # Horizontale Hilfslinien
+  geom_segment(
+    data = lines_df,
+    aes(x = x, xend = 0, y = y, yend = y),
+    linetype = "dashed", color = "red"
+  ) +
+  # Achsen durch den Ursprung
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.8) +
+  geom_vline(xintercept = 0, color = "black", linewidth = 0.8) +
+  # Achsen-Breaks
+  scale_x_continuous(breaks = c(-2, -1, 0, 1, 2)) +
+  scale_y_continuous(breaks = c(round(y_vals, 2), 0)) +
+  labs(title = "Eine Nutzenfunktion nach der Prospect Theory",
+       x = "Zugang von Gütern", y = "Nutzen") +
+  theme_light() +
+  theme(panel.border = element_blank(),
+        axis.line = element_blank())
+
+# p
+
+p+ coord_cartesian(xlim = c(0, 5), ylim = c(0, 1))+
+  ggtitle("Eine Nutzenfunktion")
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: Eine Wertefunktion nach der Prospect Theory
+
+p
+```
+
+
+### Indifferenzkurven {-}
+
+```{r}
+#| message: false
+#| warning: false
+
+library(ggplot2)
+#library(dplyr)
+
+# Parameter: Knick und Werte
+lambda <- 2.25   # Verlustaversion
+alpha <- 0.88    # Diminishing sensitivity
+
+# Parameters for the first curve
+r1_1 <- 5          # Referenzpunkt x1
+r2_1 <- 5          # Referenzpunkt x2
+V0_1 <- 0          # gewünschtes Nutzenniveau
+
+# Parameters for the second curve
+r1_2 <- 2.5        # Referenzpunkt x1
+r2_2 <- 7.5        # Referenzpunkt x2
+V0_2 <- 0          # gewünschtes Nutzenniveau
+
+
+# Hilfsfunktion für Wertfunktion (Prospect Theory)
+pt_value <- function(x, r, lambda, alpha) {
+  ifelse(x >= r, (x - r)^alpha, -lambda * (r - x)^alpha)
+}
+
+# Function for x2 (die analytische Lösung in den Code endogenisieren?)
+indiff_curve <- function(x1, r1, r2, V0) {
+  V1 <- pt_value(x1, r1, lambda, alpha)
+  V2 <- V0 - V1
+
+  ifelse(V2 >= 0,
+    r2 + (V2)^(1/alpha),
+    r2 - ((-V2) / lambda)^(1/alpha)
+  )
+}
+
+# Data generation for the first curve
+x1_values <- seq(0, 10, length.out = 200)
+x2_values_1 <- sapply(x1_values, indiff_curve, r1 = r1_1, r2 = r2_1, V0 = V0_1)
+dat1 <- data.frame(x1 = x1_values, x2 = x2_values_1, Indifferenzkurven = "Referenzpunkt 1")
+
+# Data generation for the second curve
+x2_values_2 <- sapply(x1_values, indiff_curve, r1 = r1_2, r2 = r2_2, V0 = V0_2)
+dat2 <- data.frame(x1 = x1_values, x2 = x2_values_2, Indifferenzkurven = "Referenzpunkt 2")
+
+# Combine dataframes
+dat <- rbind(dat1, dat2)
+
+# Plot
+ggplot(dat, aes(x = x1, y = x2, color = Indifferenzkurven)) +
+  geom_line(linewidth = 1.2) +
+ # geom_vline(xintercept = r1_1, linetype = "dashed", color = "grey40") +
+ # geom_hline(yintercept = r2_1, linetype = "dashed", color = "grey40") +
+ # geom_vline(xintercept = r1_2, linetype = "dashed", color = "grey60") +
+ # geom_hline(yintercept = r2_2, linetype = "dashed", color = "grey60") +
+  labs(title = "Geknickte Indifferenzkurven (Verlustaversion)",
+       x = expression(x[1]),
+       y = expression(x[2])
+       ) +
+  theme_light() +
+  scale_color_manual(values = c("Referenzpunkt 1" = "royalblue", "Referenzpunkt 2" = "darkgreen"))
+
+```
+
+
+## Exkurs: Sättigungsmengen und negativem Grenznutzen {-}
+
+```{python}
+#| message: false
+#| warning: false
+#| output: false
+
+from lets_plot import *
+import numpy as np
+from sympy import symbols, Eq, solve, lambdify, latex
+
+# Setup Lets-Plot for HTML output
+LetsPlot.setup_html()
+
+# 1. Faktor a definieren
+a = 0.5
+
+# 2. Symbole definieren
+x1, x2, U = symbols('x1 x2 U')
+
+# 3. Gleichung mit dem Faktor a definieren
+equation = Eq(U, x1**0.5 * x2**0.5 - a * x1**2)
+
+# Solve for x2 and lambdify the solution
+solution_x2 = solve(equation, x2)[0]
+x2_func = lambdify((x1, U), solution_x2)
+
+# Define specific values for U
+U_value = 3
+U_values = [U_value - 1, U_value, U_value + 1]
+colors = ['red', 'blue', 'green']
+labels = ['U=2', 'U=3', 'U=4']
+
+# Create data with values from 0 to 6 in steps of 0.1
+x_values = np.arange(1.5, 6.1, 0.1)
+data = {'x': x_values.tolist()}
+
+# Initialize the plot
+plot = ggplot()
+
+# Add curves using a loop and annotate each curve
+for i, u in enumerate(U_values):
+    plot += geom_function(aes('x'), data=data, fun=lambda t, u=u: x2_func(t, u), color=colors[i])
+    # Annotate each curve at a specific point (e.g., x=4)
+    y_value = x2_func(6, u)
+    plot += geom_text(x=6.5, y=y_value, label= labels[i], size=6
+)
+
+# Add title and labels
+plot += ggtitle(f'Indifferenzkurven zu U') + \
+        labs(x='\( x_1 \)', y='\(x_2\)', caption='Caption') + \
+        theme_light()
+
+# Display the plot
+# plot.show()
+
+
+
+# Lambdify the original equation to use with lets_plot
+U_func = lambdify((x1, x2), equation.rhs)
+
+# Define a specific value for x2
+x2_value = 1
+
+# Create data with values for x1
+x_values = np.arange(0, 3.1, 0.01)
+data = {'x1': x_values.tolist()}
+
+# Use geom_function to plot the lambdified function with x2 fixed
+plot_U = ggplot() + \
+    geom_function(aes('x1'), data=data, fun=lambda t: U_func(t, x2_value),  color="black") + \
+    ggtitle(f'\({latex(equation)}\), mit \(x_2 = {x2_value}\)') + \
+    labs(x='\( x_1 \)', y='\(U\)') + \
+    theme_light()
+
+# Display the plot
+#plot_U.show()
+#plot.show()
+
+ggsave(plot_U, filename='Nutzenfunktion-Saettigungsmenge.svg')
+
+ggsave(plot, filename='Indifferenzkurven-Saettigungsmenge.svg')
+
+```
+
+![Nutzenfunktion mit Sättigungsmenge](lets-plot-images/Nutzenfunktion-Saettigungsmenge.svg)
+
+![Indifferenzkurven mit Sättigungsmenge](lets-plot-images/Indifferenzkurven-Saettigungsmenge.svg)
