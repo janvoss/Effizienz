@@ -430,7 +430,7 @@ $C(x) = \underbrace{100}_{\text{FC}} + \underbrace{2x+\frac{1}{2}x^2}_{\text{VC}
 
 $MC=2+x$
 
-$VC=\int_{0}^{x} 2+x \, dx=2x+\frac{1}{2}x^2$
+$VC=\int_{0}^{Q} 2+x \, dx=2x+\frac{1}{2}x^2$
 
 ## Exkurs: Gleichgewichtsfindung {-}
 
