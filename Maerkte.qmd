@@ -106,7 +106,7 @@ $$\frac{d\pi}{dx}=\bar{p}-MC\overset{!}{=}0  \iff \bar{p}=MC$$
 [TR-TC]::
 
 
-```{r echo=F, warning=F, message=F, cache=F}
+```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
 library(tidyverse)
 
@@ -177,7 +177,7 @@ p
 Höherer Preis $\rightarrow$ Menge ausdehnen, bis wieder Preis=Grenzkosten
 
 
-```{r echo=F, warning=F, message=F, cache=F}
+```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
 library(tidyverse)
 
@@ -420,6 +420,129 @@ chart <- ggplot() +
 chart
 
 ```
+
+
+## Exkurs: Kosteninformationen im Preis-Mengendiagramm {-}
+
+Beispiel für Kostenfunktion:
+$C(x) = \underbrace{100}_{\text{FC}} + \underbrace{2x+\frac{1}{2}x^2}_{\text{VC}}$
+
+
+$MC=2+x$
+
+$VC=\int_{0}^{x} 2+x \, dx=2x+\frac{1}{2}x^2$
+
+## Exkurs: Gleichgewichtsfindung {-}
+
+```{r}
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+
+#p <- 1
+#x_s <- 1
+x_d <- 1.2
+
+# Initialize vectors to store the values
+p_values   <- c()
+x_s_values <- c()
+x_d_values <- c()
+
+
+for (i in 1:50){
+
+x_s=x_d
+p=.5+x_s
+x_d=1.5-.7*p
+
+
+  # Store the values in the vectors
+  p_values   <- c(p_values, p)
+  x_s_values <- c(x_s_values, x_s)
+  x_d_values <- c(x_d_values, x_d)
+}
+#p
+#x_s
+#x_d
+
+
+df <- data.frame( p = p_values,
+                  Angebot = x_s_values,
+                  Nachfrage = x_d_values)
+
+# Reshape the data frame using pivot_longer
+df_long <- pivot_longer(df,
+                               cols = c(Angebot, Nachfrage),
+                               names_to = "Marktseite",
+                               values_to = "x")
+
+# head(df_long)
+
+df_long %>% ggplot(aes(x, p))+
+geom_path(color="green")+
+geom_line(aes(color=Marktseite))+
+theme_light()+ 
+labs(title= "Iterative Anpassung im Preis-Mengendiagramm",
+     x= "Menge",
+     y="Preis",
+     caption="Darstellung: Jan S. Voßwinkel")
+
+
+
+
+library(tidyverse)
+
+#p <- 1
+#x_s <- 1
+x_d <- 1.2
+
+# Initialize vectors to store the values
+p_values   <- c()
+x_s_values <- c()
+x_d_values <- c()
+
+
+for (i in 1:50){
+
+x_s=x_d
+p=.5+x_s
+x_d=1.5-p
+
+
+  # Store the values in the vectors
+  p_values   <- c(p_values, p)
+  x_s_values <- c(x_s_values, x_s)
+  x_d_values <- c(x_d_values, x_d)
+}
+#p
+#x_s
+#x_d
+
+
+df <- data.frame( p = p_values,
+                  Angebot = x_s_values,
+                  Nachfrage = x_d_values)
+
+# Reshape the data frame using pivot_longer
+df_long <- pivot_longer(df,
+                               cols = c(Angebot, Nachfrage),
+                               names_to = "Marktseite",
+                               values_to = "x")
+
+# head(df_long)
+
+df_long %>% ggplot(aes(x, p))+
+geom_path(color="green")+
+geom_line(aes(color=Marktseite))+
+theme_light()+
+labs(title= "Keine iterative Anpassung im Preis-Mengendiagramm",
+     x= "Menge",
+     y="Preis",
+     caption="Darstellung: Jan S. Voßwinkel")
+```
+
 
 ## Der Wohlfahrtsverlust von Mindest- und Höchstpreisen
 
@@ -698,7 +821,7 @@ chart
 
 
 ## Wettbewerbsfunktionen
-[@conradWirtschaftsethik2016]
+[@conrad_wirtschaftsethik_2016]
 
 **Statische Wettbewerbsfunktionen**
 
