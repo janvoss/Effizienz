@@ -20,7 +20,10 @@
 
 ## Entwicklung
 
-```{r echo=T, warning=F, message=F}
+
+::: {.cell}
+
+```{.r .cell-code}
 library(tidyverse)
 
 df <- read.csv("gdp-per-capita-worldbank.csv")
@@ -44,7 +47,13 @@ df %>% filter(Entity %in% selected_countries) %>%
        y="BIP pro Kopf, konstante 2017 international Dollar, PPP",
        caption= "Eigene Darstellung, Daten: Ourworldindata.org")+
   facet_wrap(~Entity , scales = "free_y")
+```
 
+::: {.cell-output-display}
+![](BIP_files/figure-html/unnamed-chunk-1-1.png){width=672}
+:::
+
+```{.r .cell-code}
 # Tabelle Wachstumsraten
 
 library(broom)
@@ -64,8 +73,29 @@ library(knitr)
 
 kable(growth, digits=2, format.args = list(decimal.mark = ','), col.names=c("Staat", "Wachstumsrate (%)"),
       caption="geschätzte Durchschnittliche jährliche Wachstumsrate (%) 1990-2021, Daten: Ourworldindata.org")
-
 ```
+
+::: {.cell-output-display}
+
+
+Table: geschätzte Durchschnittliche jährliche Wachstumsrate (%) 1990-2021, Daten: Ourworldindata.org
+
+|Staat         | Wachstumsrate (%)|
+|:-------------|-----------------:|
+|China         |              8,32|
+|France        |              0,97|
+|Germany       |              1,25|
+|Greece        |              0,57|
+|India         |              4,59|
+|Ireland       |              3,71|
+|Italy         |              0,28|
+|Turkey        |              3,05|
+|United States |              1,44|
+
+
+:::
+:::
+
 
 
 ## Effizienzfragen
@@ -89,5 +119,6 @@ Gespart wird, was nicht konsumiert wird.
 - Offene Volkswirtschaft: $Y=C+I+G+NX\Leftrightarrow Y-C-G=I+NX\Leftrightarrow I=Y-C-G-NX$
 
 - Nominales vs. reales BIP
+
 
 
