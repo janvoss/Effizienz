@@ -9,7 +9,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       sliderInput("sigma", "Risikoaversion (sigma):", 
-                  min = 0, max = 3, value = 1, step = 0.1),
+                  min = -1.5, max = 1.5, value = 1, step = 0.1),
       sliderInput("p", "Wahrscheinlichkeit p (für x1=2):", 
                   min = 0, max = 1, value = 0.5, step = 0.05),
       hr(),
@@ -76,8 +76,8 @@ server <- function(input, output) {
       annotate("segment", x = sae, xend = ew, y = min(df$u) + 0.1, yend = min(df$u) + 0.1, 
                color = "purple", arrow = arrow(length = unit(0.2, "cm"), ends = "both"), lwd = 1) +
       # Labels
-      annotate("label", x = sae, y = min(df$u), label = paste("SÄ:", round(sae, 2)), color = "darkgreen") +
-      annotate("label", x = ew, y = min(df$u), label = paste("E[x]:", round(ew, 2)), color = "blue") +
+      annotate("text", x = sae, y = min(df$u), label = paste("SÄ:", round(sae, 2)), color = "darkgreen") +
+      annotate("text", x = ew, y = min(df$u), label = paste("E[x]:", round(ew, 2)), color = "blue") +
       theme_light(base_size = 15) +
       labs(title = paste("Risikoanalyse (sigma =", s, ", p =", p, ")"),
            subtitle = paste("Risikoprämie (Lila):", round(rp, 3)),
