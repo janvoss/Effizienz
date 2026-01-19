@@ -84,6 +84,199 @@ oder: $Y+Im=C+I+Ex$
 
 Gespart wird, was nicht konsumiert wird. 
 
+
+```{r}
+#| message: false
+#| warning: false
+
+library(eurostat)
+library(tidyverse)
+
+# 1. Daten laden für mehrere Länder
+# B1GQ: BIP, P31_S14_S15: Privater Konsum, P3_S13: Staatskonsum,
+# P5G: Bruttoinvestitionen, P6: Exporte, P7: Importe
+df_multi_geo <- get_eurostat("nama_10_gdp", filters = list(
+  geo = c("DE", "FR", "PL", "IT"), # Deutschland, Frankreich, Polen, Italien
+  na_item = c("B1GQ", "P31_S14_S15", "P3_S13", "P5G", "P6", "P7"),
+  unit = "CP_MEUR" # Jeweilige Preise, Millionen Euro
+))
+
+# 2. Daten transformieren
+df_multi_geo_clean <- df_multi_geo %>%
+  select(time, geo, na_item, values) %>%
+  pivot_wider(names_from = na_item, values_from = values) %>%
+  # Außenbeitrag berechnen (Ex - Im)
+  mutate(Net_Exports = P6 - P7) %>%
+  select(-P6, -P7) %>%
+  # Umbenennen für die Legende
+  rename(
+    BIP = B1GQ,
+    Privat_Konsum = P31_S14_S15,
+    Staatskonsum = P3_S13,
+    Investitionen = P5G
+  ) %>%
+  # Long-Format für ggplot (ohne das Gesamt-BIP für den Stacked Plot)
+  pivot_longer(cols = c(Privat_Konsum, Staatskonsum, Investitionen, Net_Exports),
+               names_to = "Komponente", values_to = "Wert") %>%
+  # Anteile berechnen
+  mutate(Anteil = Wert / BIP) %>%
+  # Komponente als Faktor mit gewünschter Reihenfolge für die Plots
+  mutate(Komponente = factor(Komponente, levels = c("Privat_Konsum", "Staatskonsum", "Investitionen", "Net_Exports")))
+
+
+options(scipen = 999)
+
+# Relative Anteile mit facet_wrap
+ggplot(df_multi_geo_clean %>% filter(time >=1990), aes(x = time, y = Anteil, fill = Komponente)) +
+  geom_area(alpha = 0.8, color = "white", size = 0.1) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Zusammensetzung des BIP (Anteile)",
+       subtitle = "Relative Darstellung der Verwendungskomponenten",
+       x = "Jahr", y = "Anteil am BIP", fill = "Komponente") +
+  theme_minimal() +
+  facet_wrap(~geo) # facet_wrap nach Land
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+
+
+library(eurostat)
+library(tidyverse)
+
+table <- "nasa_10_nf_tr"
+
+df <- get_eurostat(table,
+                  type = "label",
+                   time_format = "num",
+                       select_time="Y",
+                       cache = T
+                 ) %>% filter(unit=="Current prices, million euro",
+                              na_item %in% c("Gross fixed capital formation",
+                                              'Consumption of fixed capital',
+                                                'Gross domestic product at market prices'),
+                              sector == 'Total economy',
+                              direct =="Paid" #ist das richtig?
+                              )
+head(df)
+
+unique(df$na_item)
+
+df_selected_diff <- df %>%
+  filter(geo %in% c("Germany", "France", "Poland", "Italy"),
+         TIME_PERIOD>=1990) %>%
+  select(geo, TIME_PERIOD, na_item, values) %>%
+  pivot_wider(names_from = na_item, values_from = values) %>%
+  mutate(Net_Investment = `Gross fixed capital formation` - `Consumption of fixed capital`,
+          Net_Inv_rel = Net_Investment/`Gross domestic product at market prices`)
+
+ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
+)) + # Added color = geo
+  geom_line(lwd = 1.2) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Nettoanlageinvestitionen in ausgewählten Ländern", # Updated title
+    subtitle = "Anteil am BIP",
+    x = "Jahr",
+    y = "Anteil am BIP",
+    color = "Land" # Added color legend title
+  ) +
+  theme_light()+
+  theme(legend.position = "none")+
+  facet_wrap(~geo, scales = "free_y")
+
+
+library(eurostat)
+library(tidyverse)
+
+table <- "nasa_10_nf_tr"
+
+df <- get_eurostat(table,
+                  type = "label",
+                   time_format = "num",
+                       select_time="Y",
+                       cache = T
+                 ) %>% filter(unit=="Current prices, million euro",
+                              na_item %in% c("Gross fixed capital formation",
+                                              'Consumption of fixed capital',
+                                                'Gross domestic product at market prices'),
+                              sector == 'Total economy',
+                              direct =="Paid" #ist das richtig?
+                              )
+head(df)
+
+unique(df$na_item)
+
+df_selected_diff <- df %>%
+  filter(geo %in% c("Germany", "France", "Poland", "Italy"),
+         TIME_PERIOD>=1990) %>%
+  select(geo, TIME_PERIOD, na_item, values) %>%
+  pivot_wider(names_from = na_item, values_from = values) %>%
+  mutate(Net_Investment = `Gross fixed capital formation` - `Consumption of fixed capital`,
+          Net_Inv_rel = Net_Investment/`Gross domestic product at market prices`)
+
+ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
+)) + # Added color = geo
+  geom_line(lwd = 1.2) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Nettoanlageinvestitionen in ausgewählten Ländern", # Updated title
+    subtitle = "Anteil am BIP",
+    x = "Jahr",
+    y = "Anteil am BIP",
+    color = "Land" # Added color legend title
+  ) +
+  theme_light()+
+  theme(legend.position = "none")+
+  facet_wrap(~geo, scales = "free_y")
+```
+
+
+
+```{r}
+#| warning: false
+#| message: false
+#| include: false
+
+
+# library(jsonlite)
+
+# Fetch the data
+df <- read.csv("https://ourworldindata.org/grapher/historical-gov-spending-gdp.csv?v=1&csvType=full&useColumnShortNames=true")
+
+# Fetch the metadata
+#metadata <- fromJSON("https://ourworldindata.org/grapher/historical-gov-spending-gdp.metadata.json?v=1&csvType=full&useColumnShortNames=true")
+
+head(df)
+
+p <- df %>%  filter(Entity %in% c("Germany", "France", "Poland", "Italy", "United States"),
+                             Year>=1990) %>%
+ggplot(aes(x = Year, y = expenditure, color = Entity)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Staatsausgaben am BIP (via Our World in Data)",
+    subtitle = "Quelle: IMF / Our World in Data",
+    x = "Jahr",
+    y = "Anteil am BIP (in %)",
+    color = "Land"
+  ) +
+  theme_light()
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+p
+```
+
 - Geschlossene Volkswirtschaft $S=Y-C-G \Leftrightarrow I=S$
 
 - Offene Volkswirtschaft: $Y=C+I+G+NX\Leftrightarrow Y-C-G=I+NX\Leftrightarrow I=Y-C-G-NX$
