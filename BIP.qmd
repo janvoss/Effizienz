@@ -142,6 +142,7 @@ ggplot(df_multi_geo_clean %>% filter(time >=1990), aes(x = time, y = Anteil, fil
 ```{r}
 #| message: false
 #| warning: false
+#| include: false
 
 
 library(eurostat)
@@ -161,9 +162,9 @@ df <- get_eurostat(table,
                               sector == 'Total economy',
                               direct =="Paid" #ist das richtig?
                               )
-head(df)
+# head(df)
 
-unique(df$na_item)
+# unique(df$na_item)
 
 df_selected_diff <- df %>%
   filter(geo %in% c("Germany", "France", "Poland", "Italy"),
@@ -173,7 +174,7 @@ df_selected_diff <- df %>%
   mutate(Net_Investment = `Gross fixed capital formation` - `Consumption of fixed capital`,
           Net_Inv_rel = Net_Investment/`Gross domestic product at market prices`)
 
-ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
+p1 <- ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
 )) + # Added color = geo
   geom_line(lwd = 1.2) +
   geom_point() +
@@ -191,53 +192,46 @@ ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
   facet_wrap(~geo, scales = "free_y")
 
 
-library(eurostat)
-library(tidyverse)
-
-table <- "nasa_10_nf_tr"
-
-df <- get_eurostat(table,
-                  type = "label",
-                   time_format = "num",
-                       select_time="Y",
-                       cache = T
-                 ) %>% filter(unit=="Current prices, million euro",
-                              na_item %in% c("Gross fixed capital formation",
-                                              'Consumption of fixed capital',
-                                                'Gross domestic product at market prices'),
-                              sector == 'Total economy',
-                              direct =="Paid" #ist das richtig?
-                              )
-head(df)
-
-unique(df$na_item)
-
-df_selected_diff <- df %>%
+df_investment_components_rel <- df %>% # Renaming for clarity
   filter(geo %in% c("Germany", "France", "Poland", "Italy"),
          TIME_PERIOD>=1990) %>%
   select(geo, TIME_PERIOD, na_item, values) %>%
   pivot_wider(names_from = na_item, values_from = values) %>%
-  mutate(Net_Investment = `Gross fixed capital formation` - `Consumption of fixed capital`,
-          Net_Inv_rel = Net_Investment/`Gross domestic product at market prices`)
+  mutate(Gfcf_rel = `Gross fixed capital formation`/`Gross domestic product at market prices`,
+         cfc_rel = `Consumption of fixed capital`/`Gross domestic product at market prices`) %>%
+  pivot_longer(cols = c(Gfcf_rel, cfc_rel), # Pivot to long format for plotting both
+               names_to = "Komponente",
+               values_to = "Anteil")
 
-ggplot(df_selected_diff, aes(x = TIME_PERIOD, y = Net_Inv_rel, color = geo
-)) + # Added color = geo
-  geom_line(lwd = 1.2) +
+p2 <- ggplot(df_investment_components_rel, aes(x = TIME_PERIOD, y = Anteil, color = Komponente
+)) + # Use 'Anteil' for y and 'Komponente' for color
+  geom_line(# lwd = 1.2
+) +
   geom_point() +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+ # geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(
-    title = "Nettoanlageinvestitionen in ausgewählten Ländern", # Updated title
+    title = "Bruttoanlageinvestitionen und Abschreibungen in ausgewählten Ländern", # Updated title
     subtitle = "Anteil am BIP",
     x = "Jahr",
     y = "Anteil am BIP",
-    color = "Land" # Added color legend title
+    color = "Komponente" # Updated color legend title
   ) +
   theme_light()+
-  theme(legend.position = "none")+
-  facet_wrap(~geo, scales = "free_y")
+  theme(legend.position = "bottom")+ # Changed legend position to 'bottom'
+  facet_wrap(~geo, scales = "free_y") # facet_wrap with free_y scale
+
 ```
 
+```{r}
+#| warning: false
+#| message: false
+
+p1
+
+p2
+
+```
 
 
 ```{r}
