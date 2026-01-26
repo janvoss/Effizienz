@@ -2,11 +2,11 @@
 
 ## Begriff
 
-**Definition**: Das **Bruttoinlandsprodukt (BIP)** ist der **Marktwert** aller für den **Endverbrauch** bestimmten **Waren und Dienstleistunge**n, die **in einem Land** **in einem bestimmten Zeitabschnitt** hergestellt werden.
+**Definition**: Das **Bruttoinlandsprodukt (BIP)** ist der **Marktwert** aller für den **Endverbrauch** bestimmten **Waren und Dienstleistungen**, die **in einem Land** **in einem bestimmten Zeitabschnitt** hergestellt werden.
 
 - Marktwert (staatliche Leistungen ohne Preis: Kosten)
 
-- Nur Endverbrauch. ZWischenprodukte werden nicht mitgezählt, um Doppelzählung zu vermeiden
+- Nur Endverbrauch. Zwischenprodukte werden nicht mitgezählt, um Doppelzählung zu vermeiden
 
 
 - Keine gebrauchten Güter
@@ -72,7 +72,7 @@ kable(growth, digits=2, format.args = list(decimal.mark = ','), col.names=c("Sta
 
 - Kosten der Schwankung des BIP
 
-- Kosten es Wachstums des BIP
+- Kosten des Wachstums des BIP
 
 - Misst das BIP Wohlstand?
 
@@ -80,7 +80,7 @@ kable(growth, digits=2, format.args = list(decimal.mark = ','), col.names=c("Sta
 
 Verwendungsgleichung: $Y=C+I+G+(Ex-Im)$
 
-oder: $Y+Im=C+I+Ex$
+oder: $Y+Im=C+I+G+Ex$
 
 Gespart wird, was nicht konsumiert wird. 
 

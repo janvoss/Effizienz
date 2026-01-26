@@ -1,6 +1,5 @@
 # Übungsaufgaben {.unnumbered}
 
-
 1.  Was unterscheidet positive von normativen Aussagen?
 
 1.  Wofür werden in der Ökonomik ,,Modelle" eingesetzt? Nennen Sie
@@ -18,7 +17,7 @@
 1. In der ÖkonomikL werden Entscheidungssituationen üblicherweise vor
     dem Hintergrund der Knappheit analysiert. Erläutern Sie, was unter
     Knappheit zu verstehen ist und welche Formen von Knappheit auftreten
-    können. sich die Teildisziplinen?
+    können. 
 
 1. Was kann man anhand einer ,,Indifferenzkurve" ablesen?
 
