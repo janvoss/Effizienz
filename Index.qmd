@@ -34,7 +34,7 @@ generate_svg(qr, filename = "qr-titel.svg")
     icon=false 
     collapse=true }
 
-# Technische Anmerkung {.unnumbered}
+# Technische Anmerkung {-}
 
 Die Unterlagen beinhalten Elemente, die mit [R](https://www.r-project.org/) oder mit [Python](https://www.python.org/) erstellt wurden. Der jeweilige Code wird (fast immer) an der entsprechenden Stelle angezeigt.
 

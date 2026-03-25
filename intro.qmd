@@ -48,6 +48,63 @@
 
  <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
+
+```{python}
+#| message: false
+#| warning: false
+#| fig-cap: "Herausforderung Effizienz"
+
+import graphviz
+from IPython.display import display
+
+def create_sustainability_system():
+    dot = graphviz.Digraph('NachhaltigkeitsSystem', comment='Efficiency and Global Justice')
+    dot.attr(rankdir='TB', size='10,8')
+    dot.attr('node', shape='rectangle', style='rounded,filled', fontname='Arial')
+
+    # Zentrale Grenze
+    dot.node('Limits', 'Planetare Grenzen\n(Belastungsgrenze der Erde)', color='red', fillcolor='mistyrose')
+
+    # Ressourcen-Ebene
+    with dot.subgraph(name='cluster_resources') as r:
+        r.attr(label='Knappe Ressourcen', color='blue')
+        r.node('Mat', 'Materielle Rohstoffe')
+        r.node('Time', 'Zeit & Aufmerksamkeit')
+        r.node('Info', 'Valide Informationen')
+
+    # Das Werkzeug
+    dot.node('Eff', 'Effizienter Umgang\n& Technologische Intelligenz', color='green', fillcolor='honeydew', penwidth='2')
+
+    # Die Wirkung (Entkopplung)
+    dot.node('Decouple', 'Entkopplung\n(Wohlstand ohne Mehrverbrauch)', shape='ellipse', color='darkgreen')
+
+    # Globale Ziele
+    dot.node('West', 'Erhalt des Wohlstands\n(Industrialisierte Welt)', fillcolor='lightgray')
+    dot.node('South', 'Wirtschaftliches Wachstum\n(Globaler Süden / Ärmere Regionen)', fillcolor='gold')
+
+    # Verbindungen
+    dot.edge('Limits', 'Mat', label='definiert Verfügbarkeit')
+    dot.edge('Mat', 'Eff', label='erfordert')
+    dot.edge('Time', 'Eff')
+    dot.edge('Info', 'Eff')
+
+    dot.edge('Eff', 'Decouple', label='ermöglicht')
+
+    dot.edge('Decouple', 'West', label='sichert')
+    dot.edge('Decouple', 'South', label='schafft Raum für')
+
+    dot.edge('South', 'Limits', label='innerhalb bleiben', style='dashed', color='darkgreen')
+    dot.edge('West', 'Limits', label='darf nicht überschreiten', style='dashed', color='darkgreen')
+
+    return dot
+
+# Zum Generieren:
+# create_sustainability_system().render('global_efficiency_system', format='png', cleanup=True)
+display(create_sustainability_system())
+```
+
+
+
 ## Effizienz und nachhaltige Entwicklung 
 
 ```{python Nachhaltigkeit}
@@ -149,3 +206,74 @@ dot.render(filename='nachhaltigkeit', cleanup=True)  # Erzeugt output.svg
 - In Anbetracht begrenzter Ressourcen und begrenzter Kapazität der Atmosphäre ist **Effizienz** eine **notwendige Bedingung für künftigen Wohlstand** 
 
 - Jeder Zuwachs der Verfügung über Ressourcen muss sich aus Effizienzsteigerungen speisen
+
+
+## Wie erzeugt die Gesellschaft effiziente Ergebnisse?
+
+```{python}
+#| message: false
+#| warning: false
+#| fig-cap: "Wie wird Effizienz erzeugt?"
+
+import graphviz
+from IPython.display import display
+
+def create_allocation_architecture():
+    dot = graphviz.Digraph('OekonomischeAllokation', comment='Das Gefüge der VWL')
+    dot.attr(rankdir='TB', size='12,12', nodesep='0.6', ranksep='0.8')
+    dot.attr('node', fontname='Arial', style='filled', shape='rectangle', fontsize='11')
+
+    # Zentrales Problem
+    dot.node('Scarcity', 'DAS KNAPPHEITSPROBLEM\n(Unbegrenzte Bedürfnisse vs. begrenzte Güter)',
+             shape='doubleoctagon', fillcolor='#ECEFF1', penwidth='2')
+
+    # Koordinationsmechanismus
+    dot.node('Market', 'MARKTMECHANISMUS\n(Preise als Knappheitssignale)',
+             shape='diamond', fillcolor='#FFF9C4', penwidth='2')
+
+    # Akteur 1: Konsumenten
+    with dot.subgraph(name='cluster_cons') as c:
+        c.attr(label='Konsumenten', color='#1E88E5', style='dashed')
+        c.node('Cons', 'Nutzenmaximierung\nPräferenzsignale\nSoziale Verantwortung', fillcolor='#BBDEFB')
+
+    # Akteur 2: Unternehmen
+    with dot.subgraph(name='cluster_firms') as f:
+        f.attr(label='Unternehmen', color='#388E3C', style='dashed')
+        f.node('Firms', 'Gewinnmaximierung\nKosteneffizienz\nInnovation & Arbeitsteilung', fillcolor='#C8E6C9')
+
+    # Akteur 3: Der Staat
+    with dot.subgraph(name='cluster_state') as s:
+        s.attr(label='Staat', color='#F4511E', style='dashed')
+        s.node('State', 'Ordnungsrahmen\nMarktversagen korrigieren\nÖffentliche Güter', fillcolor='#FFCCBC')
+
+    # Akteur 4: NGOs / NPOs
+    with dot.subgraph(name='cluster_ngo') as n:
+        n.attr(label='Zivilgesellschaft (NGOs)', color='#8E24AA', style='dashed')
+        n.node('NGO', 'Überwachung & Moral\nÖffentliche Interessen\nNischen-Bereitstellung', fillcolor='#E1BEE7')
+
+    # Zielzustand
+    dot.node('Efficiency', 'PARETO-EFFIZIENZ\n(Maximale Rentensumme,\nminimale Verschwendung)',
+             shape='egg', fillcolor='#D1C4E9', penwidth='2')
+
+    # Verbindungen
+    dot.edge('Scarcity', 'Market', label='erfordert Koordination')
+
+    dot.edge('Cons', 'Market', label='Nachfrage')
+    dot.edge('Firms', 'Market', label='Angebot')
+
+    dot.edge('State', 'Market', label='Regulierung / Korrektur')
+    dot.edge('NGO', 'Firms', label='Moralischer Druck')
+    dot.edge('NGO', 'State', label='Advokatur')
+
+    dot.edge('Market', 'Efficiency', label='idealer Outcome')
+
+    # Risiken
+    dot.node('Failure', 'RISIKEN:\nMarktversagen\nStaatsversagen', shape='cloud', fillcolor='#FFCDD2', fontcolor='#B71C1C')
+    dot.edge('Market', 'Failure', style='dotted')
+    dot.edge('State', 'Failure', style='dotted')
+
+    return dot
+
+display(create_allocation_architecture())
+```
+
