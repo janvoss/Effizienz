@@ -44,6 +44,72 @@
 - Kosteneffizienz  
 - Allokative Effizienz
 
+
+```{python}
+#| message: false
+#| warning: false
+#| fig-cap: "Effektivität und Effizienz"
+
+import graphviz
+from IPython.display import display
+
+def create_compact_efficiency_graph():
+    dot = graphviz.Digraph('Kompakte_VWL_Effizienz', comment='Schlanke Darstellung')
+
+    # Design-Attribute für bessere Lesbarkeit auf Bildschirmen
+    dot.attr(rankdir='TB', size='8,11', nodesep='0.4', ranksep='0.6')
+    dot.attr('node', fontname='Helvetica', style='filled, rounded', shape='rect', fontsize='12')
+
+    # Wurzel
+    dot.node('Root', 'Ökonomische Analyse', fillcolor='#37474F', fontcolor='white')
+
+    # Ast 1: Effektivität
+    dot.node('Effektiv', 'EFFEKTIVITÄT\n(Zielerreichung\n „Die richtigen Dinge tun“)', fillcolor='#E3F2FD', penwidth='2')
+   # dot.node('Goal', '„Die richtigen Dinge tun“\n(Wirksamkeit)', shape='none', fontsize='10')
+
+    # Ast 2: Effizienz
+    dot.node('Effizienz', 'EFFIZIENZ\n(Mittel-Zweck-Relation\n „Die Dinge richtig tun“)', fillcolor='#E8F5E9', penwidth='2')
+   # dot.node('Verschwendung', '„Die Dinge richtig tun“\n(Vermeidung von Verschwendung)', shape='none', fontsize='10')
+
+    # Unterelemente Effizienz (Gruppiert für Übersichtlichkeit)
+    with dot.subgraph(name='cluster_prinzipien') as c:
+        c.attr(label='Prinzipien & Methoden', color='#9E9E9E', style='dotted', rankdir='TB')
+        c.node('Rational', 'Rationalprinzip\n(Minimal- & Maximalprinzip)', fillcolor='#F1F8E9')
+        c.node('Marginal', 'Marginalanalyse\n(Grenzkosten = Grenznutzen)', fillcolor='#F1F8E9')
+        c.edge('Rational', 'Marginal', style='invis')
+
+    with dot.subgraph(name='cluster_arten') as a:
+        a.attr(label='Effizienz-Dimensionen', color='#9E9E9E', style='dotted', rankdir='TB')
+        a.node('Allok', 'technische Effizienz,\n Kosteneffizienz und\n allokative Effizienz', fillcolor='#FFF9C4')
+        a.node('Dyn', 'Statisch & Dynamisch\n(Kosten & Innovation)', fillcolor='#FFF9C4')
+        a.edge('Allok', 'Dyn', style='invis')
+
+    # Bewertung/Ideal
+    dot.node('Pareto', 'Pareto-Optimum\n(Wohlfahrtsmaximum)', shape='egg', fillcolor='#D1C4E9')
+
+    # Verbindungen
+    dot.edge('Root', 'Effektiv')
+    dot.edge('Root', 'Effizienz')
+
+   # dot.edge('Effektiv', 'Goal', style='dotted', arrowhead='none')
+   # dot.edge('Effizienz', 'Verschwendung', style='dotted', arrowhead='none')
+
+    dot.edge('Effizienz', 'Rational')
+    dot.edge('Effizienz', 'Marginal')
+    dot.edge('Effizienz', 'Allok')
+    dot.edge('Effizienz', 'Dyn')
+    dot.edge('Dyn', 'Pareto', label='ZIEL')
+    dot.edge('Marginal', 'Pareto', label='ZIEL')
+
+    # dot.edge('Allok', 'Pareto', label='führt zu')
+
+    return dot
+
+display(create_compact_efficiency_graph())
+
+```
+
+
  X-University:
 
  <blockquote class="twitter-tweet" data-dnt="true"><p lang="de" dir="ltr">Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizienz ankommen ließen, müssten wir uns fragen, wie wir 2.500 kcal pro Tag mit möglichst geringem Aufwand in jeden Menschen bekommen.<br><br>1/ <a href="https://t.co/VomTcc7cLS">https://t.co/VomTcc7cLS</a></p>&mdash; Jan Schnellenbach 🇺🇦🇺🇦 (@schnellenbachj) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
@@ -263,7 +329,8 @@ def create_allocation_architecture():
 
     dot.edge('State', 'Market', label='Regulierung / Korrektur')
     dot.edge('NGO', 'Firms', label='Moralischer Druck')
-    dot.edge('NGO', 'State', label='Advokatur')
+    dot.edge('NGO', 'State', label='Erzeugt Öffentlichkeit')
+    dot.edge('NGO', 'Cons', label='Meinungsbildung')
 
     dot.edge('Market', 'Efficiency', label='idealer Outcome')
 

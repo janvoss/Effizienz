@@ -22,6 +22,7 @@ book:
   # - Wissenschaftstheorie.qmd
     # - Modelle-Rationalitaet.qmd
     - Intertemporal.qmd
+    - Risiko.qmd
   #  - Spieltheorie.qmd
    # - Edgeworth.qmd
     - Maerkte.qmd

@@ -218,38 +218,44 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Risiko.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Umgang mit Unsicherheit/Risiko</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Maerkte.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Effiziente Allokation auf Märkten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Effiziente Allokation auf Märkten</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Marktversagen.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Marktversagen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Marktversagen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./BIP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Das Bruttoinlandsprodukt</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Das Bruttoinlandsprodukt</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Geld.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Handel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Außenhandel</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Außenhandel</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Ausblick.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ausblick</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ausblick</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -358,6 +364,75 @@ window.Quarto = {
 </li>
 <li>Allokative Effizienz</li>
 </ul>
+<div id="5a9557cd" class="cell" data-message="false" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_compact_efficiency_graph():</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> graphviz.Digraph(<span class="st">'Kompakte_VWL_Effizienz'</span>, comment<span class="op">=</span><span class="st">'Schlanke Darstellung'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Design-Attribute für bessere Lesbarkeit auf Bildschirmen</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, size<span class="op">=</span><span class="st">'8,11'</span>, nodesep<span class="op">=</span><span class="st">'0.4'</span>, ranksep<span class="op">=</span><span class="st">'0.6'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>, style<span class="op">=</span><span class="st">'filled, rounded'</span>, shape<span class="op">=</span><span class="st">'rect'</span>, fontsize<span class="op">=</span><span class="st">'12'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wurzel</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Root'</span>, <span class="st">'Ökonomische Analyse'</span>, fillcolor<span class="op">=</span><span class="st">'#37474F'</span>, fontcolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ast 1: Effektivität</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Effektiv'</span>, <span class="st">'EFFEKTIVITÄT</span><span class="ch">\n</span><span class="st">(Zielerreichung</span><span class="ch">\n</span><span class="st"> „Die richtigen Dinge tun“)'</span>, fillcolor<span class="op">=</span><span class="st">'#E3F2FD'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>   <span class="co"># dot.node('Goal', '„Die richtigen Dinge tun“\n(Wirksamkeit)', shape='none', fontsize='10')</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ast 2: Effizienz</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Effizienz'</span>, <span class="st">'EFFIZIENZ</span><span class="ch">\n</span><span class="st">(Mittel-Zweck-Relation</span><span class="ch">\n</span><span class="st"> „Die Dinge richtig tun“)'</span>, fillcolor<span class="op">=</span><span class="st">'#E8F5E9'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>   <span class="co"># dot.node('Verschwendung', '„Die Dinge richtig tun“\n(Vermeidung von Verschwendung)', shape='none', fontsize='10')</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Unterelemente Effizienz (Gruppiert für Übersichtlichkeit)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_prinzipien'</span>) <span class="im">as</span> c:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        c.attr(label<span class="op">=</span><span class="st">'Prinzipien &amp; Methoden'</span>, color<span class="op">=</span><span class="st">'#9E9E9E'</span>, style<span class="op">=</span><span class="st">'dotted'</span>, rankdir<span class="op">=</span><span class="st">'TB'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        c.node(<span class="st">'Rational'</span>, <span class="st">'Rationalprinzip</span><span class="ch">\n</span><span class="st">(Minimal- &amp; Maximalprinzip)'</span>, fillcolor<span class="op">=</span><span class="st">'#F1F8E9'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        c.node(<span class="st">'Marginal'</span>, <span class="st">'Marginalanalyse</span><span class="ch">\n</span><span class="st">(Grenzkosten = Grenznutzen)'</span>, fillcolor<span class="op">=</span><span class="st">'#F1F8E9'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        c.edge(<span class="st">'Rational'</span>, <span class="st">'Marginal'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_arten'</span>) <span class="im">as</span> a:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        a.attr(label<span class="op">=</span><span class="st">'Effizienz-Dimensionen'</span>, color<span class="op">=</span><span class="st">'#9E9E9E'</span>, style<span class="op">=</span><span class="st">'dotted'</span>, rankdir<span class="op">=</span><span class="st">'TB'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        a.node(<span class="st">'Allok'</span>, <span class="st">'technische Effizienz,</span><span class="ch">\n</span><span class="st"> Kosteneffizienz und</span><span class="ch">\n</span><span class="st"> allokative Effizienz'</span>, fillcolor<span class="op">=</span><span class="st">'#FFF9C4'</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        a.node(<span class="st">'Dyn'</span>, <span class="st">'Statisch &amp; Dynamisch</span><span class="ch">\n</span><span class="st">(Kosten &amp; Innovation)'</span>, fillcolor<span class="op">=</span><span class="st">'#FFF9C4'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        a.edge(<span class="st">'Allok'</span>, <span class="st">'Dyn'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Bewertung/Ideal</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Pareto'</span>, <span class="st">'Pareto-Optimum</span><span class="ch">\n</span><span class="st">(Wohlfahrtsmaximum)'</span>, shape<span class="op">=</span><span class="st">'egg'</span>, fillcolor<span class="op">=</span><span class="st">'#D1C4E9'</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verbindungen</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Root'</span>, <span class="st">'Effektiv'</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Root'</span>, <span class="st">'Effizienz'</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>   <span class="co"># dot.edge('Effektiv', 'Goal', style='dotted', arrowhead='none')</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>   <span class="co"># dot.edge('Effizienz', 'Verschwendung', style='dotted', arrowhead='none')</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Effizienz'</span>, <span class="st">'Rational'</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Effizienz'</span>, <span class="st">'Marginal'</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Effizienz'</span>, <span class="st">'Allok'</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Effizienz'</span>, <span class="st">'Dyn'</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Dyn'</span>, <span class="st">'Pareto'</span>, label<span class="op">=</span><span class="st">'ZIEL'</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Marginal'</span>, <span class="st">'Pareto'</span>, label<span class="op">=</span><span class="st">'ZIEL'</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dot.edge('Allok', 'Pareto', label='führt zu')</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dot</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>display(create_compact_efficiency_graph())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="intro_files/figure-html/cell-2-output-1.svg" class="img-fluid figure-img"></p>
+<figcaption>Effektivität und Effizienz</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>X-University:</p>
 <blockquote class="twitter-tweet blockquote" data-dnt="true">
 <p lang="de" dir="ltr">
@@ -366,61 +441,61 @@ Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizie
 — Jan Schnellenbach 🇺🇦🇺🇦 (<span class="citation" data-cites="schnellenbachj">(<a href="#ref-schnellenbachj" role="doc-biblioref"><strong>schnellenbachj?</strong></a>)</span>) <a href="https://twitter.com/schnellenbachj/status/1631930349826588672?ref_src=twsrc%5Etfw">March 4, 2023</a>
 </blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<div id="677cfe5a" class="cell" data-message="false" data-execution_count="1">
+<div id="bf75c014" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_sustainability_system():</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> graphviz.Digraph(<span class="st">'NachhaltigkeitsSystem'</span>, comment<span class="op">=</span><span class="st">'Efficiency and Global Justice'</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, size<span class="op">=</span><span class="st">'10,8'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'rectangle'</span>, style<span class="op">=</span><span class="st">'rounded,filled'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zentrale Grenze</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Limits'</span>, <span class="st">'Planetare Grenzen</span><span class="ch">\n</span><span class="st">(Belastungsgrenze der Erde)'</span>, color<span class="op">=</span><span class="st">'red'</span>, fillcolor<span class="op">=</span><span class="st">'mistyrose'</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ressourcen-Ebene</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_resources'</span>) <span class="im">as</span> r:</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        r.attr(label<span class="op">=</span><span class="st">'Knappe Ressourcen'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Mat'</span>, <span class="st">'Materielle Rohstoffe'</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Time'</span>, <span class="st">'Zeit &amp; Aufmerksamkeit'</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Info'</span>, <span class="st">'Valide Informationen'</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Das Werkzeug</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Eff'</span>, <span class="st">'Effizienter Umgang</span><span class="ch">\n</span><span class="st">&amp; Technologische Intelligenz'</span>, color<span class="op">=</span><span class="st">'green'</span>, fillcolor<span class="op">=</span><span class="st">'honeydew'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Die Wirkung (Entkopplung)</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Decouple'</span>, <span class="st">'Entkopplung</span><span class="ch">\n</span><span class="st">(Wohlstand ohne Mehrverbrauch)'</span>, shape<span class="op">=</span><span class="st">'ellipse'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Globale Ziele</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'West'</span>, <span class="st">'Erhalt des Wohlstands</span><span class="ch">\n</span><span class="st">(Industrialisierte Welt)'</span>, fillcolor<span class="op">=</span><span class="st">'lightgray'</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'South'</span>, <span class="st">'Wirtschaftliches Wachstum</span><span class="ch">\n</span><span class="st">(Globaler Süden / Ärmere Regionen)'</span>, fillcolor<span class="op">=</span><span class="st">'gold'</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verbindungen</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Limits'</span>, <span class="st">'Mat'</span>, label<span class="op">=</span><span class="st">'definiert Verfügbarkeit'</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Mat'</span>, <span class="st">'Eff'</span>, label<span class="op">=</span><span class="st">'erfordert'</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Time'</span>, <span class="st">'Eff'</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Info'</span>, <span class="st">'Eff'</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Eff'</span>, <span class="st">'Decouple'</span>, label<span class="op">=</span><span class="st">'ermöglicht'</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Decouple'</span>, <span class="st">'West'</span>, label<span class="op">=</span><span class="st">'sichert'</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Decouple'</span>, <span class="st">'South'</span>, label<span class="op">=</span><span class="st">'schafft Raum für'</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'South'</span>, <span class="st">'Limits'</span>, label<span class="op">=</span><span class="st">'innerhalb bleiben'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'West'</span>, <span class="st">'Limits'</span>, label<span class="op">=</span><span class="st">'darf nicht überschreiten'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dot</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Zum Generieren:</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># create_sustainability_system().render('global_efficiency_system', format='png', cleanup=True)</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>display(create_sustainability_system())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_sustainability_system():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> graphviz.Digraph(<span class="st">'NachhaltigkeitsSystem'</span>, comment<span class="op">=</span><span class="st">'Efficiency and Global Justice'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, size<span class="op">=</span><span class="st">'10,8'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'rectangle'</span>, style<span class="op">=</span><span class="st">'rounded,filled'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zentrale Grenze</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Limits'</span>, <span class="st">'Planetare Grenzen</span><span class="ch">\n</span><span class="st">(Belastungsgrenze der Erde)'</span>, color<span class="op">=</span><span class="st">'red'</span>, fillcolor<span class="op">=</span><span class="st">'mistyrose'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ressourcen-Ebene</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_resources'</span>) <span class="im">as</span> r:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        r.attr(label<span class="op">=</span><span class="st">'Knappe Ressourcen'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Mat'</span>, <span class="st">'Materielle Rohstoffe'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Time'</span>, <span class="st">'Zeit &amp; Aufmerksamkeit'</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        r.node(<span class="st">'Info'</span>, <span class="st">'Valide Informationen'</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Das Werkzeug</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Eff'</span>, <span class="st">'Effizienter Umgang</span><span class="ch">\n</span><span class="st">&amp; Technologische Intelligenz'</span>, color<span class="op">=</span><span class="st">'green'</span>, fillcolor<span class="op">=</span><span class="st">'honeydew'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Die Wirkung (Entkopplung)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Decouple'</span>, <span class="st">'Entkopplung</span><span class="ch">\n</span><span class="st">(Wohlstand ohne Mehrverbrauch)'</span>, shape<span class="op">=</span><span class="st">'ellipse'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Globale Ziele</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'West'</span>, <span class="st">'Erhalt des Wohlstands</span><span class="ch">\n</span><span class="st">(Industrialisierte Welt)'</span>, fillcolor<span class="op">=</span><span class="st">'lightgray'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'South'</span>, <span class="st">'Wirtschaftliches Wachstum</span><span class="ch">\n</span><span class="st">(Globaler Süden / Ärmere Regionen)'</span>, fillcolor<span class="op">=</span><span class="st">'gold'</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verbindungen</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Limits'</span>, <span class="st">'Mat'</span>, label<span class="op">=</span><span class="st">'definiert Verfügbarkeit'</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Mat'</span>, <span class="st">'Eff'</span>, label<span class="op">=</span><span class="st">'erfordert'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Time'</span>, <span class="st">'Eff'</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Info'</span>, <span class="st">'Eff'</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Eff'</span>, <span class="st">'Decouple'</span>, label<span class="op">=</span><span class="st">'ermöglicht'</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Decouple'</span>, <span class="st">'West'</span>, label<span class="op">=</span><span class="st">'sichert'</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Decouple'</span>, <span class="st">'South'</span>, label<span class="op">=</span><span class="st">'schafft Raum für'</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'South'</span>, <span class="st">'Limits'</span>, label<span class="op">=</span><span class="st">'innerhalb bleiben'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'West'</span>, <span class="st">'Limits'</span>, label<span class="op">=</span><span class="st">'darf nicht überschreiten'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dot</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Zum Generieren:</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># create_sustainability_system().render('global_efficiency_system', format='png', cleanup=True)</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>display(create_sustainability_system())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="intro_files/figure-html/cell-2-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="intro_files/figure-html/cell-3-output-1.svg" class="img-fluid figure-img"></p>
 <figcaption>Herausforderung Effizienz</figcaption>
 </figure>
 </div>
@@ -451,74 +526,75 @@ Ein extremes Beispiel: Wenn wir es bei der Ernährung nur auf technische Effizie
 </section>
 <section id="wie-erzeugt-die-gesellschaft-effiziente-ergebnisse" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="wie-erzeugt-die-gesellschaft-effiziente-ergebnisse"><span class="header-section-number">1.6</span> Wie erzeugt die Gesellschaft effiziente Ergebnisse?</h2>
-<div id="d6a3693e" class="cell" data-message="false" data-execution_count="4">
+<div id="ec839dc9" class="cell" data-message="false" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_allocation_architecture():</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> graphviz.Digraph(<span class="st">'OekonomischeAllokation'</span>, comment<span class="op">=</span><span class="st">'Das Gefüge der VWL'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, size<span class="op">=</span><span class="st">'12,12'</span>, nodesep<span class="op">=</span><span class="st">'0.6'</span>, ranksep<span class="op">=</span><span class="st">'0.8'</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, style<span class="op">=</span><span class="st">'filled'</span>, shape<span class="op">=</span><span class="st">'rectangle'</span>, fontsize<span class="op">=</span><span class="st">'11'</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zentrales Problem</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Scarcity'</span>, <span class="st">'DAS KNAPPHEITSPROBLEM</span><span class="ch">\n</span><span class="st">(Unbegrenzte Bedürfnisse vs. begrenzte Güter)'</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'doubleoctagon'</span>, fillcolor<span class="op">=</span><span class="st">'#ECEFF1'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Koordinationsmechanismus</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Market'</span>, <span class="st">'MARKTMECHANISMUS</span><span class="ch">\n</span><span class="st">(Preise als Knappheitssignale)'</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'diamond'</span>, fillcolor<span class="op">=</span><span class="st">'#FFF9C4'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 1: Konsumenten</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_cons'</span>) <span class="im">as</span> c:</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        c.attr(label<span class="op">=</span><span class="st">'Konsumenten'</span>, color<span class="op">=</span><span class="st">'#1E88E5'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        c.node(<span class="st">'Cons'</span>, <span class="st">'Nutzenmaximierung</span><span class="ch">\n</span><span class="st">Präferenzsignale</span><span class="ch">\n</span><span class="st">Soziale Verantwortung'</span>, fillcolor<span class="op">=</span><span class="st">'#BBDEFB'</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 2: Unternehmen</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_firms'</span>) <span class="im">as</span> f:</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        f.attr(label<span class="op">=</span><span class="st">'Unternehmen'</span>, color<span class="op">=</span><span class="st">'#388E3C'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        f.node(<span class="st">'Firms'</span>, <span class="st">'Gewinnmaximierung</span><span class="ch">\n</span><span class="st">Kosteneffizienz</span><span class="ch">\n</span><span class="st">Innovation &amp; Arbeitsteilung'</span>, fillcolor<span class="op">=</span><span class="st">'#C8E6C9'</span>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 3: Der Staat</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_state'</span>) <span class="im">as</span> s:</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        s.attr(label<span class="op">=</span><span class="st">'Staat'</span>, color<span class="op">=</span><span class="st">'#F4511E'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        s.node(<span class="st">'State'</span>, <span class="st">'Ordnungsrahmen</span><span class="ch">\n</span><span class="st">Marktversagen korrigieren</span><span class="ch">\n</span><span class="st">Öffentliche Güter'</span>, fillcolor<span class="op">=</span><span class="st">'#FFCCBC'</span>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 4: NGOs / NPOs</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_ngo'</span>) <span class="im">as</span> n:</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        n.attr(label<span class="op">=</span><span class="st">'Zivilgesellschaft (NGOs)'</span>, color<span class="op">=</span><span class="st">'#8E24AA'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        n.node(<span class="st">'NGO'</span>, <span class="st">'Überwachung &amp; Moral</span><span class="ch">\n</span><span class="st">Öffentliche Interessen</span><span class="ch">\n</span><span class="st">Nischen-Bereitstellung'</span>, fillcolor<span class="op">=</span><span class="st">'#E1BEE7'</span>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zielzustand</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Efficiency'</span>, <span class="st">'PARETO-EFFIZIENZ</span><span class="ch">\n</span><span class="st">(Maximale Rentensumme,</span><span class="ch">\n</span><span class="st">minimale Verschwendung)'</span>,</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'egg'</span>, fillcolor<span class="op">=</span><span class="st">'#D1C4E9'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verbindungen</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Scarcity'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'erfordert Koordination'</span>)</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Cons'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Nachfrage'</span>)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Firms'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Angebot'</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'State'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Regulierung / Korrektur'</span>)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'NGO'</span>, <span class="st">'Firms'</span>, label<span class="op">=</span><span class="st">'Moralischer Druck'</span>)</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'NGO'</span>, <span class="st">'State'</span>, label<span class="op">=</span><span class="st">'Advokatur'</span>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Market'</span>, <span class="st">'Efficiency'</span>, label<span class="op">=</span><span class="st">'idealer Outcome'</span>)</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Risiken</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Failure'</span>, <span class="st">'RISIKEN:</span><span class="ch">\n</span><span class="st">Marktversagen</span><span class="ch">\n</span><span class="st">Staatsversagen'</span>, shape<span class="op">=</span><span class="st">'cloud'</span>, fillcolor<span class="op">=</span><span class="st">'#FFCDD2'</span>, fontcolor<span class="op">=</span><span class="st">'#B71C1C'</span>)</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Market'</span>, <span class="st">'Failure'</span>, style<span class="op">=</span><span class="st">'dotted'</span>)</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'State'</span>, <span class="st">'Failure'</span>, style<span class="op">=</span><span class="st">'dotted'</span>)</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dot</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>display(create_allocation_architecture())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_allocation_architecture():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    dot <span class="op">=</span> graphviz.Digraph(<span class="st">'OekonomischeAllokation'</span>, comment<span class="op">=</span><span class="st">'Das Gefüge der VWL'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, size<span class="op">=</span><span class="st">'12,12'</span>, nodesep<span class="op">=</span><span class="st">'0.6'</span>, ranksep<span class="op">=</span><span class="st">'0.8'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, style<span class="op">=</span><span class="st">'filled'</span>, shape<span class="op">=</span><span class="st">'rectangle'</span>, fontsize<span class="op">=</span><span class="st">'11'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zentrales Problem</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Scarcity'</span>, <span class="st">'DAS KNAPPHEITSPROBLEM</span><span class="ch">\n</span><span class="st">(Unbegrenzte Bedürfnisse vs. begrenzte Güter)'</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'doubleoctagon'</span>, fillcolor<span class="op">=</span><span class="st">'#ECEFF1'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Koordinationsmechanismus</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Market'</span>, <span class="st">'MARKTMECHANISMUS</span><span class="ch">\n</span><span class="st">(Preise als Knappheitssignale)'</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'diamond'</span>, fillcolor<span class="op">=</span><span class="st">'#FFF9C4'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 1: Konsumenten</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_cons'</span>) <span class="im">as</span> c:</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        c.attr(label<span class="op">=</span><span class="st">'Konsumenten'</span>, color<span class="op">=</span><span class="st">'#1E88E5'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        c.node(<span class="st">'Cons'</span>, <span class="st">'Nutzenmaximierung</span><span class="ch">\n</span><span class="st">Präferenzsignale</span><span class="ch">\n</span><span class="st">Soziale Verantwortung'</span>, fillcolor<span class="op">=</span><span class="st">'#BBDEFB'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 2: Unternehmen</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_firms'</span>) <span class="im">as</span> f:</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        f.attr(label<span class="op">=</span><span class="st">'Unternehmen'</span>, color<span class="op">=</span><span class="st">'#388E3C'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        f.node(<span class="st">'Firms'</span>, <span class="st">'Gewinnmaximierung</span><span class="ch">\n</span><span class="st">Kosteneffizienz</span><span class="ch">\n</span><span class="st">Innovation &amp; Arbeitsteilung'</span>, fillcolor<span class="op">=</span><span class="st">'#C8E6C9'</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 3: Der Staat</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_state'</span>) <span class="im">as</span> s:</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        s.attr(label<span class="op">=</span><span class="st">'Staat'</span>, color<span class="op">=</span><span class="st">'#F4511E'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        s.node(<span class="st">'State'</span>, <span class="st">'Ordnungsrahmen</span><span class="ch">\n</span><span class="st">Marktversagen korrigieren</span><span class="ch">\n</span><span class="st">Öffentliche Güter'</span>, fillcolor<span class="op">=</span><span class="st">'#FFCCBC'</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Akteur 4: NGOs / NPOs</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_ngo'</span>) <span class="im">as</span> n:</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        n.attr(label<span class="op">=</span><span class="st">'Zivilgesellschaft (NGOs)'</span>, color<span class="op">=</span><span class="st">'#8E24AA'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        n.node(<span class="st">'NGO'</span>, <span class="st">'Überwachung &amp; Moral</span><span class="ch">\n</span><span class="st">Öffentliche Interessen</span><span class="ch">\n</span><span class="st">Nischen-Bereitstellung'</span>, fillcolor<span class="op">=</span><span class="st">'#E1BEE7'</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Zielzustand</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Efficiency'</span>, <span class="st">'PARETO-EFFIZIENZ</span><span class="ch">\n</span><span class="st">(Maximale Rentensumme,</span><span class="ch">\n</span><span class="st">minimale Verschwendung)'</span>,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>             shape<span class="op">=</span><span class="st">'egg'</span>, fillcolor<span class="op">=</span><span class="st">'#D1C4E9'</span>, penwidth<span class="op">=</span><span class="st">'2'</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Verbindungen</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Scarcity'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'erfordert Koordination'</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Cons'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Nachfrage'</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Firms'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Angebot'</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'State'</span>, <span class="st">'Market'</span>, label<span class="op">=</span><span class="st">'Regulierung / Korrektur'</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'NGO'</span>, <span class="st">'Firms'</span>, label<span class="op">=</span><span class="st">'Moralischer Druck'</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'NGO'</span>, <span class="st">'State'</span>, label<span class="op">=</span><span class="st">'Erzeugt Öffentlichkeit'</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'NGO'</span>, <span class="st">'Cons'</span>, label<span class="op">=</span><span class="st">'Meinungsbildung'</span>)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Market'</span>, <span class="st">'Efficiency'</span>, label<span class="op">=</span><span class="st">'idealer Outcome'</span>)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Risiken</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    dot.node(<span class="st">'Failure'</span>, <span class="st">'RISIKEN:</span><span class="ch">\n</span><span class="st">Marktversagen</span><span class="ch">\n</span><span class="st">Staatsversagen'</span>, shape<span class="op">=</span><span class="st">'cloud'</span>, fillcolor<span class="op">=</span><span class="st">'#FFCDD2'</span>, fontcolor<span class="op">=</span><span class="st">'#B71C1C'</span>)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'Market'</span>, <span class="st">'Failure'</span>, style<span class="op">=</span><span class="st">'dotted'</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    dot.edge(<span class="st">'State'</span>, <span class="st">'Failure'</span>, style<span class="op">=</span><span class="st">'dotted'</span>)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dot</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>display(create_allocation_architecture())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="intro_files/figure-html/cell-5-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="intro_files/figure-html/cell-6-output-1.svg" class="img-fluid figure-img"></p>
 <figcaption>Wie wird Effizienz erzeugt?</figcaption>
 </figure>
 </div>

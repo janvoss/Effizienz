@@ -1196,7 +1196,7 @@ ggplot(dat, aes(x = x1, y = x2, color = Indifferenzkurven)) +
 ```
 
 
-## Exkurs: Sättigungsmengen und negativem Grenznutzen {-}
+## Exkurs: Sättigungsmengen und negativer Grenznutzen {-}
 
 ```{python}
 #| message: false
