@@ -38,6 +38,61 @@
 [Hier Priddat u accelerating growth]::
 
 
+### Einzel- und volkswirtschaftliche Perspektive
+
+```{python}
+#| message: false
+#| warning: false
+#| fig-cap: "Einzel- und volkswirtschaftliche Perspektive"
+
+import graphviz
+from IPython.display import display
+
+def create_perspective_comparison_graph():
+    dot = graphviz.Digraph('PerspektivenVergleich', comment='BWL vs VWL')
+
+    # Design für Übersichtlichkeit (A4/Bildschirm optimiert)
+    dot.attr(rankdir='TB', size='8,11', nodesep='0.5', ranksep='0.7')
+    dot.attr('node', fontname='Helvetica', style='filled, rounded', shape='rect', fontsize='11')
+
+    # Wurzel
+    dot.node('Root', 'Wirtschaftswissenschaften', fillcolor='#37474F', fontcolor='white')
+
+    # Perspektive BWL
+    with dot.subgraph(name='cluster_bwl') as b:
+        b.attr(label='Betriebswirtschaft (BWL)\n"Die Einzelwirtschaft"', color='#1E88E5', style='dashed')
+        b.node('BWL_Focus', 'Perspektive des Akteurs\n(Unternehmen von innen)', fillcolor='#BBDEFB')
+        b.node('BWL_Goal', 'Gewinnmaximierung &\nWettbewerbsfähigkeit', fillcolor='#E3F2FD')
+        b.node('BWL_Method', 'Managementwissenschaft\nEntscheidungstheorie', fillcolor='#E3F2FD')
+        b.edge('BWL_Focus', 'BWL_Goal')
+        b.edge('BWL_Goal', 'BWL_Method')
+
+    # Perspektive VWL
+    with dot.subgraph(name='cluster_vwl') as v:
+        v.attr(label='Volkswirtschaft (VWL)\n"Die Wirtschaftsordnung"', color='#388E3C', style='dashed')
+        v.node('VWL_Focus', 'Perspektive des Gestalters\n(Das System als Ganzes)', fillcolor='#C8E6C9')
+        v.node('VWL_Goal', 'Gemeinwohl &\nGesamtwirtschaftliche Stabilität', fillcolor='#E8F5E9')
+        v.node('VWL_Method', 'Mikro- & Makroökonomie\nOrdnungspolitik', fillcolor='#E8F5E9')
+        v.edge('VWL_Focus', 'VWL_Goal')
+        v.edge('VWL_Goal', 'VWL_Method')
+
+    # Der Konflikt / Die Schnittstelle
+    dot.node('Conflict', 'SPANNUNGSFELD\nEinzel- vs. Gesamtrationalität', shape='diamond', fillcolor='#FFF9C4')
+
+    # Verbindungen
+    dot.edge('Root', 'BWL_Focus')
+    dot.edge('Root', 'VWL_Focus')
+
+    dot.edge('BWL_Method', 'Conflict', label='Handeln', style='dotted')
+    dot.edge('VWL_Method', 'Conflict', label='Regulierung', style='dotted')
+
+    return dot
+
+# Ausgabe
+display(create_perspective_comparison_graph())
+```
+
+
 ### Teilbereiche des Effizienzbegriffs
 
 - Technische Effzienz  
@@ -188,6 +243,7 @@ def create_sustainability_system():
 # create_sustainability_system().render('global_efficiency_system', format='png', cleanup=True)
 display(create_sustainability_system())
 ```
+
 
 
 
