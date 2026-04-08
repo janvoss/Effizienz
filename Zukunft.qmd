@@ -82,7 +82,7 @@ p <- mydata_extended %>%
    # geom_smooth(method = 'lm',
    #             fullrange=T
   #  )+
-  geom_vline(xintercept=2024,linetype = "dashed" )+
+  geom_vline(xintercept= max(mydata$TIME_PERIOD),linetype = "dashed" )+
 geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
 geom_line(aes(y=upr), color = "red", linetype = "dashed")+
     annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
@@ -113,7 +113,7 @@ p2 <- mydata_extended %>%
    # geom_smooth(method = 'lm',
    #             fullrange=T
   #  )+
-  geom_vline(xintercept=2024,linetype = "dashed" )+
+  geom_vline(xintercept=max(mydata$TIME_PERIOD),linetype = "dashed" )+
 geom_line(aes(y=lwr), color = "red", linetype = "dashed")+
 geom_line(aes(y=upr), color = "red", linetype = "dashed")+
     annotate("text", x=2000, y=4500000, label="Vergangenheit", color="grey30")+
@@ -180,7 +180,7 @@ df <- read.csv("https://ourworldindata.org/grapher/gdp-per-capita-worldbank.csv?
 # Fetch the metadata
 # metadata <- fromJSON("https://ourworldindata.org/grapher/gdp-per-capita-worldbank.metadata.json?v=1&csvType=full&useColumnShortNames=true")
 
-head(df)
+# head(df)
 
 # Prognosen erstellen
 
@@ -227,7 +227,7 @@ prognose_plot <- dat_forecast %>%
 # Kombinierte Daten für ersten Plot
 plot_df <- bind_rows(df_plot, prognose_plot)
 
-head(plot_df)
+# head(plot_df)
 
 # 2. Plot: Mit Unsicherheitsintervallen
 ggplot() +
