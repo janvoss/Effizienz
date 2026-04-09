@@ -180,9 +180,9 @@ digraph causality {
   B  [label = "Kausalität nicht (direkt) beobachtbar", fillcolor = lightyellow]
   C1 [label = "Korrelation ≠ Kausalität\n(Störfaktoren, umgekehrte Kausalität,\nSelektionsverzerrungen)", fillcolor = lightcoral]
   C2 [label = "Fehlende Korrelation ≠ fehlende Kausalität\n(Nichtlinearitäten, entgegengesetzte Effekte,\nheterogene Gruppen)", fillcolor = lightcoral]
-  D  [label = "Theoretisch fundierte Modelle\n(Vorstellungen über die Welt)", fillcolor = green]
-  E  [label = "Kausale Inferenz\n(Rekonstruktion unbeobachteter Zustände)", fillcolor = green]
-  F  [label = "Forschungsdesigns / Annahmen", fillcolor = green]
+  D  [label = "Theoretisch fundierte Modelle\n(Vorstellungen über die Welt)", fillcolor = "#90EE90"]
+  E  [label = "Kausale Inferenz\n(Rekonstruktion unbeobachteter Zustände)", fillcolor = "#90EE90"]
+  F  [label = "Forschungsdesigns / Annahmen", fillcolor = "#90EE90"]
   G  [label = "Aussagen über kausale Effekte", fillcolor = gold]
 
   # --- Kanten (Beziehungen) ---
