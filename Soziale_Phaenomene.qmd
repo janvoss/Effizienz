@@ -150,6 +150,70 @@ p
 
 ## Erklärungen durch Modelle
 
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die Notwendigkeit von Modellen"
+
+
+# Falls DiagrammeR noch nicht installiert ist, bitte einmal ausführen:
+# install.packages("DiagrammeR")
+
+library(DiagrammeR)
+
+# Erstelle und rendere das Diagramm
+grViz('
+digraph causality {
+
+  # Globale Graph-Einstellungen
+  graph [rankdir = TB, fontname = "Helvetica"]
+
+  # Globale Knoten-Einstellungen (Nodes)
+  node [shape = box, style = filled, fontname = "Helvetica"]
+  
+  # Globale Kanten-Einstellungen (Edges)
+  edge [fontname = "Helvetica", fontsize = 10]
+
+  # --- Knoten (Konzepte) definieren ---
+  A  [label = "Beobachtbare Daten\n(Korrelationen, zeitliche Abfolge)", fillcolor = lightblue]
+  B  [label = "Kausalität nicht (direkt) beobachtbar", fillcolor = lightyellow]
+  C1 [label = "Korrelation ≠ Kausalität\n(Störfaktoren, umgekehrte Kausalität,\nSelektionsverzerrungen)", fillcolor = lightcoral]
+  C2 [label = "Fehlende Korrelation ≠ fehlende Kausalität\n(Nichtlinearitäten, entgegengesetzte Effekte,\nheterogene Gruppen)", fillcolor = lightcoral]
+  D  [label = "Theoretisch fundierte Modelle\n(Vorstellungen über die Welt)", fillcolor = green]
+  E  [label = "Kausale Inferenz\n(Rekonstruktion unbeobachteter Zustände)", fillcolor = green]
+  F  [label = "Forschungsdesigns / Annahmen", fillcolor = green]
+  G  [label = "Aussagen über kausale Effekte", fillcolor = gold]
+
+  # --- Kanten (Beziehungen) ---
+  A -> B  [label = "führt zu"]
+
+  B -> C1 [label = "erklärt"]
+  B -> C2 [label = "erklärt"]
+
+  C1 -> D [label = "erfordern"]
+  C2 -> D [label = "erfordern"]
+
+  D -> E  [label = "bilden Grundlage für"]
+  F -> E  [label = "unterstützen"]
+
+  E -> G  [label = "ermöglichen"]
+
+  # zusätzliche Verbindungen
+  A -> C1 [label = "kann trügen"]
+  A -> C2 [label = "kann verbergen"]
+
+  # Optionale Kante
+  D -> F  [label = "implizieren"]
+
+}
+')
+
+```
+
+
+
+
 (wissenschaftliche) **Erklärung**: Antwort auf eine Warum-Frage unter Rückgriff auf systematische Zusammenhänge
 
 **Theorie**: Systematische Vorstellung über Aspekte der Welt
