@@ -2,16 +2,17 @@
 
 ## Grundmodell
 
-- Das Doughnut-Modell geht auf @raworth_safe_2012 und nachfolgende Publikationen der gleichen Autorin zurück
+-   Das Doughnut-Modell geht auf @raworth_safe_2012 und nachfolgende Publikationen der gleichen Autorin zurück
 
-- Der Kern des Modells wird durch eine **ringförmige Struktur** beschrieben  
-  - Im Inneren liegt die sog. **soziale Basis**. Diese muss mindestens erfüllt werden, sonst drohen Entbehrungen wie Hunger, Analphabetismus, mangelnde Gesundheitsversorgung usw.
-  
-  - Außerhalb des Ringes liegen die planetaren (und lokalen) Grenzen der Natur. Hier drohen eine zu hohe Konzentration von Treibhausgasen in der Atmosphäre, der Abbau der Ozonschicht oder ein Verlust der Biodiversität. 
-  
-  - Es ist auch möglich, dass sich eine Gesellschaft sowohl im Innern als auch im Äußeren des Ringes befindet (insofern ist die grafische Repräsentation nicht ganz passend).
-  
-  - Erstrebenswert ist der innere Ring (hier grün dargestellt), der Doughnut.
+-   Der Kern des Modells wird durch eine **ringförmige Struktur** beschrieben
+
+    -   Im Inneren liegt die sog. **soziale Basis**. Diese muss mindestens erfüllt werden, sonst drohen Entbehrungen wie Hunger, Analphabetismus, mangelnde Gesundheitsversorgung usw.
+
+    -   Außerhalb des Ringes liegen die planetaren (und lokalen) Grenzen der Natur. Hier drohen eine zu hohe Konzentration von Treibhausgasen in der Atmosphäre, der Abbau der Ozonschicht oder ein Verlust der Biodiversität.
+
+    -   Es ist auch möglich, dass sich eine Gesellschaft sowohl im Innern als auch im Äußeren des Ringes befindet (insofern ist die grafische Repräsentation nicht ganz passend).
+
+    -   Erstrebenswert ist der innere Ring (hier grün dargestellt), der Doughnut.
 
 ```{r}
 #| message: false
@@ -50,10 +51,12 @@ ggplot(farbverlauf) +
   theme_void() +
   labs(title = "Das Doughnut-Model",
        caption= "Darstellung: Jan S Voßwinkel basierend auf Raworth (2012)") +
-  annotate("text", x = 2.8, y = 0.5, label = "Armut", size = 7) + # Added text annotation
+  annotate("text", x = 2.8, y = 0.5, label = "Armut/\nKonflikte", size = 7) + # Added text annotation
   annotate("text", x = 3.2, y = 0.1, label = "Planetare\n Grenzen", size = 7, hjust = -.9) # Adjusted text annotation position and
 
 ```
+
+-   @raworth_safe_2012 ist ein regelmäßiger Bezugspunkt für wachstumsskeptische Perspektiven und Kritik an einem "kapitalistischen" System
 
 ## Entwicklung in der Zeit: Statische Betrachtung
 
@@ -188,4 +191,77 @@ ggplot(df, aes(x = x, y = y, fill = z)) +
 
 ```
 
+## Der Doughnut und die Kapitalismuskritik
+
+-   @acharya_hole_2026 versuchen eine empirische Überprüfung, ob sich die Kapitalismuskritik auf das Doughnut-Modell stützen lässt.
+
+-   Es ist überhaupt nur ein sehr schwacher Zusammenhang zwischen Wirtschaftssystem und Doughnut-Zielen erkennbar, wenn überhaupt, dann sind die Ergebnisse eher *kapitalismusfreundlich*.
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Der Doughnut als Basis für Kapitalismuskritik?"
+
+
+# Falls das Paket noch nicht installiert ist:
+# install.packages("DiagrammeR")
+
+library(DiagrammeR)
+
+grViz("
+digraph DonutCritique {
+
+  // Globale Layout-Einstellungen
+  graph [rankdir = TB, nodesep = 0.5, ranksep = 0.7]
+
+  // Globale Node-Einstellungen
+  node [fontname = Helvetica, style = \"filled, rounded\", shape = rect, fontsize = 11]
+
+  // 1. Das theoretische Modell (Donut)
+  subgraph cluster_theory {
+    label = \"Theoretischer Rahmen (Kate Raworth)\"
+    color = \"#4CAF50\"
+    style = dashed
+
+    Donut [label = \"DOUGHNUT-MODELL\\n Sicherer & Gerechter Raum \", shape = doubleoctagon, fillcolor = \"#E8F5E9\"]
+    Hypothesis [label = \"Annahme: Kapitalismus/Neoliberalismus\\nerzeugt strukturelle Instabilität\", fillcolor = \"#FFEBEE\"]
+
+    Donut -> Hypothesis [label = \"Vorhersage\"]
+  }
+
+  // 2. Die empirische Formalisierung
+  subgraph cluster_test {
+    label = \"Empirischer Härtetest\"
+    color = \"#1E88E5\"
+    style = dashed
+
+    Fraser [label = \"Fraser Index\\n(Wirtschaftliche Freiheit)\", fillcolor = \"#E3F2FD\"]
+    VarCoeff [label = \"Variationskoeffizient\\n(Maß für Unausgewogenheit)\", fillcolor = \"#E3F2FD\"]
+    Data [label = \"Indikatoren:\\nUmweltleistung (EPI)\\nMenschliche Entwicklung (HDI)\", fillcolor = \"#E3F2FD\"]
+  }
+
+  // 3. Die Ergebnisse (Die Widerlegung)
+  subgraph cluster_results {
+    label = \"Ergebnisse der Untersuchung\"
+    color = \"#C62828\"
+    style = dashed
+
+    Result1 [label = \"Kein signifikanter Zusammenhang\\nzwischen Freiheit & Instabilität\", fillcolor = \"#FFCDD2\"]
+    Result2 [label = \"Kapitalistische Länder weisen\\nstabilere/gleichmäßigere Entwicklung auf\", fillcolor = \"#FFCDD2\"]
+    Verdict [label = \"Doughnut-Modell empririsch\\nnicht für Kapitalismuskritik geeignet\", shape = box, penwidth = 3, fillcolor = \"#B71C1C\", fontcolor = white]
+  }
+
+  // 4. Alternative Erklärungsansätze (Neoklassik)
+  Alt [label = \"Bewährte Lösungen:\\n• Eigentumsrechte\\n• Internalisierung externer Effekte\\n• Umverteilung\", fillcolor = \"#FFF9C4\"]
+
+  // Verbindungen
+  Hypothesis -> Fraser [label = \"getestet gegen\"]
+  Fraser -> Result1
+  VarCoeff -> Result1 [label = \"Messmethode\"]
+  Result1 -> Result2
+  Result2 -> Verdict
+  Verdict -> Alt [label = \"Empfehlung: Weiter mit\"]
+}
+")
+```
 
