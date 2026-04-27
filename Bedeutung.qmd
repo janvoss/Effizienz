@@ -2,6 +2,90 @@
 
 ## Individuelles Entscheidungsproblem
 
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Raionalitätskonzepte in der Ökonomik"
+
+
+# Falls noch nicht installiert:
+# install.packages("DiagrammeR")
+
+library(DiagrammeR)
+
+grViz("
+digraph RationalitaetsKonzepte {
+  # Allgemeine Attribute
+  graph [rankdir = TB, compound = true, nodesep = 0.5, ranksep = 0.5]
+  node [fontname = Arial, fontsize = 11, style = filled, shape = rectangle]
+
+  # 1. Das Fundament: Ökonomisches Prinzip
+  subgraph cluster_eco_principle {
+    label = 'Das Ökonomische Prinzip (Vermeidung von Verschwendung)'
+    style = filled
+    color = lightgrey
+    fillcolor = '#f9f9f9'
+    
+    Max [label = 'Maximalprinzip\n(Gegebener Input -> Max. Erfolg)', fillcolor = '#E3F2FD']
+    Min [label = 'Minimalprinzip\n(Fixes Ziel -> Min. Aufwand)', fillcolor = '#E3F2FD']
+  }
+
+  # 2. Das klassische Modell
+  subgraph cluster_homo {
+    label = 'Leitbild: Homo Oeconomicus'
+    color = '#1976D2'
+    fontcolor = '#1976D2'
+    
+    HO [label = 'Vollkommene Rationalität\nLückenlose Info\nEgoistische Nutzenmaximierung', 
+        shape = doubleoctagon, fillcolor = '#BBDEFB']
+  }
+
+  # 3. Formale/Axiomatische Rationalität
+  subgraph cluster_axioms {
+    label = 'Axiomatische Rationalität (Konsistenz)'
+    color = '#388E3C'
+    fontcolor = '#388E3C'
+    
+    Trans [label = 'Transitivität\n(A > B, B > C => A > C)', fillcolor = '#C8E6C9']
+    Comp [label = 'Vollständigkeit\n(Alle Optionen vergleichbar)', fillcolor = '#C8E6C9']
+  }
+
+  # 4. Die Realität: Beschränkte Rationalität
+  subgraph cluster_bounded {
+    label = 'Beschränkte Rationalität'
+    color = '#F57C00'
+    fontcolor = '#F57C00'
+    
+    Sat [label = 'Satisficing\n(Anspruchsniveau erfüllen statt optimieren)', fillcolor = '#FFE0B2']
+    Heur [label = 'Heuristiken & Biases\n(Systematische Fehlentscheidungen)', fillcolor = '#FFE0B2']
+  }
+
+  # 5. Soziale & Philosophische Dimension
+  PD [label = 'Gefangenendilemma\n(Individuelle vs. Kollektive Rationalität)', 
+      shape = component, fillcolor = '#FFCDD2']
+  Instr [label = 'Instrumentelle Rationalität\n(Wahl der Mittel)', fillcolor = '#D1C4E9']
+  Subst [label = 'Substanzielle Rationalität\n(Reflektion der Ziele)', fillcolor = '#D1C4E9', penwidth = 2]
+
+  # Verbindungen
+  HO -> Max [style = dashed]
+  HO -> Min [style = dashed]
+  HO -> PD [label = ' führt zu Ineffizienz in...']
+  
+  # Kritik-Pfeil (Richtung umgekehrt wie im Python 'dir=back')
+  Sat -> HO [label = ' Kritik durch', color = red, arrowhead = none]
+
+  Trans -> HO [label = ' Axiome für']
+  Comp -> HO
+
+  Instr -> Subst [label = ' 2. Stufe der Rationalität']
+  Subst -> Sat [label = ' erkennt Grenzen an', style = dotted]
+}
+")
+```
+
+
+
 Das Folgende ist fast wörtlich aus @Detel07_Soz S. 20 übernommen.
 
 ### Basisschema der Handlungserklärung
@@ -453,7 +537,6 @@ def create_rationality_map():
 # Visualisierung anzeigen
 display(create_rationality_map())
 ```
-
 
 
 ## Gesellschaftliches Entscheidungsproblem
