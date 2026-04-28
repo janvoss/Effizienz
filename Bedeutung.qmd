@@ -2,6 +2,11 @@
 
 ## Individuelles Entscheidungsproblem
 
+::: {.callout-note icon="false" collapse="false"}
+# Kernbotschaft {-}
+Individuell rationales Verhalten führt zu individuell effizienzten Ergebnissen. Dies ist eine Frage der Definition der Rationalität und der Effizienz. 
+:::
+
 
 ```{r}
 #| warning: false
@@ -165,7 +170,7 @@ Person, sondern ein Schema, eine **"Grammatik" der Erklärung**.
 
 - Ein Beispiel: $U(x_1, x_2)=\frac{1}{2} \sqrt{x_1\times x_2}$
 
-#### 3D-Darstellung: Nutzengebirge
+#### 3D-Darstellung: Nutzengebirge und Indifferenzkurven als Projektion der Höhenlinien
 
 ```{r}
 #| message: false
@@ -226,22 +231,8 @@ p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
 p
 ```
 
-#### 2D-Darstellung: Kombinationen von beiden Gütern, die zu gleichem Nutzenniveau führen
 
-
-```{r}
-#| message: false
-#| warning: false
-#| fig-cap: 2D-Ansicht des Nutzengebirges
-
-p <- plot_ly(z = u, type = "contour", opacity=.5) %>%
-  layout(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE)) %>%
-   config(displaylogo = FALSE) %>%
-  hide_colorbar()
-
-p
-```
-[Hier Nutzenfunktion und Indifferenzkurven]::
+#### 2D-Darstellung: Indifferenzkurven
 
 ```{python}
 #| message: false
@@ -475,69 +466,6 @@ src.render(filename='Rationalitaet', cleanup=True)  # Erzeugt output.svg
 
 ![Nutzen und Rationalität nach @klonschinski_nutzen_2021](Rationalitaet.svg)
 
-```{python}
-#| message: false
-#| waning: false
-
-
-import graphviz
-from IPython.display import display
-
-def create_rationality_map():
-    dot = graphviz.Digraph('RationalitaetsKonzepte', comment='Dimensions of Rationality')
-    dot.attr(rankdir='TB', size='12,12', compound='true')
-    dot.attr('node', fontname='Arial', fontsize='11', style='filled', shape='rectangle')
-
-    # 1. Das Fundament: Ökonomisches Prinzip
-    with dot.subgraph(name='cluster_eco_principle') as c:
-        c.attr(label='Das Ökonomische Prinzip (Vermeidung von Verschwendung)',
-               style='filled', color='lightgrey', fillcolor='#f9f9f9')
-        c.node('Max', 'Maximalprinzip\n(Gegebener Input -> Max. Erfolg)', fillcolor='#E3F2FD')
-        c.node('Min', 'Minimalprinzip\n(Fixes Ziel -> Min. Aufwand)', fillcolor='#E3F2FD')
-
-    # 2. Das klassische Modell
-    with dot.subgraph(name='cluster_homo') as h:
-        h.attr(label='Leitbild: Homo Oeconomicus', color='#1976D2', fontcolor='#1976D2')
-        h.node('HO', 'Vollkommene Rationalität\nLückenlose Info\nEgoistische Nutzenmaximierung',
-               shape='doubleoctagon', fillcolor='#BBDEFB')
-
-    # 3. Formale/Axiomatische Rationalität
-    with dot.subgraph(name='cluster_axioms') as a:
-        a.attr(label='Axiomatische Rationalität (Konsistenz)', color='#388E3C')
-        a.node('Trans', 'Transitivität\n(A > B, B > C => A > C)', fillcolor='#C8E6C9')
-        a.node('Comp', 'Vollständigkeit\n(Alle Optionen vergleichbar)', fillcolor='#C8E6C9')
-
-    # 4. Die Realität: Beschränkte Rationalität
-    with dot.subgraph(name='cluster_bounded') as b:
-        b.attr(label='Beschränkte Rationalität', color='#F57C00')
-        b.node('Sat', 'Satisficing\n(Anspruchsniveau erfüllen statt optimieren)', fillcolor='#FFE0B2')
-        h_node = 'Heuristiken & Biases\n(Systematische Fehlentscheidungen)'
-        b.node('Heur', h_node, fillcolor='#FFE0B2')
-
-    # 5. Soziale & Philosophische Dimension
-    dot.node('PD', 'Gefangenendilemma\n(Individuelle vs. Kollektive Rationalität)',
-             shape='component', fillcolor='#FFCDD2')
-    dot.node('Instr', 'Instrumentelle Rationalität\n(Wahl der Mittel)', fillcolor='#D1C4E9')
-    dot.node('Subst', 'Substanzielle Rationalität\n(Reflektion der Ziele)', fillcolor='#D1C4E9', penwidth='2')
-
-    # Verbindungen
-    dot.edge('HO', 'Max', style='dashed')
-    dot.edge('HO', 'Min', style='dashed')
-    dot.edge('HO', 'PD', label='führt zu Ineffizienz in...')
-    dot.edge('HO', 'Sat', label='Kritik durch', color='red', arrowhead='none', dir='back')
-
-    dot.edge('Trans', 'HO', label='Axiome für')
-    dot.edge('Comp', 'HO')
-
-    dot.edge('Instr', 'Subst', label='2. Stufe der Rationalität')
-    dot.edge('Subst', 'Sat', label='erkennt Grenzen an', style='dotted')
-
-    return dot
-
-# Visualisierung anzeigen
-display(create_rationality_map())
-```
-
 
 ## Gesellschaftliches Entscheidungsproblem
 
@@ -558,209 +486,11 @@ Wenn keiene Pareto-Verbesserungen mehr möglich sind, liegt **Pareto-Effizienz**
 
 ***
 
-```{python}
-#| message: false
-#| warning: false
-#| cache: true
-#| eval: false # sonst so lange render-Zeit
-#| output: false
 
+<iframe src="https://shinylive.io/r/app/#code=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" width="100%" height="800" title="Interaktives Solow-Modell">
 
-from sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log
-import numpy as np
-from lets_plot import *
+</iframe>
 
-# Define variables
-x1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')
-
-# Define constants
-x1_max = 100
-x2_max = 100
-
-# Utility functions
-Utility_A = Eq(U_A, x1**.3 * x2**.7)
-Utility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)
-
-# Given utility level for B
-UB_values = np.linspace(1, 91, 10)
-
-# Use latex to create a LaTeX string for the subtitle
-utility_latex = f"\({latex(Utility_A)}\), \({latex(Utility_B)}\)"
-
-# Modify the string
-utility_latex_modified = (
-    utility_latex.replace(r"\log", "ln")
-                 .replace(r"\left", "")
-                 .replace(r"\right", "")
-)
-
-# Lagrangian
-L = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)
-
-# Precompute derivatives
-dL_dx1 = diff(L, x1)
-dL_dx2 = diff(L, x2)
-dL_dlambda = diff(L, lambda_)
-
-# x1 values for graph
-x_values = np.arange(0.01, x1_max + 0.01, 0.3)
-data = {'x': x_values.tolist()}
-
-# List to store optimal points
-optimal_points = []
-
-# Setup Lets-Plot for HTML output
-LetsPlot.setup_html()
-
-p = ggplot()
-
-for u in UB_values:
-    # Solve the system of equations once and substitute `u` in the solutions
-    solutions = solve(
-        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),
-        (x1, x2, lambda_),
-        dict=True,
-        simplify = False
-    )
-
-    # Extract optimal x1, x2 values
-    x1_opt = float(solutions[0].get(x1))
-    x2_opt = float(solutions[0].get(x2))
-
-    optimal_points.append({'x': x1_opt, 'y': x2_opt})
-
-    UtilityA_value = Utility_A.rhs.subs(solutions[0])
-
-    # Indifference Curves
-    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))
-    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))
-
-    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \
-         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \
-         geom_point(x=x1_opt, y=x2_opt)
-
-# Convert optimal_points to a format suitable for geom_line
-optimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}
-
-p += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')
-
-p += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \
-     theme_light() + \
-     labs(title='Eine Edgeworth Box',
-          subtitle=utility_latex_modified,
-          x='\(x_1\)',
-          y='\(x_2\)',
-          caption='Eine Edgeworth Box')
-
-# p.show()
-
-ggsave(p, filename='Edgeworth_1.svg')
-
-```
-
-![Eine Edgeworth-Box](./lets-plot-images/Edgeworth_1.svg)
-
-```{python}
-#| message: false
-#| warning: false
-#| cache: true
-#| eval: false # sonst so lange render-Zeit
-#| output: false
-
-
-from sympy import symbols, diff, Eq, lambdify, solve, latex, nsolve, log
-import numpy as np
-from lets_plot import *
-
-# Define variables
-x1, x2, u, U_A, U_B, lambda_ = symbols('x1 x2 u U_A U_B lambda_')
-
-# Define constants
-x1_max = 100
-x2_max = 100
-
-# Utility functions
-Utility_A = Eq(U_A, x1**.5 * x2**.5)
-Utility_B = Eq(U_B, (x1_max - x1)**.5 * (x2_max - x2)**.5)
-
-# Given utility level for B
-UB_values = np.linspace(1, 91, 10)
-
-# Use latex to create a LaTeX string for the subtitle
-utility_latex = f"\({latex(Utility_A)}\), \({latex(Utility_B)}\)"
-
-# Modify the string
-utility_latex_modified = (
-    utility_latex.replace(r"\log", "ln")
-                 .replace(r"\left", "")
-                 .replace(r"\right", "")
-)
-
-# Lagrangian
-L = Utility_A.rhs + lambda_ * (U_B - Utility_B.rhs)
-
-# Precompute derivatives
-dL_dx1 = diff(L, x1)
-dL_dx2 = diff(L, x2)
-dL_dlambda = diff(L, lambda_)
-
-# x1 values for graph
-x_values = np.arange(0.01, x1_max + 0.01, 0.3)
-data = {'x': x_values.tolist()}
-
-# List to store optimal points
-optimal_points = []
-
-# Setup Lets-Plot for HTML output
-LetsPlot.setup_html()
-
-p = ggplot()
-
-for u in UB_values:
-    # Solve the system of equations once and substitute `u` in the solutions
-    solutions = solve(
-        (dL_dx1.subs(U_B, u), dL_dx2.subs(U_B, u), dL_dlambda.subs(U_B, u)),
-        (x1, x2, lambda_),
-        dict=True,
-        simplify = False
-    )
-
-    # Extract optimal x1, x2 values
-    x1_opt = float(solutions[0].get(x1))
-    x2_opt = float(solutions[0].get(x2))
-
-    optimal_points.append({'x': x1_opt, 'y': x2_opt})
-
-    UtilityA_value = Utility_A.rhs.subs(solutions[0])
-
-    # Indifference Curves
-    Ind_B = lambdify(x1, solve(Utility_B, x2)[0].subs(U_B, u))
-    Ind_A = lambdify(x1, solve(Utility_A, x2)[0].subs(U_A, UtilityA_value))
-
-    p += geom_function(aes('x'), data=data, fun=lambda t: Ind_B(t), color='red') + \
-         geom_function(aes('x'), data=data, fun=lambda t: Ind_A(t), color='blue') + \
-         geom_point(x=x1_opt, y=x2_opt)
-
-# Convert optimal_points to a format suitable for geom_line
-optimal_points_data = {'x': [pt['x'] for pt in optimal_points], 'y': [pt['y'] for pt in optimal_points]}
-
-p += geom_line(aes(x='x', y='y'), data=optimal_points_data, color='green')
-
-p += coord_cartesian(xlim=[0, x1_max + 5], ylim=[0, x2_max]) + \
-     theme_light() + \
-     labs(title='Eine Edgeworth Box',
-          subtitle=utility_latex_modified,
-          x='\(x_1\)',
-          y='\(x_2\)',
-          caption='Eine Edgeworth Box')
-
-# p.show()
-
-ggsave(p, filename='Edgeworth_2.svg')
-
-```
-
-![Eine weitere Edgeworth-Box](./lets-plot-images/Edgeworth_2.svg)
 
 - Welche Allokationen von $x_1$ und $x_2$ effizient sieht, lässt sich nur vor dem Hintergrund der jeweiligen Nutzenfunktionen beurteilen
 
