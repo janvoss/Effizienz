@@ -4,7 +4,7 @@
 
 ::: {.callout-note icon="false" collapse="false"}
 # Kernbotschaft {-}
-Individuell rationales Verhalten führt zu individuell effizienzten Ergebnissen. Dies ist eine Frage der Definition der Rationalität und der Effizienz. 
+Individuell rationales Verhalten führt zu individuell effizienten Ergebnissen. Dies ist eine Frage der Definition der Rationalität und der Effizienz. 
 :::
 
 
