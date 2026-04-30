@@ -381,6 +381,11 @@ chart
 
 ```
 
+
+Ein Optimum liegt vor, wenn die Steigung der Indifferenzkurve gleich der Steigung der Budgetgerade ist und man sich auf der Budgetgerade befindet. 
+
+$$MRS_{x_1, x_2}=-\frac{MU_1}{MU_2}=-\frac{p_1}{p_2}$$
+
 #### Das Verhältnis zwischen Rationalität und Nutzenmaximierung
 
 - Unter Sicherheit führt rationales Verhalten individuell zu effizienten Ergebnissen.
