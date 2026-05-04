@@ -1106,3 +1106,68 @@ ggsave(plot, filename='Indifferenzkurven-Saettigungsmenge.svg')
 ![Nutzenfunktion mit Sättigungsmenge](lets-plot-images/Nutzenfunktion-Saettigungsmenge.svg)
 
 ![Indifferenzkurven mit Sättigungsmenge](lets-plot-images/Indifferenzkurven-Saettigungsmenge.svg)
+
+
+## Nachtrag: Rationalität und Eigennutz
+
+- Das Wohlergehen kann anderer Menschen kann ein Argument in der Nutzenfunktion sein (Muster: Eltern kümmern sich um ihre Kinder, spontane Hilfe gegenüber Fremden aus Mitgefühl)
+
+- Dann geht es der handelnden Person besser, indem sie für eine andere Person etwas Gutes tut.
+
+- Erklärt werden muss dann noch immer, warum jemand etwas für Dritte tut, wenn es der handelnden Person dadurch nicht besser geht. 
+- Entweder *auch* Aufnahme in die Nutzenfunktion (dann wäre es aber wieder aus Eigeninteresse motiviert), oder Nutzen aus dem Befolgen von Regeln bzw. negativer Nutzen aus normabweichendem Verhalten
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Rationalität und Eigennutz nach @sen_rational_1977"
+
+library(DiagrammeR)
+
+grViz("
+digraph SenMotivation {
+  # Graph-Attribute
+  graph [rankdir = TD, layout = dot, size = '10,10']
+  
+  # Standard-Knoten-Attribute
+  node [fontname = Arial, style = filled, shape = rectangle]
+
+  # Definition der Knoten
+  Actor        [label = 'Menschlicher Akteur', shape = doubleoctagon, fillcolor = '#E1F5FE']
+  SelfInterest [label = 'Reines Eigeninteresse', fillcolor = '#FFF9C4']
+  Sympathy     [label = 'Sympathie\n(Nutzeninterdependenz)', fillcolor = '#C8E6C9']
+  Welfare      [label = 'Persönliches\nWohlergehen', shape = ellipse, fillcolor = '#A5D6A7']
+  Commitment   [label = 'VERPFLICHTUNG\n(Moral, Normen, Regeln)', fillcolor = '#FFCDD2', penwidth = 2]
+  Choice       [label = 'Tatsächliche Wahl', shape = box, fillcolor = '#EF9A9A']
+
+  # Logik-Verbindungen (Edges)
+  Actor -> SelfInterest
+  Actor -> Sympathy
+  Actor -> Commitment
+
+  SelfInterest -> Welfare
+  Sympathy -> Welfare [label = 'Anderen helfen -> Eigener Nutzen']
+
+  # Standard-Ökonomie Pfad
+  Welfare -> Choice [label = 'Standard-Ökonomie:\nWahl = Nutzen', style = dashed]
+
+  # Der Bruch durch Verpflichtung (Sen's Kritik)
+  Commitment -> Choice [
+    label = 'Erklärung über Nutzen\n oder Restriktionen?', 
+    color = red, 
+    fontcolor = red, 
+    penwidth = 2
+  ]
+  
+  Welfare -> Choice [
+    label = 'Nutzenverlust akzeptiert', 
+    color = red, 
+    arrowhead = none, 
+    style = dotted
+  ]
+}
+")
+
+
+```
+
