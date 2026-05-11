@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -236,6 +265,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<ul>
+<li>übliche Nutzenfunktion mit abnehmendem Grenznutzen und konstanter Elastizität des Grenznutzens</li>
+</ul>
+<p><span class="math display">\[u(x) = \begin{cases} \dfrac{x^{1-\sigma}}{1-\sigma} &amp;\text{für } \sigma \neq 1 \\[15pt]\ln(x) &amp; \text{für } \sigma= 1 \end{cases}\]</span></p>
+<p>Wobei <span class="math inline">\(\sigma\)</span> der Koeffizient der relativen Risikoaversion ist.</p>
+<ul>
+<li><p>Die Krümmung der Nutzenfunktion hängt nur von <span class="math inline">\(\sigma\)</span> ab.</p></li>
+<li><p>Ein höheres <span class="math inline">\(\sigma\)</span> bedeutet eine stärkere Krümmung der Kurve. Je krummer die Kurve, desto geringer ist der zusätzliche Nutzen aus sehr hohen Gewinnen und desto schwerer wiegen Verluste. Der Akteur ist also risikoaverser.</p></li>
+<li><p>Negative Werte von <span class="math inline">\(\sigma\)</span> bedeuten Risikofreude</p></li>
+</ul>
+<iframe src="https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACAKoBJCQBE4AMz61StEiICutCQB4AtBKXUdAEwAKUAOZx2IiRPWlqcKxDjV7YLLU60AayIoaGpWTjhECQBRRgB3FlItCGtOCC1SAC8KCQAyCQBlWgJuOEZStU4AE4BHHQA3KFcyITABXAcJTv8zOHoWABkoViIM+whHRx6+lndPccnJzjpexhkIVDHWgA8ARlbcLrAAQS1OTKhuUxSJPcQDiRg+CQBeCQAGDF3DmCht14ku3eh0apjgAIATIdOORUADPrt2p1FstaKt1ptSN5thCHq1TudLtdrLcIfc8I9nm9dt9Hn8AQBWYESUFacHUgAc0NhAMRHQmiwkqPRGy2YFQeLAAHVLoxOCU4Hw6CUAorSBI4ewlAAfxi3RHkn5Uj4-enUkFNNnwjAM7lwOFvT7vBlIgUolZlDFi-zWX6S3z+IIGKzMeDkPVcWi+qACQ2UiZvAy037-N5QlmW9mAjDpmH26185GTbiMdiuwUSUrUVAAFTg2yxrQAEnw4orOFEfb8JAA+D4SPzqxh+QLBeplTgSdhBCABKD1dpHfkVleOVpdqD6fuDiTDwNEJSMOBaMxRqcz8fbRcHIurybrqPdx0DmG7kcz4+kZjUKd0DwsAQMFaYQ3Qkct71A34+DmLxbw1agiFIAB5DJMW8PcAgsBDSAeCprG4dU3laAA2d53lQbZgKLEDHBAkDxEKMpxz1AYiGsQIRAiRhmP0IwlGSAh1BIdg+ExQ5RlITEBAkEBOk6SQW2oJROH42chImHU9V6CYADkMmyCZ2AAYSwLBjhoiQtAAfVU3jjAE9T2G2aFpNk0DaCUKcoHoTguAkIxES3XY4AMYjpKPJJGAgdgEOsJyBAsxxPAiXc4Ei6KnIAPXYXZ-KFaSAukgB6KdcqMTgEs6ABfOSBQU2glJU5IAnU4xdQkU9wSkGBVRLVSWo0QyCgAEYkegyjgEoPAgCy+HqKzrNswx7IgQTBvYLQXJkosPK8ny-MKoKQrC1L0vYetUA2yrQOS8EIq0KL2CerQJAAKlKvKKukgBqQEBGy3KSpyz6EosmqBU6CTMQAEgwrDELso8IFWeGsTcxZJBDWA0rKCQoDOaQZCLPY7NEjJob2YmIVJ0VSAp3FQLhZaybpiVQI3GmYY3Isi0kXYMBieJEmSVI20YdV2GiKVEokOA4jsuF3pJ37gaMVBpKVhnFl5iQIQF2IEnFkW0n0nJJZ0mWcmWxXLJs5InNpDcfo+tWNdt1SnNzR8Yx50DJAAZgFooFXKNVqjqWhQQoCWRplzgoHBZmIHmxb7YoaFvZlnWABYBYDUdUEYKonnBdgsAsGXGCZow5c+hPfYxhQoHIDT2s6iQAGkHvHHWpVoPVsmKbhptl0gEknNs1FxppJxxNqtNocEkNQdQAmJqzQUnZaIhqdgEUOOffttCRmmsUhuAwCTGTImXrM3uz4-QMInI3mfDlUtbhKvd37ecoVM6zqBVgVkngTGWqAjar9qAVSLMAlMdkUyQM3ocVO0UcQZ2jNdbWft-IGCMAAISgClLAEhUa4IMA3SYmNsLMG4PAQyrA-iESOKIMAssyBKDKGQCQrADDHBKBEGWqBsIv2QbbMRpBWCoCzK0agDxiA-iImAFQR4mDFDXhSagcQzAAn9suVc2xqDeQBPiM4FwrgiynFeB4rAjH0BMWAPSWQchaHijeUCgooIJg1EQ8g3h85BBCE0cIpcOYvAeBuQ4VE2j6JXIwhsDjWGHHoJIhxci8BwUmLY2gMAAQEHYHAvghw4F-CwRBRuUgyBlGcJ4IsMByANnYKgXxdhWhS1eA8RgoxkbnTiIcCE14wAAB9CijXCRSLpyQzBcATv0wZIyAlEELsXReHSJndOmVXQ4-sEpRI8YKaYujDh-izJ8Y+BB6y8i+IAxuBQ4BziqUWCIvpo6+W2O8AEexikfLeKgh2GDfjXn2SuEmbx0E8Nyr8u2aCvaYL2XeRYCiHH0DBA8agqS0zHO0ZCG5VDSHNXVJpQWhskgpBNs4wy0QLZ4y0J5VYjEHnkCLKgIgfBSC+TlocdOEgkVKJRWyB4qASi8mIocC5qZda4scJIKUcASSZC0LkkaU4mxEGHJkEgpAmi4wsJwhqMsWBdLiG8n5ss+k8NNdy0FQpZkQoBNyzJiKiCKKOGYFgARrBHgoGiigZ9uAFnTFonRbwdmUOlRIAAatUwI2qJCKWUn+Reoh2Zyvoeypypr45wG+QCZppZWhnEYMBYA-sAC6B9IU2uzXat4DrgUVl5a691nq4Des0RiiQeiT7YupDaOOqbXkZvtea1gpq83eELcWstFbh3FMrXWhFkxG2tH5XANFHau1BquS6MNEhJCLOWSXKcAwGqbnwRNIeeMJj0u2HwgRcAZYyv7kKNKBl-7glcEPdU2pxoL3BPw7gEQiyGqIMaodbws05reOOgtnAi1tBLaWiQKtTxKCUE0lgE64NTsQNnUtAhXpOhdPChF1rOU1p8fmsAk6ENluQ1OVD6GYPUew7R3D+HCMYGdECxdy7xQPWEWuzRvrz4FjFUQXoRzu3Bs7VKvdEhz3yhLB5UltgJghA6rjW9AGgM4O2KgGTNYsBSGiLLRgRitApIkAALUVFNHI+MAD7ZRuBNHsb0ScqNOBFgaViCVkGeG5sw7B+DAhEPHO8slILeZvAjSECITpGyZnVoGTx1cLLJzmh5c6hxbrGAeq9Uk24BmARGZM+-TVkIxWXN7YiXdvmnKzsC9B4LLHQvhZPpF6B0W-FtKlPForkyenkdSyRlcGXeTiZdSu1FFJ9OGeM9ECr3DMU8pq9mOroEdZ6WoNQAwJ6ICrKUE0br-gIDJ2dXI0C3kTnsH9Y6KbDjPXDHXawXRYMQLgwYscdAQotXi29RAHgfBWA-cujoAEOhoRMVxhBmHjABBgCqqWoAA" width="100%" height="1400" title="Risikoeinstellungen">
+</iframe>
+<ul>
+<li><p>Hier im Zentrum: Vergleich des Nutzens des Erwartungswertes und des erwarteten Nutzens (Erwartungsnutzens)</p></li>
+<li><p>Es gibt also eine Nachfrage nach Risikoübernahme</p></li>
+<li><p>Daher sind Verträge zur Risikoübertragung potenziell wohlfahrtssteigernd</p>
+<ul>
+<li>Versicherungen</li>
+<li>unternehmerische Risiken</li>
+<li>Arbeitsverträge</li>
+</ul></li>
+</ul>
 
 
 

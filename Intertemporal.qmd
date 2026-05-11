@@ -122,7 +122,7 @@ Hier angenommen: Unendlich langer (bzw. hinreichend langer) Plannungshorizont: $
 Die Ressource wächst mit der Rate $r$.
 Aus der Euler-Gleichung folgt bei der Nutzenfunktion $u(x_t)=ln(x_t)$, dass der Konsum mit der Rate $r-i$ wachsen soll.
 
-Von den Erträgen auf die Resourcenausstattung $r\times X_0$ muss als der Anteil $r-i$ zurückgelegt werden, damit die Erträge in der nächsten Perioden entsprechend höher sein können. Der Rest kann konsumiert werden.
+Von den Erträgen auf die Resourcenausstattung $r\times X_0$ muss also der Anteil $r-i$ zurückgelegt werden, damit die Erträge in der nächsten Perioden entsprechend höher sein können. Der Rest kann konsumiert werden.
 
 Also: $x_0=\underbrace{X_0\times r }_{\text{Erträge auf den Bestand}} \underbrace{- X_0 \times (r-i)}_{\text{Rücklage für späteren Konsum}}=X_0(r-r+i)=iX_0$
 

@@ -106,10 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -357,7 +354,7 @@ window.Quarto = {
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</h3>
 <p>Steigung der Indifferenzkurve: <span class="math inline">\(-\frac{u'_0}{u'_1\times \frac{1}{1+i}} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}\)</span></p>
 <p>Steigung der Budgetgerade:<span class="math inline">\(-(1+r)\)</span></p>
-<div id="8332f87c" class="cell" data-message="false" data-execution_count="1">
+<div id="9dfe780d" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
@@ -443,7 +440,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="9WTrms"></div>
+            <div id="wzov6g"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -467,16 +464,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("9WTrms").appendChild(div);
+                        document.getElementById("wzov6g").appendChild(div);
                     };
-                    var e = document.getElementById("9WTrms");
+                    var e = document.getElementById("wzov6g");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="exBFga"></div>
+   <div id="o3viXr"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -501,7 +498,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("exBFga");
+   const containerDiv = document.getElementById("o3viXr");
    let fig = null;
    
    function renderPlot() {
@@ -789,7 +786,7 @@ window.Quarto = {
 <p>Wie bestimmt sich aber <span class="math inline">\(x_0\)</span>?</p>
 <p>Hier angenommen: Unendlich langer (bzw. hinreichend langer) Plannungshorizont: <span class="math inline">\(T \rightarrow \infty\)</span></p>
 <p>Die Ressource wächst mit der Rate <span class="math inline">\(r\)</span>. Aus der Euler-Gleichung folgt bei der Nutzenfunktion <span class="math inline">\(u(x_t)=ln(x_t)\)</span>, dass der Konsum mit der Rate <span class="math inline">\(r-i\)</span> wachsen soll.</p>
-<p>Von den Erträgen auf die Resourcenausstattung <span class="math inline">\(r\times X_0\)</span> muss als der Anteil <span class="math inline">\(r-i\)</span> zurückgelegt werden, damit die Erträge in der nächsten Perioden entsprechend höher sein können. Der Rest kann konsumiert werden.</p>
+<p>Von den Erträgen auf die Resourcenausstattung <span class="math inline">\(r\times X_0\)</span> muss also der Anteil <span class="math inline">\(r-i\)</span> zurückgelegt werden, damit die Erträge in der nächsten Perioden entsprechend höher sein können. Der Rest kann konsumiert werden.</p>
 <p>Also: <span class="math inline">\(x_0=\underbrace{X_0\times r }_{\text{Erträge auf den Bestand}} \underbrace{- X_0 \times (r-i)}_{\text{Rücklage für späteren Konsum}}=X_0(r-r+i)=iX_0\)</span></p>
 <p>Der intertemporale Konsumpfad ergibt sich also als</p>
 <p><span class="math display">\[ \boxed{x_t=i X_0\times e^{(r-i)t}}\]</span></p>
@@ -825,7 +822,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
 </div>
 </div>
 </div>
-<div id="e2066006" class="cell" data-message="false" data-execution_count="2">
+<div id="91cd30a5" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -914,7 +911,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="srU8PH"></div>
+            <div id="TNwiCR"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -938,16 +935,16 @@ Exakte Herleitung mit Ressourcenbeschränkung
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("srU8PH").appendChild(div);
+                        document.getElementById("TNwiCR").appendChild(div);
                     };
-                    var e = document.getElementById("srU8PH");
+                    var e = document.getElementById("TNwiCR");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="7IbdGd"></div>
+   <div id="sUOQXE"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -972,7 +969,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("7IbdGd");
+   const containerDiv = document.getElementById("sUOQXE");
    let fig = null;
    
    function renderPlot() {
@@ -1078,7 +1075,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="sQlYko"></div>
+   <div id="y4hkmT"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1103,7 +1100,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("sQlYko");
+   const containerDiv = document.getElementById("y4hkmT");
    let fig = null;
    
    function renderPlot() {
@@ -1209,7 +1206,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="3eUEL0"></div>
+   <div id="1uHFb0"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1234,7 +1231,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("3eUEL0");
+   const containerDiv = document.getElementById("1uHFb0");
    let fig = null;
    
    function renderPlot() {
