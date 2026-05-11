@@ -110,13 +110,35 @@ Zunächst sei hier wieder von folgender Nutzenfunktion ausgegangen:
 
 $u(x_t)=ln(x_t)$
 
-Aus der Ableitung der Nutzenfunktion $u'(x_t)= \frac{1}{x_t}$ folgt der optimale Konsumpfad: $$\boxed{x_{t+1}=x_t \times e^{r-i}}$$.
+Aus der Ableitung der Nutzenfunktion $u'(x_t)= \frac{1}{x_t}$ folgt der optimale Konsumpfad (**Euler-Gleichung**): $$\boxed{x_{t+1}=x_t \times e^{r-i}}$$.
 
 Da dies für alle Perioden gilt, ist $$x_t= x_0\ e^{(r-i)t}$$
 
-### Ressourcenbeschränkung
+
+Wie bestimmt sich aber $x_0$?
+
+Hier angenommen: Unendlich langer (bzw. hinreichend langer) Plannungshorizont: $T \rightarrow \infty$
+
+Die Ressource wächst mit der Rate $r$.
+Aus der Euler-Gleichung folgt bei der Nutzenfunktion $u(x_t)=ln(x_t)$, dass der Konsum mit der Rate $r-i$ wachsen soll.
+
+Von den Erträgen auf die Resourcenausstattung $r\times X_0$ muss als der Anteil $r-i$ zurückgelegt werden, damit die Erträge in der nächsten Perioden entsprechend höher sein können. Der Rest kann konsumiert werden.
+
+Also: $x_0=\underbrace{X_0\times r }_{\text{Erträge auf den Bestand}} \underbrace{- X_0 \times (r-i)}_{\text{Rücklage für späteren Konsum}}=X_0(r-r+i)=iX_0$
+
+
+Der intertemporale Konsumpfad ergibt sich also als
+
+$$ \boxed{x_t=i X_0\times e^{(r-i)t}}$$
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+### Exakte Herleitung mit Ressourcenbeschränkung
 
 Zu jedem Zeitpunkt wächst die Ressource mit der Rate $r$ vermindert um die Entnahme zu dem Zeitpunkt $x_t$. Der Anfangsbestand der Ressource ist $X_0$, am Ende des Planungshorizontes soll die Ressource aufgebraucht sein, $X_T=0$.
+
+Notation: Ein Punkt über einer Variable bezeichnet ihre Veränderung in der Zeit.
 
 $\dot{X}(t) = rX(t) - x(t), \quad X(0) = X_0, \quad X(T) = 0$
 
@@ -141,8 +163,6 @@ $x_t= x_0\ e^{(r-i)t}$
 $$ \iff \boxed{ x_t=\frac{i X_0}{1-e^{-iT}}\ e^{(r-i)t}}$$
 
 
-### Effizienter intertemporaler Konsumpfad
-
 $x_t= x_0\ e^{(r-i)t}$
 
 
@@ -153,6 +173,7 @@ Mit $T \to \infty$
 
 $$ \boxed{x_t=i X_0\times e^{(r-i)t}}$$
 
+:::
 
 ```{python}
 #| message: false

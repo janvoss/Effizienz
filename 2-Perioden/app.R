@@ -28,7 +28,7 @@ ui <- fluidPage(
       # Schieberegler für das Einkommen (I)
       sliderInput("X", "Grundausstattung (X)", min = 50, max = 200, value = 100, step = 10, pre = "€"),
       # Schieberegler für den Preis von Gut 1 (p1)
-      sliderInput("g", "Wachstumsrate (g)", min = 0, max = .5, value = .01, step = 0.01),
+      sliderInput("r", "Wachstumsrate (r)", min = 0, max = .5, value = .01, step = 0.01),
       # Schieberegler für den Preis von Gut 2 (p2)
      # sliderInput("p2", "Preis von Gut 2 (p₂)", min = 0.1, max = 5, value = 0.5, step = 0.1, pre = "€"),
       # Schieberegler für Zeitpräferenz (i)
@@ -50,13 +50,13 @@ server <- function(input, output) {
   reactive_calcs <- reactive({
     # Eingabewerte von den Schiebereglern holen
     X <- input$X
-    g <- input$g
+    r <- input$g
 #    p2 <- input$p2
     i <- input$i
     
     # Berechnung des optimalen Konsumpunkts (Gleichgewicht)
     x0_eq <- X * ((1+i)/(2+i))
-    x1_eq <- (X-x0_eq) * (1+g)
+    x1_eq <- (X-x0_eq) * (1+r)
     
     # Berechnung des Nutzenniveaus im Gleichgewicht
     # Fehlerbehandlung für den Fall, dass x1_eq oder x2_eq null sind
@@ -66,7 +66,7 @@ server <- function(input, output) {
       0
     }
     
-    list(X = X, g = g, i = i, x0_eq = x0_eq, x1_eq = x1_eq, U_eq = U_eq)
+    list(X = X, r = r, i = i, x0_eq = x0_eq, x1_eq = x1_eq, U_eq = U_eq)
   })
   
   # Die Grafik rendern
@@ -75,7 +75,7 @@ server <- function(input, output) {
     # Hole die berechneten Werte
     calcs <- reactive_calcs()
     X <- calcs$X
-    g <- calcs$g
+    r <- calcs$g
     i <- calcs$i
     x0_eq <- calcs$x0_eq
     x1_eq <- calcs$x1_eq
