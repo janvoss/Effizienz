@@ -93,9 +93,7 @@ $$\iff \boxed{x_0 = X_0 \frac{1 + i}{2 + i}}$$
 
 ## T-Perioden-Modell, kontinuierliche Zeit
 
-### Vorüberlegungen
-
-Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate $g$ wächst, und sie ursprünglich $X_0$ beträgt, dann beträgt sie nach $T$ Perioden $X_T=X_0 \times  e^{r\times T}$ Einheiten.
+Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate rg$ wächst, und sie ursprünglich $X_0$ beträgt, dann beträgt sie nach $T$ Perioden $X_T=X_0 \times  e^{r\times T}$ Einheiten.
 
 Wenn der Nutzen zukünftiger Prioden mit der Rate $i$ diskontiert wird, dann beträgt der Gegenwartswert zukünftigesn Nutzens in Periode $T$ $u_{PV}(x_T)=u(x_T) \times e^{-i \times T}$.
 

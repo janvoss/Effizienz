@@ -291,10 +291,7 @@ window.Quarto = {
   <li><a href="#grafische-repräsentation-der-lösung" id="toc-grafische-repräsentation-der-lösung" class="nav-link" data-scroll-target="#grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</a></li>
   <li><a href="#die-euler-gleichung" id="toc-die-euler-gleichung" class="nav-link" data-scroll-target="#die-euler-gleichung"><span class="header-section-number">6.2.4</span> Die Euler-Gleichung</a></li>
   </ul></li>
-  <li><a href="#t-perioden-modell-kontinuierliche-zeit" id="toc-t-perioden-modell-kontinuierliche-zeit" class="nav-link" data-scroll-target="#t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</a>
-  <ul class="collapse">
-  <li><a href="#vorüberlegungen" id="toc-vorüberlegungen" class="nav-link" data-scroll-target="#vorüberlegungen"><span class="header-section-number">6.3.1</span> Vorüberlegungen</a></li>
-  </ul></li>
+  <li><a href="#t-perioden-modell-kontinuierliche-zeit" id="toc-t-perioden-modell-kontinuierliche-zeit" class="nav-link" data-scroll-target="#t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</a></li>
   </ul>
 </nav>
     </div>
@@ -354,7 +351,7 @@ window.Quarto = {
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="grafische-repräsentation-der-lösung"><span class="header-section-number">6.2.3</span> Grafische Repräsentation der Lösung</h3>
 <p>Steigung der Indifferenzkurve: <span class="math inline">\(-\frac{u'_0}{u'_1\times \frac{1}{1+i}} = -\frac{\frac{1}{x_0}}{\frac{1}{x_1}\frac{1}{1+i}}=-\frac{x_1(1+i)}{x_0}\)</span></p>
 <p>Steigung der Budgetgerade:<span class="math inline">\(-(1+r)\)</span></p>
-<div id="9dfe780d" class="cell" data-message="false" data-execution_count="1">
+<div id="6f7821f6" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Eq, symbols, solve, diff, lambdify, Rational, latex, log</span>
@@ -440,7 +437,7 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="wzov6g"></div>
+            <div id="8U5AWu"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -464,16 +461,16 @@ window.Quarto = {
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("wzov6g").appendChild(div);
+                        document.getElementById("8U5AWu").appendChild(div);
                     };
-                    var e = document.getElementById("wzov6g");
+                    var e = document.getElementById("8U5AWu");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="o3viXr"></div>
+   <div id="SXkbgQ"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -498,7 +495,7 @@ window.Quarto = {
        };
    }
    
-   const containerDiv = document.getElementById("o3viXr");
+   const containerDiv = document.getElementById("SXkbgQ");
    let fig = null;
    
    function renderPlot() {
@@ -772,9 +769,7 @@ window.Quarto = {
 </section>
 <section id="t-perioden-modell-kontinuierliche-zeit" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="t-perioden-modell-kontinuierliche-zeit"><span class="header-section-number">6.3</span> T-Perioden-Modell, kontinuierliche Zeit</h2>
-<section id="vorüberlegungen" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="vorüberlegungen"><span class="header-section-number">6.3.1</span> Vorüberlegungen</h3>
-<p>Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate <span class="math inline">\(g\)</span> wächst, und sie ursprünglich <span class="math inline">\(X_0\)</span> beträgt, dann beträgt sie nach <span class="math inline">\(T\)</span> Perioden <span class="math inline">\(X_T=X_0 \times  e^{r\times T}\)</span> Einheiten.</p>
+<p>Wenn eine Ressource in kontinuierlicher Zeit mit der Wachstumsrate rg$ wächst, und sie ursprünglich <span class="math inline">\(X_0\)</span> beträgt, dann beträgt sie nach <span class="math inline">\(T\)</span> Perioden <span class="math inline">\(X_T=X_0 \times  e^{r\times T}\)</span> Einheiten.</p>
 <p>Wenn der Nutzen zukünftiger Prioden mit der Rate <span class="math inline">\(i\)</span> diskontiert wird, dann beträgt der Gegenwartswert zukünftigesn Nutzens in Periode <span class="math inline">\(T\)</span> <span class="math inline">\(u_{PV}(x_T)=u(x_T) \times e^{-i \times T}\)</span>.</p>
 <p>Die <strong>Euler-Gleichung</strong> in kontinuierlicher Zeit lautet dann <span class="math display">\[u'(x_1)=u'(x_0) e^{(i-r)}\]</span></p>
 <p>Der Gegenwartswert mehrerer zukünftiger Perioden ergibt sich aus dem Integral der absdiskontierten Nutzenwerte über die Zeit.</p>
@@ -822,7 +817,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
 </div>
 </div>
 </div>
-<div id="91cd30a5" class="cell" data-message="false" data-execution_count="2">
+<div id="fdb669d9" class="cell" data-message="false" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -911,7 +906,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
 </details>
 <div class="cell-output cell-output-display">
 
-            <div id="TNwiCR"></div>
+            <div id="13O19I"></div>
             <script type="text/javascript" data-lets-plot-script="library">
                 if(!window.letsPlotCallQueue) {
                     window.letsPlotCallQueue = [];
@@ -935,16 +930,16 @@ Exakte Herleitung mit Ressourcenbeschränkung
                         var div = document.createElement("div");
                         div.style.color = 'darkred';
                         div.textContent = 'Error loading Lets-Plot JS';
-                        document.getElementById("TNwiCR").appendChild(div);
+                        document.getElementById("13O19I").appendChild(div);
                     };
-                    var e = document.getElementById("TNwiCR");
+                    var e = document.getElementById("13O19I");
                     e.appendChild(script);
                 })()
             </script>
             
 </div>
 <div class="cell-output cell-output-display">
-   <div id="sUOQXE"></div>
+   <div id="rxuXde"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -969,7 +964,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("sUOQXE");
+   const containerDiv = document.getElementById("rxuXde");
    let fig = null;
    
    function renderPlot() {
@@ -1075,7 +1070,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="y4hkmT"></div>
+   <div id="DD8aBm"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1100,7 +1095,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("y4hkmT");
+   const containerDiv = document.getElementById("DD8aBm");
    let fig = null;
    
    function renderPlot() {
@@ -1206,7 +1201,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
    </script>
 </div>
 <div class="cell-output cell-output-display">
-   <div id="1uHFb0"></div>
+   <div id="MKQPwF"></div>
    <script type="text/javascript" data-lets-plot-script="plot">
    
    (function() {
@@ -1231,7 +1226,7 @@ Exakte Herleitung mit Ressourcenbeschränkung
        };
    }
    
-   const containerDiv = document.getElementById("1uHFb0");
+   const containerDiv = document.getElementById("MKQPwF");
    let fig = null;
    
    function renderPlot() {
@@ -1334,7 +1329,6 @@ Exakte Herleitung mit Ressourcenbeschränkung
 </iframe>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
