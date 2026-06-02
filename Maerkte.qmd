@@ -4,7 +4,7 @@
 
 ### Herleitung der Nachfragefunktion
 
-s. Tafelaufschrieb
+s.  Tafelaufschrieb
 
 ### Aggregation der Nachfragefunktion
 
@@ -96,15 +96,9 @@ p
 
 ### Herleitung der Angebotsfunktion
 
-
-[Angebotsfunktion herleiten?]::
-
 $$\max \pi=\bar{p}\times x-TC(x)$$
 
 $$\frac{d\pi}{dx}=\bar{p}-MC\overset{!}{=}0  \iff \bar{p}=MC$$
-
-[TR-TC]::
-
 
 ```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
@@ -175,7 +169,6 @@ p
 ```
 
 Höherer Preis $\rightarrow$ Menge ausdehnen, bis wieder Preis=Grenzkosten
-
 
 ```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
@@ -268,8 +261,7 @@ p <- ggplot() +
 
 ```
 
-$\rightarrow$ Die  Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. **Damit ist die Grenzkostenfunktion die Angebotsfunktion**.
-
+$\rightarrow$ Die Menge wird immer soweit ausgedehnt, bis die Grenzkosten dem Preis (Steigung der Erlösfunktion) entsprechen. **Damit ist die Grenzkostenfunktion die Angebotsfunktion**.
 
 ### Aggregation der Angebotsfunktion
 
@@ -359,7 +351,6 @@ p
 
 ```
 
-
 ## Das Marktgleichgewicht, Konsumenten- und Produzentenrente
 
 ```{r echo=F, warning=F, message=F, cache=F}
@@ -421,18 +412,17 @@ chart
 
 ```
 
+## Exkurs: Kosteninformationen im Preis-Mengendiagramm {.unnumbered}
 
-## Exkurs: Kosteninformationen im Preis-Mengendiagramm {-}
-
-Beispiel für Kostenfunktion:
-$C(x) = \underbrace{100}_{\text{FC}} + \underbrace{2x+\frac{1}{2}x^2}_{\text{VC}}$
-
+Beispiel für Kostenfunktion: $C(x) = \underbrace{100}_{\text{FC}} + \underbrace{2x+\frac{1}{2}x^2}_{\text{VC}}$
 
 $MC=2+x$
 
 $VC=\int_{0}^{Q} 2+x \, dx=2x+\frac{1}{2}x^2$
 
-## Exkurs: Gleichgewichtsfindung {-}
+## Exkurs: Gleichgewichtsfindung {.unnumbered}
+
+Simmpler iterativer Prozess zur Ermittlung eines Gleichgewichts.
 
 ```{r}
 #| message: false
@@ -543,9 +533,11 @@ labs(title= "Keine iterative Anpassung im Preis-Mengendiagramm",
      caption="Darstellung: Jan S. Voßwinkel")
 ```
 
+Ein bisschen mehr Intuition: Wie entickelt sich ein Gleichgewicht unter vollständigem Wettbewerb? Sehr interessante Überlegungen dazu in @albrecht_markets_2025.
+
+Und aktuelle Forschung zum Walrasianischen Problem der Gleichgewichtsfindung in @lorenzoni_tatonnement_2026.
 
 ## Der Wohlfahrtsverlust von Mindest- und Höchstpreisen
-
 
 ### Mindestpreis
 
@@ -731,7 +723,6 @@ chart
 
 ## Der Wohlfahrtsverlust einer Mengensteuer
 
-
 ```{r echo=T, warning=F, message=F, cache=F}
 # Bibliotheken laden
 library(tidyverse)
@@ -819,36 +810,33 @@ chart
 
 ```
 
-
 ## Wettbewerbsfunktionen
+
 [@conrad_wirtschaftsethik_2016]
 
 **Statische Wettbewerbsfunktionen**
 
-- Steuerungsfunktion
+-   Steuerungsfunktion
 
-- Allokationsfunktion
+-   Allokationsfunktion
 
-- Anreizfunktion
+-   Anreizfunktion
 
-- Sanktionsfunktion
+-   Sanktionsfunktion
 
-- Verteilungsfunktion
+-   Verteilungsfunktion
 
-- Freiheitsfunktion
+-   Freiheitsfunktion
 
-- Kontrollfunktion
-
+-   Kontrollfunktion
 
 **Dynamische Wettbewerbsfunktionen**
 
-- Innovationsfunktion
+-   Innovationsfunktion
 
-- Imitationsfunktion
+-   Imitationsfunktion
 
-- Anpassungsfunktion
-
-[Irgendwo auch: Entlassung von Mitarbeitenden: Funktion und ethische Bewertung]::
+-   Anpassungsfunktion
 
 ## Pfadabhängigkeit
 
@@ -856,16 +844,15 @@ Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in f
 
 ### Veranschaulichung anhand der Pólya-Urne
 
-- Es gibt Kugeln verschiedener Farben in einer Urne.
+-   Es gibt Kugeln verschiedener Farben in einer Urne.
 
-- Es wird zufällig eine Kugel gezogen
+-   Es wird zufällig eine Kugel gezogen
 
-- Die gezogene Kugel wird zurückgelegt
+-   Die gezogene Kugel wird zurückgelegt
 
-- Es wird eine zusätzliche Kugel (oder mehrere zusätzliche Kugeln) der Urne hinzugefügt, die die gleiche Farbe hat (haben), wie die zuvor gehogene Kugel. 
+-   Es wird eine zusätzliche Kugel (oder mehrere zusätzliche Kugeln) der Urne hinzugefügt, die die gleiche Farbe hat (haben), wie die zuvor gehogene Kugel.
 
-- Die Prozedur wird wiederholt
-
+-   Die Prozedur wird wiederholt
 
 ### Grafik
 
@@ -940,19 +927,16 @@ print(p1+ p2+plot_layout(guides = 'collect') +
 
 ```
 
-### Ergebnis 
+### Ergebnis
 
-- Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne 
+-   Zufälle bei den ersten Zügen haben großen Einfluss auf die Verteilung der Kugelfarben in der Urne
 
-
-- Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
-
-
+-   Eine oder mehrere Farben erhalten auch bei Gleichverteilung der Farben zu Beginn eine dominante Position
 
 ### Anwendung auf ökonomischen Wettbewerb
 
-- Netzwerkeffekte (Vorteile großer Nutzerzahlen)
+-   Netzwerkeffekte (Vorteile großer Nutzerzahlen)
 
-- Lock-in-Effekte (Tastaturlayout, Betriebssysteme, politischer Wettbewerb)
+-   Lock-in-Effekte (Tastaturlayout, Betriebssysteme, politischer Wettbewerb)
 
-- Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
+-   Superstarphänomene (Michael Jackson war ein Star, weil er gute Musik machte. Er war auch ein Star, weil er ein Star war)
