@@ -845,6 +845,99 @@ window.Quarto = {
 <li><p>Imitationsfunktion</p></li>
 <li><p>Anpassungsfunktion</p></li>
 </ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Erstellung des Digraph-Objekts mit ansprechendem Design</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(comment<span class="op">=</span><span class="st">'Wettbewerbsfunktionen in der Marktwirtschaft'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'png'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Graph-Attribute für ein professionelles Layout</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, ratio<span class="op">=</span><span class="st">'fill'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'15'</span>, shape<span class="op">=</span><span class="st">'box'</span>, style<span class="op">=</span><span class="st">'filled'</span>, color<span class="op">=</span><span class="st">'#2c3e50'</span>, fillcolor<span class="op">=</span><span class="st">'#f8f9fa'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'13'</span>, color<span class="op">=</span><span class="st">'#7f8c8d'</span>, arrowhead<span class="op">=</span><span class="st">'vee'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Hauptknoten (Zielsatz / Kontext)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'M'</span>, <span class="st">'Marktwirtschaft &amp;</span><span class="ch">\n</span><span class="st">Wettbewerb'</span>, fillcolor<span class="op">=</span><span class="st">'#34495e'</span>, fontcolor<span class="op">=</span><span class="st">'white'</span>, fontsize<span class="op">=</span><span class="st">'14'</span>, style<span class="op">=</span><span class="st">'filled,bold'</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#dot.node('W', 'Erhöhung der Wohlfahrt\n(Niedrige Preise, hohe Qualität, Konsumentenrente)', fillcolor='#27ae60', fontcolor='white', fontsize='12', style='filled,bold')</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'E'</span>, <span class="st">'Wettbewerbspolitik</span><span class="ch">\n</span><span class="st">(Schutz vor Monopolen &amp; Marktversagen)'</span>, fillcolor<span class="op">=</span><span class="st">'#e74c3c'</span>, fontcolor<span class="op">=</span><span class="st">'white'</span>, fontsize<span class="op">=</span><span class="st">'11'</span>, style<span class="op">=</span><span class="st">'filled,bold'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Hauptkategorien der Funktionen</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'S_KAT'</span>, <span class="st">'Statische Wettbewerbsfunktionen</span><span class="ch">\n</span><span class="st">(Kurzfristig / Effizienz des aktuellen Marktes)'</span>, fillcolor<span class="op">=</span><span class="st">'#2980b9'</span>, fontcolor<span class="op">=</span><span class="st">'white'</span>, fontsize<span class="op">=</span><span class="st">'12'</span>, style<span class="op">=</span><span class="st">'filled,bold'</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'D_KAT'</span>, <span class="st">'Dynamische Wettbewerbsfunktionen</span><span class="ch">\n</span><span class="st">(Langfristig / Motor des technischen Fortschritts)'</span>, fillcolor<span class="op">=</span><span class="st">'#8e44ad'</span>, fontcolor<span class="op">=</span><span class="st">'white'</span>, fontsize<span class="op">=</span><span class="st">'12'</span>, style<span class="op">=</span><span class="st">'filled,bold'</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Verbindungen von der Marktwirtschaft zu den Kategorien</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'M'</span>, <span class="st">'S_KAT'</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'M'</span>, <span class="st">'D_KAT'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># SUBGRAPH: Statische Funktionen</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_static'</span>) <span class="im">as</span> s:</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    s.attr(label<span class="op">=</span><span class="st">'Statische Funktionen'</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'15'</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Steuer'</span>, <span class="st">'Steuerungsfunktion</span><span class="ch">\n</span><span class="st">- Ausrichtung an Konsumentenwünschen'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Allok'</span>, <span class="st">'Allokationsfunktion</span><span class="ch">\n</span><span class="st">- Kostengünstigste Vorprodukte</span><span class="ch">\n</span><span class="st">- Konzentration auf effiziente Firmen'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Anreiz'</span>, <span class="st">'Anreizfunktion</span><span class="ch">\n</span><span class="st">- Gewinn als Motivation für Leistung'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Sank'</span>, <span class="st">'Sanktionsfunktion</span><span class="ch">\n</span><span class="st">- Marktaustritt bei Ineffizienz'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Vert'</span>, <span class="st">'Verteilungsfunktion</span><span class="ch">\n</span><span class="st">- Leistungs- &amp; marktgerechte Entlohnung'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'S_Frei'</span>, <span class="st">'Freiheitsfunktion</span><span class="ch">\n</span><span class="st">- Entfaltungsspielräume</span><span class="ch">\n</span><span class="st">- Begrenzung wirtschaftlicher Macht'</span>, fillcolor<span class="op">=</span><span class="st">'#ecf0f1'</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Verbindungen zu statischen Funktionen</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Steuer'</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Allok'</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Anreiz'</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Sank'</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Vert'</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_KAT'</span>, <span class="st">'S_Frei'</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Innerhalb der statischen Funktionen Verknüpfungen herstellen</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'S_Steuer'</span>, <span class="st">'S_Allok'</span>, style<span class="op">=</span><span class="st">'dotted'</span>, label<span class="op">=</span><span class="st">'eng verbunden'</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co"># SUBGRAPH: Dynamische Funktionen</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph(name<span class="op">=</span><span class="st">'cluster_dynamic'</span>) <span class="im">as</span> d:</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    d.attr(label<span class="op">=</span><span class="st">'Dynamische Funktionen'</span>, color<span class="op">=</span><span class="st">'#8e44ad'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'15'</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    d.node(<span class="st">'D_Inno'</span>, <span class="st">'Innovationsfunktion</span><span class="ch">\n</span><span class="st">- Wettbewerb als Entdeckungsverfahren</span><span class="ch">\n</span><span class="st">- Suche nach neuen Produkten/Verfahren'</span>, fillcolor<span class="op">=</span><span class="st">'#f5eef8'</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    d.node(<span class="st">'D_Imit'</span>, <span class="st">'Imitationsfunktion</span><span class="ch">\n</span><span class="st">- Nachahmung von Pionierleistungen</span><span class="ch">\n</span><span class="st">- Breite Durchsetzung des Fortschritts'</span>, fillcolor<span class="op">=</span><span class="st">'#f5eef8'</span>)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    d.node(<span class="st">'D_Anpass'</span>, <span class="st">'Anpassungsfunktion</span><span class="ch">\n</span><span class="st">- Reaktion auf neue Nachfragestrukturen</span><span class="ch">\n</span><span class="st">- Internationale Arbeitsteilung'</span>, fillcolor<span class="op">=</span><span class="st">'#f5eef8'</span>)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Verbindungen zu dynamischen Funktionen</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'D_KAT'</span>, <span class="st">'D_Inno'</span>)</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'D_KAT'</span>, <span class="st">'D_Imit'</span>)</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'D_KAT'</span>, <span class="st">'D_Anpass'</span>)</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Prozesskette der Innovation verdeutlichen</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'D_Inno'</span>, <span class="st">'D_Imit'</span>, label<span class="op">=</span><span class="st">'Pionier -&gt; Nachahmung'</span>)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Gesamtzusammenhang &amp; Rahmenbedingungen</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Beide Kategorien führen zur Wohlfahrt</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co">#dot.edge('S_KAT', 'W', color='#27ae60', penwidth='2.0')</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co">#dot.edge('D_KAT', 'W', color='#27ae60', penwidth='2.0')</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Die Politik sichert das System ab</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'E'</span>, <span class="st">'M'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'#e74c3c'</span>, label<span class="op">=</span><span class="st">'Sicherung der</span><span class="ch">\n</span><span class="st">Funktionsfähigkeit'</span>)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzeige des Diagramms im Jupyter Notebook</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co"># display(dot)</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>dot.render(<span class="st">'Wettbewerbsfunktionen'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Wettbewerbsfunktionen.svg" class="img-fluid figure-img"></p>
+<figcaption>Wettbewerbsfunktionen nach <span class="citation" data-cites="conrad_wirtschaftsethik_2016">Conrad (<a href="#ref-conrad_wirtschaftsethik_2016" role="doc-biblioref">2016</a>)</span></figcaption>
+</figure>
+</div>
 </section>
 <section id="pfadabhängigkeit" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="pfadabhängigkeit"><span class="header-section-number">8.6</span> Pfadabhängigkeit</h2>
@@ -864,105 +957,105 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Nun mit ggplot</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix aufbauen</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">1000</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>urn <span class="ot">&lt;-</span> cols <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span> <span class="fu">t</span>()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>urn <span class="ot">&lt;-</span> <span class="fu">rbind</span>(urn, <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n<span class="dv">-1</span>, <span class="at">ncol =</span> <span class="fu">ncol</span>(urn)))</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>cols_unique <span class="ot">&lt;-</span> <span class="fu">colnames</span>(urn)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># n-1 draws from Dirichelet distribution</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)){</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span><span class="sc">+</span>j)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n<span class="dv">-1</span>)) {</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> urn[i, ]</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  col_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(cols_unique, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> (urn[i, ] <span class="sc">/</span> <span class="fu">sum</span>(urn[i, ]))                       ) <span class="co"># sample ball</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="ot">&lt;-</span> urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="sc">+</span> <span class="dv">1</span> <span class="co"># add ball with same colour</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Data frame erzeugen</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(urn) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(Züge<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n))</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Rundenanzahl</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># long format</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>   </span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">"Z"</span>) ,</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Farbe"</span>, <span class="at">values_to =</span> <span class="st">"Anzahl"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Züge) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anteil=</span>Anzahl<span class="sc">/</span><span class="fu">sum</span>(Anzahl))</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anzahl, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"schwarz"</span>, <span class="st">"blau"</span>, <span class="st">"grün"</span>, <span class="st">"rot"</span>, <span class="st">"gelb"</span>))<span class="sc">+</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = 'bottom', legend.direction = "horizontal")+</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anteil, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"schwarz"</span>, <span class="st">"blau"</span>, <span class="st">"grün"</span>, <span class="st">"rot"</span>, <span class="st">"gelb"</span>))<span class="sc">+</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = 'bottom', legend.direction = "horizontal")#+</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#p1 &lt;- p1+theme(legend.position = NULL)</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1<span class="sc">+</span> p2<span class="sc">+</span><span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">'collect'</span>) <span class="sc">+</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">'Pfadabhängigkeit in der Póliya-Urne'</span>),</span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subtitle=</span><span class="fu">paste0</span>(<span class="st">'Durchlauf Nr. '</span>, j)))</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Original [https://www.r-bloggers.com/2021/09/the-polya-urn-model-a-simple-simulation-of-the-rich-get-richer/]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Nun mit ggplot</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix aufbauen</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>urn <span class="ot">&lt;-</span> cols <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span> <span class="fu">t</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>urn <span class="ot">&lt;-</span> <span class="fu">rbind</span>(urn, <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n<span class="dv">-1</span>, <span class="at">ncol =</span> <span class="fu">ncol</span>(urn)))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>cols_unique <span class="ot">&lt;-</span> <span class="fu">colnames</span>(urn)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># n-1 draws from Dirichelet distribution</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)){</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span><span class="sc">+</span>j)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n<span class="dv">-1</span>)) {</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, ] <span class="ot">&lt;-</span> urn[i, ]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  col_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(cols_unique, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> (urn[i, ] <span class="sc">/</span> <span class="fu">sum</span>(urn[i, ]))                       ) <span class="co"># sample ball</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="ot">&lt;-</span> urn[i<span class="sc">+</span><span class="dv">1</span>, col_sample] <span class="sc">+</span> <span class="dv">1</span> <span class="co"># add ball with same colour</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Data frame erzeugen</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(urn) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(Züge<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n))</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Rundenanzahl</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># long format</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>   </span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">"Z"</span>) ,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Farbe"</span>, <span class="at">values_to =</span> <span class="st">"Anzahl"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Züge) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Anteil=</span>Anzahl<span class="sc">/</span><span class="fu">sum</span>(Anzahl))</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anzahl, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"schwarz"</span>, <span class="st">"blau"</span>, <span class="st">"grün"</span>, <span class="st">"rot"</span>, <span class="st">"gelb"</span>))<span class="sc">+</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = 'bottom', legend.direction = "horizontal")+</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Züge, <span class="at">y=</span>Anteil, <span class="at">group=</span>Farbe, <span class="at">color=</span>Farbe))<span class="sc">+</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fu">unique</span>(df1<span class="sc">$</span>Farbe)),</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"schwarz"</span>, <span class="st">"blau"</span>, <span class="st">"grün"</span>, <span class="st">"rot"</span>, <span class="st">"gelb"</span>))<span class="sc">+</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = 'bottom', legend.direction = "horizontal")#+</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = NULL)</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">#p1 &lt;- p1+theme(legend.position = NULL)</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1<span class="sc">+</span> p2<span class="sc">+</span><span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">'collect'</span>) <span class="sc">+</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">'Pfadabhängigkeit in der Póliya-Urne'</span>),</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subtitle=</span><span class="fu">paste0</span>(<span class="st">'Durchlauf Nr. '</span>, j)))</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Maerkte_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Maerkte_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Maerkte_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Maerkte_files/figure-html/unnamed-chunk-10-4.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Maerkte_files/figure-html/unnamed-chunk-10-5.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="Maerkte_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>

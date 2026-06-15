@@ -838,6 +838,96 @@ chart
 
 -   Anpassungsfunktion
 
+```{python}
+#| output: false
+
+import graphviz
+from IPython.display import display
+
+# Erstellung des Digraph-Objekts mit ansprechendem Design
+dot = graphviz.Digraph(comment='Wettbewerbsfunktionen in der Marktwirtschaft', format='png')
+
+# Globale Graph-Attribute für ein professionelles Layout
+dot.attr(rankdir='TB', ratio='fill')
+dot.attr('node', fontname='Arial', fontsize='15', shape='box', style='filled', color='#2c3e50', fillcolor='#f8f9fa')
+dot.attr('edge', fontname='Arial', fontsize='13', color='#7f8c8d', arrowhead='vee')
+
+# 1. Hauptknoten (Zielsatz / Kontext)
+dot.node('M', 'Marktwirtschaft &\nWettbewerb', fillcolor='#34495e', fontcolor='white', fontsize='14', style='filled,bold')
+
+#dot.node('W', 'Erhöhung der Wohlfahrt\n(Niedrige Preise, hohe Qualität, Konsumentenrente)', fillcolor='#27ae60', fontcolor='white', fontsize='12', style='filled,bold')
+
+dot.node('E', 'Wettbewerbspolitik\n(Schutz vor Monopolen & Marktversagen)', fillcolor='#e74c3c', fontcolor='white', fontsize='11', style='filled,bold')
+
+# 2. Hauptkategorien der Funktionen
+dot.node('S_KAT', 'Statische Wettbewerbsfunktionen\n(Kurzfristig / Effizienz des aktuellen Marktes)', fillcolor='#2980b9', fontcolor='white', fontsize='12', style='filled,bold')
+dot.node('D_KAT', 'Dynamische Wettbewerbsfunktionen\n(Langfristig / Motor des technischen Fortschritts)', fillcolor='#8e44ad', fontcolor='white', fontsize='12', style='filled,bold')
+
+# Verbindungen von der Marktwirtschaft zu den Kategorien
+dot.edge('M', 'S_KAT')
+dot.edge('M', 'D_KAT')
+
+# ==========================================
+# SUBGRAPH: Statische Funktionen
+# ==========================================
+with dot.subgraph(name='cluster_static') as s:
+    s.attr(label='Statische Funktionen', color='#2980b9', style='dashed', fontname='Arial', fontsize='15')
+
+    s.node('S_Steuer', 'Steuerungsfunktion\n- Ausrichtung an Konsumentenwünschen', fillcolor='#ecf0f1')
+    s.node('S_Allok', 'Allokationsfunktion\n- Kostengünstigste Vorprodukte\n- Konzentration auf effiziente Firmen', fillcolor='#ecf0f1')
+    s.node('S_Anreiz', 'Anreizfunktion\n- Gewinn als Motivation für Leistung', fillcolor='#ecf0f1')
+    s.node('S_Sank', 'Sanktionsfunktion\n- Marktaustritt bei Ineffizienz', fillcolor='#ecf0f1')
+    s.node('S_Vert', 'Verteilungsfunktion\n- Leistungs- & marktgerechte Entlohnung', fillcolor='#ecf0f1')
+    s.node('S_Frei', 'Freiheitsfunktion\n- Entfaltungsspielräume\n- Begrenzung wirtschaftlicher Macht', fillcolor='#ecf0f1')
+
+# Verbindungen zu statischen Funktionen
+dot.edge('S_KAT', 'S_Steuer')
+dot.edge('S_KAT', 'S_Allok')
+dot.edge('S_KAT', 'S_Anreiz')
+dot.edge('S_KAT', 'S_Sank')
+dot.edge('S_KAT', 'S_Vert')
+dot.edge('S_KAT', 'S_Frei')
+
+# Innerhalb der statischen Funktionen Verknüpfungen herstellen
+dot.edge('S_Steuer', 'S_Allok', style='dotted', label='eng verbunden')
+
+# ==========================================
+# SUBGRAPH: Dynamische Funktionen
+# ==========================================
+with dot.subgraph(name='cluster_dynamic') as d:
+    d.attr(label='Dynamische Funktionen', color='#8e44ad', style='dashed', fontname='Arial', fontsize='15')
+
+    d.node('D_Inno', 'Innovationsfunktion\n- Wettbewerb als Entdeckungsverfahren\n- Suche nach neuen Produkten/Verfahren', fillcolor='#f5eef8')
+    d.node('D_Imit', 'Imitationsfunktion\n- Nachahmung von Pionierleistungen\n- Breite Durchsetzung des Fortschritts', fillcolor='#f5eef8')
+    d.node('D_Anpass', 'Anpassungsfunktion\n- Reaktion auf neue Nachfragestrukturen\n- Internationale Arbeitsteilung', fillcolor='#f5eef8')
+
+# Verbindungen zu dynamischen Funktionen
+dot.edge('D_KAT', 'D_Inno')
+dot.edge('D_KAT', 'D_Imit')
+dot.edge('D_KAT', 'D_Anpass')
+
+# Prozesskette der Innovation verdeutlichen
+dot.edge('D_Inno', 'D_Imit', label='Pionier -> Nachahmung')
+
+# ==========================================
+# Gesamtzusammenhang & Rahmenbedingungen
+# ==========================================
+# Beide Kategorien führen zur Wohlfahrt
+#dot.edge('S_KAT', 'W', color='#27ae60', penwidth='2.0')
+#dot.edge('D_KAT', 'W', color='#27ae60', penwidth='2.0')
+
+# Die Politik sichert das System ab
+dot.edge('E', 'M', style='dashed', color='#e74c3c', label='Sicherung der\nFunktionsfähigkeit')
+
+# Anzeige des Diagramms im Jupyter Notebook
+# display(dot)
+
+dot.render('Wettbewerbsfunktionen', format='svg', cleanup=True)
+```
+
+![Wettbewerbsfunktionen nach @conrad_wirtschaftsethik_2016 ](Wettbewerbsfunktionen.svg) 
+
+
 ## Pfadabhängigkeit
 
 Wettbewerb kann durch selbst-verstärkende Prozesse geprägt sein. Zufälle in frühen Perioden können dann zu verfestigten Wettbewerbsstrukturen führen.
