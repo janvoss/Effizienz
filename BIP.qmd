@@ -82,7 +82,15 @@ Verwendungsgleichung: $Y=C+I+G+(Ex-Im)$
 
 oder: $Y+Im=C+I+G+Ex$
 
-Gespart wird, was nicht konsumiert wird. 
+Gespart wird, indem produziert, aber nicht konsumiert wird. 
+
+Geschlossene Volkswirtschaft: 
+
+$$S=Y-C-G$$
+
+Mit $$Y=C+G+I \iff I=Y-C-G$$
+
+Also $$S=I$$
 
 
 ```{r}
@@ -250,9 +258,9 @@ df <- read.csv("https://ourworldindata.org/grapher/historical-gov-spending-gdp.c
 
 head(df)
 
-p <- df %>%  filter(Entity %in% c("Germany", "France", "Poland", "Italy", "United States"),
-                             Year>=1990) %>%
-ggplot(aes(x = Year, y = expenditure, color = Entity)) +
+p <- df %>%  filter(entity %in% c("Germany", "France", "Poland", "Italy", "United States"),
+                             year>=1990) %>%
+ggplot(aes(x = year, y = expenditure, color = entity)) +
   geom_line(size = 1) +
   labs(
     title = "Staatsausgaben am BIP (via Our World in Data)",
@@ -271,10 +279,19 @@ ggplot(aes(x = Year, y = expenditure, color = Entity)) +
 p
 ```
 
-- Geschlossene Volkswirtschaft $S=Y-C-G \Leftrightarrow I=S$
 
-- Offene Volkswirtschaft: $Y=C+I+G+NX\Leftrightarrow Y-C-G=I+NX\Leftrightarrow I=Y-C-G-NX$
+
+Offene Volkswirtschaft: 
+$$Y=C+I+G+NX \iff Y-C-G=I+NX \iff I=Y-C-G-NX$$
+
+$$\iff I=S-NX$$
+
+Heimische Investitionen und Nettoexporte hängen also zusammen. 
 
 - Nominales vs. reales BIP
 
-
+  - **Nominales BIP**: Messung zu laufenden Preisen
+  - Das nominale BIP verändert sich also sowohl durch Mengen- als auch durch Preisänderungen
+  
+  - **Reales BIP**: Messung zu konstanten Preisen eines Basisjahres
+  - Das reale BIP verändert sich nur durch Mengenänderungen
