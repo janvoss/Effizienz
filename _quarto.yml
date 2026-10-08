@@ -6,7 +6,7 @@ book:
   title: "Effiziente Nutzung knapper Ressourcen"
   author: "Prof. Dr. Jan S. Voßwinkel"
   # date: "2025"
-  subtitle: "Sommersemester 2026"
+  subtitle: "Wintersemester 2026/27"
   #lang: de
   language:  _language.yml
   repo-url: https://github.com/janvoss/Effizienz.git
@@ -35,6 +35,7 @@ book:
     - Uebungsaufgaben.qmd 
 
 bibliography: Effizienz.bib
+csl: dresden.csl
 lang: de
   
 
