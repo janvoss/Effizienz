@@ -359,6 +359,126 @@ $\rightarrow$ Teile der Zukunft sind nicht mehr änderbar
 
 ## Revolution vs Reform
 
+```{python}
+#| output: false
+
+import graphviz
+# from IPython.display import display, SVG
+
+# Initialisierung des gerichteten Graphen
+dot = graphviz.Digraph(
+    comment='Revolution vs. Reform (Popper & Hayek)', format='svg'
+)
+dot.attr(rankdir='TB', size='12,12', fontname='Helvetica')
+dot.attr('node', fontname='Helvetica', style='filled', margin='0.2')
+
+# Zentrales Thema (Root)
+dot.node(
+    'Root',
+    'Gesellschaftsgestaltung\n(Karl Popper & F. A. von Hayek)',
+    fillcolor='#2c3e50',
+    fontcolor='white',
+    shape='box',
+    fontsize='14',
+    style='filled,rounded',
+)
+
+# Hauptäste: Revolution vs. Reform
+dot.node(
+    'Rev',
+    'Die Revolution\n(Utopische Sozialtechnik)',
+    fillcolor='#e74c3c',
+    fontcolor='white',
+    shape='box',
+    fontsize='12',
+    style='filled,rounded',
+)
+dot.node(
+    'Ref',
+    'Die Reform\n(Stückwerk-Sozialtechnik)',
+    fillcolor='#27ae60',
+    fontcolor='white',
+    shape='box',
+    fontsize='12',
+    style='filled,rounded',
+)
+
+dot.edge('Root', 'Rev', label='Radikaler Umsturz')
+dot.edge('Root', 'Ref', label='Schrittweiser Wandel')
+
+# Ast 1: Revolution (Gefahren & Dynamiken)
+dot.node(
+    'Rev1',
+    'Verlassen des bekannten Rahmens\n(Massiver Zuwachs an Nicht-Wissen)',
+    fillcolor='#fadbd8',
+    shape='ellipse',
+)
+dot.node(
+    'Rev2',
+    'Anmaßung von Wissen\n(Unkenntnis der Post-Revolution)',
+    fillcolor='#fadbd8',
+    shape='ellipse',
+)
+dot.node(
+    'Rev3',
+    'Schrankenlose Gewalt &\nUnterwerfung unter ein Ziel',
+    fillcolor='#fadbd8',
+    shape='ellipse',
+)
+dot.node(
+    'Rev4',
+    'Unbeabsichtigte Nebenwirkungen\n& neue, tiefere Krisen',
+    fillcolor='#fadbd8',
+    shape='ellipse',
+)
+
+dot.edge('Rev', 'Rev1')
+dot.edge('Rev', 'Rev2')
+dot.edge('Rev', 'Rev3')
+dot.edge('Rev3', 'Rev4', color='#c0392b', style='dashed')
+
+# Ast 2: Reform (Stabilität & Lernfähigkeit)
+dot.node(
+    'Ref1',
+    'Handeln innerhalb\nes gegebenen Rahmens',
+    fillcolor='#d4efdf',
+    shape='ellipse',
+)
+dot.node(
+    'Ref2',
+    'Demut vor Fehlbarkeit\n& dezentrales Wissen',
+    fillcolor='#d4efdf',
+    shape='ellipse',
+)
+dot.node(
+    'Ref3',
+    'Ständiges Feedback\n& schrittweises Lernen',
+    fillcolor='#d4efdf',
+    shape='ellipse',
+)
+dot.node(
+    'Ref4',
+    'Nachhaltige Problemlösung\n(z.B. Klima & Soziales)',
+    fillcolor='#d4efdf',
+    shape='ellipse',
+)
+
+dot.edge('Ref', 'Ref1')
+dot.edge('Ref', 'Ref2')
+dot.edge('Ref', 'Ref3')
+dot.edge('Ref3', 'Ref4', color='#1e8449', style='dashed')
+
+# 1. Als SVG-Datei speichern (erzeugt 'popper_hayek_vergleich.svg')
+output_filename = 'popper_hayek_vergleich'
+dot.render(output_filename, cleanup=True)
+print(f'SVG erfolgreich gespeichert unter: {output_filename}.svg')
+
+# 2. Direkt in IPython / Jupyter Notebook anzeigen
+# display(SVG(filename=f'{output_filename}.svg'))
+```
+![Revolution vs. Reform](popper_hayek_vergleich.svg)
+
+
 -   Revolution bedeutet das Verlassen des Rahmens, für den man (einigermaßen) verstanden hat.
 
 -   Reformen bedeuten, dass man innerhalb eines gegebenen Rahmens Veränderungen vornimmt.
