@@ -26,7 +26,7 @@ from graphviz import Digraph
 dot = Digraph(comment='Ökonomischer Anpassungsprozess (Kreislauf)', format='svg')
 
 # Graph-Attribute für übersichtliches Layout
-dot.attr(rankdir='LR', size='12,4')
+dot.attr(rankdir='TD', size='12,4')
 dot.attr('node', shape='box', style='rounded,filled', fontname='Arial')
 
 # 2. Knoten definieren
