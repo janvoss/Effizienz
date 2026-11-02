@@ -7,3 +7,5 @@ Klausur/
 Abstimmung-Mikro/
 
 /.quarto/
+
+**/*.quarto_ipynb

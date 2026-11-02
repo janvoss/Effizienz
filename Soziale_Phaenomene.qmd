@@ -14,6 +14,48 @@
 
 - Muster: Individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow$ Gleichgewicht. Exogener Schock $\rightarrow$ neue individuelle Entscheidungen $\rightarrow$ Interaktion/Anpassung/Aggregation $\rightarrow  \dots$
 
+
+```{python}
+#| output: false
+
+
+from graphviz import Digraph
+# from IPython.display import display, SVG
+
+# 1. Graph initialisieren
+dot = Digraph(comment='Ökonomischer Anpassungsprozess (Kreislauf)', format='svg')
+
+# Graph-Attribute für übersichtliches Layout
+dot.attr(rankdir='LR', size='12,4')
+dot.attr('node', shape='box', style='rounded,filled', fontname='Arial')
+
+# 2. Knoten definieren
+dot.node('A', '1. Ausgangsgleichgewicht\n(Stabiler Ruhezustand)', fillcolor='#E0F7FA', color='#00838F')
+dot.node('B', '2. Exogener Schock\n(Störung von außen)', fillcolor='#FFEBEE', color='#C62828')
+dot.node('C', '3. Ceteris paribus\n(Sonst alles unverändert)', fillcolor='#FFF8E1', color='#F57F17')
+dot.node('D', '4. Nutzenmaximierung\n(Akteure passen sich an)', fillcolor='#E8F5E9', color='#2E7D32')
+dot.node('E', '5. Neues Gleichgewicht\n(Neuer Ruhezustand)', fillcolor='#E0F7FA', color='#00838F')
+
+# 3. Vorwärts-Verbindungen
+dot.edge('A', 'B', label=' Ereignis trifft ein')
+dot.edge('B', 'C', label=' Isolierung')
+dot.edge('C', 'D', label=' Reaktionen')
+dot.edge('D', 'E', label=' Einpendeln')
+
+# 4. Rückwärts-Verbindung (gestrichelter Pfeil vom Ende zum Anfang)
+dot.edge('E', 'A', label=' Basis für\nneue Schocks', style='dashed', color='#78909C', constraint='false')
+
+# 5. Als SVG-Datei speichern
+output_path = dot.render(filename='oekonomischer_prozess_kreislauf', cleanup=True)
+print(f"Grafik erfolgreich gespeichert unter: {output_path}")
+
+# 6. Im IPython-Notebook / Jupyter direkt visualisieren
+# display(SVG(filename='oekonomischer_prozess_kreislauf.svg'))
+
+```
+
+![Gleichgewicht und exogener Schock](oekonomischer_prozess_kreislauf.svg)
+
 :::{.callout-note 
     icon=false 
     collapse=true }

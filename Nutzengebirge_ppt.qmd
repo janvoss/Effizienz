@@ -1,0 +1,59 @@
+---
+title: "Nutzengebirge"
+format:
+  html:
+    embed-resources: true
+lang: de
+
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+library(plotly)
+
+f <- function(x1, x2){x1+x2}
+
+x1a <- 0
+x1b <- 100
+
+x2a <- 0
+x2b <- 100
+
+x1 <- seq(x1a, x1b)
+x2 <- seq(x2a, x2b)  
+
+
+f <- function(x1, x2){.5*(x1*x2)^.5}
+
+
+u <- outer(x1, x2, f)
+
+p <- plot_ly(z = u, type = "surface", opacity=.5) %>%
+ #
+  layout(scene = list(xaxis = list(title ="x<sub>1</sub>", showticklabels = FALSE), yaxis = list(title = "x<sub>2</sub>", showticklabels = FALSE), zaxis = list(title = "U", showticklabels = FALSE))) %>%
+   config(displaylogo = FALSE,
+          scrollZoom = F) %>%            add_surface(
+      contours = list(
+      z = list(
+      show=T,
+      usecolormap=T,
+      highlightcolor="#ff0000",
+      project=list(z=TRUE)
+      )
+    )
+  )%>% layout(
+    scene = list(
+      camera=list(
+        eye = list(x=-1, y=-2, z=.2)
+        )
+      )
+  )%>% 
+  hide_colorbar()
+
+p 
+```
+
